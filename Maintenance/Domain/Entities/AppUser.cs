@@ -8,11 +8,11 @@ namespace Domain.Entities
 {
     public class AppUser
     {
-        public string Name { get; set; }
-        public string Surname { get; set; }
-        public int OTP { get; set; }
-        public bool IsActive { get; set; }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
+        public int? OTP { get; set; }
+        public bool? IsActive { get; set; }
         public string? ConnectionId { get; set; }
-        public DateTime CreationDate { get; set; }
+        public DateTime? CreationDate { get; set; }
     }
 }

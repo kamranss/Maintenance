@@ -8,8 +8,8 @@ namespace Domain.Entities
 {
     public class MaintenanceAct
     {
-        public string DocumentName { get; set; }
-        public string DocumentNumber { get; set; }
-        public int ConfirmedById { get; set; }
+        public string? DocumentName { get; set; }
+        public string? DocumentNumber { get; set; }
+        public int? ConfirmedById { get; set; }
     }
 }

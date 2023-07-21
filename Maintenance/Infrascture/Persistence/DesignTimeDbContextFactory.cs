@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace Persistence
 {
-    public class Department
+    internal class DesignTimeDbContextFactory
     {
-        public string? Name { get; set; }
     }
 }

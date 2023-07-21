@@ -8,6 +8,6 @@ namespace Domain.Entities
 {
     public class EquipmentPart
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

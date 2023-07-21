@@ -8,9 +8,9 @@ namespace Domain.Entities
 {
     public class MaintenancePlan
     {
-        public string Code { get; set; }
-        public string Name { get; set; }
-        public List<Service> Services { get; set; }
+        public string? Code { get; set; }
+        public string? Name { get; set; }
+        public List<Service>? Services { get; set; }
 
     }
 }

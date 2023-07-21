@@ -14,7 +14,16 @@ namespace Persistence.Context
         {
             
         }
-        public DbSet<Equipment> Equipments { get; set; }
-        public DbSet<Department> Departments { get; set; }
+        public DbSet<Equipment>? Equipments { get; set; }
+        public DbSet<EquipmentPart>? EquipmentParts { get; set; }
+        public DbSet<Department>? Departments { get; set; }
+        public DbSet<AppUser>? AppUsers { get; set; }
+        public DbSet<MaintenanceAct>? MaintenanceAct { get; set; }
+        public DbSet<MaintenancePlan>? MaintenancePlan { get; set; }
+        public DbSet<MetricType>? MetricTypes { get; set; }
+        public DbSet<Service>? Services { get; set; }
+        public DbSet<UsageHours>? UsageHours { get; set; }
+
+
     }
 }
