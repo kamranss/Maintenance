@@ -15,6 +15,9 @@ namespace Domain.Entities
         public string? Capacity { get; set; }
         public string? EquipmentType { get; set; }
         public string? usageLocation { get; set; }
-        public List<EquipmentPart>? Parts { get; set; }
+        public int DepartmentId { get; set; }
+        public Department? Department { get; set; }
+        public List<MaintenancePlan>? MaintenancePlan { get; set; }
+        public List<Part>? Parts { get; set; }
     }
 }

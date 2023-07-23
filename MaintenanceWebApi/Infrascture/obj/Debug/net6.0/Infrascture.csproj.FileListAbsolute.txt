@@ -1,0 +1,12 @@
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\bin\Debug\net6.0\Infrascture.deps.json
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\bin\Debug\net6.0\Infrascture.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\bin\Debug\net6.0\Infrascture.pdb
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.csproj.AssemblyReference.cache
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.AssemblyInfoInputs.cache
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.AssemblyInfo.cs
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.csproj.CoreCompileInputs.cache
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\refint\Infrascture.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\Infrascture.pdb
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\Infrascture\obj\Debug\net6.0\ref\Infrascture.dll

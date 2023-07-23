@@ -13,9 +13,9 @@ namespace Persistence.Concretes
         public List<Equipment> GetEquipment()
             => new()
         {
-            new (){Id = Guid.NewGuid(), EquipmentName = "ForkLift"},
-             new (){Id = Guid.NewGuid(), EquipmentName = "ForkLift"},
-              new (){Id = Guid.NewGuid(), EquipmentName = "ForkLift"}
+            new (){Id = 1, EquipmentName = "ForkLift"},
+             new (){Id = 2, EquipmentName = "ForkLift"},
+              new (){Id = 3, EquipmentName = "ForkLift"}
         };
     }
 }
