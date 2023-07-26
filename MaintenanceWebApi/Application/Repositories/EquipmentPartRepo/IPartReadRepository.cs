@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Repositories.EquipmentRepo
+namespace Application.Repositories.EquipmentPartRepo
 {
-    public interface IEquipmentReadRepository : IWriteRepository<Equipment>
+    public interface IPartReadRepository:IReadRepository<Part>
     {
     }
 }

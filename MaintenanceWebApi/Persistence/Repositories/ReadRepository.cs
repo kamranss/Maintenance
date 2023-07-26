@@ -12,40 +12,39 @@ using System.Threading.Tasks;
 namespace Persistence.Repositories
 {
 
-    public class ReadRepository<T> : IReadRepository<T> where T: class
+    public class ReadRepository<T>:IReadRepository<T> where T : BaseEntity
     {
 
-        readonly private MaintenanceDbContext _context;
-        public ReadRepository(MaintenanceDbContext context)
+        
+        public DbSet<T> Table { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        readonly private MaintenanceDbContext _maintenanceDbContext;
+        public ReadRepository(MaintenanceDbContext context )
         {
-            _context = context;
+            _maintenanceDbContext = context;
+            Table = _maintenanceDbContext.Set<T>();
         }
-
-        public DbSet<T> Table => _context.Set<T>();
-
-        DbSet<T> IRepository<T>.Table { set => _context.Set<T>(); }
 
         public IQueryable<T> GetAll(bool tracking = true)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> GetByIdAsync(string id, bool tracking = true)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)
-        {
-            throw new NotImplementedException();
+            return Table;
         }
 
         public IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true)
         {
-            throw new NotImplementedException();
+            return Table.Where(method);
         }
 
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)
+        {
+            return await Table.FirstOrDefaultAsync(method);
+        }
+
+        public async Task<T> GetByIdAsync(string id, bool tracking = true)
+        {
+            return await Table.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
+        }
         //public DbSet<T> Table => _context.Set<T>();
+
 
     }
 }
