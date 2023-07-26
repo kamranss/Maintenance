@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction.EquipmentS;
+using Application.Repositories.EquipmentRepo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,10 +10,14 @@ namespace MaintenanceWebApi.Controllers
     public class EquipmentController : ControllerBase
     {
         private readonly IEquipmentService _equipmentService;
+        private readonly IEquipmentReadRepository _equipmentReadRepository;
+        private readonly IEquipmentWriteRepository _equipmentWriteRepository;
 
-        public EquipmentController(IEquipmentService equipmentService)
+        public EquipmentController(IEquipmentService equipmentService, IEquipmentReadRepository equipmentReadRepository, IEquipmentWriteRepository equipmentWriteRepository)
         {
             _equipmentService = equipmentService;
+            _equipmentReadRepository = equipmentReadRepository;
+            _equipmentWriteRepository = equipmentWriteRepository;
         }
 
         [HttpGet]
@@ -20,6 +25,12 @@ namespace MaintenanceWebApi.Controllers
         {
             var equipments = _equipmentService.GetEquipment();
             return Ok(equipments);
+        }
+
+        [HttpGet]
+        public IActionResult GetEqu()
+        {
+           new() { Id = Guid.NewGuid(), Name = "Asdf",}
         }
     }
 }

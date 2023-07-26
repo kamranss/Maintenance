@@ -49,19 +49,22 @@ namespace Persistence.Repositories
 
         public async Task<bool> RemoveAsync(string id)
         {
-            //EntityEntry<T> entityEntry = await Table.FirstOrDefaultAsync(i=> i.Id == Guid.Parse(id));
-            //return entityEntry.State == EntityState.Deletedl
+            T model = await Table.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
+            //Table.Remove(model);
+            //return true;
+            return Remove(model); // this method also removes thats why we called thisone
 
         }
 
         public bool Update(T model)
         {
-            throw new NotImplementedException();
+            EntityEntry entityEntry = Table.Update(model);
+            return entityEntry.State == EntityState.Modified;
         }
 
-        public Task<int> SaveAsync()
+        public async Task<int> SaveAsync()
         {
-            throw new NotImplementedException();
+           return await _maintenanceDbContext.SaveChangesAsync();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Application.Repositories.EquipmentRepo
 {
-    public interface IEquipmentReadRepository : IWriteRepository<Equipment>
+    public interface IEquipmentReadRepository : IReadRepository<Equipment>
     {
     }
 }

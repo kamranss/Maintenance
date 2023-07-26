@@ -1,9 +1,11 @@
 ﻿using Application.Abstraction.EquipmentS;
+using Application.Repositories.EquipmentRepo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Concretes.Equipment;
 using Persistence.Configuration;
 using Persistence.Context;
+using Persistence.Repositories.EquipmentRepo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +20,8 @@ namespace Persistence
         {
             services.AddSingleton<IEquipmentService, EquipmentService>();
             services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(DbConfiguration.ConnectionString));
+            services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
+            services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
         }
     }
 }

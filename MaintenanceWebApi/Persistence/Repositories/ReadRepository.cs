@@ -26,25 +26,48 @@ namespace Persistence.Repositories
 
         public IQueryable<T> GetAll(bool tracking = true)
         {
-            return Table;
+            var query = Table.AsQueryable();
+            if (!tracking)
+            {
+                query.AsNoTracking();
+            }
+            return query;
         }
 
         public IQueryable<T> GetWhere(Expression<Func<T, bool>> method, bool tracking = true)
         {
-            return Table.Where(method);
+            var query = Table.Where(method);
+            if (!tracking)
+            {
+                query.AsNoTracking();
+            }
+            return query;
         }
 
         public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method, bool tracking = true)
         {
-            return await Table.FirstOrDefaultAsync(method);
+            var query = Table.AsQueryable();
+            if (!tracking)
+            {
+                query = Table.AsNoTracking();
+            }
+            return await query.FirstOrDefaultAsync(method);
+            //return await Table.FirstOrDefaultAsync(method);
         }
 
         public async Task<T> GetByIdAsync(string id, bool tracking = true)
         {
-            return await Table.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
+            //return await Table.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
+            var query = Table.AsQueryable();
+            if (!tracking)
+            {
+                query = Table.AsNoTracking();
+            }
+            return await query.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
         }
-        //public DbSet<T> Table => _context.Set<T>();
+       
 
 
     }
 }
+//public DbSet<T> Table => _context.Set<T>();

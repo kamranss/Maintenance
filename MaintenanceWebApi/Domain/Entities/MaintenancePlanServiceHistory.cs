@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    internal class EMaintenancePlanServiceHistory
+    internal class MaintenancePlanServiceHistory:BaseEntity
     {
+        public Guid ServiceId { get; set; }
+        public Service Service { get; set; }
+        public bool IsImplemented { get; set; }
+        public int EquipmentValue { get; set; }
     }
 }

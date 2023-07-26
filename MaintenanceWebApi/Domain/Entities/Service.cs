@@ -10,6 +10,7 @@ namespace Domain.Entities
     public class Service:BaseEntity
     {
         public string? Name { get; set; }
+        public string ServiceType { get; set; }
         public int MaintenancePlanId { get; set; }
         public MaintenancePlan? MaintenancePlan { get; set; }
     }

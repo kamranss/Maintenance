@@ -11,7 +11,7 @@ namespace Domain.Entities
 {
     public class Equipment:BaseEntity
     {
-        public string? EquipmentName { get; set; }
+        public string? Name { get; set; }
         public string? UnitNumber { get; set; }
         public string? Description { get; set; }
         public string? Color { get; set; }

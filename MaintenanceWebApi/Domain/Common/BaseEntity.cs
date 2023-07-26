@@ -9,8 +9,8 @@ namespace Domain.Common
     public class BaseEntity
     {
         public Guid Id { get; set; }
-        public DateTime? Created { get; set; }
-        public DateTime? Modified { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
         public int? CreatedByid { get; set; }
         public int? ModifiedById { get; set; }
     }
