@@ -25,6 +25,8 @@ namespace Persistence.Context
         public DbSet<Service>? Services { get; set; }
         public DbSet<UsageHour>? UsageHours { get; set; }
         public DbSet<EquipmentPart>? EquipmentParts { get; set; }
+        public DbSet<EquipmentType> Types { get; set; }
+        public DbSet<OperationSite> OperationSites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

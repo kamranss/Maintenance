@@ -13,6 +13,5 @@ namespace Domain.Common
         public DateTime? Modified { get; set; }
         public int? CreatedByid { get; set; }
         public int? ModifiedById { get; set; }
-        //public AppUser Appuser { get; set; }
     }
 }
