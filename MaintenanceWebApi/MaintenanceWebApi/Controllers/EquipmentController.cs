@@ -1,4 +1,4 @@
-﻿using Application.Abstraction.EquipmentS;
+﻿using Application.Abstraction.Services;
 using Application.Repositories.EquipmentRepo;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -23,14 +23,10 @@ namespace MaintenanceWebApi.Controllers
         [HttpGet]
         public IActionResult GetEquipments()
         {
-            var equipments = _equipmentService.GetEquipment();
+            //var equipments = _equipmentService.GetEquipment();
             return Ok(equipments);
         }
 
-        [HttpGet]
-        public IActionResult GetEqu()
-        {
-           new() { Id = Guid.NewGuid(), Name = "Asdf",}
-        }
+      
     }
 }

@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Constant
+namespace Application.DTOs.Department
 {
-    public enum Status
+    internal class DepartmentCreateDto
     {
-        Active,
-        Deactive,
     }
 }
