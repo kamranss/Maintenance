@@ -25,7 +25,7 @@ namespace Persistence
 
 
 
-            services.AddScoped<IEquipmentService, EquipmentService>();
+            //services.AddScoped<IEquipmentService, EquipmentService>();
         }
     }
 }

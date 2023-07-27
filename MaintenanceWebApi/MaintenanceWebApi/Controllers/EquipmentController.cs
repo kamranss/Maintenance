@@ -24,7 +24,7 @@ namespace MaintenanceWebApi.Controllers
         public IActionResult GetEquipments()
         {
             //var equipments = _equipmentService.GetEquipment();
-            return Ok(equipments);
+            return Ok();
         }
 
       

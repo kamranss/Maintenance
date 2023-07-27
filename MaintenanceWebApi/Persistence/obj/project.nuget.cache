@@ -1,9 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "Xu7IscS1Ma7GDeVY0BfPcftuJK1E+9CUCiImwDNhSQH+L/ZTjpwcwvZaIMC3Dt4UzVbXWLZdRh1VrfcTJActHg==",
+  "dgSpecHash": "GdhBTsIotMNx7gieH5k7mGi9Do2k6W6bC11SsJdyBaE1qdA55DzYzUNiH/xdabAqvjw5qt3iW9/iqvDW4NPLsA==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\Persistence\\Persistence.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\user\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.0\\microsoft.aspnetcore.cryptography.internal.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.0\\microsoft.aspnetcore.cryptography.keyderivation.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.0\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.0.nupkg.sha512",

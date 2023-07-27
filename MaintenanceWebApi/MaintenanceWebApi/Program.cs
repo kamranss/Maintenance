@@ -1,11 +1,13 @@
 
+using MaintenanceWebApi;
 using Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddPersistenceService();
-builder.Services.AddControllers();
+builder.Services.AddValidationService();
+//builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

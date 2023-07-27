@@ -44,3 +44,6 @@ C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\ob
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\Humanizer.dll
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\FluentValidation.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\FluentValidation.AspNetCore.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\FluentValidation.DependencyInjectionExtensions.dll
