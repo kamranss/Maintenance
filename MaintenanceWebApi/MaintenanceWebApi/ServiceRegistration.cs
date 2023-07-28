@@ -1,6 +1,7 @@
 ﻿
 using Application.Validators.Department;
 using Application.Validators.Equipment;
+using Application.Validators.User;
 using FluentValidation.AspNetCore;
 
 namespace MaintenanceWebApi
@@ -13,6 +14,8 @@ namespace MaintenanceWebApi
             {
                 option.RegisterValidatorsFromAssemblyContaining<EquipmenCreatetValidator>();
                 option.RegisterValidatorsFromAssemblyContaining<DepartmentCreateValidator>();
+                option.RegisterValidatorsFromAssemblyContaining<UserLoginDtoValidator>();
+                option.RegisterValidatorsFromAssemblyContaining<UserRegisterDtoValidator>();
             });
         }
     }

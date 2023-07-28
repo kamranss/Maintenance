@@ -13,8 +13,8 @@ namespace Persistence.Services
     public class EquipmentService
     {
 
-        private readonly IEquipmentReadRepository _equipmentReadRepository;
-        private readonly IEquipmentWriteRepository _equipmentWriteRepository;
+        private readonly IEquipmentReadRepository? _equipmentReadRepository;
+        private readonly IEquipmentWriteRepository? _equipmentWriteRepository;
         //readonly IQRCodeService _qrCodeService;
        
 
