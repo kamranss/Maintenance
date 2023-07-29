@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Equipment
 {
-    public class EquipmentCreateDto
+    public class EquipmentUpdateDto
     {
         public string? Name { get; set; }
         public string? UnitNumber { get; set; }
@@ -24,7 +23,5 @@ namespace Application.DTOs.Equipment
         public string? EquipmentType { get; set; }
         public string? usageLocation { get; set; }
         public int? DepartmentId { get; set; }
-        public IFormFile Image { get; set; }
-
     }
 }

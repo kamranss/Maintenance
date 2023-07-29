@@ -19,6 +19,7 @@ namespace Domain.Entities
         public string? Model { get; set; }
         public bool? isDeleted { get; set; }
         public string? Status { get; set; }
+        //public IFormFile Image { get; set; }
         public int? OperationSiteid { get; set; }
         public DateOnly? ProductionYear { get; set; }
         public string MadeBy { get; set; }
