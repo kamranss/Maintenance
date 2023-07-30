@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Equipment;
 using Application.RequestParameters;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
@@ -20,17 +21,17 @@ namespace Application.Abstraction.Services
         void CreateEquipment(EquipmentCreateDto product);
         void Delete(int? id);
         EquipmentGetDto FindEquipment(int? id);
-        ProductUpdateVM MapProducTotVM(Product product);
+        Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto product);
 
         //void RemoveImage(int? id);
 
-        Product Deatil(int? id);
+        EquipmentGetDto Deatil(int? id);
 
-        void SaveProImage(IFormFile newImage, Product product);
+        void SaveEquipmentImage(IFormFile newImage, Equipment equipment);
         void SaveChanges();
-        Product IsProductExist(int? id);
+        EquipmentGetDto IsEquipmentExist(int? id);
         Image FindImage(int? id);
-        void RemoveProImage(Image image);
+        void RemoveEquipmentImage(Image image);
 
     }
 }

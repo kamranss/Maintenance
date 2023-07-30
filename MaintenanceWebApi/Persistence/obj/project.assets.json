@@ -1395,6 +1395,7 @@
     "net6.0": [
       "Application >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 6.0.0",
+      "Microsoft.Extensions.Caching.Memory >= 6.0.0",
       "Microsoft.Extensions.Configuration >= 6.0.0",
       "Microsoft.Extensions.Configuration.Json >= 6.0.0",
       "Microsoft.Extensions.DependencyInjection.Abstractions >= 6.0.0",
@@ -1445,6 +1446,10 @@
         "targetAlias": "net6.0",
         "dependencies": {
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[6.0.0, )"
+          },
+          "Microsoft.Extensions.Caching.Memory": {
             "target": "Package",
             "version": "[6.0.0, )"
           },

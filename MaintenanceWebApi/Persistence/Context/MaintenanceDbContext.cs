@@ -26,7 +26,7 @@ namespace Persistence.Context
         public DbSet<Service>? Services { get; set; }
         public DbSet<UsageHour>? UsageHours { get; set; }
         public DbSet<EquipmentPart>? EquipmentParts { get; set; }
-        public DbSet<EquipmentType> Types { get; set; }
+        //public DbSet<EquipmentType> Types { get; set; }
         public DbSet<OperationSite> OperationSites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,6 +53,18 @@ namespace Persistence.Context
             }
 
             return await base.SaveChangesAsync(cancellationToken);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Seed data for departments
+            modelBuilder.Entity<Department>().HasData(
+                new Department { Name = "Planning & Infrastructure", IsDeleted = false, IsActive = true },
+                new Department { Name = "Takelaj", IsDeleted = false, IsActive = true },
+                new Department { Name = "Operation", IsDeleted = false, IsActive = true },
+                new Department { Name = "Maintenance", IsDeleted = false, IsActive = true }
+            );
+
         }
 
     }
