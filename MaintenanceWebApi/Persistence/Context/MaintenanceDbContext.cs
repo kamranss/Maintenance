@@ -68,10 +68,42 @@ namespace Persistence.Context
                     new Department { Id = 1, Name = "Planning", IsDeleted = false, IsActive = true },
                     new Department { Id = 2, Name = "Takelaj", IsDeleted = false, IsActive = true },
                     new Department { Id = 3, Name = "Operation", IsDeleted = false, IsActive = true },
-                    new Department { Id = 4, Name = "Electircal", IsDeleted = false, IsActive = true },
-                    new Department { Id = 5, Name = "MarineService", IsDeleted = false, IsActive = true },
-                    new Department { Id = 6, Name = "Infrascture", IsDeleted = false, IsActive = true },
-                    new Department { Id = 7, Name = "Maintenance", IsDeleted = false, IsActive = true }
+                    new Department { Id = 4, Name = "Electrical", IsDeleted = false, IsActive = true },
+                    new Department { Id = 5, Name = "MarineFleet", IsDeleted = false, IsActive = true },
+                    new Department { Id = 6, Name = "Mechanical", IsDeleted = false, IsActive = true },
+                    new Department { Id = 7, Name = "Cranes", IsDeleted = false, IsActive = true },
+                    new Department { Id = 8, Name = "Railway", IsDeleted = false, IsActive = true },
+                    new Department { Id = 9, Name = "Transport", IsDeleted = false, IsActive = true },
+                    new Department { Id = 10, Name = "Engineering", IsDeleted = false, IsActive = true },
+                    new Department { Id = 11, Name = "Berth", IsDeleted = false, IsActive = true }
+
+                );
+            });
+            modelBuilder.Entity<OperationSite>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new OperationSite { Id = 1, Name = "Building_1", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 2, Name = "Building_2", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 3, Name = "OperationArea_1", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 4, Name = "WareHause_1", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 5, Name = "WareHause_2", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 6, Name = "WareHause_3", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 7, Name = "OperationArea_2", IsDeleted = false, IsActive = true },
+                );
+            });
+
+            modelBuilder.Entity<EquipmentType>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new EquipmentType { Id = 1, Name = "Building_1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 2, Name = "Building_2", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 1, Name = "OperationArea_1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 1, Name = "WareHause_1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 1, Name = "WareHause_2", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 1, Name = "WareHause_3", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 1, Name = "OperationArea_2", IsDeleted = false, IsActive = true },
                 );
             });
 

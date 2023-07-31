@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="DTOs\MaintenancePlan\" />
+    <Folder Include="Mapper\Equipment\" />
   </ItemGroup>
 
 </Project>

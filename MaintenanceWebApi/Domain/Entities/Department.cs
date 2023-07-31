@@ -10,8 +10,8 @@ namespace Domain.Entities
     public class Department:BaseEntity
     {
         public string? Name { get; set; }
-        public bool? IsDeleted { get; set; }
-        public bool? IsActive { get; set; }
+        public string? DepartmentHead { get; set; }
+        public DateTime? RemovalDate { get; set; }
         public List<Equipment>? Equipments { get; set; }
     }
 }

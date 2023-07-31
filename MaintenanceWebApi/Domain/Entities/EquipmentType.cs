@@ -9,6 +9,6 @@ namespace Domain.Entities
 {
     public class EquipmentType:BaseEntity
     {
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }
