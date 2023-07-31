@@ -1,5 +1,4 @@
-﻿
-using Domain.Common;
+﻿using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace Domain.Entities
         public string? Status { get; set; }
         //public IFormFile Image { get; set; }
         public int? OperationSiteid { get; set; }
-        public DateOnly? ProductionYear { get; set; }
+        public string? ProductionYear { get; set; }
         public string MadeBy { get; set; }
         public string? SeriaNumber { get; set; }
         public int? Typeid { get; set; }
@@ -32,7 +31,7 @@ namespace Domain.Entities
         public Department? Department { get; set; }
         public List<MaintenancePlan>? MaintenancePlan { get; set; }
         public List<Part>? Part { get; set; }
-        public List<EquipmentType> Type { get; set; }
+        //public List<EquipmentType> Type { get; set; }
         public List<OperationSite> OperationSite { get; set; }
 
     }

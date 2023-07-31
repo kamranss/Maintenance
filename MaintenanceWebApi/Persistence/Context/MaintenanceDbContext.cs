@@ -55,15 +55,25 @@ namespace Persistence.Context
             return await base.SaveChangesAsync(cancellationToken);
         }
 
+ 
+       
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Seed data for departments
-            modelBuilder.Entity<Department>().HasData(
-                new Department { Name = "Planning & Infrastructure", IsDeleted = false, IsActive = true },
-                new Department { Name = "Takelaj", IsDeleted = false, IsActive = true },
-                new Department { Name = "Operation", IsDeleted = false, IsActive = true },
-                new Department { Name = "Maintenance", IsDeleted = false, IsActive = true }
-            );
+            modelBuilder.Entity<Department>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new Department { Id = 1, Name = "Planning", IsDeleted = false, IsActive = true },
+                    new Department { Id = 2, Name = "Takelaj", IsDeleted = false, IsActive = true },
+                    new Department { Id = 3, Name = "Operation", IsDeleted = false, IsActive = true },
+                    new Department { Id = 4, Name = "Electircal", IsDeleted = false, IsActive = true },
+                    new Department { Id = 5, Name = "MarineService", IsDeleted = false, IsActive = true },
+                    new Department { Id = 6, Name = "Infrascture", IsDeleted = false, IsActive = true },
+                    new Department { Id = 7, Name = "Maintenance", IsDeleted = false, IsActive = true }
+                );
+            });
 
         }
 

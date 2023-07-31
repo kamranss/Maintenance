@@ -47,9 +47,9 @@ namespace Persistence.Repositories
             return true;
         }
 
-        public async Task<bool> RemoveAsync(string id)
+        public async Task<bool> RemoveAsync(int id)
         {
-            T model = await Table.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
+            T model = await Table.FirstOrDefaultAsync(i => i.Id == id);
             //Table.Remove(model);
             //return true;
             return Remove(model); // this method also removes thats why we called thisone

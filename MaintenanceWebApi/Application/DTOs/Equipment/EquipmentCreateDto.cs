@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,10 @@ namespace Application.DTOs.Equipment
         public string? Identification { get; set; }
         public string? Model { get; set; }
         public int? OperationSiteid { get; set; }
-        public DateOnly? ProductionYear { get; set; }
+        [RegularExpression(@"^\d{4}$", ErrorMessage = "The production year must be a 4-digit number.")]
+        public string? ProductionYear { get; set; }
         public string MadeBy { get; set; }
         public string? SeriaNumber { get; set; }
-        public int? Typeid { get; set; }
         public string? Capacity { get; set; }
         public string? EquipmentType { get; set; }
         public string? usageLocation { get; set; }

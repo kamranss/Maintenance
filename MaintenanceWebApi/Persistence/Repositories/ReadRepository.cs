@@ -55,7 +55,7 @@ namespace Persistence.Repositories
             //return await Table.FirstOrDefaultAsync(method);
         }
 
-        public async Task<T> GetByIdAsync(string id, bool tracking = true)
+        public async Task<T> GetByIdAsync(int id, bool tracking = true)
         {
             //return await Table.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
             var query = Table.AsQueryable();
@@ -63,7 +63,7 @@ namespace Persistence.Repositories
             {
                 query = Table.AsNoTracking();
             }
-            return await query.FirstOrDefaultAsync(i => i.Id == Guid.Parse(id));
+            return await query.FirstOrDefaultAsync(i => i.Id == id);
         }
        
 
