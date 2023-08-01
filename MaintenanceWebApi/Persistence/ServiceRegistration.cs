@@ -1,9 +1,11 @@
 ﻿using Application.Abstraction.Services;
+using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentRepo;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Configuration;
 using Persistence.Context;
+using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentRepo;
 using Persistence.Services;
 using System;
@@ -23,6 +25,7 @@ namespace Persistence
 
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
+            services.AddScoped<IDepartmentReadRepository, DepartmentReadRepository>();
 
 
 

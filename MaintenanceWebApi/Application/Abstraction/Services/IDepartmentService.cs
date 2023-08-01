@@ -21,16 +21,16 @@ namespace Application.Abstraction.Services
         void CreateDepartment(DepartmentCreateDto product);
         void DeleteDepartment(int? id);
         DepartmentGetDto FindDepartment(int? id);
-        //Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto product);
+        Equipment MapDtoToEntity(EquipmentUpdateDto product);
 
-        ////void RemoveImage(int? id);
+        //void RemoveImage(int? id);
 
-        //EquipmentGetDto Deatil(int? id);
+        EquipmentGetDto Deatil(int? id);
 
-        //void SaveEquipmentImage(IFormFile newImage, Equipment equipment);
-        //void SaveChanges();
-        //EquipmentGetDto IsEquipmentExist(int? id);
-        //Image FindImage(int? id);
-        //void RemoveEquipmentImage(Image image);
+        void SaveEquipmentImage(IFormFile newImage, Equipment equipment);
+        void SaveChanges();
+        EquipmentGetDto IsEquipmentExist(int? id);
+        Image FindImage(int? id);
+        void RemoveEquipmentImage(Image image);
     }
 }
