@@ -18,8 +18,9 @@ namespace Persistence
     {
         public static void AddPersistenceService(this IServiceCollection services)
         {
-         
+            services.AddMemoryCache();
             services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(DbConfiguration.ConnectionString));
+
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
 

@@ -9,11 +9,10 @@ namespace Domain.Entities
 {
     public class UsageHour:BaseEntity
     {
+        public string Name { get; set; }
         public int? UsageHourValue { get; set; }
         public DateTime? DateTime { get; set; }
-        public string? CreatedBy { get; set; }
-        public string? ModifiedBy { get; set; }
-        public int? EquipmentID { get; set; }
+        public int? EquipmentId { get; set; }
         public string? EquipmentName { get; set; }
     }
 }

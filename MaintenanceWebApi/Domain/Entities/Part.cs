@@ -9,8 +9,8 @@ namespace Domain.Entities
 {
     public class Part:BaseEntity
     {
-        public string? Name { get; set; }
         public string? Code { get; set; }
+        public string? Name { get; set; }
         public List<Equipment>? Equipments { get; set; }
     }
 }

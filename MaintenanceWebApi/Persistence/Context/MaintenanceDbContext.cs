@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
-    public class MaintenanceDbContext:DbContext
+    public class MaintenanceDbContext : DbContext
     {
         public MaintenanceDbContext(DbContextOptions options) : base(options)
         {
@@ -22,11 +22,10 @@ namespace Persistence.Context
         public DbSet<AppUser>? AppUsers { get; set; }
         public DbSet<MaintenanceAct>? MaintenanceAct { get; set; }
         public DbSet<MaintenancePlan>? MaintenancePlan { get; set; }
-        public DbSet<MetricType>? MetricTypes { get; set; }
         public DbSet<Service>? Services { get; set; }
         public DbSet<UsageHour>? UsageHours { get; set; }
         public DbSet<EquipmentPart>? EquipmentParts { get; set; }
-        //public DbSet<EquipmentType> Types { get; set; }
+        public DbSet<EquipmentType> Types { get; set; }
         public DbSet<OperationSite> OperationSites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -55,8 +54,8 @@ namespace Persistence.Context
             return await base.SaveChangesAsync(cancellationToken);
         }
 
- 
-       
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -89,7 +88,7 @@ namespace Persistence.Context
                     new OperationSite { Id = 4, Name = "WareHause_1", IsDeleted = false, IsActive = true },
                     new OperationSite { Id = 5, Name = "WareHause_2", IsDeleted = false, IsActive = true },
                     new OperationSite { Id = 6, Name = "WareHause_3", IsDeleted = false, IsActive = true },
-                    new OperationSite { Id = 7, Name = "OperationArea_2", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 7, Name = "OperationArea_2", IsDeleted = false, IsActive = true }
                 );
             });
 
@@ -97,13 +96,44 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new EquipmentType { Id = 1, Name = "Building_1", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 2, Name = "Building_2", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 1, Name = "OperationArea_1", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 1, Name = "WareHause_1", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 1, Name = "WareHause_2", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 1, Name = "WareHause_3", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 1, Name = "OperationArea_2", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 1, Name = "Forklift 1.5", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 2, Name = "Forklift 2.5", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 3, Name = "Forklift 4", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 4, Name = "Forklift 10", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 5, Name = "Forklift 20", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 6, Name = "Reach Stacker 45", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 7, Name = "Portal Crane 80T", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 8, Name = "Portal Crane 40T", IsDeleted = false, IsActive = true },                  
+                    new EquipmentType { Id = 9, Name = "Loader 25", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 10, Name = "GC_Berth", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 11, Name = "Ferry_Berth", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 12, Name = "Ro-Ro_Berth", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 13, Name = "Tug_Boat", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 14, Name = "Mobile_Crane 220T", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 15, Name = "Building", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 16, Name = "Container_Spreader", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 17, Name = "Terminal_Tractor", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 18, Name = "Oil_Cleaner_Boat", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 19, Name = "Greifer", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 20, Name = "Lifting_Magnet", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 21, Name = "Fender", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 22, Name = "Railway", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 23, Name = "Wire_Rope_Sling", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 24, Name = "Chain_Connector", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 25, Name = "Lifting_Lug", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 26, Name = "Hook", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 27, Name = "Websling", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 28, Name = "Bunker", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 29, Name = "Generator", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 30, Name = "Shalves", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 31, Name = "Plate_Clamp", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 32, Name = "Harness", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 33, Name = "Roads", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 34, Name = "Drum_Lifter", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 35, Name = "Working_Platform", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 36, Name = "Single leg chain sling", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 37, Name = "Portal Crane 32T", IsDeleted = false, IsActive = true }
+
                 );
             });
 

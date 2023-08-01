@@ -17,7 +17,7 @@ namespace Application.Abstraction.Services
         Task StockUpdateToEquipmentAsync(string equipmentId, int stock);
 
         Pagination<EquipmentGetDto> GetEquipments(int page, int take);
-        List<EquipmentGetDto> GetCategories();
+        List<EquipmentGetDto> GetEquipment();
         void CreateEquipment(EquipmentCreateDto product);
         void Delete(int? id);
         EquipmentGetDto FindEquipment(int? id);

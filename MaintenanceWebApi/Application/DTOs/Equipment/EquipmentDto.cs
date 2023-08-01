@@ -26,5 +26,9 @@ namespace Application.DTOs.Equipment
         public string? usageLocation { get; set; }
         public int? DepartmentId { get; set; }
         public IFormFile Image { get; set; }
+        public bool? IsActive { get; set; }
+        public bool? IsDeleted { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
     }
 }
