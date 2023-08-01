@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction.Services;
+using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentRepo;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,20 @@ namespace Persistence
         {
             services.AddMemoryCache();
             services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(DbConfiguration.ConnectionString));
+
+            services.AddAutoMapper(option =>
+            {
+                option.AddProfile<MapProfile>();
+            }); // Config for Automapper package
+
+
+
+
+
+
+
+
+
 
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();

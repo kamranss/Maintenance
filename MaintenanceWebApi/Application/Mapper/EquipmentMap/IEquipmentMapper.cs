@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 //using static System.Net.Mime.MediaTypeNames;
 
-namespace Application.Mapper
+namespace Application.Mapper.EquipmentMap
 {
     public interface IEquipmentMapper
     {
@@ -19,6 +19,6 @@ namespace Application.Mapper
         public Equipment FindCategoryFromList(int? id, List<Equipment> categories);
         public void MapUpdateCacheEquipment(EquipmentUpdateDto equipmentUpdateDto, EquipmentUpdateDto existEquipmentInCache);
         void SaveEquipmentImage(IFormFile newImage, EquipmentCreateDto equipmentCreateDto);
-       
+
     }
 }
