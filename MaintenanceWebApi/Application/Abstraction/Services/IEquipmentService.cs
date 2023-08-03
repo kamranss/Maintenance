@@ -30,8 +30,8 @@ namespace Application.Abstraction.Services
         void SaveEquipmentImage(IFormFile newImage, Equipment equipment);
         void SaveChanges();
         EquipmentGetDto IsEquipmentExist(int? id);
-        Image FindImage(int? id);
-        void RemoveEquipmentImage(Image image);
+        //Image FindImage(int? id);
+        //void RemoveEquipmentImage(Image image);
 
     }
 }

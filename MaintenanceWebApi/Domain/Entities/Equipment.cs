@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,15 +19,18 @@ namespace Domain.Entities
         public string? Model { get; set; }
         public bool? isDeleted { get; set; }
         public string? Status { get; set; }
-        //public IFormFile Image { get; set; }
+        public IFormFile Image { get; set; }
+        public string? ImagUrl { get; set; }
         public int? OperationSiteid { get; set; }
         public string? ProductionYear { get; set; }
-        public string MadeBy { get; set; }
+        public string? MadeBy { get; set; }
         public string? SeriaNumber { get; set; }
         public int? Typeid { get; set; }
         public string? Capacity { get; set; }
         public string? EquipmentType { get; set; }
         public string? usageLocation { get; set; }
+        public DateTime? LastMaintenace { get; set; }
+        public decimal? CurrentValue { get; set; }
         public int? DepartmentId { get; set; }
         public Department? Department { get; set; }
         public List<MaintenancePlan>? MaintenancePlan { get; set; }

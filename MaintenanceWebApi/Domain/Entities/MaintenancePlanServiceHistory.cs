@@ -9,7 +9,7 @@ namespace Domain.Entities
 {
     internal class MaintenancePlanServiceHistory:BaseEntity
     {
-        public Guid ServiceId { get; set; }
+        public int? ServiceId { get; set; }
         public Service Service { get; set; }
         public bool IsImplemented { get; set; }
         public int EquipmentValue { get; set; }

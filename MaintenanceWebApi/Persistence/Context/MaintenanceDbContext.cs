@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
 using System;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
-    public class MaintenanceDbContext : DbContext
+    public class MaintenanceDbContext : IdentityDbContext<AppUser>
     {
         public MaintenanceDbContext(DbContextOptions options) : base(options)
         {
@@ -23,9 +24,9 @@ namespace Persistence.Context
         public DbSet<MaintenanceAct>? MaintenanceAct { get; set; }
         public DbSet<MaintenancePlan>? MaintenancePlan { get; set; }
         public DbSet<Service>? Services { get; set; }
-        public DbSet<UsageHour>? UsageHours { get; set; }
+        public DbSet<UsageHistory>? UsageHistories { get; set; }
         public DbSet<EquipmentPart>? EquipmentParts { get; set; }
-        public DbSet<EquipmentType> Types { get; set; }
+        //public DbSet<EquipmentType> Types { get; set; }
         public DbSet<OperationSite> OperationSites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
