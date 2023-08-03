@@ -100,11 +100,17 @@ namespace Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("DepartmentHead")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
 
                     b.Property<bool?>("IsActive")
                         .HasColumnType("boolean");
@@ -112,11 +118,14 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
+
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -152,28 +161,56 @@ namespace Persistence.Migrations
                             Id = 4,
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Electircal"
+                            Name = "Electrical"
                         },
                         new
                         {
                             Id = 5,
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "MarineService"
+                            Name = "MarineFleet"
                         },
                         new
                         {
                             Id = 6,
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Infrascture"
+                            Name = "Mechanical"
                         },
                         new
                         {
                             Id = 7,
                             IsActive = true,
                             IsDeleted = false,
-                            Name = "Maintenance"
+                            Name = "Cranes"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Railway"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Transport"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Engineering"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Berth"
                         });
                 });
 
@@ -191,8 +228,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Color")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -209,6 +246,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Identification")
                         .HasColumnType("text");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("MadeBy")
                         .IsRequired()
                         .HasColumnType("text");
@@ -216,8 +259,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Model")
                         .HasColumnType("text");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -264,8 +307,8 @@ namespace Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -273,8 +316,14 @@ namespace Persistence.Migrations
                     b.Property<int?>("EquipmentId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<int?>("PartId")
                         .HasColumnType("integer");
@@ -291,6 +340,301 @@ namespace Persistence.Migrations
                     b.ToTable("EquipmentParts");
                 });
 
+            modelBuilder.Entity("Domain.Entities.EquipmentType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Types");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Forklift 1.5"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Forklift 2.5"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Forklift 4"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Forklift 10"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Forklift 20"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Reach Stacker 45"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Portal Crane 80T"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Portal Crane 40T"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Loader 25"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "GC_Berth"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Ferry_Berth"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Ro-Ro_Berth"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Tug_Boat"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Mobile_Crane 220T"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Building"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Container_Spreader"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Terminal_Tractor"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Oil_Cleaner_Boat"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Greifer"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Lifting_Magnet"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Fender"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Railway"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Wire_Rope_Sling"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Chain_Connector"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Lifting_Lug"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Hook"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Websling"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Bunker"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Generator"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Shalves"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Plate_Clamp"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Harness"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Roads"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Drum_Lifter"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Working_Platform"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Single leg chain sling"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Portal Crane 32T"
+                        });
+                });
+
             modelBuilder.Entity("Domain.Entities.MaintenanceAct", b =>
                 {
                     b.Property<int>("Id")
@@ -302,8 +646,8 @@ namespace Persistence.Migrations
                     b.Property<int?>("ConfirmedById")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -314,8 +658,14 @@ namespace Persistence.Migrations
                     b.Property<string>("DocumentNumber")
                         .HasColumnType("text");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -336,17 +686,27 @@ namespace Persistence.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("MetricType")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<int>("MetricTypeId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -355,38 +715,8 @@ namespace Persistence.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MetricTypeId");
 
                     b.ToTable("MaintenancePlan");
-                });
-
-            modelBuilder.Entity("Domain.Entities.MetricType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime?>("CreatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("MetricTypes");
                 });
 
             modelBuilder.Entity("Domain.Entities.OperationSite", b =>
@@ -397,20 +727,26 @@ namespace Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int>("DepartmentId")
+                    b.Property<int?>("DepartmentId")
                         .HasColumnType("integer");
 
                     b.Property<int?>("EquipmentId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -426,6 +762,57 @@ namespace Persistence.Migrations
                     b.HasIndex("EquipmentId");
 
                     b.ToTable("OperationSites");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Building_1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Building_2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "OperationArea_1"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "WareHause_1"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "WareHause_2"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "WareHause_3"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "OperationArea_2"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Part", b =>
@@ -439,14 +826,20 @@ namespace Persistence.Migrations
                     b.Property<string>("Code")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -467,17 +860,23 @@ namespace Persistence.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
                     b.Property<int>("MaintenancePlanId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<string>("ModifiedBy")
+                        .HasColumnType("text");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -507,26 +906,30 @@ namespace Persistence.Migrations
                     b.Property<string>("CreatedBy")
                         .HasColumnType("text");
 
-                    b.Property<int?>("CreatedByid")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("DateTime")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("EquipmentID")
+                    b.Property<int?>("EquipmentId")
                         .HasColumnType("integer");
 
                     b.Property<string>("EquipmentName")
                         .HasColumnType("text");
 
+                    b.Property<bool?>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<int?>("ModifiedById")
-                        .HasColumnType("integer");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -593,24 +996,11 @@ namespace Persistence.Migrations
                     b.Navigation("Part");
                 });
 
-            modelBuilder.Entity("Domain.Entities.MaintenancePlan", b =>
-                {
-                    b.HasOne("Domain.Entities.MetricType", "MetricType")
-                        .WithMany()
-                        .HasForeignKey("MetricTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MetricType");
-                });
-
             modelBuilder.Entity("Domain.Entities.OperationSite", b =>
                 {
                     b.HasOne("Domain.Entities.Department", "Department")
                         .WithMany()
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("Domain.Entities.Equipment", null)
                         .WithMany("OperationSite")

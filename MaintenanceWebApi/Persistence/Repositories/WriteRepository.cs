@@ -14,7 +14,7 @@ namespace Persistence.Repositories
 {
     public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
-        public DbSet<T> Table { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<T> Table { get; set; }
         private readonly MaintenanceDbContext _maintenanceDbContext;
 
         public WriteRepository(MaintenanceDbContext maintenanceDbContext)

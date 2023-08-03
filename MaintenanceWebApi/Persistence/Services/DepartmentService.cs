@@ -3,6 +3,7 @@ using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.Repositories.DepartmentRepo;
 using Application.RequestParameters;
+using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -16,18 +17,20 @@ namespace Persistence.Services
 {
     public class DepartmentService:IDepartmentService
     {
-        IDepartmentReadRepository _readRepository;
-        IDepartmentWriteRepository _writeRepository;
+        private readonly IDepartmentReadRepository _readRepository;
+        private readonly IDepartmentWriteRepository _writeRepository;
+        private readonly IMapper _mapper;
 
-        public DepartmentService(IDepartmentReadRepository readRepository, IDepartmentWriteRepository writeRepository)
+        public DepartmentService(IDepartmentReadRepository readRepository, IDepartmentWriteRepository writeRepository, IMapper mapper)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
+            _mapper = mapper;
         }
 
         public void CreateDepartment(DepartmentCreateDto product)
         {
-            throw new NotImplementedException();
+            
         }
 
         public EquipmentGetDto Deatil(int? id)
@@ -42,7 +45,15 @@ namespace Persistence.Services
 
         public DepartmentGetDto FindDepartment(int? id)
         {
-            throw new NotImplementedException();
+            var existDepartment = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            if (existDepartment == null)
+            {
+                return null;
+            }
+            DepartmentGetDto departmentGetDto = new DepartmentGetDto();
+            departmentGetDto.Name = existDepartment.Name;
+            departmentGetDto.Description = existDepartment.Description;
+            return departmentGetDto;
         }
 
         public Pagination<DepartmentGetDto> GetDepartment(int page, int take)
@@ -51,6 +62,11 @@ namespace Persistence.Services
         }
 
         public List<DepartmentGetDto> GetDepartments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take)
         {
             throw new NotImplementedException();
         }

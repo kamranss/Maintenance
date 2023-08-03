@@ -18,7 +18,7 @@ namespace Application.Mapper.EquipmentMap
         //void AddCategoryToList(List<Equipment> categoriesList, Category category);
         public Equipment FindCategoryFromList(int? id, List<Equipment> categories);
         public void MapUpdateCacheEquipment(EquipmentUpdateDto equipmentUpdateDto, EquipmentUpdateDto existEquipmentInCache);
-        void SaveEquipmentImage(IFormFile newImage, EquipmentCreateDto equipmentCreateDto);
+        //void SaveEquipmentImage(IFormFile newImage, EquipmentCreateDto equipmentCreateDto);
 
     }
 }

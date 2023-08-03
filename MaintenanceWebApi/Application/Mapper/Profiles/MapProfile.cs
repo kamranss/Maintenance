@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Equipment;
 using AutoMapper;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Application.Mapper.Profiles
         //        .ForMember(ds => ds.ProductsCount, map => map.MapFrom(c => c.Products.Count)); // this approach works when property names are not same
 
 
-        //    CreateMap<Category, categoryInProductReturnDto>()
+        //CreateMap<Department, Depar>()
         //        .ForMember(ds => ds.ProductCount, map => map.MapFrom(c => c.Products.Count)); // we are doing it because of types are different within mapped objects
 
 

@@ -16,14 +16,15 @@ namespace Persistence.Repositories
     {
 
         
-        public DbSet<T> Table { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public DbSet<T> Table { get; set; }
         readonly private MaintenanceDbContext _maintenanceDbContext;
         public ReadRepository(MaintenanceDbContext context )
         {
-            _maintenanceDbContext = context;
-            Table = _maintenanceDbContext.Set<T>();
+            this._maintenanceDbContext = context;
+            this.Table = _maintenanceDbContext.Set<T>();
         }
 
+        //public DbSet<T> Table => _table;
         public IQueryable<T> GetAll(bool tracking = true)
         {
             var query = Table.AsQueryable();

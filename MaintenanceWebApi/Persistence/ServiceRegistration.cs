@@ -41,9 +41,9 @@ namespace Persistence
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
             services.AddScoped<IDepartmentReadRepository, DepartmentReadRepository>();
+            services.AddScoped<IDepartmentWriteRepository, DepartmentWriteRepository>();
 
-
-
+            services.AddScoped<IDepartmentService, DepartmentService>();
             //services.AddScoped<IEquipmentService, EquipmentService>();
         }
     }
