@@ -1,4 +1,5 @@
-﻿using Application.Abstraction.Services;
+﻿using Application.Abstraction.Contracts;
+using Application.Abstraction.Services;
 using Application.DTOs.Equipment;
 using Application.Exceptions.EquipmentException;
 using Application.Repositories.EquipmentRepo;
@@ -6,6 +7,7 @@ using Application.RequestParameters;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,16 +31,36 @@ namespace Persistence.Services
             _mapper = mapper;
         }
 
-        public void CreateEquipment(EquipmentCreateDto equipment)
+        public async Task<ServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
+
             if (equipment == null)
             {
-                throw new EquipmentCreateException("Equipment object is null!");
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment object is null!" };
             }
 
+            //if (equipment.EquipmentType != null)
+            //{
+            //    Enum.TryParse<EquipmentType>(equipment.EquipmentType, out var equipmentType));
+            //}
             if (equipment.Image != null)
             {
                 var newEquipment = _mapper.Map<Equipment>(equipment);
+                var result =  await _equipmentWriteRepository.AddAsync(newEquipment);
+                if (result)
+                {
+                    await _equipmentWriteRepository.SaveAsync();
+                }
+              
+
+                // Map the 'newEquipment' back to 'EquipmentCreateDto' before returning it
+                var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
+
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
+            }
+            else
+            {
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment image is missing!" };
             }
         }
 
@@ -97,6 +119,11 @@ namespace Persistence.Services
         }
 
         public Task StockUpdateToEquipmentAsync(string equipmentId, int stock)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<IServiceResult<EquipmentCreateDto>> IEquipmentService.CreateEquipment(EquipmentCreateDto product)
         {
             throw new NotImplementedException();
         }

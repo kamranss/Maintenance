@@ -1,9 +1,11 @@
 ﻿using Application.Abstraction.Services;
 using Application.DTOs.Equipment;
+using Application.Exceptions.EquipmentException;
 using Application.Repositories.EquipmentRepo;
 using Domain.Concrets;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Services;
 
 namespace MaintenanceWebApi.Controllers
 {
@@ -39,23 +41,27 @@ namespace MaintenanceWebApi.Controllers
 
 
         [HttpPost("NewEquipment")]
-        public IActionResult CreateEquipment([FromBody] EquipmentCreateDto equipmentCreateDto)
+        public async Task<IActionResult> CreateEquipment([FromBody] EquipmentCreateDto equipmentCreateDto)
         {
-            if (!string.IsNullOrEmpty(equipmentCreateDto.EquipmentType) &&
-                
-                Enum.TryParse<EquipmentType>(equipmentCreateDto.EquipmentType, out var equipmentType))
+            try
             {
-               
+                var result = await _equipmentService.CreateEquipment(equipmentCreateDto);
 
-                return Ok("Equipment created successfully!");
+                if (result.IsSuccess)
+                {
+                    return Ok("Equipment created successfully.");
+                }
+                else
+                {
+                    return BadRequest(result.ErrorMessage);
+                }
             }
-            else
+            catch (EquipmentCreateException ex)
             {
-              
-                return BadRequest("Invalid equipment type selection.");
+                return BadRequest(ex.Message);
             }
         }
 
-
+      
     }
 }

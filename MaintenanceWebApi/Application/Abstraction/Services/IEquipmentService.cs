@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Equipment;
+﻿using Application.Abstraction.Contracts;
+using Application.DTOs.Equipment;
 using Application.RequestParameters;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -18,7 +19,7 @@ namespace Application.Abstraction.Services
 
         Pagination<EquipmentGetDto> GetEquipments(int page, int take);
         List<EquipmentGetDto> GetEquipment();
-        void CreateEquipment(EquipmentCreateDto product);
+        Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto product);
         void Delete(int? id);
         EquipmentGetDto FindEquipment(int? id);
         Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto product);
