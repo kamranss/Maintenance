@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction.Services;
 using Application.DTOs.Equipment;
+using Application.Exceptions.EquipmentException;
 using Application.Repositories.EquipmentRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -30,17 +31,14 @@ namespace Persistence.Services
 
         public void CreateEquipment(EquipmentCreateDto equipment)
         {
-            try
+            if (equipment == null)
             {
-                if (equipment == null)
-                {
-                    return
-                }
+                throw new EquipmentCreateException("Equipment object is null!");
             }
-            catch (Exception)
-            {
 
-                throw;
+            if (equipment.Image != null)
+            {
+                var newEquipment = _mapper.Map<Equipment>(equipment);
             }
         }
 

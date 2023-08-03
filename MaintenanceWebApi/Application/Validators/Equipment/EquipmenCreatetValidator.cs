@@ -53,7 +53,7 @@ namespace Application.Validators.Equipment
             RuleFor(e => e.DepartmentId)
                  .NotEmpty().WithMessage("Can not be null");
 
-            RuleFor(e => e.usageLocation)
+            RuleFor(e => e.UsageLocation)
                  .NotEmpty().WithMessage("Can not be null")
                  .MinimumLength(4).WithMessage("You should select from the list");
 

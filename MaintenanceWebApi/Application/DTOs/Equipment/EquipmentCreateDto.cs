@@ -23,7 +23,7 @@ namespace Application.DTOs.Equipment
         public string? SeriaNumber { get; set; }
         public string? Capacity { get; set; }
         public string? EquipmentType { get; set; }
-        public string? usageLocation { get; set; }
+        public string? UsageLocation { get; set; }
         public int? DepartmentId { get; set; }
         public IFormFile Image { get; set; }
 
