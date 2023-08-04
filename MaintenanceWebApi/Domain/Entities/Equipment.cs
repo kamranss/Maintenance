@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,6 +20,7 @@ namespace Domain.Entities
         public string? Model { get; set; }
         public bool? isDeleted { get; set; }
         public string? Status { get; set; }
+        [NotMapped]
         public IFormFile Image { get; set; }
         public string? ImagUrl { get; set; }
         public int? OperationSiteid { get; set; }

@@ -2,6 +2,8 @@
 using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentRepo;
+using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Configuration;
@@ -23,6 +25,23 @@ namespace Persistence
         {
             services.AddMemoryCache();
             services.AddDbContext<MaintenanceDbContext>(option => option.UseNpgsql(DbConfiguration.ConnectionString));
+            services.AddIdentity<AppUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 8;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireDigit = true;
+                options.SignIn.RequireConfirmedEmail = true;
+
+                options.User.RequireUniqueEmail = true;
+                options.Lockout.AllowedForNewUsers = true;
+
+                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+            }).AddEntityFrameworkStores<MaintenanceDbContext>()
+              .AddDefaultTokenProviders(); 
+          
 
             services.AddAutoMapper(option =>
             {

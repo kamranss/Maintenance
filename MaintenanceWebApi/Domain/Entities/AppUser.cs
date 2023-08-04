@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class AppUser:IdentityUser
+    public class AppUser:IdentityUser<string>
     {
         public string? Name { get; set; }
         public string? Surname { get; set; }
@@ -16,6 +16,7 @@ namespace Domain.Entities
         public bool? IsOperator { get; set; }
         public bool? IsDivisionHead { get; set; }
         public string? ConnectionId { get; set; }
+        public DateTime? RefreshTokenEndDate { get; set; }
         public DateTime? CreationDate { get; set; }
     }
 }

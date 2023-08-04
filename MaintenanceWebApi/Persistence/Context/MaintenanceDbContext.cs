@@ -1,5 +1,6 @@
 ﻿using Domain.Common;
 using Domain.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Configuration;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
-    public class MaintenanceDbContext : IdentityDbContext<AppUser>
+    public class MaintenanceDbContext : IdentityDbContext<AppUser,IdentityRole,string>
     {
         public MaintenanceDbContext(DbContextOptions options) : base(options)
         {
@@ -20,7 +21,7 @@ namespace Persistence.Context
         public DbSet<Equipment>? Equipments { get; set; }
         public DbSet<Part>? Parts { get; set; }
         public DbSet<Department>? Departments { get; set; }
-        public DbSet<AppUser>? AppUsers { get; set; }
+        //public DbSet<AppUser>? AppUsers { get; set; }
         public DbSet<MaintenanceAct>? MaintenanceAct { get; set; }
         public DbSet<MaintenancePlan>? MaintenancePlan { get; set; }
         public DbSet<Service>? Services { get; set; }
@@ -36,6 +37,8 @@ namespace Persistence.Context
                 optionsBuilder.UseNpgsql(DbConfiguration.ConnectionString, b => b.MigrationsAssembly("MaintenanceWebApi"));
             }
         }
+
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
 
@@ -60,6 +63,9 @@ namespace Persistence.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityUserLogin<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserToken<string>>().HasNoKey();
+            modelBuilder.Entity<IdentityUserRole<string>>().HasNoKey();
             // Seed data for departments
             modelBuilder.Entity<Department>(entity =>
             {
