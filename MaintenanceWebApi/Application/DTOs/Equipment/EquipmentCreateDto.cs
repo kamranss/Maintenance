@@ -17,8 +17,9 @@ namespace Application.DTOs.Equipment
         public string? Identification { get; set; }
         public string? Model { get; set; }
         public int? OperationSiteid { get; set; }
+
         [RegularExpression(@"^\d{4}$", ErrorMessage = "The production year must be a 4-digit number.")]
-        public string? ProductionYear { get; set; }
+        public int? ProductionYear { get; set; }
         public string MadeBy { get; set; }
         public string? SeriaNumber { get; set; }
         public string? Capacity { get; set; }
@@ -26,6 +27,8 @@ namespace Application.DTOs.Equipment
         public string? UsageLocation { get; set; }
         public int? DepartmentId { get; set; }
         public IFormFile Image { get; set; }
+        public DateTime? LastMaintenace { get; set; }
+        public decimal? CurrentValue { get; set; }
 
     }
 }

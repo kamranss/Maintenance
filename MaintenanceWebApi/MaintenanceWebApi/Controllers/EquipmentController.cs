@@ -32,13 +32,7 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        [HttpGet("EquipmentType")]
-        public IActionResult GetEquipmentTypes()
-        {
-            var equipmentTypes = Enum.GetNames(typeof(EquipmentType)).ToList();
-            return Ok(equipmentTypes);
-        }
-
+      
 
         [HttpPost("NewEquipment")]
         public async Task<IActionResult> CreateEquipment([FromBody] EquipmentCreateDto equipmentCreateDto)
@@ -62,6 +56,34 @@ namespace MaintenanceWebApi.Controllers
             }
         }
 
-      
+
+        [HttpGet("Type")]
+        public IActionResult GetEquipmentTypes()
+        {
+            var equipmentTypes = Enum.GetNames(typeof(EquipmentType)).ToList();
+            return Ok(equipmentTypes);
+        }
+
+        [HttpGet("Status")]
+        public IActionResult GetEquipmentStatus()
+        {
+            var equipmentStatus = Enum.GetNames(typeof(EquipmentStatus)).ToList();
+            return Ok(equipmentStatus);
+        }
+
+        [HttpGet("MetricType")]
+        public IActionResult GetEquipmentMetricType()
+        {
+            var  metricType = Enum.GetNames(typeof(Metrictype)).ToList();
+            return Ok(metricType);
+        }
+
+        [HttpGet("Location")]
+        public IActionResult GetEquipmentLocation()
+        {
+            var location = Enum.GetNames(typeof(Location)).ToList();
+            return Ok(location);
+        }
+
     }
 }

@@ -100,6 +100,7 @@ app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// log config
 app.Use(async (context, next) =>
 {
     var userName = context.User?.Identity?.IsAuthenticated != null || true ? context.User.Identity.Name : null;

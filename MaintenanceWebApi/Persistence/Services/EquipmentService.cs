@@ -6,7 +6,9 @@ using Application.Repositories.EquipmentRepo;
 using Application.RequestParameters;
 using AutoMapper;
 using Domain.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Memory;
 using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -24,44 +26,81 @@ namespace Persistence.Services
         private readonly IEquipmentReadRepository? _equipmentReadRepository;
         private readonly IEquipmentWriteRepository? _equipmentWriteRepository;
         private readonly IMapper _mapper;
-        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper)
+        private IMemoryCache _memoryCach;
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment)
         {
             _equipmentReadRepository = equipmentReadRepository;
             _equipmentWriteRepository = equipmentWriteRepository;
             _mapper = mapper;
+            _memoryCach = memoryCach;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<ServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
-
-            if (equipment == null)
+            try
             {
-                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment object is null!" };
-            }
 
-            //if (equipment.EquipmentType != null)
-            //{
-            //    Enum.TryParse<EquipmentType>(equipment.EquipmentType, out var equipmentType));
-            //}
-            if (equipment.Image != null)
-            {
+                EquipmentCreateException.ValidateEquipmentProperties(equipment);
                 var newEquipment = _mapper.Map<Equipment>(equipment);
-                var result =  await _equipmentWriteRepository.AddAsync(newEquipment);
+                newEquipment.IsActive = true;
+                newEquipment.IsDeleted = true;
+
+                var result = await _equipmentWriteRepository.AddAsync(newEquipment);
                 if (result)
                 {
-                    await _equipmentWriteRepository.SaveAsync();
+                    var endresult = await _equipmentWriteRepository.SaveAsync();
+
+                    if (endresult>0)
+                    {
+                        var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
+
+                        List<EquipmentCreateDto> cachedEquipments;
+                        bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
+                        if (!EquipmentsAlreadyExist)
+                        {
+                            //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
+                            var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
+
+
+                            var cachEntryOption = new MemoryCacheEntryOptions()
+                                .SetSlidingExpiration(TimeSpan.FromDays(10));
+                            _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
+                        }
+                        else
+                        {
+                     
+                            var equipments = cachedEquipments;
+
+                           var equipmentsFromDb = _equipmentReadRepository.GetByIdAsync(newEquipment.Id);
+                            if (equipmentsFromDb != null)
+                            {
+                                var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(equipmentsFromDb);
+                                equipments.Add(mappedEquipment2);
+
+                                // Update the cache with the updated products list
+                                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                                    .SetSlidingExpiration(TimeSpan.FromDays(10));
+                                _memoryCach.Set("CachedEquipmentss", equipments, cacheEntryOptions);
+                            }
+                        }
+
+                        return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
+                    }
+                    return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
                 }
-              
 
-                // Map the 'newEquipment' back to 'EquipmentCreateDto' before returning it
-                var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
-
-                return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
             }
-            else
+            catch (EquipmentCreateException)
             {
-                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment image is missing!" };
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Somthing Went Wrong" };
+                //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = ValidateEquipmentProperties.Message };
             }
+         
+
+
         }
 
         //readonly IQRCodeService _qrCodeService;

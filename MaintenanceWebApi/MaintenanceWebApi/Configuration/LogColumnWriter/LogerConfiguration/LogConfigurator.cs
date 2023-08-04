@@ -1,4 +1,4 @@
-﻿
+﻿    
 using NpgsqlTypes;
 using Serilog;
 using Serilog.Core;
@@ -28,10 +28,10 @@ namespace MaintenanceWebApi.Configuration.LogColumnWriter.LogerConfiguration
                                     {"user_name", new UserNameColumnWriter()}
                                 }))               
                 .WriteTo.Logger(equipmentLoger => equipmentLoger
-                    .Filter.ByIncludingOnly(Matching.FromSource("EquipmentLpg")) // Assuming logs related to products are logged with this source
+                    .Filter.ByIncludingOnly(Matching.FromSource("EquipmentLpg")) // Assuming logs related to equipments are logged with this source
                     .WriteTo.Console()
                     .WriteTo.File("Logs/Equipmentlogs.txt")
-                    .WriteTo.PostgreSQL(connectionString, "product_logs", needAutoCreateTable: true,
+                    .WriteTo.PostgreSQL(connectionString, "equiments_logs", needAutoCreateTable: true,
                     columnOptions: new Dictionary<string, ColumnWriterBase>
                                 {
                                     {"message", new RenderedMessageColumnWriter(NpgsqlDbType.Text)},

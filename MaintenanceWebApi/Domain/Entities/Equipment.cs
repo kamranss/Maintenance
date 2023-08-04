@@ -20,11 +20,12 @@ namespace Domain.Entities
         public string? Model { get; set; }
         public bool? isDeleted { get; set; }
         public string? Status { get; set; }
+
         [NotMapped]
         public IFormFile Image { get; set; }
         public string? ImagUrl { get; set; }
         public int? OperationSiteid { get; set; }
-        public string? ProductionYear { get; set; }
+        public int? ProductionYear { get; set; }
         public string? MadeBy { get; set; }
         public string? SeriaNumber { get; set; }
         public int? Typeid { get; set; }
