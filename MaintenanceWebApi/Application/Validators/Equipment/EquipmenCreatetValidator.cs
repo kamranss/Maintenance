@@ -15,47 +15,47 @@ namespace Application.Validators.Equipment
     {
         public EquipmenCreatetValidator()
         {
-            RuleFor(e => e.Name)
-                .NotEmpty().WithMessage("Not leave empty")
-                .MaximumLength(20).WithMessage("Max lenght should be 20");
+            //RuleFor(e => e.Name)
+            //    .NotEmpty().WithMessage("Not leave empty")
+            //    .MaximumLength(20).WithMessage("Max lenght should be 20");
 
-            RuleFor(e => e.Description)
-                .NotEmpty().WithMessage("Can not be null")
-                .MaximumLength(20).WithMessage("Max lenght should be 20");
-
-            //RuleFor(e => e.ProductionYear)
+            //RuleFor(e => e.Description)
             //    .NotEmpty().WithMessage("Can not be null")
-            //    .MaximumLength(4).WithMessage("Should be date and time");
+            //    .MaximumLength(20).WithMessage("Max lenght should be 20");
 
-            RuleFor(e => e.MadeBy)
-               .NotEmpty().WithMessage("Can not be null")
-               .MaximumLength(4).WithMessage("You should select from the list");
+            ////RuleFor(e => e.ProductionYear)
+            ////    .NotEmpty().WithMessage("Can not be null")
+            ////    .MaximumLength(4).WithMessage("Should be date and time");
 
-            RuleFor(e => e.SeriaNumber)
-                .NotEmpty().WithMessage("Can not be null")
-                .MaximumLength(4).WithMessage("You should select from the list");
+            //RuleFor(e => e.MadeBy)
+            //   .NotEmpty().WithMessage("Can not be null")
+            //   .MaximumLength(4).WithMessage("You should select from the list");
 
-            RuleFor(e => e.Capacity)
-                .NotEmpty().WithMessage("Can not be null")
-                .MaximumLength(4).WithMessage("You should select from the list");
+            //RuleFor(e => e.SeriaNumber)
+            //    .NotEmpty().WithMessage("Can not be null")
+            //    .MaximumLength(4).WithMessage("You should select from the list");
 
-            RuleFor(e => e.SeriaNumber)
-                .NotEmpty().WithMessage("Can not be null")
-                .MaximumLength(4).WithMessage("You should select from the list");
+            //RuleFor(e => e.Capacity)
+            //    .NotEmpty().WithMessage("Can not be null")
+            //    .MaximumLength(4).WithMessage("You should select from the list");
 
-            RuleFor(e => e.EquipmentType)
-                .NotEmpty().WithMessage("Can not be null")
-                .MaximumLength(4).WithMessage("You should select from the list");
+            //RuleFor(e => e.SeriaNumber)
+            //    .NotEmpty().WithMessage("Can not be null")
+            //    .MaximumLength(4).WithMessage("You should select from the list");
 
-            RuleFor(e => e.OperationSiteid)
-                 .NotEmpty().WithMessage("Can not be null");
+            //RuleFor(e => e.EquipmentType)
+            //    .NotEmpty().WithMessage("Can not be null")
+            //    .MaximumLength(4).WithMessage("You should select from the list");
 
-            RuleFor(e => e.DepartmentId)
-                 .NotEmpty().WithMessage("Can not be null");
+            //RuleFor(e => e.OperationSiteid)
+            //     .NotEmpty().WithMessage("Can not be null");
 
-            RuleFor(e => e.UsageLocation)
-                 .NotEmpty().WithMessage("Can not be null")
-                 .MinimumLength(4).WithMessage("You should select from the list");
+            //RuleFor(e => e.DepartmentId)
+            //     .NotEmpty().WithMessage("Can not be null");
+
+            //RuleFor(e => e.UsageLocation)
+            //     .NotEmpty().WithMessage("Can not be null")
+            //     .MinimumLength(4).WithMessage("You should select from the list");
 
 
             //RuleFor(p => p.)

@@ -14,12 +14,12 @@ namespace Application.Mapper.Profiles
         public MapProfile()
         {
             CreateMap<EquipmentCreateDto, Equipment>()
-                .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid()));
+                .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap();
 
-            
+         
 
-        //CreateMap<Department, Depar>()
-        //        .ForMember(ds => ds.ProductCount, map => map.MapFrom(c => c.Products.Count)); // we are doing it because of types are different within mapped objects
+            //CreateMap<Department, Depar>()
+            //        .ForMember(ds => ds.ProductCount, map => map.MapFrom(c => c.Products.Count)); // we are doing it because of types are different within mapped objects
 
 
             //    CreateMap<Product, ProductReturnDto>()

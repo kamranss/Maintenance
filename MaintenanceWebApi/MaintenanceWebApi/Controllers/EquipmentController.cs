@@ -35,7 +35,7 @@ namespace MaintenanceWebApi.Controllers
       
 
         [HttpPost("NewEquipment")]
-        public async Task<IActionResult> CreateEquipment([FromBody] EquipmentCreateDto equipmentCreateDto)
+        public async Task<IActionResult> CreateEquipment([FromForm] EquipmentCreateDto equipmentCreateDto)
         {
             try
             {

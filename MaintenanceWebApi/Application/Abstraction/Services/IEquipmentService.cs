@@ -19,10 +19,11 @@ namespace Application.Abstraction.Services
 
         Pagination<EquipmentGetDto> GetEquipments(int page, int take);
         List<EquipmentGetDto> GetEquipment();
-        Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto product);
+        Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment);
+
         void Delete(int? id);
         EquipmentGetDto FindEquipment(int? id);
-        Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto product);
+        Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto equipment);
 
         //void RemoveImage(int? id);
 
