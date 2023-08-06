@@ -2,6 +2,7 @@
 using Application.Abstraction.Services;
 using Application.DTOs.Equipment;
 using Application.Exceptions.EquipmentException;
+using Application.Helpers.FileExten;
 using Application.Repositories.EquipmentRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -39,9 +40,30 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
+            if (!equipment.Image.CheckFileType())
+            {
+                return new ServiceResult<EquipmentCreateDto>
+                {
+                    IsSuccess = false,
+                    ErrorMessage = "File Type is not correct"
+                };
+            }
+            string imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
+
             var newEquipment = _mapper.Map<Equipment>(equipment);
             newEquipment.IsActive = true;
             newEquipment.IsDeleted = true;
+            imageUrl = imageUrl + Guid.NewGuid();
+            newEquipment.ImagUrl = imageUrl;
+            if (!equipment.Image.CheckFileLenght(3000))
+            {
+                return new ServiceResult<EquipmentCreateDto>
+                {
+                    IsSuccess = false,
+                    ErrorMessage = "File Size is bigger"
+                };
+            }
+
 
             var result = await _equipmentWriteRepository.AddAsync(newEquipment);
             if (result)

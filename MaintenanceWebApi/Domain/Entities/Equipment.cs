@@ -21,8 +21,8 @@ namespace Domain.Entities
         public bool? isDeleted { get; set; }
         public string? Status { get; set; }
 
-        [NotMapped]
-        public IFormFile Image { get; set; }
+        //[NotMapped]
+        //public IFormFile Image { get; set; }
         public string? ImagUrl { get; set; }
         public int? OperationSiteid { get; set; }
         public int? ProductionYear { get; set; }

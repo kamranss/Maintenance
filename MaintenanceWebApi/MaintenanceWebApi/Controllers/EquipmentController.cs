@@ -37,18 +37,19 @@ namespace MaintenanceWebApi.Controllers
         [HttpPost("NewEquipment")]
         public async Task<IActionResult> CreateEquipment([FromForm] EquipmentCreateDto equipmentCreateDto)
         {
+            var result = await _equipmentService.CreateEquipment(equipmentCreateDto);
+
+            if (result.IsSuccess)
+            {
+                return Ok("Equipment created successfully.");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
             try
             {
-                var result = await _equipmentService.CreateEquipment(equipmentCreateDto);
-
-                if (result.IsSuccess)
-                {
-                    return Ok("Equipment created successfully.");
-                }
-                else
-                {
-                    return BadRequest(result.ErrorMessage);
-                }
+               
             }
             catch (EquipmentCreateException ex)
             {
