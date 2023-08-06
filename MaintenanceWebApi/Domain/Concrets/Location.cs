@@ -12,6 +12,7 @@ namespace Domain.Concrets
         Garadagh,
         Baku,
         Sangachal,
-        Dubandi
+        Dubandi,
+        Sumgayit
     }
 }

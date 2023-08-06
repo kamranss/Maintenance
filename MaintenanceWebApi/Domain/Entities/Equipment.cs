@@ -17,7 +17,7 @@ namespace Domain.Entities
         public string? Description { get; set; }
         public string? Color { get; set; }
         public string? Identification { get; set; }
-        public string? Model { get; set; }
+        public int? ModelId { get; set; }
         public bool? isDeleted { get; set; }
         public string? Status { get; set; }
 
@@ -26,7 +26,7 @@ namespace Domain.Entities
         public string? ImagUrl { get; set; }
         public int? OperationSiteid { get; set; }
         public int? ProductionYear { get; set; }
-        public string? MadeBy { get; set; }
+        public int? ManufactureId { get; set; }
         public string? SeriaNumber { get; set; }
         public int? Typeid { get; set; }
         public string? Capacity { get; set; }
@@ -40,6 +40,8 @@ namespace Domain.Entities
         public List<Part>? Part { get; set; }
         //public List<EquipmentType> Type { get; set; }
         public List<OperationSite> OperationSite { get; set; }
+        public Model Model { get; set; }
+        public Manufacture Manufacture { get; set; }
 
     }
 }

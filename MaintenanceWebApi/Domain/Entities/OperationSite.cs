@@ -10,6 +10,7 @@ namespace Domain.Entities
     public class OperationSite:BaseEntity
     {
         public string Name { get; set; }
+        public int Code { get; set; }
         public int? DepartmentId { get; set; }
         public Department Department { get; set; }
     }

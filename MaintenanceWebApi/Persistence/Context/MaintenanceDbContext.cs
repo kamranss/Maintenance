@@ -29,6 +29,8 @@ namespace Persistence.Context
         public DbSet<EquipmentPart>? EquipmentParts { get; set; }
         //public DbSet<EquipmentType> Types { get; set; }
         public DbSet<OperationSite> OperationSites { get; set; }
+        public DbSet<Model> Models { get; set; }
+        public DbSet<Manufacture> Manufactures { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -67,6 +69,7 @@ namespace Persistence.Context
             modelBuilder.Entity<IdentityUserToken<string>>().HasNoKey();
             modelBuilder.Entity<IdentityUserRole<string>>().HasNoKey();
             // Seed data for departments
+
             modelBuilder.Entity<Department>(entity =>
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
@@ -85,6 +88,7 @@ namespace Persistence.Context
 
                 );
             });
+
             modelBuilder.Entity<OperationSite>(entity =>
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
@@ -95,7 +99,13 @@ namespace Persistence.Context
                     new OperationSite { Id = 4, Name = "WareHause_1", IsDeleted = false, IsActive = true },
                     new OperationSite { Id = 5, Name = "WareHause_2", IsDeleted = false, IsActive = true },
                     new OperationSite { Id = 6, Name = "WareHause_3", IsDeleted = false, IsActive = true },
-                    new OperationSite { Id = 7, Name = "OperationArea_2", IsDeleted = false, IsActive = true }
+                    new OperationSite { Id = 7, Name = "OperationArea_2", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 8, Name = "ST-1", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 9, Name = "ST-2", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 10, Name = "ST-3", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 11, Name = "ST-4", IsDeleted = false, IsActive = true },
+                    new OperationSite { Id = 12, Name = "ST-5", IsDeleted = false, IsActive = true }
+
                 );
             });
 
@@ -140,6 +150,231 @@ namespace Persistence.Context
                     new EquipmentType { Id = 35, Name = "Working_Platform", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 36, Name = "Single leg chain sling", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 37, Name = "Portal Crane 32T", IsDeleted = false, IsActive = true }
+
+                );
+            });
+
+            modelBuilder.Entity<Manufacture>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new EquipmentType { Id = 1, Name = "Single leg chain sling", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 2, Name = "Working platform", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 3, Name = "Hangcha", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 4, Name = "XCMG", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 5, Name = "Kalmar", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 6, Name = "Terberq", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 7, Name = "Sisu", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 8, Name = "Toyoto", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 9, Name = "Bobkat", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 10, Name = "Hyster", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 11, Name = "Boss", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 12, Name = "Ardelt", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 13, Name = "None", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 14, Name = "VDL", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 15, Name = "Sunny", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 16, Name = "Camry", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 17, Name = "Engine", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 18, Name = "023-2 №-li dizel generator", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 19, Name = "022-1 №-li dizel generator", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 20, Name = "021-TQM 23 B48-754", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 21, Name = "Service berth-N4", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 22, Name = "Molino", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 23, Name = "Service berth-N3 ", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 24, Name = "Shackle", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 25, Name = "County", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 26, Name = "Santafe", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 27, Name = "Sonata", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 28, Name = "Kartal SLX", IsDeleted = false, IsActive = true }                   
+
+                );
+            });
+
+
+            modelBuilder.Entity<Model>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                   new EquipmentType { Id = 1, Name = "RS45-31CH", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 2, Name = "CPCD200-W36", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 3, Name = "CPCD100-W17", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 4, Name = "CPCD40-RC24", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 5, Name = "CPCD25N-RC2", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 6, Name = "CPCD15N-RC26", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 7, Name = "XT760", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 8, Name = "DRD420-60S5", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 9, Name = "DSD420-12CSG", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 10, Name = "T-1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 11, Name = "TV-10EIT-4x4/2600", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 12, Name = "FD-100F50", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 13, Name = "843", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 14, Name = "HS1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 15, Name = "B1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 16, Name = "FD-15", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 17, Name = "Kondor 1500", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 18, Name = "QAY220 All Terrain Crane", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 19, Name = "None", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 20, Name = "Sokol 500", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 21, Name = "Mobil Pnevmatik Transporter", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 22, Name = "ST 1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 23, Name = "ST 2", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 24, Name = "ST 3", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 25, Name = "ST 4", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 26, Name = "ST 4", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 27, Name = "ST 5", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 28, Name = "ST 6", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 29, Name = "ST 7", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 30, Name = "ST 8", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 31, Name = "ST 8", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 32, Name = "ST 9", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 33, Name = "ST 10", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 34, Name = "Ferry Terminal", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 35, Name = "YT180-04", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 36, Name = "CH 6600", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 37, Name = "AM 140/76/36", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 38, Name = "VSG/020.0-2.2-6400", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 39, Name = "VSG/015.0.07.13500", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 40, Name = "VSG/016.0-2.2-5000", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 41, Name = "VSG/020.0-0.7-17500", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 42, Name = "Sabir Babayev yedək gəmisi", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 43, Name = "Ələt yedək gəmisi", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 44, Name = "Silkway yedək gəmisi", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 45, Name = "045-TQM 23 B - 48", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 46, Name = "046-MNMS-73", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 47, Name = "047-Şəfəq", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 48, Name = "048-Kür", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 49, Name = "049-Günəşli", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 50, Name = "050-Nüsrət Şirinov", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 51, Name = "051-Elxan Kazımov", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 52, Name = "052-Limançı", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 53, Name = "053-TQM 23 B48 - 2494", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 54, Name = "Nissan", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 55, Name = "Toyota", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 56, Name = "QAZ", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 57, Name = "HOWO", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 58, Name = "Fiat", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 59, Name = "111111", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 60, Name = "Vaz", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 61, Name = "Tofash", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 62, Name = "Volkswagen", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 63, Name = "Hyundai", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 64, Name = "Mersedes Benz", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 65, Name = "5 Tonne 5mtr x 26mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 66, Name = "5 Tonne 4mtr x 26mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 67, Name = "10 Tonne 5.5mtr x 32mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 68, Name = "15 Tonne 4mtr x 38mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 69, Name = "5 Tonne 3mtr x 26mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 70, Name = "8.6 Tonne 1.9mtr x26mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 71, Name = "8.6 Tonne 10 mtr x 26mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 72, Name = "6.2 Tonne 11.06mtr x 22mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 73, Name = "8.6 Tonne 10 mtr x 26mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 74, Name = "6.2 Tonne 11.06mtr x 22mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 75, Name = "6.2 Tonne 10 mtr x 22mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 76, Name = "6.2 Tonne 6 mtr x 22 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 77, Name = "077-5.1 6 mtr x 22 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 78, Name = "078-5.1 Tonne 1.3 mtr x 20 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 79, Name = "079-5.1 Tonne 2.93 mtr x 20 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 80, Name = "080-10.1 Tonne 12 mtr x 28 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 81, Name = "081-5 Tonne 8 mtr x 20 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 82, Name = "082-8 Tonne 8 mtr x 26 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 83, Name = "083-10 Tonne 10 mtr x 28 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 84, Name = "084-10.1 Tonne 6 mtr x 28 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 85, Name = "085-10.1 Tonne 6 mtr x 28 mm dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 86, Name = "086-12 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 87, Name = "087-25 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 88, Name = "6.5 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 89, Name = "4.75 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 90, Name = "3.25 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 91, Name = "8.5 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 92, Name = "12 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 93, Name = "12.5 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 94, Name = "8 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 95, Name = "3 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 96, Name = "10 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 97, Name = "4064 Kgs", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 98, Name = "5 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 99, Name = "3 Tonne 1 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 100, Name = "3 Tonne 2 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 101, Name = "3 Tonne 2 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 102, Name = "3 Tonne 3 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 103, Name = "3 Tonne 5 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 104, Name = "3 Tonne 6 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 105, Name = "3 Tonne 10 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 106, Name = "106-5 tonne 3 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 107, Name = "107-5 Tonne 5 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 108, Name = "108-5 Tonne 6 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 109, Name = "109-10 Tonne 5 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 110, Name = "110-6 Tonne 4 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 111, Name = "6 Tonne 6 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 112, Name = "112-6 Tonne 10mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 113, Name = "113-14 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 114, Name = "114-15 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 115, Name = "115-136 kgs", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 116, Name = "116-30 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 117, Name = "117-Model: H2000/3 MFB", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 118, Name = "118-Model: KP 25", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 119, Name = "119-Model: 71022", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 120, Name = "120-2250 kgs", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 121, Name = "121-1.5 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 122, Name = "122-SİNGLE LİNE LANYARD", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 123, Name = "123-Takelaj sahəsi", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 124, Name = "8 Tonne 8 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 125, Name = "8 Tonne 6mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 126, Name = "126- Qarmaq   KE-40", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 127, Name = "127-Qarmaq    KE-80", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 128, Name = "128-Qarmaq   KE-32", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 129, Name = "10 Tonee x 3 mtr x 28 dia", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 130, Name = "3 tonne x 1.5 mtr x 20 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 131, Name = "7 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 132, Name = "3 tonne x 1 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 133, Name = "10 Tonne 6 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 134, Name = "10 tonne 4 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 135, Name = "1 tonne 2mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 136, Name = "5 tonne 10 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 137, Name = "8 Tonne 2mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 138, Name = "10 Tonne 10 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 139, Name = "17 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 140, Name = "3.2 tonne x  3 mtr x 16 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 141, Name = "10 tonne x 5.5 mtr x 28 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 142, Name = "10 tonne x 5 mtr x 28 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 143, Name = "10 tonne x 4 mtr x 28 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 144, Name = "10 Tonne x 6 mtr x 28 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 145, Name = "6.2 Tonne x 3mtr x 22mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 146, Name = "6.2 Tonne x 5 mtr x 22mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 147, Name = "18.5 Tonne x 3 mtr x 38 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 148, Name = "18.5 Tonne x 5 mtr x 38 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 149, Name = "2 tonne 2 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 150, Name = "1.74mtr x 4.24mtr x 1.32mtr - 300kgs", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 151, Name = "400 kgs", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 152, Name = "18.5 Tonne x 8 mtr x 38 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 153, Name = "10 Tonne x 12 mtr x 28 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 154, Name = "5.3  Tonne x 15 mtr x 13 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 155, Name = "8 tonne 4 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 156, Name = "85 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 157, Name = "35 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 158, Name = "9.5 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 159, Name = "13.5 tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 160, Name = "10 Tonne x 8 mtr x 28 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 161, Name = "161-İnzibati bina CR-2 və qazanxan HB-1", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 162, Name = "162-Ümumi yük terminalı binaları CR-7 , CR-9 , CR-8", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 163, Name = "163-Texniki xidmət binaları CR-3, CR-4, CR-10, CR-15, CR-16, WS-3", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 164, Name = "164-RO-RO terminalı binaları CR-17, FS-5 , FS-10, FS-11, FS-16, FS-17, FS-18", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 165, Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 165, Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 166, Name = "166-DƏMİRYOLU binaları RM-1, RM-2 ,RM-4 ,RM-5, RM-6, RM- 7, RM-8, RM-13, RM-14, RM15, RM-16", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 167, Name = "167-Mühafizə xidməti binaları AB-1, AB-2, AB-7", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 168, Name = "142 tonne x 3,4 mtr x 56 mm", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 169, Name = "50 Tonne", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 170, Name = "300 kgs", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 171, Name = "4 tonne 2 mtr", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 172, Name = "172-Abşeron Neft Terminalı binaları", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 173, Name = "173-Abşeron Neft Terminalı hidrotexniki qurğuları 1 saylı körpü", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 174, Name = "174-Abşeron Neft Terminalı hidrotexniki qurğuları 3 saylı körpü", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 175, Name = "175-Dəniz vağzalı binası", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 176, Name = "176-Dəniz vağzalı hidrotexniki qurğuları", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 177, Name = "177-İdarə binası və mədəniyyət evi", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 178, Name = "178-Qaradağ mülki-müdafiə binaları", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 179, Name = "179-Liman ərazisi yollar (Kargo , Ro-Ro , Bərə terminal)", IsDeleted = false, IsActive = true }
 
                 );
             });
