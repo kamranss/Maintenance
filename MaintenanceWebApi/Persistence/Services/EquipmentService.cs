@@ -90,11 +90,11 @@ namespace Persistence.Services
                     {
 
                         var equipments = cachedEquipments;
-
-                        var equipmentsFromDb = _equipmentReadRepository.GetByIdAsync(newEquipment.Id);
-                        if (equipmentsFromDb != null)
+             
+                        var newlyAddedEquipment = _equipmentReadRepository.GetWhere(d => d.Name == newEquipment.Name).ToList();
+                        if (newlyAddedEquipment != null)
                         {
-                            var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(equipmentsFromDb);
+                            var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(newlyAddedEquipment);
                             equipments.Add(mappedEquipment2);
 
                             // Update the cache with the updated products list
@@ -113,7 +113,7 @@ namespace Persistence.Services
 
 
 
-        }
+        } // done
 
         //readonly IQRCodeService _qrCodeService;
 
@@ -147,21 +147,59 @@ namespace Persistence.Services
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
 
-            var items = _equipmentReadRepository
-               .GetAll()
-               .Skip((page - 1) * take)
-               .Take(take)
-               .ToList();
-            if (items == null)
+            List<EquipmentCachedDto> cachedEquipments;
+            bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
+            if (!EquipmentsAlreadyExist)
             {
-                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+               var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false);
+
+                var items = EquipmentsFromDb
+                 .Skip((page - 1) * take)
+                 .Take(take)
+                 .ToList();
+
+                
+                if (items == null)
+                {
+                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+                }
+                var totalCount = items.Count;
+                var pageCount = (int)Math.Ceiling((double)totalCount / take);
+
+                var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
+                var pagination = new Pagination<EquipmentListDto>(equipmentListDto, page, pageCount, totalCount);
+
+                EquipmentsFromDb.ToList();
+                 var cachEntryOption = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromDays(10));
+                _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
+
+
+                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
             }
-            var totalCount = items.Count;
-            var pageCount = (int)Math.Ceiling((double)totalCount / take);
-            var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
-            var pagination = new Pagination<EquipmentListDto>(equipmentListDto, page, pageCount, totalCount);
-            return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
-        }
+            else
+            {
+                var items = cachedEquipments
+                    .Skip((page - 1) * take)
+                    .Take(take)
+                    .ToList();
+
+                if (items.Count == 0)
+                {
+                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no equipment in Db" };
+                }
+
+                var totalCount = items.Count;
+                var pageCount = (int)Math.Ceiling((double)totalCount / take);
+
+                var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
+                var pagination = new Pagination<EquipmentListDto>(equipmentListDto, page, pageCount, totalCount);
+                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
+
+            }
+
+           
+        } // done
 
         public EquipmentGetDto IsEquipmentExist(int? id)
         {

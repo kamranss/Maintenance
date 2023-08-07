@@ -14,7 +14,11 @@ namespace Application.Validators.Department
         {
             RuleFor(p => p.Name)
               .NotEmpty().WithMessage("Not leave empty")
-              .MaximumLength(20).WithMessage("Max lenght should be 20");
+              .MaximumLength(20).WithMessage("Max lenght should be 20")
+              .MinimumLength(5).WithMessage("Max Lenght should be 5");
+            
+            RuleFor(p => p.Name)
+              .MaximumLength(20).WithMessage("Max lenght should be 50");
         }
     }
 }

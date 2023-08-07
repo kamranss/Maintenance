@@ -6,8 +6,10 @@ using Application.Repositories.DepartmentRepo;
 using Application.RequestParameters;
 using AutoMapper;
 using Domain.Entities;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -23,18 +25,75 @@ namespace Persistence.Services
         private readonly IDepartmentReadRepository _readRepository;
         private readonly IDepartmentWriteRepository _writeRepository;
         private readonly IMapper _mapper;
+        private IMemoryCache _memoryCach;
 
-        public DepartmentService(IDepartmentReadRepository readRepository, IDepartmentWriteRepository writeRepository, IMapper mapper)
+        public DepartmentService(IDepartmentReadRepository readRepository, IDepartmentWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _mapper = mapper;
+            _memoryCach = memoryCach;
         }
 
-        public void CreateDepartment(DepartmentCreateDto product)
+
+        public async Task<IServiceResult<DepartmentCreateDto>> CreateDepartment(DepartmentCreateDto department)
         {
-            
-        }
+            var newDepartment = _mapper.Map<Department>(department);
+            newDepartment.IsActive = true;
+            newDepartment.IsDeleted = true;
+           
+            var isSameDepartmentExist = _readRepository.GetWhere(d => d.Name == newDepartment.Name).Any();
+            if (isSameDepartmentExist)
+            {
+                return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Same Department already exist" };
+            }
+            var result = await _writeRepository.AddAsync(newDepartment);
+            if (result)
+            {
+                var endresult = await _writeRepository.SaveAsync();
+
+                if (endresult > 0)
+                {
+                    var mappedDepartment = _mapper.Map<DepartmentCreateDto>(newDepartment);
+
+                    List<DepartmentCachedDto> cachedDepartments;
+                    bool DepartmentsAlreadyExist = _memoryCach.TryGetValue("CachedDepartments", out cachedDepartments);
+                    if (!DepartmentsAlreadyExist)
+                    {
+                        //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
+                        var departmentsFromDb = _readRepository.GetAll(tracking: false).ToList();
+
+
+                        var cachEntryOption = new MemoryCacheEntryOptions()
+                            .SetSlidingExpiration(TimeSpan.FromDays(10));
+                        _memoryCach.Set("CachedEquipmentss", departmentsFromDb, cachEntryOption);
+                    }
+                    else
+                    {
+
+                        var departments = cachedDepartments;
+
+                        var newlyAdedDepartmen = _readRepository.GetWhere(d => d.Name == newDepartment.Name).ToList();
+                        if (newlyAdedDepartmen != null)
+                        {
+                            var mappedDepartmentToCache = _mapper.Map<DepartmentCachedDto>(newlyAdedDepartmen);
+                            departments.Add(mappedDepartmentToCache);
+
+                            // Update the cache with the updated products list
+                            var cacheEntryOptions = new MemoryCacheEntryOptions()
+                                .SetSlidingExpiration(TimeSpan.FromDays(10));
+                            _memoryCach.Set("CachedEquipmentss", departments, cacheEntryOptions);
+                        }
+                    }
+
+                    return new ServiceResult<DepartmentCreateDto> { IsSuccess = true, Data = mappedDepartment };
+                }
+                return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
+            }
+
+            return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
+
+        } // done
 
         public EquipmentGetDto Deatil(int? id)
         {
@@ -57,17 +116,23 @@ namespace Persistence.Services
             departmentGetDto.Name = existDepartment.Name;
             departmentGetDto.Description = existDepartment.Description;
             return departmentGetDto;
-        }
+        } // should be removed
 
-        public Pagination<DepartmentGetDto> GetDepartment(int page, int take)
+        public async Task<IServiceResult<DepartmentListDto>> FindDepartmentAsync(int? id)
         {
-            throw new NotImplementedException();
-        }
+            if (!id.HasValue && id<=0)
+            {
+                return new ServiceResult<DepartmentListDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+            }
+            var existDepartment = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            if (existDepartment == null)
+            {
+                return new ServiceResult<DepartmentListDto> { IsSuccess = false, ErrorMessage = "There is no department with this Id" };
+            }
+            var departmentListDto = _mapper.Map<DepartmentListDto>(existDepartment);
 
-        public List<DepartmentGetDto> GetDepartments()
-        {
-            throw new NotImplementedException();
-        }
+            return new ServiceResult<DepartmentListDto> { IsSuccess = true, Data = departmentListDto };
+        } // done
 
         public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? pagesize)
         {
@@ -95,7 +160,7 @@ namespace Persistence.Services
             var departmentListDto = _mapper.Map<List<DepartmentListDto>>(items);
             var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, pageValue, pageCount, totalCount);
             return  new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartments };
-        }
+        } // done 
 
         public Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take)
         {
@@ -112,14 +177,8 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
-        public void SaveChanges()
-        {
-            throw new NotImplementedException();
-        }
 
-        public void SaveDepartmentImage(IFormFile newImage, Equipment equipment)
-        {
-            throw new NotImplementedException();
-        }
+
+     
     }
 }

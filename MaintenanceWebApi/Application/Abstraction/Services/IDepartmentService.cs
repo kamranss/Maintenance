@@ -18,15 +18,16 @@ namespace Application.Abstraction.Services
  
         //Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take);
         Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? take);
-        List<DepartmentGetDto> GetDepartments();
-        void CreateDepartment(DepartmentCreateDto product);
+        //List<DepartmentGetDto> GetDepartments();
+        Task<IServiceResult<DepartmentCreateDto>> CreateDepartment(DepartmentCreateDto department);
+        //void CreateDepartment(DepartmentCreateDto product);
         void DeleteDepartment(int? id);
-        DepartmentGetDto FindDepartment(int? id);
+        //DepartmentGetDto FindDepartment(int? id);
+        Task<IServiceResult<DepartmentListDto>> FindDepartmentAsync(int? id);
         //Equipment MapDtoToEntity(EquipmentUpdateDto product);
         EquipmentGetDto Deatil(int? id);
-        void SaveDepartmentImage(IFormFile newImage, Equipment equipment);
         EquipmentGetDto IsDepartmentExist(int? id);
-        void SaveChanges();
+        //void SaveChanges();
 
     }
 }

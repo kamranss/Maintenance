@@ -19,11 +19,11 @@ namespace MaintenanceWebApi.Controllers
         [HttpGet]
         public IActionResult GetDepartment(int? id)
         {
-            if (id == null)
-            {
-                throw new ArgumentNullException("id");
-            }
-           var department =  _departmentService.FindDepartment(id);
+            //if (id == null)
+            //{
+            //    throw new ArgumentNullException("id");
+            //}
+           var department =  _departmentService.FindDepartmentAsync(id);
             return Ok(department);
         }
 

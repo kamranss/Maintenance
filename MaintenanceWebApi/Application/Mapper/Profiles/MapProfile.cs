@@ -16,10 +16,16 @@ namespace Application.Mapper.Profiles
         {
             CreateMap<EquipmentCreateDto, Equipment>()
                 .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap();
-
             CreateMap<Equipment,EquipmentListDto>();
+            CreateMap<EquipmentCachedDto, EquipmentListDto>().ReverseMap();
+
+
 
             CreateMap<Department, DepartmentListDto>();
+            CreateMap<Department, DepartmentCreateDto>().ReverseMap();
+            CreateMap<Department, DepartmentCachedDto>().ReverseMap();
+
+
 
 
 
