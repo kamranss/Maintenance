@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.Abstraction.Services;
+using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.Exceptions.EquipmentException;
 using Application.Helpers.FileExten;
@@ -128,17 +129,7 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
-        public EquipmentGetDto FindEquipment(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
-  
-        public List<EquipmentGetDto> GetEquipment()
-        {
-            throw new NotImplementedException();
-        }
-
+      
         public async Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int page, int take)
         {
           
@@ -206,17 +197,8 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
-        public Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto product)
-        {
-            throw new NotImplementedException();
-        }
 
         public Task<byte[]> QrCodeToEquipmentAsync(string equipmentId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveChanges()
         {
             throw new NotImplementedException();
         }
@@ -231,7 +213,23 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
- 
+        public async Task<IServiceResult<EquipmentListDto>> FindEquipmentAsync(int? id)
+        {
+            if (!id.HasValue && id <= 0)
+            {
+                return new ServiceResult<EquipmentListDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+            }
+            var existEquipment = _equipmentReadRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            if (existEquipment == null)
+            {
+                return new ServiceResult<EquipmentListDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
+            }
+            var equipmentListDto = _mapper.Map<EquipmentListDto>(existEquipment);
+
+            return new ServiceResult<EquipmentListDto> { IsSuccess = true, Data = equipmentListDto };
+        } // done
+
+
 
 
 
@@ -251,65 +249,65 @@ namespace Persistence.Services
         //    try
         //    {
 
-            //        //EquipmentCreateException.ValidateEquipmentProperties(equipment);
-            //        var newEquipment = _mapper.Map<Equipment>(equipment);
-            //        newEquipment.IsActive = true;
-            //        newEquipment.IsDeleted = true;
+        //        //EquipmentCreateException.ValidateEquipmentProperties(equipment);
+        //        var newEquipment = _mapper.Map<Equipment>(equipment);
+        //        newEquipment.IsActive = true;
+        //        newEquipment.IsDeleted = true;
 
-            //        var result = await _equipmentWriteRepository.AddAsync(newEquipment);
-            //        if (result)
-            //        {
-            //            var endresult = await _equipmentWriteRepository.SaveAsync();
+        //        var result = await _equipmentWriteRepository.AddAsync(newEquipment);
+        //        if (result)
+        //        {
+        //            var endresult = await _equipmentWriteRepository.SaveAsync();
 
-            //            if (endresult > 0)
-            //            {
-            //                var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
+        //            if (endresult > 0)
+        //            {
+        //                var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
 
-            //                List<EquipmentCreateDto> cachedEquipments;
-            //                bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
-            //                if (!EquipmentsAlreadyExist)
-            //                {
-            //                    //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
-            //                    var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
-
-
-            //                    var cachEntryOption = new MemoryCacheEntryOptions()
-            //                        .SetSlidingExpiration(TimeSpan.FromDays(10));
-            //                    _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
-            //                }
-            //                else
-            //                {
-
-            //                    var equipments = cachedEquipments;
-
-            //                    var equipmentsFromDb = _equipmentReadRepository.GetByIdAsync(newEquipment.Id);
-            //                    if (equipmentsFromDb != null)
-            //                    {
-            //                        var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(equipmentsFromDb);
-            //                        equipments.Add(mappedEquipment2);
-
-            //                        // Update the cache with the updated products list
-            //                        var cacheEntryOptions = new MemoryCacheEntryOptions()
-            //                            .SetSlidingExpiration(TimeSpan.FromDays(10));
-            //                        _memoryCach.Set("CachedEquipmentss", equipments, cacheEntryOptions);
-            //                    }
-            //                }
-
-            //                return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
-            //            }
-            //            return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
-            //        }
-
-            //        return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
-            //    }
-            //    catch (EquipmentCreateException)
-            //    {
-            //        return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Somthing Went Wrong" };
-            //        //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = ValidateEquipmentProperties.Message };
-            //    }
+        //                List<EquipmentCreateDto> cachedEquipments;
+        //                bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
+        //                if (!EquipmentsAlreadyExist)
+        //                {
+        //                    //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
+        //                    var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
 
 
+        //                    var cachEntryOption = new MemoryCacheEntryOptions()
+        //                        .SetSlidingExpiration(TimeSpan.FromDays(10));
+        //                    _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
+        //                }
+        //                else
+        //                {
 
-            //}
+        //                    var equipments = cachedEquipments;
+
+        //                    var equipmentsFromDb = _equipmentReadRepository.GetByIdAsync(newEquipment.Id);
+        //                    if (equipmentsFromDb != null)
+        //                    {
+        //                        var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(equipmentsFromDb);
+        //                        equipments.Add(mappedEquipment2);
+
+        //                        // Update the cache with the updated products list
+        //                        var cacheEntryOptions = new MemoryCacheEntryOptions()
+        //                            .SetSlidingExpiration(TimeSpan.FromDays(10));
+        //                        _memoryCach.Set("CachedEquipmentss", equipments, cacheEntryOptions);
+        //                    }
+        //                }
+
+        //                return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
+        //            }
+        //            return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
+        //        }
+
+        //        return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
+        //    }
+        //    catch (EquipmentCreateException)
+        //    {
+        //        return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Somthing Went Wrong" };
+        //        //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = ValidateEquipmentProperties.Message };
+        //    }
+
+
+
+        //}
     }
 }
