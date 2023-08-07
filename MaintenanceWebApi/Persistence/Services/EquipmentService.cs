@@ -139,9 +139,28 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
-        public Pagination<EquipmentGetDto> GetEquipments(int page, int take)
+        public async Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int page, int take)
         {
-            throw new NotImplementedException();
+          
+            if (!(page>0 && take>0))
+            {
+                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+            }
+
+            var items = _equipmentReadRepository
+               .GetAll()
+               .Skip((page - 1) * take)
+               .Take(take)
+               .ToList();
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+            }
+            var totalCount = items.Count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / take);
+            var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
+            var pagination = new Pagination<EquipmentListDto>(equipmentListDto, page, pageCount, totalCount);
+            return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
         }
 
         public EquipmentGetDto IsEquipmentExist(int? id)

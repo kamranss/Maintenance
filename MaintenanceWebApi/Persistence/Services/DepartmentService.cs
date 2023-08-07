@@ -1,4 +1,5 @@
-﻿using Application.Abstraction.Services;
+﻿using Application.Abstraction.Contracts;
+using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.Repositories.DepartmentRepo;
@@ -6,6 +7,8 @@ using Application.RequestParameters;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,6 +67,30 @@ namespace Persistence.Services
         public List<DepartmentGetDto> GetDepartments()
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int page, int take)
+        {
+            if (!(page > 0 && take > 0))
+            {
+                return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+            }
+
+            var items = _readRepository
+               .GetAll()
+               .Skip((page - 1) * take)
+               .Take(take)
+               .Include(d => d.Equipments)
+               .ToList();
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+            }
+            var totalCount = items.Count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / take);
+            var departmentListDto = _mapper.Map<List<DepartmentListDto>>(items);
+            var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, page, pageCount, totalCount);
+            return  new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartments };
         }
 
         public Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take)

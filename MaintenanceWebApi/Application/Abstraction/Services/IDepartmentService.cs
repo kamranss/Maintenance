@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Department;
+﻿using Application.Abstraction.Contracts;
+using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.RequestParameters;
 using Domain.Entities;
@@ -15,7 +16,8 @@ namespace Application.Abstraction.Services
     public interface IDepartmentService
     {
  
-        Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take);
+        //Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take);
+        Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int page, int take);
         List<DepartmentGetDto> GetDepartments();
         void CreateDepartment(DepartmentCreateDto product);
         void DeleteDepartment(int? id);

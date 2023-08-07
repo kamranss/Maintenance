@@ -190,7 +190,6 @@ namespace Persistence.Context
                 );
             });
 
-
             modelBuilder.Entity<Model>(entity =>
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
@@ -359,7 +358,6 @@ namespace Persistence.Context
                     new EquipmentType { Id = 162, Name = "162-Ümumi yük terminalı binaları CR-7 , CR-9 , CR-8", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 163, Name = "163-Texniki xidmət binaları CR-3, CR-4, CR-10, CR-15, CR-16, WS-3", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 164, Name = "164-RO-RO terminalı binaları CR-17, FS-5 , FS-10, FS-11, FS-16, FS-17, FS-18", IsDeleted = false, IsActive = true },
-                    new EquipmentType { Id = 165, Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 165, Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 166, Name = "166-DƏMİRYOLU binaları RM-1, RM-2 ,RM-4 ,RM-5, RM-6, RM- 7, RM-8, RM-13, RM-14, RM15, RM-16", IsDeleted = false, IsActive = true },
                     new EquipmentType { Id = 167, Name = "167-Mühafizə xidməti binaları AB-1, AB-2, AB-7", IsDeleted = false, IsActive = true },

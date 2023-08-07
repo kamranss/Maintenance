@@ -25,7 +25,7 @@ namespace Persistence.Repositories
         }
 
         //public DbSet<T> Table => _table;
-        public IQueryable<T> GetAll(bool tracking = true)
+        public  IQueryable<T> GetAll(bool tracking = true)
         {
             var query = Table.AsQueryable();
             if (!tracking)

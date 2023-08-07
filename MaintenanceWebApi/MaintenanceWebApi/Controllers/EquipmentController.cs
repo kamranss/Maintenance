@@ -58,12 +58,20 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        [HttpGet("Type")]
-        public IActionResult GetEquipmentTypes()
+        //[HttpGet("Type")]
+        //public IActionResult GetEquipmentTypes()
+        //{
+        //    var equipmentTypes = Enum.GetNames(typeof(EquipmentType)).ToList();
+        //    return Ok(equipmentTypes);
+        //}
+
+        [HttpGet("All")]
+        public IActionResult GetEquipments(int take, int pageNumber)
         {
-            var equipmentTypes = Enum.GetNames(typeof(EquipmentType)).ToList();
-            return Ok(equipmentTypes);
+           var equipments =  _equipmentService.GetEquipmentsAsync(take, pageNumber);
+            return Ok(equipments);
         }
+
 
         [HttpGet("Status")]
         public IActionResult GetEquipmentStatus()
