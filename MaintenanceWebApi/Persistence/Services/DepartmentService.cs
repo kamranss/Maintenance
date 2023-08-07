@@ -69,17 +69,21 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int page, int take)
+        public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? pagesize)
         {
-            if (!(page > 0 && take > 0))
+            if (!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0)
             {
                 return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
 
+            int pageValue = page.Value;
+            int takeValue = pagesize.Value;
+            int skipCount = (pageValue - 1) * takeValue;
+
             var items = _readRepository
                .GetAll()
-               .Skip((page - 1) * take)
-               .Take(take)
+               .Skip(skipCount)
+               .Take(takeValue)
                .Include(d => d.Equipments)
                .ToList();
             if (items == null)
@@ -87,9 +91,9 @@ namespace Persistence.Services
                 return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
             }
             var totalCount = items.Count;
-            var pageCount = (int)Math.Ceiling((double)totalCount / take);
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
             var departmentListDto = _mapper.Map<List<DepartmentListDto>>(items);
-            var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, page, pageCount, totalCount);
+            var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, pageValue, pageCount, totalCount);
             return  new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartments };
         }
 

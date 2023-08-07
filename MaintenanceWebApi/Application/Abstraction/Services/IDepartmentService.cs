@@ -17,7 +17,7 @@ namespace Application.Abstraction.Services
     {
  
         //Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take);
-        Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int page, int take);
+        Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? take);
         List<DepartmentGetDto> GetDepartments();
         void CreateDepartment(DepartmentCreateDto product);
         void DeleteDepartment(int? id);

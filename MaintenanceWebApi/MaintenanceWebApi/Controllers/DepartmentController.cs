@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Services;
 
 namespace MaintenanceWebApi.Controllers
 {
@@ -24,6 +25,13 @@ namespace MaintenanceWebApi.Controllers
             }
            var department =  _departmentService.FindDepartment(id);
             return Ok(department);
+        }
+
+        [HttpGet("All")]
+        public IActionResult GetEquipments(int pageSize, int pageNumber)
+        {
+            var departments = _departmentService.GetDepartmentsAsync(pageSize, pageNumber);
+            return Ok(departments);
         }
 
     }

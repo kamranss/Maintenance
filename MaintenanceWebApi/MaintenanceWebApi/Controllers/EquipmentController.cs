@@ -66,9 +66,9 @@ namespace MaintenanceWebApi.Controllers
         //}
 
         [HttpGet("All")]
-        public IActionResult GetEquipments(int take, int pageNumber)
+        public IActionResult GetEquipments(int pageSize, int pageNumber)
         {
-           var equipments =  _equipmentService.GetEquipmentsAsync(take, pageNumber);
+           var equipments =  _equipmentService.GetEquipmentsAsync(pageSize, pageNumber);
             return Ok(equipments);
         }
 

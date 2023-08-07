@@ -133,8 +133,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<DateTime?>("RemovalDate")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<int?>("RemovalDate")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
