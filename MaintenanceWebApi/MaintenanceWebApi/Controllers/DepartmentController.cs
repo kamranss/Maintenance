@@ -69,6 +69,14 @@ namespace MaintenanceWebApi.Controllers
             }
         }
 
+        [Route("ModDepartment")]
+        [HttpPut]
+        public IActionResult Update(DepartmentUpdateDto departmentUpdateDto)
+        {
+           _departmentService.UpdateDepartmentAsync(departmentUpdateDto);
+           
+            return StatusCode(200, "Department Updated");
+        }
 
     }
 }

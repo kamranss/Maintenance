@@ -21,6 +21,8 @@ namespace Application.Abstraction.Services
         //List<DepartmentGetDto> GetDepartments();
         Task<IServiceResult<DepartmentCreateDto>> CreateDepartmentAsync(DepartmentCreateDto department);
         //void CreateDepartment(DepartmentCreateDto product);
+
+        Task<IServiceResult<DepartmentUpdateDto>> UpdateDepartmentAsync(DepartmentUpdateDto department);
         void DeleteDepartment(int? id);
         Task<IServiceResult<DepartmentDto>> DeleteDepartmentAsync(int id);
         DepartmentGetDto FindDepartment(int? id);

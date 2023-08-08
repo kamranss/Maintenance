@@ -189,6 +189,57 @@ namespace Persistence.Services
             departmentGetDto.Description = existDepartment.Description;
             return departmentGetDto;
         } // will not use this one
+
+        public async Task<IServiceResult<DepartmentUpdateDto>> UpdateDepartmentAsync(DepartmentUpdateDto department)
+        {
+
+            var existDepartment = _readRepository.GetWhere(d => d.Id == department.Id).FirstOrDefault();
+            if (existDepartment == null)
+            {
+                return new ServiceResult<DepartmentUpdateDto> { IsSuccess = false, ErrorMessage = "Department not found" };
+            }
+
+            var checkDepartmentName = _readRepository.GetWhere(d => d.Name == department.Name).Any();
+            if ( _readRepository.GetWhere(d => d.Name.ToLower() == department.Name.ToLower() && d.Id != department.Id).Any())
+            {
+                return new ServiceResult<DepartmentUpdateDto> { IsSuccess = false, ErrorMessage = "Same Department already exist you should pick another Name" };
+            }
+
+            existDepartment.Name = department.Name;
+            existDepartment.Description = department.Description;
+
+            _writeRepository.Update(existDepartment);
+            _writeRepository.SaveAsync();
+
+
+
+            List<DepartmentCachedDto> cachedDepartments;
+            bool DepartmentsAlreadyExist = _memoryCach.TryGetValue("CachedDepartments", out cachedDepartments);
+            if (!DepartmentsAlreadyExist)
+            {
+                //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
+                var departmentsFromDb = _readRepository.GetAll(tracking: false).ToList();
+                
+                var cachEntryOption = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromDays(10));
+                _memoryCach.Set("CachedEquipmentss", departmentsFromDb, cachEntryOption);
+            }
+            else
+            {
+
+             
+
+                var updatedCachedDepartment = cachedDepartments.Where(d => d.Id == department.Id).FirstOrDefault();
+                updatedCachedDepartment.Name = department.Name;
+                updatedCachedDepartment.Description = department.Description;
+
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                         .SetSlidingExpiration(TimeSpan.FromDays(10));
+                _memoryCach.Set("CachedEquipmentss", cachedDepartments, cacheEntryOptions);
+            }
+
+            return new ServiceResult<DepartmentUpdateDto> { IsSuccess = true, Data = department };
+        } // done
     }
 
         
