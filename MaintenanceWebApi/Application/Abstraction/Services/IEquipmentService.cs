@@ -18,11 +18,12 @@ namespace Application.Abstraction.Services
         Task<byte[]> QrCodeToEquipmentAsync(string equipmentId);
         Task StockUpdateToEquipmentAsync(string equipmentId, int stock);
 
-        Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int page, int take);
+        Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? take);
         //List<EquipmentGetDto> GetEquipment();
         Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment);
 
-        void Delete(int? id);
+        //void Delete(int? id);
+        Task<IServiceResult<EquipmentDto>> DeleteEquipmentAsync(int id);
         //EquipmentGetDto FindEquipment(int? id);
         Task<IServiceResult<EquipmentListDto>> FindEquipmentAsync(int? id);
         //Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto equipment);

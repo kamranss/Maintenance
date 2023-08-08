@@ -18,7 +18,5 @@ namespace Persistence.Repositories.DepartmentRepo
         }
 
        
-
-       
     }
 }

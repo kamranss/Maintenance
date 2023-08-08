@@ -1,4 +1,7 @@
 ﻿using Application.Abstraction.Services;
+using Application.DTOs.Department;
+using Application.DTOs.Equipment;
+using Application.Exceptions.EquipmentException;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
@@ -28,11 +31,44 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [HttpGet("All")]
-        public IActionResult GetEquipments(int pageSize, int pageNumber)
+        public IActionResult GetDepartments(int page, int pageSize)
         {
-            var departments = _departmentService.GetDepartmentsAsync(pageSize, pageNumber);
+            var departments = _departmentService.GetDepartmentsAsync(page, pageSize);
             return Ok(departments);
         }
+
+        [HttpPost("NewDepartment")]
+        public async Task<IActionResult> CreateDepartment(DepartmentCreateDto equipmentCreateDto)
+        {
+            var result = await _departmentService.CreateDepartmentAsync(equipmentCreateDto);
+
+            if (result.IsSuccess)
+            {
+                return Ok("Equipment created successfully.");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+           
+        }
+
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+           
+            var result = await _departmentService.DeleteDepartmentAsync(id);
+            if (result.IsSuccess == true)
+            {
+                return Ok("Department Deleted succesfully");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
 
     }
 }

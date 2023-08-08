@@ -22,6 +22,7 @@ namespace Application.Mapper.Profiles
 
 
             CreateMap<Department, DepartmentListDto>();
+            CreateMap<Department, DepartmentDto>();
             CreateMap<Department, DepartmentCreateDto>().ReverseMap();
             CreateMap<Department, DepartmentCachedDto>().ReverseMap();
 

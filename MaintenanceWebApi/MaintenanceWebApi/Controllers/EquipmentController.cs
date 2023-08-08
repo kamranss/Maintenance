@@ -24,15 +24,6 @@ namespace MaintenanceWebApi.Controllers
             _equipmentWriteRepository = equipmentWriteRepository;
         }
 
-        [HttpGet]
-        public IActionResult GetEquipments()
-        {
-            //var equipments = _equipmentService.GetEquipment();
-            return Ok();
-        }
-
-
-      
 
         [HttpPost("NewEquipment")]
         public async Task<IActionResult> CreateEquipment([FromForm] EquipmentCreateDto equipmentCreateDto)
@@ -47,23 +38,22 @@ namespace MaintenanceWebApi.Controllers
             {
                 return BadRequest(result.ErrorMessage);
             }
-            try
-            {
+            //try
+            //{
                
-            }
-            catch (EquipmentCreateException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            //}
+            //catch (EquipmentCreateException ex)
+            //{
+            //    return BadRequest(ex.Message);
+            //}
         }
 
-
-        //[HttpGet("Type")]
-        //public IActionResult GetEquipmentTypes()
-        //{
-        //    var equipmentTypes = Enum.GetNames(typeof(EquipmentType)).ToList();
-        //    return Ok(equipmentTypes);
-        //}
+        [HttpGet]
+        public IActionResult GetEquipment(int? id)
+        {
+            var department = _equipmentService.FindEquipmentAsync(id);
+            return Ok(department);
+        }
 
         [HttpGet("All")]
         public IActionResult GetEquipments(int pageSize, int pageNumber)
@@ -93,6 +83,23 @@ namespace MaintenanceWebApi.Controllers
             var location = Enum.GetNames(typeof(Location)).ToList();
             return Ok(location);
         }
+
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var result = await _equipmentService.DeleteEquipmentAsync(id);
+            if (result.IsSuccess == true)
+            {
+                return Ok("Equipment Deleted succesfully");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
 
     }
 }

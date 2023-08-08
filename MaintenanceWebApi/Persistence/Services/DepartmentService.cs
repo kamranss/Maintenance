@@ -36,7 +36,7 @@ namespace Persistence.Services
         }
 
 
-        public async Task<IServiceResult<DepartmentCreateDto>> CreateDepartment(DepartmentCreateDto department)
+        public async Task<IServiceResult<DepartmentCreateDto>> CreateDepartmentAsync(DepartmentCreateDto department)
         {
             var newDepartment = _mapper.Map<Department>(department);
             newDepartment.IsActive = true;
@@ -103,24 +103,34 @@ namespace Persistence.Services
         public void DeleteDepartment(int? id)
         {
             throw new NotImplementedException();
-        }
+        }// will not use 
 
-        public DepartmentGetDto FindDepartment(int? id)
+        public async Task<IServiceResult<DepartmentDto>> DeleteDepartmentAsync(int id)
         {
-            var existDepartment = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
-            if (existDepartment == null)
+            if (id==null && id<=0)
             {
-                return null;
+                return new ServiceResult<DepartmentDto> { IsSuccess = false, ErrorMessage = "The id should not be null" };
             }
-            DepartmentGetDto departmentGetDto = new DepartmentGetDto();
-            departmentGetDto.Name = existDepartment.Name;
-            departmentGetDto.Description = existDepartment.Description;
-            return departmentGetDto;
-        } // should be removed
+
+            var existDepartment = await _readRepository.GetByIdAsync(id);
+
+            if (existDepartment==null)
+            {
+                return new ServiceResult<DepartmentDto> { IsSuccess = false, ErrorMessage = "The department not found" };
+            }
+            var result = _writeRepository.Remove(existDepartment);
+            if (result == true)
+            {
+               await _writeRepository.SaveAsync();
+                var mappedDepartment = _mapper.Map<DepartmentDto>(existDepartment);
+                return new ServiceResult<DepartmentDto> { IsSuccess = true, Data = mappedDepartment };
+            }
+            return new ServiceResult<DepartmentDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
+        } // done
 
         public async Task<IServiceResult<DepartmentListDto>> FindDepartmentAsync(int? id)
         {
-            if (!id.HasValue && id<=0)
+            if (!id.HasValue && id <= 0)
             {
                 return new ServiceResult<DepartmentListDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
             }
@@ -132,7 +142,7 @@ namespace Persistence.Services
             var departmentListDto = _mapper.Map<DepartmentListDto>(existDepartment);
 
             return new ServiceResult<DepartmentListDto> { IsSuccess = true, Data = departmentListDto };
-        } // done
+        }// done
 
         public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? pagesize)
         {
@@ -150,6 +160,7 @@ namespace Persistence.Services
                .Skip(skipCount)
                .Take(takeValue)
                .Include(d => d.Equipments)
+               .Where(d => d.IsDeleted == false)
                .ToList();
             if (items == null)
             {
@@ -159,26 +170,75 @@ namespace Persistence.Services
             var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
             var departmentListDto = _mapper.Map<List<DepartmentListDto>>(items);
             var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, pageValue, pageCount, totalCount);
-            return  new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartments };
-        } // done 
-
-        public Pagination<DepartmentGetDto> GetDepartmentsPortion(int page, int take)
-        {
-            throw new NotImplementedException();
-        }
+            return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartments };
+        } // done
 
         public EquipmentGetDto IsDepartmentExist(int? id)
         {
             throw new NotImplementedException();
         }
-
-        public Equipment MapDtoToEntity(EquipmentUpdateDto product)
+        public DepartmentGetDto FindDepartment(int? id)
         {
-            throw new NotImplementedException();
-        }
+            var existDepartment = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            if (existDepartment == null)
+            {
+                return null;
+            }
+            DepartmentGetDto departmentGetDto = new DepartmentGetDto();
+            departmentGetDto.Name = existDepartment.Name;
+            departmentGetDto.Description = existDepartment.Description;
+            return departmentGetDto;
+        } // will not use this one
+    }
 
+        
+
+        //public async Task<IServiceResult<DepartmentListDto>> FindDepartmentAsync(int? id)
+        //{
+        //    if (!id.HasValue && id<=0)
+        //    {
+        //        return new ServiceResult<DepartmentListDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+        //    }
+        //    var existDepartment = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
+        //    if (existDepartment == null)
+        //    {
+        //        return new ServiceResult<DepartmentListDto> { IsSuccess = false, ErrorMessage = "There is no department with this Id" };
+        //    }
+        //    var departmentListDto = _mapper.Map<DepartmentListDto>(existDepartment);
+
+        //    return new ServiceResult<DepartmentListDto> { IsSuccess = true, Data = departmentListDto };
+        //} // done
+
+        //public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? pagesize)
+        //{
+        //    if (!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0)
+        //    {
+        //        return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+        //    }
+
+        //    int pageValue = page.Value;
+        //    int takeValue = pagesize.Value;
+        //    int skipCount = (pageValue - 1) * takeValue;
+
+        //    var items = _readRepository
+        //       .GetAll()
+        //       .Skip(skipCount)
+        //       .Take(takeValue)
+        //       .Include(d => d.Equipments)
+        //       .Where(d => d.IsDeleted==false)
+        //       .ToList();
+        //    if (items == null)
+        //    {
+        //        return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+        //    }
+        //    var totalCount = items.Count;
+        //    var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+        //    var departmentListDto = _mapper.Map<List<DepartmentListDto>>(items);
+        //    var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, pageValue, pageCount, totalCount);
+        //    return  new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartments };
+        //} // done 
 
 
      
-    }
+    
 }

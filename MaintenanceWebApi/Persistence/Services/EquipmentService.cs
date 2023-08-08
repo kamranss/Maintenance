@@ -124,19 +124,17 @@ namespace Persistence.Services
             throw new NotImplementedException();
         }
 
-        public void Delete(int? id)
-        {
-            throw new NotImplementedException();
-        }
-
       
-        public async Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int page, int take)
+        public async Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? pagesize)
         {
           
-            if (!(page>0 && take>0))
+            if ((!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0))
             {
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
+            int pageValue = page.Value;
+            int takeValue = pagesize.Value;
+            int skipCount = (pageValue - 1) * takeValue;
 
             List<EquipmentCachedDto> cachedEquipments;
             bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
@@ -145,8 +143,9 @@ namespace Persistence.Services
                var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false);
 
                 var items = EquipmentsFromDb
-                 .Skip((page - 1) * take)
-                 .Take(take)
+                 .Skip((pageValue - 1) * takeValue)
+                 .Take(takeValue)
+                 .Where(e => e.isDeleted == false)
                  .ToList();
 
                 
@@ -155,10 +154,10 @@ namespace Persistence.Services
                     return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
                 }
                 var totalCount = items.Count;
-                var pageCount = (int)Math.Ceiling((double)totalCount / take);
+                var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
 
                 var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
-                var pagination = new Pagination<EquipmentListDto>(equipmentListDto, page, pageCount, totalCount);
+                var pagination = new Pagination<EquipmentListDto>(equipmentListDto, pageValue, pageCount, totalCount);
 
                 EquipmentsFromDb.ToList();
                  var cachEntryOption = new MemoryCacheEntryOptions()
@@ -171,8 +170,9 @@ namespace Persistence.Services
             else
             {
                 var items = cachedEquipments
-                    .Skip((page - 1) * take)
-                    .Take(take)
+                    .Skip((pageValue - 1) * takeValue)
+                    .Take(takeValue)
+                    .Where(e => e.IsDeleted == false)
                     .ToList();
 
                 if (items.Count == 0)
@@ -181,10 +181,10 @@ namespace Persistence.Services
                 }
 
                 var totalCount = items.Count;
-                var pageCount = (int)Math.Ceiling((double)totalCount / take);
+                var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
 
                 var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
-                var pagination = new Pagination<EquipmentListDto>(equipmentListDto, page, pageCount, totalCount);
+                var pagination = new Pagination<EquipmentListDto>(equipmentListDto, pageValue, pageCount, totalCount);
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
 
             }
@@ -228,6 +228,43 @@ namespace Persistence.Services
 
             return new ServiceResult<EquipmentListDto> { IsSuccess = true, Data = equipmentListDto };
         } // done
+
+        public async Task<IServiceResult<EquipmentDto>> DeleteEquipmentAsync(int id)
+        {
+            if (id == null && id <= 0)
+            {
+                return new ServiceResult<EquipmentDto> { IsSuccess = false, ErrorMessage = "The id should not be null" };
+            }
+
+            var existEquipment = await _equipmentReadRepository.GetByIdAsync(id);
+
+            if (existEquipment == null)
+            {
+                return new ServiceResult<EquipmentDto> { IsSuccess = false, ErrorMessage = "The Equipment not found" };
+            }
+            var result = _equipmentWriteRepository.Remove(existEquipment);
+            if (result == true)
+            {
+                await _equipmentWriteRepository.SaveAsync();
+
+                List<EquipmentCreateDto> cachedEquipments;
+                bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
+                var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
+                var cachEntryOption = new MemoryCacheEntryOptions()
+                       .SetSlidingExpiration(TimeSpan.FromDays(10));
+                if (!EquipmentsAlreadyExist)
+                {
+                   
+                    _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
+
+                }
+                _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
+
+                var mappedEquipment = _mapper.Map<EquipmentDto>(existEquipment);
+                return new ServiceResult<EquipmentDto> { IsSuccess = true, Data = mappedEquipment };
+            }
+            return new ServiceResult<EquipmentDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
+        }
 
 
 

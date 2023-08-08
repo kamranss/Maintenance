@@ -1,11 +1,19 @@
 {
   "Version": 1,
-  "Hash": "f5epwSyj3vt4PAiYYdnuzupKyzvZNE5oIBqMTLEsR5w=",
+  "Hash": "dBP/70XRaKh5xPuE/+oPPN/qdyMbxLhHxhuq/sLjSX8=",
   "Source": "MaintenanceWebApi",
   "BasePath": "_content/MaintenanceWebApi",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MaintenanceWebApi\\wwwroot",
+      "Source": "MaintenanceWebApi",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "Pattern": "**"
+    }
+  ],
   "Assets": []
 }
