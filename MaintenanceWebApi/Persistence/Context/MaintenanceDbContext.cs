@@ -377,6 +377,21 @@ namespace Persistence.Context
                 );
             });
 
+            modelBuilder.Entity<EquipmentPart>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new EquipmentType { Id = 1, Name = "Oil Filter", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 2, Name = "Air Filter", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 3, Name = "Engine Oil", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 4, Name = "TransMission Oil", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 5, Name = "Gear_Box Oil", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 6, Name = "Wheels", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 7, Name = "Antifiriz", IsDeleted = false, IsActive = true },
+                    new EquipmentType { Id = 8, Name = "Break pads", IsDeleted = false, IsActive = true }
+                );
+            });
+
         }
 
     }

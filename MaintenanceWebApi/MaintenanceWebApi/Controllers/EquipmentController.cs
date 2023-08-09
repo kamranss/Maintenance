@@ -26,6 +26,9 @@ namespace MaintenanceWebApi.Controllers
 
 
         [HttpPost("NewEquipment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CreateEquipment([FromForm] EquipmentCreateDto equipmentCreateDto)
         {
             var result = await _equipmentService.CreateEquipment(equipmentCreateDto);
@@ -56,6 +59,9 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetEquipments(int pageSize, int pageNumber)
         {
            var equipments =  _equipmentService.GetEquipmentsAsync(pageSize, pageNumber);
@@ -64,6 +70,9 @@ namespace MaintenanceWebApi.Controllers
 
 
         [HttpGet("Status")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetEquipmentStatus()
         {
             var equipmentStatus = Enum.GetNames(typeof(EquipmentStatus)).ToList();
@@ -71,6 +80,9 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [HttpGet("MetricType")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetEquipmentMetricType()
         {
             var  metricType = Enum.GetNames(typeof(Metrictype)).ToList();
@@ -78,6 +90,9 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [HttpGet("Location")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetEquipmentLocation()
         {
             var location = Enum.GetNames(typeof(Location)).ToList();
@@ -85,6 +100,9 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [Route("delete/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [HttpDelete]
         public async Task<IActionResult> Delete(int id)
         {

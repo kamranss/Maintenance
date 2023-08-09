@@ -31,6 +31,9 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetDepartments(int page, int pageSize)
         {
             var departments = _departmentService.GetDepartmentsAsync(page, pageSize);
@@ -38,6 +41,9 @@ namespace MaintenanceWebApi.Controllers
         }
 
         [HttpPost("NewDepartment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CreateDepartment(DepartmentCreateDto equipmentCreateDto)
         {
             var result = await _departmentService.CreateDepartmentAsync(equipmentCreateDto);
@@ -55,6 +61,9 @@ namespace MaintenanceWebApi.Controllers
 
         [Route("delete/{id}")]
         [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(int id)
         {
            
@@ -71,6 +80,9 @@ namespace MaintenanceWebApi.Controllers
 
         [Route("ModDepartment")]
         [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Update(DepartmentUpdateDto departmentUpdateDto)
         {
            _departmentService.UpdateDepartmentAsync(departmentUpdateDto);
