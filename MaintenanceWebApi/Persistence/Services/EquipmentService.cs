@@ -266,18 +266,48 @@ namespace Persistence.Services
             return new ServiceResult<EquipmentDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
         }
 
+        public async Task<IServiceResult<EquipmentUpdateDto>> UpdateEquipemntAsync(EquipmentUpdateDto equipmentUpdateDto)
+        {
+
+            var existEquipment = _equipmentReadRepository.GetWhere(d => d.Id == equipmentUpdateDto.Id).FirstOrDefault();
+            if (existEquipment == null)
+            {
+                return new ServiceResult<EquipmentUpdateDto> { IsSuccess = false, ErrorMessage = "Equipment not found" };
+            }
+
+
+            existEquipment.Name = equipmentUpdateDto.Name;
+            existEquipment.Description = equipmentUpdateDto.Description;
+
+            _equipmentWriteRepository.Update(existEquipment);
+            _equipmentWriteRepository.SaveAsync();
 
 
 
+            List<EquipmentCachedDto> cachedEquipments;
+            bool EquipementsAlreadyExist = _memoryCach.TryGetValue("CachedDepartments", out cachedEquipments);
+            if (!EquipementsAlreadyExist)
+            {
+                //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
+                var equipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
 
+                var cachEntryOption = new MemoryCacheEntryOptions()
+                    .SetSlidingExpiration(TimeSpan.FromDays(10));
+                _memoryCach.Set("CachedEquipmentss", equipmentsFromDb, cachEntryOption);
+            }
+            else
+            {
+                var updatedCachedEquipments = cachedEquipments.Where(d => d.Id == equipmentUpdateDto.Id).FirstOrDefault();
+                updatedCachedEquipments.Name = equipmentUpdateDto.Name;
+                updatedCachedEquipments.Description = equipmentUpdateDto.Description;
 
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                         .SetSlidingExpiration(TimeSpan.FromDays(10));
+                _memoryCach.Set("CachedEquipmentss", cachedEquipments, cacheEntryOptions);
+            }
 
-
-
-
-
-
-
+            return new ServiceResult<EquipmentUpdateDto> { IsSuccess = true, Data = equipmentUpdateDto };
+        }
 
 
 

@@ -1,5 +1,7 @@
 ﻿using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Service;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -25,6 +27,20 @@ namespace Application.Mapper.Profiles
             CreateMap<Department, DepartmentDto>();
             CreateMap<Department, DepartmentCreateDto>().ReverseMap();
             CreateMap<Department, DepartmentCachedDto>().ReverseMap();
+
+
+            CreateMap<Service, ServiceDto>();
+            CreateMap<ServiceCreateDto, Service>();
+            CreateMap<ServiceUpdateDto, Service>();
+
+
+            CreateMap<MaintenancePlan, MaintenancePlanDto>();
+            CreateMap<MaintenancePlanCreateDto, MaintenancePlan>();
+            CreateMap<MaintenancePlanUpdateDto, MaintenancePlan>()
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
 
 
 

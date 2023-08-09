@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction.Services;
+using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.Exceptions.EquipmentException;
 using Application.Repositories.EquipmentRepo;
@@ -117,6 +118,19 @@ namespace MaintenanceWebApi.Controllers
                 return BadRequest(result.ErrorMessage);
             }
         }
+
+        [Route("ModEqipment")]
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Update(EquipmentUpdateDto equipmentUpdateDto)
+        {
+            _equipmentService.UpdateEquipemntAsync(equipmentUpdateDto);
+
+            return StatusCode(200, "EquipmentUpdated Updated");
+        }
+
 
 
     }

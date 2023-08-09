@@ -8,6 +8,7 @@ namespace Application.DTOs.Equipment
 {
     public class EquipmentUpdateDto
     {
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public string? UnitNumber { get; set; }
         public string? Description { get; set; }

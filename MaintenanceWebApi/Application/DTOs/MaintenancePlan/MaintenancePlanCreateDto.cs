@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.MaintenancePlan
 {
-    internal class MaintenancePlanCreateDto
+    public class MaintenancePlanCreateDto
     {
+        public string? Code { get; set; }
+        public string? Name { get; set; }
+
+        public string? MetricType { get; set; } // enum
     }
 }

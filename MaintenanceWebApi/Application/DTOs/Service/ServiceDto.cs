@@ -10,7 +10,7 @@ namespace Application.DTOs.Service
     public class ServiceDto:BaseEntity
     {
         public string? Name { get; set; }
-        public string? ServiceType { get; set; }
+        public string? ServiceType { get; set; } // enum
         public string? ServiceDescription { get; set; }
         public int? MaintenancePlanId { get; set; }
 

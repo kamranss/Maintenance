@@ -24,6 +24,7 @@ namespace Application.Abstraction.Services
 
         //void Delete(int? id);
         Task<IServiceResult<EquipmentDto>> DeleteEquipmentAsync(int id);
+        Task<IServiceResult<EquipmentUpdateDto>> UpdateEquipemntAsync(EquipmentUpdateDto department);
         //EquipmentGetDto FindEquipment(int? id);
         Task<IServiceResult<EquipmentListDto>> FindEquipmentAsync(int? id);
         //Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto equipment);
