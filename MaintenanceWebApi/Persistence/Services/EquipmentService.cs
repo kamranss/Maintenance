@@ -264,7 +264,7 @@ namespace Persistence.Services
                 return new ServiceResult<EquipmentDto> { IsSuccess = true, Data = mappedEquipment };
             }
             return new ServiceResult<EquipmentDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
-        }
+        } // done
 
         public async Task<IServiceResult<EquipmentUpdateDto>> UpdateEquipemntAsync(EquipmentUpdateDto equipmentUpdateDto)
         {
@@ -307,7 +307,7 @@ namespace Persistence.Services
             }
 
             return new ServiceResult<EquipmentUpdateDto> { IsSuccess = true, Data = equipmentUpdateDto };
-        }
+        } // done
 
 
 

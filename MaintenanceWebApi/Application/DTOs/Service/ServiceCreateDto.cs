@@ -12,5 +12,6 @@ namespace Application.DTOs.Service
         public string? ServiceType { get; set; } // Enum
         public string? ServiceDescription { get; set; }
         public int? MaintenancePlanId { get; set; } // table
+        // when we create service we also should add Respective Plan Id which is selected at front side
     }
 }

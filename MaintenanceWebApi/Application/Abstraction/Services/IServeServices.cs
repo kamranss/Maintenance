@@ -14,7 +14,8 @@ namespace Application.Abstraction.Services
     public interface IServeServices
     {
         Task<IServiceResult<Pagination<ServiceDto>>> GetServicesAsync(int? page, int? take);
-        Task<IServiceResult<Pagination<ServiceDto>>> FindServiceAsync(int? id);
+        Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? take, int? id);
+        Task<IServiceResult<ServiceDto>> FindServiceAsync(int? id);
         Task<IServiceResult<ServiceCreateDto>> CreateServiceAsync(ServiceCreateDto service);
         Task<IServiceResult<DepartmentUpdateDto>> UpdateServiceAsync(DepartmentUpdateDto department);
         Task<IServiceResult<ServiceDto>> DeleteServiceAsync(int id);

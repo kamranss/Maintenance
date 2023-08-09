@@ -2,6 +2,8 @@
 using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentRepo;
+using Application.Repositories.MpRepo;
+using Application.Repositories.ServiceRepo;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,6 +12,8 @@ using Persistence.Configuration;
 using Persistence.Context;
 using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentRepo;
+using Persistence.Repositories.MpRepo;
+using Persistence.Repositories.ServiceRepo;
 using Persistence.Services;
 using System;
 using System.Collections.Generic;
@@ -59,11 +63,21 @@ namespace Persistence
 
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
+
             services.AddScoped<IDepartmentReadRepository, DepartmentReadRepository>();
             services.AddScoped<IDepartmentWriteRepository, DepartmentWriteRepository>();
 
+            services.AddScoped<IMpReadRepository, MpReadRepository>();
+            services.AddScoped<IMpWriteRepository, MpWriteRepository>();
+
+            services.AddScoped<IServiceReadRepository, ServiceReadRepository>();
+            services.AddScoped<IServiceWriteRepository, ServiceWriteRepository>();
+            
+
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEquipmentService, EquipmentService>();
+            services.AddScoped<IMPService, MPService>();
+
         }
     }
 }

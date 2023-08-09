@@ -17,7 +17,7 @@ namespace Application.Mapper.Profiles
         public MapProfile()
         {
             CreateMap<EquipmentCreateDto, Equipment>()
-                .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap();
+                .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap(); //  should be fixed
             CreateMap<Equipment,EquipmentListDto>();
             CreateMap<EquipmentCachedDto, EquipmentListDto>().ReverseMap();
 
@@ -41,6 +41,8 @@ namespace Application.Mapper.Profiles
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
+
+   
 
 
 

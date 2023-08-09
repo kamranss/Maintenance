@@ -18,7 +18,7 @@ namespace Application.Abstraction.Services
         Task<byte[]> QrCodeToEquipmentAsync(string equipmentId);
         Task StockUpdateToEquipmentAsync(string equipmentId, int stock);
 
-        Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? take);
+        Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? pageSize);
         //List<EquipmentGetDto> GetEquipment();
         Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment);
 
