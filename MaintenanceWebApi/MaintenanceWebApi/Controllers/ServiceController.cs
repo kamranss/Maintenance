@@ -70,5 +70,16 @@ namespace MaintenanceWebApi.Controllers
 
         }
 
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetService(int? id)
+        {
+            var Service = _servService.FindServiceAsync( id);
+            return Ok(Service);
+        }
+
+
     }
 }

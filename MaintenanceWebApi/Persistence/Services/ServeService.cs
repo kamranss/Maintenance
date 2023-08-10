@@ -95,9 +95,20 @@ namespace Persistence.Services
             return new ServiceResult<ServiceDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
         } // done
 
-        public Task<IServiceResult<ServiceDto>> FindServiceAsync(int? id)
+        public async Task<IServiceResult<ServiceDto>> FindServiceAsync(int? id)
         {
-            throw new NotImplementedException();
+            if (!id.HasValue && id <= 0)
+            {
+                return new ServiceResult<ServiceDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+            }
+            var existService = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            if (existService == null)
+            {
+                return new ServiceResult<ServiceDto> { IsSuccess = false, ErrorMessage = "There is no Service with this Id" };
+            }
+            var serviceDTO = _mapper.Map<ServiceDto>(existService);
+
+            return new ServiceResult<ServiceDto> { IsSuccess = true, Data =serviceDTO };
         }
 
         public Task<IServiceResult<Pagination<ServiceDto>>> GetServicesAsync(int? page, int? take)
