@@ -17,6 +17,7 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<MaintenancePlanDto>> FindMPAsync(int? id);
         Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto service);
         Task<IServiceResult<MaintenancePlanUpdateDto>> UpdateMPAsync(MaintenancePlanUpdateDto department);
+        Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? take, int? id);
         Task<IServiceResult<MaintenancePlanDto>> DeleteMPAsync(int id);
     }
 }

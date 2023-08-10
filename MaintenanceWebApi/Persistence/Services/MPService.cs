@@ -3,13 +3,16 @@ using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Service;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.MpRepo;
 using Application.RequestParameters;
 using AutoMapper;
 using Domain.Concrets;
 using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Persistence.Repositories.MpRepo;
 using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -93,6 +96,42 @@ namespace Persistence.Services
             var MaintenancePlanDto = _mapper.Map<MaintenancePlanDto>(existMP);
 
             return new ServiceResult<MaintenancePlanDto> { IsSuccess = true, Data = MaintenancePlanDto };
+        } // done
+
+        public async Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? pagesize, int? id)
+        {
+            if ((!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0))
+            {
+                return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+            }
+            int pageValue = page.Value;
+            int takeValue = pagesize.Value;
+            int skipCount = (pageValue - 1) * takeValue;
+
+
+            var MpFromDb = _readRepository.GetWhere(mp => mp.Id == id);
+            if (MpFromDb == null)
+            {
+                return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = false, ErrorMessage = "Mp not found" };
+            }
+
+            var items = MpFromDb
+                .Include(mp => mp.Services)  // Include related Services
+                .Skip((pageValue - 1) * takeValue)
+                .Take(takeValue)
+                .ToList();
+
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = false, ErrorMessage = "There is no Service in DB" };
+            }
+            var totalCount = items.Count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+
+            var MpListDto = _mapper.Map<List<ServiceDto>>(items);
+            var pagination = new Pagination<ServiceDto>(MpListDto, pageValue, pageCount, totalCount);
+
+            return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = true, Data = pagination };
         } // done
 
         public async Task<IServiceResult<Pagination<MaintenancePlanDto>>> GetMPsAsync(int? page, int? pagesize)

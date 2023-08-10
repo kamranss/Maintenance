@@ -34,10 +34,10 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetMP(int? id)
+        public IActionResult GetMpServices(int? page, int? pageSize, int? id)
         {
-            var maintenancePlan = _mpService.FindMPAsync(id);
-            return Ok(maintenancePlan);
+            var Services = _mpService.FindServicesByMPidAsync(page,pageSize,id);
+            return Ok(Services);
         }
 
 
