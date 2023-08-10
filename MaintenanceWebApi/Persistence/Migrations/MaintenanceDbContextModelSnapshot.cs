@@ -267,7 +267,7 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("LastMaintenace")
+                    b.Property<DateTime?>("LastMaintenaceTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("ManufactureId")
@@ -365,6 +365,56 @@ namespace Persistence.Migrations
                     b.HasIndex("PartId");
 
                     b.ToTable("EquipmentParts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsActive = true,
+                            IsDeleted = false
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsActive = true,
+                            IsDeleted = false
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.EquipmentType", b =>
@@ -725,6 +775,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<bool?>("IsActive")
                         .HasColumnType("boolean");
 
@@ -732,11 +785,7 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("MetricType")
-                        .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("MetricTypeId")
-                        .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
@@ -2503,7 +2552,7 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<int>("MaintenancePlanId")
+                    b.Property<int?>("MaintenancePlanId")
                         .HasColumnType("integer");
 
                     b.Property<string>("ModifiedBy")
@@ -2545,9 +2594,6 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("Description")
-                        .HasColumnType("integer");
-
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("timestamp with time zone");
 
@@ -2569,10 +2615,10 @@ namespace Persistence.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("text");
+                    b.Property<int?>("OperationName")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("Operator")
+                    b.Property<string>("OperatorName")
                         .HasColumnType("text");
 
                     b.Property<int?>("RemovalDate")
@@ -2584,11 +2630,14 @@ namespace Persistence.Migrations
                     b.Property<int?>("StartUsageHourValue")
                         .HasColumnType("integer");
 
+                    b.Property<decimal?>("TotalTime")
+                        .HasColumnType("numeric");
+
+                    b.Property<int?>("TotalUsageValue")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int?>("UsageHourValue")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -2788,9 +2837,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.MaintenancePlan", "MaintenancePlan")
                         .WithMany("Services")
-                        .HasForeignKey("MaintenancePlanId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("MaintenancePlanId");
 
                     b.Navigation("MaintenancePlan");
                 });

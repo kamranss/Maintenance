@@ -1,0 +1,212 @@
+﻿<Project>
+  <ItemGroup>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\05648803-2903-494b-bde6-6d566b3d4d6cImage 8.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/05648803-2903-494b-bde6-6d566b3d4d6cImage 8.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\05648803-2903-494b-bde6-6d566b3d4d6cImage 8.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\1bbb4a5e-3c6d-4635-8895-f5a5a22d53c3Image 16.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/1bbb4a5e-3c6d-4635-8895-f5a5a22d53c3Image 16.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\1bbb4a5e-3c6d-4635-8895-f5a5a22d53c3Image 16.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\31f4dc24-839b-43cc-89a2-ef7a96d269afImage 1.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/31f4dc24-839b-43cc-89a2-ef7a96d269afImage 1.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\31f4dc24-839b-43cc-89a2-ef7a96d269afImage 1.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\35385200-f386-42bc-b039-ff5320a0a2bc674357.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/35385200-f386-42bc-b039-ff5320a0a2bc674357.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\35385200-f386-42bc-b039-ff5320a0a2bc674357.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\422f2634-bf40-4861-9556-ca55a683a474Image 8.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/422f2634-bf40-4861-9556-ca55a683a474Image 8.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\422f2634-bf40-4861-9556-ca55a683a474Image 8.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\4c47a69e-5efa-4b7a-86ae-94b9a24c19e623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/4c47a69e-5efa-4b7a-86ae-94b9a24c19e623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\4c47a69e-5efa-4b7a-86ae-94b9a24c19e623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\699e79db-48c4-4b26-b651-17018774694e23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/699e79db-48c4-4b26-b651-17018774694e23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\699e79db-48c4-4b26-b651-17018774694e23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\8d0859b5-a53b-4871-8659-1e083133a941wallpaperflare.com_wallpaper2.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/8d0859b5-a53b-4871-8659-1e083133a941wallpaperflare.com_wallpaper2.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\8d0859b5-a53b-4871-8659-1e083133a941wallpaperflare.com_wallpaper2.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c120c96f-9080-484e-96e4-46a5928d040623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/c120c96f-9080-484e-96e4-46a5928d040623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c120c96f-9080-484e-96e4-46a5928d040623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c44a1f6f-136b-4c0e-856e-1569a7ae1999Image 10.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/c44a1f6f-136b-4c0e-856e-1569a7ae1999Image 10.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\c44a1f6f-136b-4c0e-856e-1569a7ae1999Image 10.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ea20e38f-c088-48e8-bbcd-52d906c17d9aImage 11.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/ea20e38f-c088-48e8-bbcd-52d906c17d9aImage 11.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ea20e38f-c088-48e8-bbcd-52d906c17d9aImage 11.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ee7689fd-03a8-440b-a5a5-1a35bd3e15df23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/ee7689fd-03a8-440b-a5a5-1a35bd3e15df23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\ee7689fd-03a8-440b-a5a5-1a35bd3e15df23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\f2ea28ad-4e66-4c6b-857b-e74758d8ec3b674357.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>MaintenanceWebApi</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/MaintenanceWebApi</BasePath>
+      <RelativePath>images/f2ea28ad-4e66-4c6b-857b-e74758d8ec3b674357.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\images\f2ea28ad-4e66-4c6b-857b-e74758d8ec3b674357.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+  </ItemGroup>
+</Project>

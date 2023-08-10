@@ -32,7 +32,7 @@ namespace Domain.Entities
         public string? Capacity { get; set; }
         public string? EquipmentType { get; set; }
         public string? usageLocation { get; set; }
-        public DateTime? LastMaintenace { get; set; }
+        public DateTime? LastMaintenaceTime { get; set; }
         public decimal? CurrentValue { get; set; }
         public int? DepartmentId { get; set; }
         public Department? Department { get; set; }
@@ -40,7 +40,7 @@ namespace Domain.Entities
         public List<Part>? Part { get; set; }
         //public List<EquipmentType> Type { get; set; }
         public List<OperationSite> OperationSite { get; set; }
-        public Model Model { get; set; }
+        public Model? Model { get; set; }
         public Manufacture Manufacture { get; set; }
 
     }

@@ -26,6 +26,12 @@ namespace Application.Mapper.Profiles
             CreateMap<Department, DepartmentListDto>();
             CreateMap<Department, DepartmentDto>();
             CreateMap<Department, DepartmentCreateDto>().ReverseMap();
+            CreateMap<Department, DepartmentUpdateDto>().ReverseMap()
+                .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())
+                .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
+                .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
+
             CreateMap<Department, DepartmentCachedDto>().ReverseMap();
 
 

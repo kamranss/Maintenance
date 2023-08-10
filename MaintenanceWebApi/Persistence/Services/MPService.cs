@@ -1,11 +1,14 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.Abstraction.Services;
+using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.MpRepo;
 using Application.RequestParameters;
 using AutoMapper;
+using Domain.Concrets;
+using Domain.Entities;
 using Microsoft.Extensions.Caching.Memory;
 using Persistence.Services.Common;
 using System;
@@ -32,20 +35,65 @@ namespace Persistence.Services
             _memoryCach = memoryCach;
         }
 
-        public Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto service)
+        public async Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto service)
         {
-            throw new NotImplementedException();
-        }
+            var newService = _mapper.Map<MaintenancePlan>(service);
+            newService.IsActive = true;
+            newService.IsDeleted = true;
 
-        public Task<IServiceResult<MaintenancePlanDto>> DeleteMPAsync(int id)
-        {
-            throw new NotImplementedException();
-        }
+            var result = await _writeRepository.AddAsync(newService);
+            if (result)
+            {
+                var endresult = await _writeRepository.SaveAsync();
 
-        public Task<IServiceResult<MaintenancePlanDto>> FindMPAsync(int? id)
+                if (endresult > 0)
+                {
+                    return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = true, Data = service };
+                }
+                return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = false, ErrorMessage = "Service could not be saved." };
+            }
+
+            return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = false, ErrorMessage = "Service could not be added." };
+        } // done
+
+        public async Task<IServiceResult<MaintenancePlanDto>> DeleteMPAsync(int id)
         {
-            throw new NotImplementedException();
-        }
+            if (id == null && id <= 0)
+            {
+                return new ServiceResult<MaintenancePlanDto> { IsSuccess = false, ErrorMessage = "The id should not be null" };
+            }
+
+            var existMP = await _readRepository.GetByIdAsync(id);
+
+            if (existMP == null)
+            {
+                return new ServiceResult<MaintenancePlanDto> { IsSuccess = false, ErrorMessage = "The MP not found" };
+            }
+            var result = _writeRepository.Remove(existMP);
+            if (result == true)
+            {
+                await _writeRepository.SaveAsync();
+                var mappedToDtoMP = _mapper.Map<MaintenancePlanDto>(existMP);
+                return new ServiceResult<MaintenancePlanDto> { IsSuccess = true, Data = mappedToDtoMP };
+            }
+            return new ServiceResult<MaintenancePlanDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
+        } // done
+
+        public async Task<IServiceResult<MaintenancePlanDto>> FindMPAsync(int? id)
+        {
+            if (!id.HasValue && id <= 0)
+            {
+                return new ServiceResult<MaintenancePlanDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+            }
+            var existMP = _readRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            if (existMP == null)
+            {
+                return new ServiceResult<MaintenancePlanDto> { IsSuccess = false, ErrorMessage = "There is no Mp with this Id" };
+            }
+            var MaintenancePlanDto = _mapper.Map<MaintenancePlanDto>(existMP);
+
+            return new ServiceResult<MaintenancePlanDto> { IsSuccess = true, Data = MaintenancePlanDto };
+        } // done
 
         public async Task<IServiceResult<Pagination<MaintenancePlanDto>>> GetMPsAsync(int? page, int? pagesize)
         {
@@ -81,9 +129,36 @@ namespace Persistence.Services
 
         } // done
 
-        public Task<IServiceResult<MaintenancePlanCreateDto>> UpdateMPAsync(MaintenancePlanUpdateDto department)
+        public async Task<IServiceResult<MaintenancePlanUpdateDto>> UpdateMPAsync(MaintenancePlanUpdateDto maintenancePlanUpdateDto)
         {
-            throw new NotImplementedException();
-        }
+            var existMP = _readRepository.GetWhere(d => d.Id == maintenancePlanUpdateDto.Id).FirstOrDefault();
+            if (existMP == null)
+            {
+                return new ServiceResult<MaintenancePlanUpdateDto> { IsSuccess = false, ErrorMessage = "MP not found" };
+            }
+
+            var checkMpName = _readRepository.GetWhere(d => d.Name == maintenancePlanUpdateDto.Name).Any();
+            if (_readRepository.GetWhere(d => d.Name.ToLower() == maintenancePlanUpdateDto.Name.ToLower() && d.Id != maintenancePlanUpdateDto.Id).Any())
+            {
+                return new ServiceResult<MaintenancePlanUpdateDto> { IsSuccess = false, ErrorMessage = "Same Mp already exist you should pick another Name" };
+            }
+
+            if (!Enum.IsDefined(typeof(Metrictype), maintenancePlanUpdateDto.MetricType))
+            {
+                return new ServiceResult<MaintenancePlanUpdateDto> { IsSuccess = false, ErrorMessage = "Invalid MetricType value" };
+            }
+
+            existMP.Name = maintenancePlanUpdateDto.Name;
+            existMP.Description = maintenancePlanUpdateDto.Description;
+            existMP.Code = maintenancePlanUpdateDto.Code;
+            existMP.MetricType = maintenancePlanUpdateDto.MetricType;
+
+            _writeRepository.Update(existMP);
+            _writeRepository.SaveAsync();
+
+            return new ServiceResult<MaintenancePlanUpdateDto> { IsSuccess = true, Data = maintenancePlanUpdateDto };
+        } // done
+
+    
     }
 }

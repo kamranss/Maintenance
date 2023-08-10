@@ -41,6 +41,10 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
+            if (equipment.Image == null)
+            {
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage="Image ismissing" };
+            }
             if (!equipment.Image.CheckFileType())
             {
                 return new ServiceResult<EquipmentCreateDto>
@@ -49,6 +53,14 @@ namespace Persistence.Services
                     ErrorMessage = "File Type is not correct"
                 };
             }
+            //if (!equipment.Image.CheckFileLenght(10000))
+            //{
+            //    return new ServiceResult<EquipmentCreateDto>
+            //    {
+            //        IsSuccess = false,
+            //        ErrorMessage = "File Size is bigger"
+            //    };
+            //}
             string imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
 
             var newEquipment = _mapper.Map<Equipment>(equipment);
@@ -56,14 +68,7 @@ namespace Persistence.Services
             newEquipment.IsDeleted = true;
             imageUrl = imageUrl + Guid.NewGuid();
             newEquipment.ImagUrl = imageUrl;
-            if (!equipment.Image.CheckFileLenght(3000))
-            {
-                return new ServiceResult<EquipmentCreateDto>
-                {
-                    IsSuccess = false,
-                    ErrorMessage = "File Size is bigger"
-                };
-            }
+           
 
 
             var result = await _equipmentWriteRepository.AddAsync(newEquipment);
@@ -311,70 +316,6 @@ namespace Persistence.Services
 
 
 
-        //public async Task<ServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
-        //{
-        //    try
-        //    {
-
-        //        //EquipmentCreateException.ValidateEquipmentProperties(equipment);
-        //        var newEquipment = _mapper.Map<Equipment>(equipment);
-        //        newEquipment.IsActive = true;
-        //        newEquipment.IsDeleted = true;
-
-        //        var result = await _equipmentWriteRepository.AddAsync(newEquipment);
-        //        if (result)
-        //        {
-        //            var endresult = await _equipmentWriteRepository.SaveAsync();
-
-        //            if (endresult > 0)
-        //            {
-        //                var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
-
-        //                List<EquipmentCreateDto> cachedEquipments;
-        //                bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
-        //                if (!EquipmentsAlreadyExist)
-        //                {
-        //                    //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
-        //                    var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
-
-
-        //                    var cachEntryOption = new MemoryCacheEntryOptions()
-        //                        .SetSlidingExpiration(TimeSpan.FromDays(10));
-        //                    _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
-        //                }
-        //                else
-        //                {
-
-        //                    var equipments = cachedEquipments;
-
-        //                    var equipmentsFromDb = _equipmentReadRepository.GetByIdAsync(newEquipment.Id);
-        //                    if (equipmentsFromDb != null)
-        //                    {
-        //                        var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(equipmentsFromDb);
-        //                        equipments.Add(mappedEquipment2);
-
-        //                        // Update the cache with the updated products list
-        //                        var cacheEntryOptions = new MemoryCacheEntryOptions()
-        //                            .SetSlidingExpiration(TimeSpan.FromDays(10));
-        //                        _memoryCach.Set("CachedEquipmentss", equipments, cacheEntryOptions);
-        //                    }
-        //                }
-
-        //                return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
-        //            }
-        //            return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
-        //        }
-
-        //        return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
-        //    }
-        //    catch (EquipmentCreateException)
-        //    {
-        //        return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Somthing Went Wrong" };
-        //        //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = ValidateEquipmentProperties.Message };
-        //    }
-
-
-
-        //}
+        
     }
 }

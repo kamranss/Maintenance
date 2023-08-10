@@ -1,6 +1,10 @@
 ﻿using Application.Abstraction.Services;
+using Application.DTOs.Department;
+using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Services;
 
 namespace MaintenanceWebApi.Controllers
 {
@@ -19,11 +23,73 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetDepartments(int page, int pageSize)
+        public IActionResult GetMPs(int page, int pageSize)
         {
             var Mps = _mpService.GetMPsAsync(page, pageSize);
             return Ok(Mps);
         }
 
+
+        [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetMP(int? id)
+        {
+            var maintenancePlan = _mpService.FindMPAsync(id);
+            return Ok(maintenancePlan);
+        }
+
+
+        [HttpPost("NewMP")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> CreateDepartment(MaintenancePlanCreateDto maintenancePlanCreateDto)
+        {
+            var result = await _mpService.CreateMPAsync(maintenancePlanCreateDto);
+
+            if (result.IsSuccess)
+            {
+                return Ok("Mp created successfully.");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+
+        }
+
+
+        [Route("ModMP")]
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Update(MaintenancePlanUpdateDto maintenancePlanUpdateDto)
+        {
+            await _mpService.UpdateMPAsync(maintenancePlanUpdateDto);
+            return StatusCode(200, "Mp Updated");
+        }
+
+
+        [Route("delete/{id}")]
+        [HttpDelete]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Delete(int id)
+        {
+
+            var result = await _mpService.DeleteMPAsync(id);
+            if (result.IsSuccess == true)
+            {
+                return Ok("Mp Deleted succesfully");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
     }
 }
