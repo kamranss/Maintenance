@@ -50,7 +50,7 @@ namespace MaintenanceWebApi.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok("Equipment created successfully.");
+                return Ok("Department created successfully.");
             }
             else
             {

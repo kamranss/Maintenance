@@ -68,7 +68,9 @@ namespace Persistence.Services
             newEquipment.IsDeleted = true;
             imageUrl = imageUrl + Guid.NewGuid();
             newEquipment.ImagUrl = imageUrl;
-           
+            newEquipment.Status = "Active";
+
+
 
 
             var result = await _equipmentWriteRepository.AddAsync(newEquipment);

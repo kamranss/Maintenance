@@ -8,11 +8,11 @@ namespace Domain.Concrets
 {
     public enum Location
     {
-        Alat,
-        Garadagh,
-        Baku,
-        Sangachal,
-        Dubandi,
-        Sumgayit
+        ALAT,
+        GARADAGH,
+        BAKU,
+        SANGACHAL,
+        DUBANDI,
+        SUMGAYIT
     }
 }

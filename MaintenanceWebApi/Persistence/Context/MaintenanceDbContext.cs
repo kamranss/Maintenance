@@ -392,6 +392,32 @@ namespace Persistence.Context
                 );
             });
 
+            modelBuilder.Entity<MaintenancePlan>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new MaintenancePlan { Id = 1, Code = "POCR-1", Name = "Portal Crane", Description = "Vizual Inspection", MetricType = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 2, Code = "POCR-2", Name = "Portal Crane Prof", Description = "Profilaktik Inspection", MetricType = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 3, Code = "FRKL-1", Name = "Fork Lift", Description = "Vizual Inspection", MetricType = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 4, Code = "RAIL-1", Name = "Railway", Description = "Vizual Inspection of Railway", MetricType = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 5, Code = "FRKL-2", Name = "Fork Lift", Description = "Engine Oil Change", MetricType = "MotoHours", IsDeleted = false, IsActive = true }
+                );
+            });
+
+            modelBuilder.Entity<Service>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new Service { Id = 1, Name = "Engine Oil ", ServiceDescription = "Engine Oil change", ServiceType = "Refill", MaintenancePlanId = 5, IsDeleted = false, IsActive = true },
+                    new Service { Id = 2, Name = "Engine Oil Filter", ServiceDescription = "Engine Oil filter change", ServiceType = "Replace", MaintenancePlanId = 5, IsDeleted = false, IsActive = true },
+                    new Service { Id = 3, Name = "Engine Oil Change", ServiceDescription = "Engine Oil change", ServiceType = "Refill", IsDeleted = false, IsActive = true },
+                    new Service { Id = 4, Name = "Engine Oil Change", ServiceDescription = "Engine Oil change", ServiceType = "Refill", IsDeleted = false, IsActive = true }
+             
+
+
+                );
+            });
+
         }
 
     }

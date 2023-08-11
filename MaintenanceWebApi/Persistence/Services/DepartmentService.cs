@@ -88,10 +88,10 @@ namespace Persistence.Services
 
                     return new ServiceResult<DepartmentCreateDto> { IsSuccess = true, Data = mappedDepartment };
                 }
-                return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
+                return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Department could not be saved." };
             }
 
-            return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
+            return new ServiceResult<DepartmentCreateDto> { IsSuccess = false, ErrorMessage = "Department could not be added." };
 
         } // done
 

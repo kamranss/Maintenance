@@ -9,9 +9,9 @@ namespace Domain.Concrets
 {
     public enum EquipmentStatus
     {
-        Active,
-        Inactive,
-        Repair,
-        Concervated
+        ACTIVE,
+        INACTIVE,
+        REPAIR,
+        CONCERVATED
     }
 }

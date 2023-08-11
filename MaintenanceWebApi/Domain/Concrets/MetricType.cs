@@ -8,9 +8,9 @@ namespace Domain.Concrets
 {
     public enum Metrictype
     {
-        Period,
-        MotoHours,
-        Weight,
-        Distance
+        PERIOD,
+        MOTO_HOURS,
+        WEIGHT,
+        DISTANCE
     }
 }

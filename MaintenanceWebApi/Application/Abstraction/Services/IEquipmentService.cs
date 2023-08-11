@@ -1,6 +1,8 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.Service;
+using Application.DTOs.UsageHistory;
 using Application.RequestParameters;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -34,6 +36,8 @@ namespace Application.Abstraction.Services
         EquipmentGetDto Deatil(int? id);
 
         void SaveEquipmentImage(IFormFile newImage, Equipment equipment);
+
+        Task<IServiceResult<Pagination<UsageHistoryDto>>> GetUsageHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id);
         //void SaveChanges();
         //EquipmentGetDto IsEquipmentExist(int? id);
         //Image FindImage(int? id);

@@ -13,6 +13,7 @@ namespace Application.DTOs.Service
         public string? ServiceType { get; set; } // enum
         public string? ServiceDescription { get; set; }
         public int? MaintenancePlanId { get; set; }
+        public int? ChangedPartId { get; set; }
 
     }
 }

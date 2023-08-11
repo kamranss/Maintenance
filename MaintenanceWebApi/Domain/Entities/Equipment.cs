@@ -43,5 +43,7 @@ namespace Domain.Entities
         public Model? Model { get; set; }
         public Manufacture Manufacture { get; set; }
 
+        public List<UsageHistory> UsageHistories { get; set; }
+
     }
 }

@@ -10,7 +10,7 @@ namespace Domain.Entities
     public class UsageHistory:BaseEntity
     {
         public string? EquipmentName { get; set; }
-        public int? OperationName { get; set; }
+        public string? OperationName { get; set; }
         public int? StartUsageHourValue { get; set; }
         public int? EndUsageHourValue { get; set; }
         public string? OperatorName { get; set; }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Concrets
 {
-    public enum EquipmentType
+    public enum EquipmentType // ]WILL NOT BE USED
     {
         CRANE_SHIP_TO_SHORE,
         CRANE_GANTRY,

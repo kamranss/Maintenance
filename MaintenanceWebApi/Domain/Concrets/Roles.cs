@@ -8,8 +8,8 @@ namespace Domain.Concrets
 {
     public enum Roles
     {
-        SuperAdmin,
-        Admin,
-        Member
+        SUPER_ADMIN,
+        ADMIN,
+        MEMBER
     }
 }
