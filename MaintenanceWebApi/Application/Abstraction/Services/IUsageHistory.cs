@@ -11,9 +11,9 @@ namespace Application.Abstraction.Services
 {
     partial interface IUsageHistory
     {
-        Task<IServiceResult<Pagination<ServiceDto>>> GetUsageHistoryByEquipentIdAsync(int? page, int? take, int? id);
+        //Task<IServiceResult<Pagination<ServiceDto>>> GetUsageHistoryByEquipentIdAsync(int? page, int? take, int? id);
         //Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? take, int? id);
-        Task<IServiceResult<ServiceDto>> FindServiceAsync(int? id);
+        Task<IServiceResult<ServiceDto>> FindUSageServiceAsync(int? id);
         Task<IServiceResult<ServiceCreateDto>> CreateUsageHistoryAsync(ServiceCreateDto service);
         //Task<IServiceResult<ServiceUpdateDto>> UpdateServiceAsync(ServiceUpdateDto department);
         //Task<IServiceResult<ServiceDto>> DeleteServiceAsync(int id);

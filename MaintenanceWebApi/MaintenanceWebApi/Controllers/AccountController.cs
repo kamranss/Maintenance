@@ -48,7 +48,7 @@ namespace MaintenanceWebApi.Controllers
             {
                 return BadRequest(result.Errors);
             }
-            result = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
+            result = await _userManager.AddToRoleAsync(user, Roles.ADMIN.ToString());
             if (!result.Succeeded)
             {
                 return BadRequest(result.Errors);

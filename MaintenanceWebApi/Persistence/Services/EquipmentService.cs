@@ -2,6 +2,8 @@
 using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.Service;
+using Application.DTOs.UsageHistory;
 using Application.Exceptions.EquipmentException;
 using Application.Helpers.FileExten;
 using Application.Repositories.EquipmentRepo;
@@ -10,6 +12,7 @@ using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Persistence.Services.Common;
 using System;
@@ -316,8 +319,42 @@ namespace Persistence.Services
             return new ServiceResult<EquipmentUpdateDto> { IsSuccess = true, Data = equipmentUpdateDto };
         } // done
 
+        public async Task<IServiceResult<Pagination<UsageHistoryDto>>> GetUsageHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id)
+        {
+            throw new NotImplementedException();
+            if ((!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0 || id == null || id <= 0))
+            {
+                return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+            }
+            int pageValue = page.Value;
+            int takeValue = pagesize.Value;
+            int skipCount = (pageValue - 1) * takeValue;
 
 
-        
+            var EquFromDb = _equipmentReadRepository.GetWhere(e => e.Id == id);
+            if (EquFromDb == null)
+            {
+                return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "Equipment not found" };
+            }
+
+            var items = EquFromDb
+                .Include(e => e.UsageHistories) // Include related UsageHistories
+                .Skip((pageValue - 1) * takeValue)
+                .Take(takeValue)
+                .ToList();
+
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "There is no UsageHistory in DB" };
+            }
+            var totalCount = items.Count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+
+            var MpListDto = _mapper.Map<List<UsageHistoryDto>>(items);
+            var pagination = new Pagination<UsageHistoryDto>(MpListDto, pageValue, pageCount, totalCount);
+
+            return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = pagination };
+
+        }
     }
 }

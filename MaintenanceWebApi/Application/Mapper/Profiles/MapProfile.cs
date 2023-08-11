@@ -2,6 +2,7 @@
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Service;
+using Application.DTOs.UsageHistory;
 using AutoMapper;
 using Domain.Entities;
 using System;
@@ -49,7 +50,8 @@ namespace Application.Mapper.Profiles
                 .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
 
    
-
+            CreateMap<UsageHistory, UsageHistoryDto>().ReverseMap();
+            CreateMap<UsageHistoryCreateDto, UsageHistory>();
 
 
 

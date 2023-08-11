@@ -131,6 +131,16 @@ namespace MaintenanceWebApi.Controllers
             return StatusCode(200, "EquipmentUpdated Updated");
         }
 
+        [HttpGet("EquipmentUsageHistory")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetEquipmentUsageHistory(int? pageSize, int? pageNumber, int id)
+        {
+            var usageHistory = _equipmentService.GetUsageHistoryByEquipmentIdAsync(pageSize, pageNumber, id);
+            return Ok(usageHistory);
+        }
+
 
 
     }

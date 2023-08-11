@@ -25,8 +25,8 @@ namespace Persistence.Context
         public DbSet<MaintenanceAct>? MaintenanceAct { get; set; }
         public DbSet<MaintenancePlan>? MaintenancePlan { get; set; }
         public DbSet<Service>? Services { get; set; }
-        public DbSet<UsageHistory>? UsageHistories { get; set; }
-        public DbSet<EquipmentPart>? EquipmentParts { get; set; }
+        public DbSet<UsageHistory> UsageHistories { get; set; }
+        public DbSet<EquipmentPart> EquipmentParts { get; set; }
         //public DbSet<EquipmentType> Types { get; set; }
         public DbSet<OperationSite> OperationSites { get; set; }
         public DbSet<Model> Models { get; set; }
