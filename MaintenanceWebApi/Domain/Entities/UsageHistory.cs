@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Concrets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Domain.Entities
     public class UsageHistory:BaseEntity
     {
         public string? EquipmentName { get; set; }
-        public string? OperationName { get; set; }
+        public Operation? OperationName { get; set; }
         public int? StartUsageHourValue { get; set; }
         public int? EndUsageHourValue { get; set; }
         public string? OperatorName { get; set; }

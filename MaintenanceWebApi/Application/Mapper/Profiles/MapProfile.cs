@@ -21,6 +21,7 @@ namespace Application.Mapper.Profiles
                 .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap(); //  should be fixed
             CreateMap<Equipment,EquipmentListDto>();
             CreateMap<EquipmentCachedDto, EquipmentListDto>().ReverseMap();
+            CreateMap<Equipment,EquipmentStatusDto>();
 
 
 

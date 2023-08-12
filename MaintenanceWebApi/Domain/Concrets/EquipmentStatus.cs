@@ -12,6 +12,7 @@ namespace Domain.Concrets
         ACTIVE,
         INACTIVE,
         REPAIR,
+        INUSE,
         CONCERVATED
     }
 }

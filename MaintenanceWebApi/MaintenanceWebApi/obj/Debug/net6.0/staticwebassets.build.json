@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "dBP/70XRaKh5xPuE/+oPPN/qdyMbxLhHxhuq/sLjSX8=",
+  "Hash": "KaHd6OV1Mk4MRFEcWcP1gKoOAlzrY7KRCglF2LKp/A8=",
   "Source": "MaintenanceWebApi",
   "BasePath": "_content/MaintenanceWebApi",
   "Mode": "Default",
@@ -15,5 +15,91 @@
       "Pattern": "**"
     }
   ],
-  "Assets": []
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\81b55369-0bee-4e76-b4e8-06be2d6e218623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/81b55369-0bee-4e76-b4e8-06be2d6e218623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\81b55369-0bee-4e76-b4e8-06be2d6e218623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\85e4374f-97c7-462a-bd79-204c61639ed958.Basket-Part1.mp4_snapshot_28.03.949.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/85e4374f-97c7-462a-bd79-204c61639ed958.Basket-Part1.mp4_snapshot_28.03.949.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\85e4374f-97c7-462a-bd79-204c61639ed958.Basket-Part1.mp4_snapshot_28.03.949.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\ad4b3794-633c-48e4-abec-b7d56b8907b523.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/ad4b3794-633c-48e4-abec-b7d56b8907b523.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\ad4b3794-633c-48e4-abec-b7d56b8907b523.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\ed58570b-0a9d-4cac-a58d-a7bf4ca07bdf23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/ed58570b-0a9d-4cac-a58d-a7bf4ca07bdf23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\ed58570b-0a9d-4cac-a58d-a7bf4ca07bdf23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\f5f9d8b2-e50d-474b-8619-6e2745cd658b23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/f5f9d8b2-e50d-474b-8619-6e2745cd658b23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\f5f9d8b2-e50d-474b-8619-6e2745cd658b23.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg"
+    }
+  ]
 }

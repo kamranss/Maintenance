@@ -2,6 +2,7 @@
 using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using Application.Exceptions.EquipmentException;
@@ -9,6 +10,7 @@ using Application.Helpers.FileExten;
 using Application.Repositories.EquipmentRepo;
 using Application.RequestParameters;
 using AutoMapper;
+using Domain.Concrets;
 using Domain.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -56,6 +58,7 @@ namespace Persistence.Services
                     ErrorMessage = "File Type is not correct"
                 };
             }
+
             //if (!equipment.Image.CheckFileLenght(10000))
             //{
             //    return new ServiceResult<EquipmentCreateDto>
@@ -71,7 +74,7 @@ namespace Persistence.Services
             newEquipment.IsDeleted = true;
             imageUrl = imageUrl + Guid.NewGuid();
             newEquipment.ImagUrl = imageUrl;
-            newEquipment.Status = "Active";
+            newEquipment.Status = EquipmentStatus.ACTIVE.ToString();
 
 
 
@@ -155,7 +158,7 @@ namespace Persistence.Services
                 var items = EquipmentsFromDb
                  .Skip((pageValue - 1) * takeValue)
                  .Take(takeValue)
-                 .Where(e => e.isDeleted == false)
+                 .Where(e => e.IsDeleted == false || e.IsDeleted == null)
                  .ToList();
 
                 
@@ -355,6 +358,32 @@ namespace Persistence.Services
 
             return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = pagination };
 
+        }
+
+    
+
+        public async Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, string newStatus)
+        {
+            if (id == null && id <= 0)
+            {
+                return new ServiceResult<EquipmentStatusDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+            }
+            if (!Enum.IsDefined(typeof(Domain.Concrets.EquipmentStatus), newStatus))
+            {
+                return new ServiceResult<EquipmentStatusDto> { IsSuccess = false, ErrorMessage = "Invalid Status value" };
+            }
+            var existEquipment = await _equipmentReadRepository.GetByIdAsync(id);
+
+            if (existEquipment == null)
+            {
+                return new ServiceResult<EquipmentStatusDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
+            }
+
+            existEquipment.Status = newStatus;
+
+            var equipmentStatusDto = _mapper.Map<EquipmentStatusDto>(existEquipment);
+
+            return new ServiceResult<EquipmentStatusDto> { IsSuccess = true, Data = equipmentStatusDto };
         }
     }
 }

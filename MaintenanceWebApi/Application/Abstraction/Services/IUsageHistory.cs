@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.DTOs.Service;
+using Application.DTOs.UsageHistory;
 using Application.RequestParameters;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,10 @@ namespace Application.Abstraction.Services
 {
     partial interface IUsageHistory
     {
-        //Task<IServiceResult<Pagination<ServiceDto>>> GetUsageHistoryByEquipentIdAsync(int? page, int? take, int? id);
-        //Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? take, int? id);
-        Task<IServiceResult<ServiceDto>> FindUSageServiceAsync(int? id);
-        Task<IServiceResult<ServiceCreateDto>> CreateUsageHistoryAsync(ServiceCreateDto service);
-        //Task<IServiceResult<ServiceUpdateDto>> UpdateServiceAsync(ServiceUpdateDto department);
-        //Task<IServiceResult<ServiceDto>> DeleteServiceAsync(int id);
+        
+        Task<IServiceResult<UsageHistoryDto>> FindEquipmentUSageAsync(int? id);
+        Task<IServiceResult<UsageHistoryCreateDto>> CreateUsageHistoryAsync(UsageHistoryCreateDto usageHistoryCreate);
+        Task<IServiceResult<UsageHistoryEndDto>> CreateUsageHistoryAsync(UsageHistoryEndDto usageHistoryEnd);
+
     }
 }

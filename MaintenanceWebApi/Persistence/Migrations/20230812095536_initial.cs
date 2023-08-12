@@ -82,8 +82,8 @@ namespace Persistence.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Code = table.Column<string>(type: "text", nullable: true),
                     Name = table.Column<string>(type: "text", nullable: true),
-                    MetricTypeId = table.Column<int>(type: "integer", nullable: false),
-                    MetricType = table.Column<string>(type: "text", nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    MetricType = table.Column<string>(type: "text", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -286,7 +286,7 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "text", nullable: true),
                     ServiceType = table.Column<string>(type: "text", nullable: true),
                     ServiceDescription = table.Column<string>(type: "text", nullable: true),
-                    MaintenancePlanId = table.Column<int>(type: "integer", nullable: false),
+                    MaintenancePlanId = table.Column<int>(type: "integer", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -302,8 +302,7 @@ namespace Persistence.Migrations
                         name: "FK_Services_MaintenancePlan_MaintenancePlanId",
                         column: x => x.MaintenancePlanId,
                         principalTable: "MaintenancePlan",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -318,18 +317,16 @@ namespace Persistence.Migrations
                     Color = table.Column<string>(type: "text", nullable: true),
                     Identification = table.Column<string>(type: "text", nullable: true),
                     ModelId = table.Column<int>(type: "integer", nullable: true),
-                    isDeleted = table.Column<bool>(type: "boolean", nullable: true),
-                    Status = table.Column<string>(type: "text", nullable: true),
                     ImagUrl = table.Column<string>(type: "text", nullable: true),
                     OperationSiteid = table.Column<int>(type: "integer", nullable: true),
                     ProductionYear = table.Column<int>(type: "integer", nullable: true),
                     ManufactureId = table.Column<int>(type: "integer", nullable: true),
                     SeriaNumber = table.Column<string>(type: "text", nullable: true),
-                    Typeid = table.Column<int>(type: "integer", nullable: true),
                     Capacity = table.Column<string>(type: "text", nullable: true),
-                    EquipmentType = table.Column<string>(type: "text", nullable: true),
-                    usageLocation = table.Column<string>(type: "text", nullable: true),
-                    LastMaintenace = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    EquipmentTypeId = table.Column<int>(type: "integer", nullable: true),
+                    Status = table.Column<int>(type: "integer", nullable: true),
+                    usageLocation = table.Column<int>(type: "integer", nullable: true),
+                    LastMaintenaceTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CurrentValue = table.Column<decimal>(type: "numeric", nullable: true),
                     DepartmentId = table.Column<int>(type: "integer", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
@@ -347,6 +344,11 @@ namespace Persistence.Migrations
                         name: "FK_Equipments_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Equipments_EquipmentType_EquipmentTypeId",
+                        column: x => x.EquipmentTypeId,
+                        principalTable: "EquipmentType",
                         principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Equipments_Manufactures_ManufactureId",
@@ -478,16 +480,16 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Name = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<int>(type: "integer", nullable: true),
+                    EquipmentName = table.Column<string>(type: "text", nullable: true),
+                    OperationName = table.Column<int>(type: "integer", nullable: true),
                     StartUsageHourValue = table.Column<int>(type: "integer", nullable: true),
                     EndUsageHourValue = table.Column<int>(type: "integer", nullable: true),
-                    Operator = table.Column<string>(type: "text", nullable: true),
-                    UsageHourValue = table.Column<int>(type: "integer", nullable: true),
+                    OperatorName = table.Column<string>(type: "text", nullable: true),
+                    TotalUsageValue = table.Column<int>(type: "integer", nullable: true),
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    TotalTime = table.Column<decimal>(type: "numeric", nullable: true),
                     EquipmentId = table.Column<int>(type: "integer", nullable: true),
-                    EquipmentName = table.Column<string>(type: "text", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -522,6 +524,21 @@ namespace Persistence.Migrations
                     { 9, null, null, null, null, true, false, null, "Transport", null, null },
                     { 10, null, null, null, null, true, false, null, "Engineering", null, null },
                     { 11, null, null, null, null, true, false, null, "Berth", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "EquipmentParts",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "EquipmentId", "IsActive", "IsDeleted", "ModifiedBy", "PartId", "RemovalDate", "UpdatedDate" },
+                values: new object[,]
+                {
+                    { 1, null, null, null, true, false, null, null, null, null },
+                    { 2, null, null, null, true, false, null, null, null, null },
+                    { 3, null, null, null, true, false, null, null, null, null },
+                    { 4, null, null, null, true, false, null, null, null, null },
+                    { 5, null, null, null, true, false, null, null, null, null },
+                    { 6, null, null, null, true, false, null, null, null, null },
+                    { 7, null, null, null, true, false, null, null, null, null },
+                    { 8, null, null, null, true, false, null, null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -566,6 +583,18 @@ namespace Persistence.Migrations
                     { 35, null, null, true, false, null, "Working_Platform", null, null },
                     { 36, null, null, true, false, null, "Single leg chain sling", null, null },
                     { 37, null, null, true, false, null, "Portal Crane 32T", null, null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "MaintenancePlan",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "IsActive", "IsDeleted", "MetricType", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
+                values: new object[,]
+                {
+                    { 1, "POCR-1", null, null, "Vizual Inspection", true, false, "Period", null, "Portal Crane", null, null },
+                    { 2, "POCR-2", null, null, "Profilaktik Inspection", true, false, "Period", null, "Portal Crane Prof", null, null },
+                    { 3, "FRKL-1", null, null, "Vizual Inspection", true, false, "Period", null, "Fork Lift", null, null },
+                    { 4, "RAIL-1", null, null, "Vizual Inspection of Railway", true, false, "Period", null, "Railway", null, null },
+                    { 5, "FRKL-2", null, null, "Engine Oil Change", true, false, "MotoHours", null, "Fork Lift", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -808,6 +837,24 @@ namespace Persistence.Migrations
                     { 12, 0, null, null, null, null, true, false, null, "ST-5", null, null }
                 });
 
+            migrationBuilder.InsertData(
+                table: "Services",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "IsActive", "IsDeleted", "MaintenancePlanId", "ModifiedBy", "Name", "RemovalDate", "ServiceDescription", "ServiceType", "UpdatedDate" },
+                values: new object[,]
+                {
+                    { 3, null, null, true, false, null, null, "Engine Oil Change", null, "Engine Oil change", "Refill", null },
+                    { 4, null, null, true, false, null, null, "Engine Oil Change", null, "Engine Oil change", "Refill", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Services",
+                columns: new[] { "Id", "CreatedBy", "CreatedDate", "IsActive", "IsDeleted", "MaintenancePlanId", "ModifiedBy", "Name", "RemovalDate", "ServiceDescription", "ServiceType", "UpdatedDate" },
+                values: new object[,]
+                {
+                    { 1, null, null, true, false, 5, null, "Engine Oil ", null, "Engine Oil change", "Refill", null },
+                    { 2, null, null, true, false, 5, null, "Engine Oil Filter", null, "Engine Oil filter change", "Replace", null }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EquipmentMaintenancePlan_MaintenancePlanId",
                 table: "EquipmentMaintenancePlan",
@@ -832,6 +879,11 @@ namespace Persistence.Migrations
                 name: "IX_Equipments_DepartmentId",
                 table: "Equipments",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Equipments_EquipmentTypeId",
+                table: "Equipments",
+                column: "EquipmentTypeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Equipments_ManufactureId",
@@ -874,9 +926,6 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "EquipmentParts");
-
-            migrationBuilder.DropTable(
-                name: "EquipmentType");
 
             migrationBuilder.DropTable(
                 name: "MaintenanceAct");
@@ -922,6 +971,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "EquipmentType");
 
             migrationBuilder.DropTable(
                 name: "Manufactures");

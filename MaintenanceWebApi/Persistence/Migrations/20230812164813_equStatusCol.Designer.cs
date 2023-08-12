@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(MaintenanceDbContext))]
-    [Migration("20230811180606_serviceUpdated")]
-    partial class serviceUpdated
+    [Migration("20230812164813_equStatusCol")]
+    partial class equStatusCol
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,8 +254,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("EquipmentType")
-                        .HasColumnType("text");
+                    b.Property<int?>("EquipmentTypeId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Identification")
                         .HasColumnType("text");
@@ -269,7 +269,7 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("LastMaintenaceTime")
+                    b.Property<DateTime?>("LastMaintenaceDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("ManufactureId")
@@ -299,17 +299,11 @@ namespace Persistence.Migrations
                     b.Property<string>("Status")
                         .HasColumnType("text");
 
-                    b.Property<int?>("Typeid")
-                        .HasColumnType("integer");
-
                     b.Property<string>("UnitNumber")
                         .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("boolean");
 
                     b.Property<string>("usageLocation")
                         .HasColumnType("text");
@@ -317,6 +311,8 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("EquipmentTypeId");
 
                     b.HasIndex("ManufactureId");
 
@@ -2709,8 +2705,8 @@ namespace Persistence.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<string>("OperationName")
-                        .HasColumnType("text");
+                    b.Property<int?>("OperationName")
+                        .HasColumnType("integer");
 
                     b.Property<string>("OperatorName")
                         .HasColumnType("text");
@@ -2884,6 +2880,10 @@ namespace Persistence.Migrations
                         .WithMany("Equipments")
                         .HasForeignKey("DepartmentId");
 
+                    b.HasOne("Domain.Entities.EquipmentType", "EquipmentType")
+                        .WithMany()
+                        .HasForeignKey("EquipmentTypeId");
+
                     b.HasOne("Domain.Entities.Manufacture", "Manufacture")
                         .WithMany()
                         .HasForeignKey("ManufactureId");
@@ -2893,6 +2893,8 @@ namespace Persistence.Migrations
                         .HasForeignKey("ModelId");
 
                     b.Navigation("Department");
+
+                    b.Navigation("EquipmentType");
 
                     b.Navigation("Manufacture");
 

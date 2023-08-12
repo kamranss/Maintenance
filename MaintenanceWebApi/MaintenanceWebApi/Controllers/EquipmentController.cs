@@ -142,6 +142,19 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
+        [Route("StatusChange")]
+        [HttpPatch]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Update(int id, string newStatus)
+        {
+            _equipmentService.ChangeEquipmentStatusAsync(id, newStatus);
+
+            return StatusCode(200, "Status Updated");
+        }
+
+
 
     }
 }

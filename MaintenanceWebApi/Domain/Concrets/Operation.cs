@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Concrets
 {
-    public enum Opreation
+    public enum Operation
     {
         TRUCK_TO_WAREHOUSE,
         TRUCK_TO_VESSEL,

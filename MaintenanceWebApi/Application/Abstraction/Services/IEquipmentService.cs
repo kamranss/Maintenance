@@ -4,6 +4,7 @@ using Application.DTOs.Equipment;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using Application.RequestParameters;
+using Domain.Concrets;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using System;
@@ -38,6 +39,8 @@ namespace Application.Abstraction.Services
         void SaveEquipmentImage(IFormFile newImage, Equipment equipment);
 
         Task<IServiceResult<Pagination<UsageHistoryDto>>> GetUsageHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id);
+
+        Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, string newStatus);
         //void SaveChanges();
         //EquipmentGetDto IsEquipmentExist(int? id);
         //Image FindImage(int? id);

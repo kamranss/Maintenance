@@ -72,8 +72,11 @@ namespace Persistence
             services.AddScoped<IMpReadRepository, MpReadRepository>();
             services.AddScoped<IMpWriteRepository, MpWriteRepository>();
 
+     
+
             services.AddScoped<IServiceReadRepository, ServiceReadRepository>();
             services.AddScoped<IServiceWriteRepository, ServiceWriteRepository>();
+
             services.AddScoped<IUsageHistoryReadRepository, UsageHistoryReadRepository>();
             services.AddScoped<IUsageHistoryWriteRepository, UsageHistoryWriteRepository>();
             
@@ -81,6 +84,7 @@ namespace Persistence
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IEquipmentService, EquipmentService>();
             services.AddScoped<IMPService, MPService>();
+            services.AddScoped<IServeServices, ServeService>();
 
         }
     }

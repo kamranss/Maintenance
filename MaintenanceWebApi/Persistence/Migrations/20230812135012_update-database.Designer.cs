@@ -12,8 +12,8 @@ using Persistence.Context;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(MaintenanceDbContext))]
-    [Migration("20230809214650_second")]
-    partial class second
+    [Migration("20230812135012_update-database")]
+    partial class updatedatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -254,8 +254,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("EquipmentType")
-                        .HasColumnType("text");
+                    b.Property<int?>("EquipmentTypeId")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Identification")
                         .HasColumnType("text");
@@ -269,7 +269,7 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<DateTime?>("LastMaintenaceTime")
+                    b.Property<DateTime?>("LastMaintenaceDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("ManufactureId")
@@ -296,10 +296,7 @@ namespace Persistence.Migrations
                     b.Property<string>("SeriaNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
-
-                    b.Property<int?>("Typeid")
+                    b.Property<int?>("Status")
                         .HasColumnType("integer");
 
                     b.Property<string>("UnitNumber")
@@ -308,15 +305,14 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<bool?>("isDeleted")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("usageLocation")
-                        .HasColumnType("text");
+                    b.Property<int?>("usageLocation")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
+
+                    b.HasIndex("EquipmentTypeId");
 
                     b.HasIndex("ManufactureId");
 
@@ -777,6 +773,9 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("CreatedDate")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
                     b.Property<bool?>("IsActive")
                         .HasColumnType("boolean");
 
@@ -784,7 +783,6 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("MetricType")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("ModifiedBy")
@@ -802,6 +800,58 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("MaintenancePlan");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "POCR-1",
+                            Description = "Vizual Inspection",
+                            IsActive = true,
+                            IsDeleted = false,
+                            MetricType = "Period",
+                            Name = "Portal Crane"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "POCR-2",
+                            Description = "Profilaktik Inspection",
+                            IsActive = true,
+                            IsDeleted = false,
+                            MetricType = "Period",
+                            Name = "Portal Crane Prof"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = "FRKL-1",
+                            Description = "Vizual Inspection",
+                            IsActive = true,
+                            IsDeleted = false,
+                            MetricType = "Period",
+                            Name = "Fork Lift"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = "RAIL-1",
+                            Description = "Vizual Inspection of Railway",
+                            IsActive = true,
+                            IsDeleted = false,
+                            MetricType = "Period",
+                            Name = "Railway"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Code = "FRKL-2",
+                            Description = "Engine Oil Change",
+                            IsActive = true,
+                            IsDeleted = false,
+                            MetricType = "MotoHours",
+                            Name = "Fork Lift"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Manufacture", b =>
@@ -2578,6 +2628,46 @@ namespace Persistence.Migrations
                     b.HasIndex("MaintenancePlanId");
 
                     b.ToTable("Services");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            MaintenancePlanId = 5,
+                            Name = "Engine Oil ",
+                            ServiceDescription = "Engine Oil change",
+                            ServiceType = "Refill"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            MaintenancePlanId = 5,
+                            Name = "Engine Oil Filter",
+                            ServiceDescription = "Engine Oil filter change",
+                            ServiceType = "Replace"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Engine Oil Change",
+                            ServiceDescription = "Engine Oil change",
+                            ServiceType = "Refill"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Engine Oil Change",
+                            ServiceDescription = "Engine Oil change",
+                            ServiceType = "Refill"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.UsageHistory", b =>
@@ -2790,6 +2880,10 @@ namespace Persistence.Migrations
                         .WithMany("Equipments")
                         .HasForeignKey("DepartmentId");
 
+                    b.HasOne("Domain.Entities.EquipmentType", "EquipmentType")
+                        .WithMany()
+                        .HasForeignKey("EquipmentTypeId");
+
                     b.HasOne("Domain.Entities.Manufacture", "Manufacture")
                         .WithMany()
                         .HasForeignKey("ManufactureId");
@@ -2799,6 +2893,8 @@ namespace Persistence.Migrations
                         .HasForeignKey("ModelId");
 
                     b.Navigation("Department");
+
+                    b.Navigation("EquipmentType");
 
                     b.Navigation("Manufacture");
 
@@ -2845,7 +2941,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.UsageHistory", b =>
                 {
                     b.HasOne("Domain.Entities.Equipment", "Equipment")
-                        .WithMany()
+                        .WithMany("UsageHistories")
                         .HasForeignKey("EquipmentId");
 
                     b.Navigation("Equipment");
@@ -2889,6 +2985,8 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Equipment", b =>
                 {
                     b.Navigation("OperationSite");
+
+                    b.Navigation("UsageHistories");
                 });
 
             modelBuilder.Entity("Domain.Entities.MaintenancePlan", b =>
