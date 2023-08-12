@@ -26,8 +26,8 @@ namespace Domain.Entities
         public string? SeriaNumber { get; set; }
         public string? Capacity { get; set; }
         public int? EquipmentTypeId { get; set; }
-        public string? Status { get; set; }
-        public string? usageLocation { get; set; }
+        public EquipmentStatus? Status { get; set; }
+        public Location? usageLocation { get; set; }
         public DateTime? LastMaintenaceDate { get; set; }
         public decimal? CurrentValue { get; set; }
         public int? DepartmentId { get; set; }

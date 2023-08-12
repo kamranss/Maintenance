@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Concrets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,8 @@ namespace Domain.Entities
         public string? Name { get; set; }
         public string? Description { get; set; }
         //public int MetricTypeId { get; set; }
-        public string? MetricType { get; set; }
+        public Metrictype? MetricType { get; set; }
+        public string? MetricTypeName { get; set; }
         public List<Equipment>? Equipments { get; set; }
         public List<Service>? Services { get; set; }
     }

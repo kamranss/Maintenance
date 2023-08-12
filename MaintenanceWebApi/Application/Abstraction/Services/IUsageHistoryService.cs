@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Application.Abstraction.Services
 {
-    partial interface IUsageHistory
+    public interface IUsageHistoryService
     {
         
         Task<IServiceResult<UsageHistoryDto>> FindEquipmentUSageAsync(int? id);
         Task<IServiceResult<UsageHistoryCreateDto>> CreateUsageHistoryAsync(UsageHistoryCreateDto usageHistoryCreate);
-        Task<IServiceResult<UsageHistoryEndDto>> CreateUsageHistoryAsync(UsageHistoryEndDto usageHistoryEnd);
+        Task<IServiceResult<UsageHistoryEndDto>> EndUsageHistoryAsync(UsageHistoryEndDto usageHistoryEnd);
 
     }
 }

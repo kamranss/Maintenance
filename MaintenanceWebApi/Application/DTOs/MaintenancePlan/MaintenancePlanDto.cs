@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.Equipment;
 using Application.DTOs.Service;
 using Domain.Common;
+using Domain.Concrets;
 using Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ namespace Application.DTOs.MaintenancePlan
         public string? Code { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? MetricType { get; set; } // inum
+        public Metrictype? MetricType { get; set; } // inum
         public List<EquipmentDto>? Equipments { get; set; }
         public List<ServiceDto>? Services { get; set; }
     }

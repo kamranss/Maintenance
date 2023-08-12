@@ -58,7 +58,10 @@ namespace Persistence.Services
                     ErrorMessage = "File Type is not correct"
                 };
             }
-
+            if (!Enum.IsDefined(typeof(Location), equipment.UsageLocation))
+            {
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Invalid UsageLocation value" };
+            }
             //if (!equipment.Image.CheckFileLenght(10000))
             //{
             //    return new ServiceResult<EquipmentCreateDto>
@@ -74,7 +77,8 @@ namespace Persistence.Services
             newEquipment.IsDeleted = true;
             imageUrl = imageUrl + Guid.NewGuid();
             newEquipment.ImagUrl = imageUrl;
-            newEquipment.Status = EquipmentStatus.ACTIVE.ToString();
+            newEquipment.Status = EquipmentStatus.ACTIVE;
+            newEquipment.usageLocation = equipment.UsageLocation;
 
 
 
@@ -362,7 +366,7 @@ namespace Persistence.Services
 
     
 
-        public async Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, string newStatus)
+        public async Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, EquipmentStatus newStatus)
         {
             if (id == null && id <= 0)
             {

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Concrets
+namespace Application.Abstraction.Services
 {
-    public enum Metrictype
+    public interface IUserService
     {
-        PERIOD=1,
-        MOTO_HOURS=2,
-        WEIGHT=3,
-        DISTANCE=4
+
     }
 }

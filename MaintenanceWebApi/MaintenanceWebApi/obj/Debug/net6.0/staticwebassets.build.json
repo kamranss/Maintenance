@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "KaHd6OV1Mk4MRFEcWcP1gKoOAlzrY7KRCglF2LKp/A8=",
+  "Hash": "lhwu44r72q9kctQwt+D9uVFT8FrIJR/Jlbh1wGmUUFg=",
   "Source": "MaintenanceWebApi",
   "BasePath": "_content/MaintenanceWebApi",
   "Mode": "Default",
@@ -16,6 +16,40 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\0bb49e21-1652-4ffd-bdb1-fe1102c4099323.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/0bb49e21-1652-4ffd-bdb1-fe1102c4099323.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\0bb49e21-1652-4ffd-bdb1-fe1102c4099323.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\28094c19-d2bd-4da7-ab9a-f886a4a06fa923.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/28094c19-d2bd-4da7-ab9a-f886a4a06fa923.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\28094c19-d2bd-4da7-ab9a-f886a4a06fa923.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg"
+    },
     {
       "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\81b55369-0bee-4e76-b4e8-06be2d6e218623.Basket-AdminPanel-Start.mp4_snapshot_00.43.09.777.jpg",
       "SourceId": "MaintenanceWebApi",

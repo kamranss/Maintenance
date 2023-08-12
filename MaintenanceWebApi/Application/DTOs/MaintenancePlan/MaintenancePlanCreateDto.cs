@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Concrets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,6 +12,6 @@ namespace Application.DTOs.MaintenancePlan
         public string? Code { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
-        public string? MetricType { get; set; } // enum
+        public Metrictype? MetricType { get; set; } // enum
     }
 }

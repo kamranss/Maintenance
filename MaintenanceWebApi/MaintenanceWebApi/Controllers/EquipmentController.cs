@@ -80,15 +80,6 @@ namespace MaintenanceWebApi.Controllers
             return Ok(equipmentStatus);
         }
 
-        [HttpGet("MetricType")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetEquipmentMetricType()
-        {
-            var  metricType = Enum.GetNames(typeof(Metrictype)).ToList();
-            return Ok(metricType);
-        }
 
         [HttpGet("Location")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -147,7 +138,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Update(int id, string newStatus)
+        public IActionResult Update(int id, EquipmentStatus newStatus)
         {
             _equipmentService.ChangeEquipmentStatusAsync(id, newStatus);
 

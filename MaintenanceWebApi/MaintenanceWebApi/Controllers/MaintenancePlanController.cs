@@ -2,6 +2,7 @@
 using Application.DTOs.Department;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Service;
+using Domain.Concrets;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
@@ -90,6 +91,18 @@ namespace MaintenanceWebApi.Controllers
             {
                 return BadRequest(result.ErrorMessage);
             }
+        }
+
+
+
+        [HttpGet("MetricType")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetPlanMetricType()
+        {
+            var metricType = Enum.GetNames(typeof(Metrictype)).ToList();
+            return Ok(metricType);
         }
     }
 }

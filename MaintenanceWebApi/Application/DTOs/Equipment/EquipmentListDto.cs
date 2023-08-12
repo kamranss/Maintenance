@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Domain.Concrets;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Application.DTOs.Equipment
 {
     public class EquipmentListDto
     {
-        public string? Status { get; set; }
+        public EquipmentStatus? Status { get; set; }
         public string? Name { get; set; }
         //public string? UnitNumber { get; set; }
         public string? Description { get; set; }
@@ -20,7 +21,7 @@ namespace Application.DTOs.Equipment
         public int? ProductionYear { get; set; }
         public string? SeriaNumber { get; set; }
         public string? EquipmentType { get; set; }
-        public string? UsageLocation { get; set; }
+        public Location? UsageLocation { get; set; }
         public int? DepartmentId { get; set; }
         public int? ManufactureId { get; set; }
         public int? ModelId { get; set; }

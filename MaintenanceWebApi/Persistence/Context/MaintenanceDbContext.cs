@@ -1,4 +1,5 @@
 ﻿using Domain.Common;
+using Domain.Concrets;
 using Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -396,11 +397,11 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new MaintenancePlan { Id = 1, Code = "POCR-1", Name = "Portal Crane", Description = "Vizual Inspection", MetricType = "Period", IsDeleted = false, IsActive = true },
-                    new MaintenancePlan { Id = 2, Code = "POCR-2", Name = "Portal Crane Prof", Description = "Profilaktik Inspection", MetricType = "Period", IsDeleted = false, IsActive = true },
-                    new MaintenancePlan { Id = 3, Code = "FRKL-1", Name = "Fork Lift", Description = "Vizual Inspection", MetricType = "Period", IsDeleted = false, IsActive = true },
-                    new MaintenancePlan { Id = 4, Code = "RAIL-1", Name = "Railway", Description = "Vizual Inspection of Railway", MetricType = "Period", IsDeleted = false, IsActive = true },
-                    new MaintenancePlan { Id = 5, Code = "FRKL-2", Name = "Fork Lift", Description = "Engine Oil Change", MetricType = "MotoHours", IsDeleted = false, IsActive = true }
+                    new MaintenancePlan { Id = 1, Code = "POCR-1", Name = "Portal Crane", Description = "Vizual Inspection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 2, Code = "POCR-2", Name = "Portal Crane Prof", Description = "Profilaktik Inspection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 3, Code = "FRKL-1", Name = "Fork Lift", Description = "Vizual Inspection", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 4, Code = "RAIL-1", Name = "Railway", Description = "Vizual Inspection of Railway", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true },
+                    new MaintenancePlan { Id = 5, Code = "FRKL-2", Name = "Fork Lift", Description = "Engine Oil Change", MetricType = Metrictype.PERIOD, MetricTypeName = "Period", IsDeleted = false, IsActive = true }
                 );
             });
 

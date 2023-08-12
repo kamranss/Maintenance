@@ -40,7 +40,7 @@ namespace Application.Abstraction.Services
 
         Task<IServiceResult<Pagination<UsageHistoryDto>>> GetUsageHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id);
 
-        Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, string newStatus);
+        Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, EquipmentStatus newStatus);
         //void SaveChanges();
         //EquipmentGetDto IsEquipmentExist(int? id);
         //Image FindImage(int? id);

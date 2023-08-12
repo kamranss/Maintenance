@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Concrets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace Application.DTOs.Equipment
 {
     public class EquipmentGetDto
     {
+        public EquipmentStatus? Status { get; set; }
         public string? Name { get; set; }
         public string? UnitNumber { get; set; }
         public string? Description { get; set; }
@@ -21,7 +23,7 @@ namespace Application.DTOs.Equipment
         public int? Typeid { get; set; }
         public string? Capacity { get; set; }
         public string? EquipmentType { get; set; }
-        public string? usageLocation { get; set; }
+        public Location? usageLocation { get; set; }
         public int? DepartmentId { get; set; }
 
     }
