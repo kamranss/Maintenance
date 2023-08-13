@@ -2,6 +2,7 @@
 using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentRepo;
+using Application.Repositories.ManufactureRepo;
 using Application.Repositories.MpRepo;
 using Application.Repositories.ServiceRepo;
 using Application.Repositories.UsageHistoryRepo;
@@ -13,6 +14,7 @@ using Persistence.Configuration;
 using Persistence.Context;
 using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentRepo;
+using Persistence.Repositories.ManufactureRepo;
 using Persistence.Repositories.MpRepo;
 using Persistence.Repositories.ServiceRepo;
 using Persistence.Repositories.UsageHistoryRepo;
@@ -72,7 +74,8 @@ namespace Persistence
             services.AddScoped<IMpReadRepository, MpReadRepository>();
             services.AddScoped<IMpWriteRepository, MpWriteRepository>();
 
-     
+            services.AddScoped<IManufactureReadRepository, ManufactureReadRepository>();
+            services.AddScoped<IManufactureWriteRepository, ManufactureWriteRepository>();
 
             services.AddScoped<IServiceReadRepository, ServiceReadRepository>();
             services.AddScoped<IServiceWriteRepository, ServiceWriteRepository>();
@@ -85,6 +88,7 @@ namespace Persistence
             services.AddScoped<IEquipmentService, EquipmentService>();
             services.AddScoped<IMPService, MPService>();
             services.AddScoped<IServeServices, ServeService>();
+            services.AddScoped<IManufactureService, ManufactureService>();
 
         }
     }

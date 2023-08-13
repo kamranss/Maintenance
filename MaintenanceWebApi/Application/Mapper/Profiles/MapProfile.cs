@@ -1,6 +1,7 @@
 ﻿using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Manufacture;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using AutoMapper;
@@ -56,7 +57,7 @@ namespace Application.Mapper.Profiles
             CreateMap<UsageHistoryCreateDto, UsageHistory>();
 
 
-
+            CreateMap<Manufacture, ManufactureDto>();
 
 
             //CreateMap<Department, Depar>()
