@@ -38,20 +38,51 @@ namespace Persistence.Services
             _memoryCach = memoryCach;
         }
 
-        public async Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto service)
+        public async Task<IServiceResult<MaintenencePlanStatusDto>> ChangeMpStatusAsync(int id, MaintenencePlanStatus newStatus)
         {
-            var newService = _mapper.Map<MaintenancePlan>(service);
-            newService.IsActive = true;
-            newService.IsDeleted = true;
+            if (id == null && id <= 0)
+            {
+                return new ServiceResult<MaintenencePlanStatusDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+            }
+            if (!Enum.IsDefined(typeof(Domain.Concrets.EquipmentStatus), newStatus))
+            {
+                return new ServiceResult<MaintenencePlanStatusDto> { IsSuccess = false, ErrorMessage = "Invalid Status value" };
+            }
+            var existMp = await _readRepository.GetByIdAsync(id);
 
-            var result = await _writeRepository.AddAsync(newService);
+            if (existMp == null)
+            {
+                return new ServiceResult<MaintenencePlanStatusDto> { IsSuccess = false, ErrorMessage = "There is no Mp with this Id in Db" };
+            }
+
+            existMp.Status = newStatus;
+
+            var mpStatusDto = _mapper.Map<MaintenencePlanStatusDto>(existMp);
+
+            return new ServiceResult<MaintenencePlanStatusDto> { IsSuccess = true, Data = mpStatusDto };
+        }
+
+        public async Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto maintenancePlan)
+        {
+            if (!Enum.IsDefined(typeof(Metrictype), maintenancePlan.MetricType))
+            {
+                return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = false, ErrorMessage = "Invalid MetricType value" };
+            }
+            var newMp = _mapper.Map<MaintenancePlan>(maintenancePlan);
+            newMp.IsActive = true;
+            newMp.IsDeleted = true;
+            newMp.MetricType = maintenancePlan.MetricType;
+            newMp.MetricTypeName = maintenancePlan.MetricType.ToString();
+
+
+            var result = await _writeRepository.AddAsync(newMp);
             if (result)
             {
                 var endresult = await _writeRepository.SaveAsync();
 
                 if (endresult > 0)
                 {
-                    return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = true, Data = service };
+                    return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = true, Data = maintenancePlan };
                 }
                 return new ServiceResult<MaintenancePlanCreateDto> { IsSuccess = false, ErrorMessage = "Service could not be saved." };
             }

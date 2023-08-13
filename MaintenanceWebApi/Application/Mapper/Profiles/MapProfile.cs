@@ -43,6 +43,7 @@ namespace Application.Mapper.Profiles
 
 
             CreateMap<MaintenancePlan, MaintenancePlanDto>();
+            CreateMap<MaintenancePlan, MaintenencePlanStatusDto>();
             CreateMap<MaintenancePlanCreateDto, MaintenancePlan>();
             CreateMap<MaintenancePlanUpdateDto, MaintenancePlan>()
                 .ForMember(dest => dest.CreatedDate, opt => opt.Ignore())

@@ -378,7 +378,7 @@ namespace Persistence.Context
                 );
             });
 
-            modelBuilder.Entity<EquipmentPart>(entity =>
+            modelBuilder.Entity<Part>(entity =>
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(

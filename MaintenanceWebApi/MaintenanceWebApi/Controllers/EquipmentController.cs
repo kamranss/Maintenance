@@ -70,26 +70,7 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        [HttpGet("Status")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetEquipmentStatus()
-        {
-            var equipmentStatus = Enum.GetNames(typeof(EquipmentStatus)).ToList();
-            return Ok(equipmentStatus);
-        }
-
-
-        [HttpGet("Location")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetEquipmentLocation()
-        {
-            var location = Enum.GetNames(typeof(Location)).ToList();
-            return Ok(location);
-        }
+     
 
         [Route("delete/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]

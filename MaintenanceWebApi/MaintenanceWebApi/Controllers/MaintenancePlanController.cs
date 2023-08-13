@@ -104,5 +104,17 @@ namespace MaintenanceWebApi.Controllers
             var metricType = Enum.GetNames(typeof(Metrictype)).ToList();
             return Ok(metricType);
         }
+        [Route("StatusChange")]
+        [HttpPatch]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Update(int id, MaintenencePlanStatus newStatus)
+        {
+            _mpService.ChangeMpStatusAsync(id, newStatus);
+
+            return StatusCode(200, "Status Updated");
+        }
+
     }
 }

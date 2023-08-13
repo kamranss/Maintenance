@@ -13,6 +13,7 @@ namespace Domain.Entities
         public string? Code { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }
+        public MaintenencePlanStatus? Status { get; set; }
         //public int MetricTypeId { get; set; }
         public Metrictype? MetricType { get; set; }
         public string? MetricTypeName { get; set; }
