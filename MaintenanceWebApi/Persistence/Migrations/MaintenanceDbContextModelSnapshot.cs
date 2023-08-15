@@ -294,8 +294,8 @@ namespace Persistence.Migrations
                     b.Property<string>("SeriaNumber")
                         .HasColumnType("text");
 
-                    b.Property<string>("Status")
-                        .HasColumnType("text");
+                    b.Property<int?>("Status")
+                        .HasColumnType("integer");
 
                     b.Property<string>("UnitNumber")
                         .HasColumnType("text");
@@ -303,8 +303,8 @@ namespace Persistence.Migrations
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("usageLocation")
-                        .HasColumnType("text");
+                    b.Property<int?>("usageLocation")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -361,56 +361,6 @@ namespace Persistence.Migrations
                     b.HasIndex("PartId");
 
                     b.ToTable("EquipmentParts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 2,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 3,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 4,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 5,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 6,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 7,
-                            IsActive = true,
-                            IsDeleted = false
-                        },
-                        new
-                        {
-                            Id = 8,
-                            IsActive = true,
-                            IsDeleted = false
-                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.EquipmentType", b =>
@@ -780,7 +730,10 @@ namespace Persistence.Migrations
                     b.Property<bool?>("IsDeleted")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("MetricType")
+                    b.Property<int?>("MetricType")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("MetricTypeName")
                         .HasColumnType("text");
 
                     b.Property<string>("ModifiedBy")
@@ -790,6 +743,9 @@ namespace Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<int?>("RemovalDate")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("Status")
                         .HasColumnType("integer");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -807,7 +763,8 @@ namespace Persistence.Migrations
                             Description = "Vizual Inspection",
                             IsActive = true,
                             IsDeleted = false,
-                            MetricType = "Period",
+                            MetricType = 1,
+                            MetricTypeName = "Period",
                             Name = "Portal Crane"
                         },
                         new
@@ -817,7 +774,8 @@ namespace Persistence.Migrations
                             Description = "Profilaktik Inspection",
                             IsActive = true,
                             IsDeleted = false,
-                            MetricType = "Period",
+                            MetricType = 1,
+                            MetricTypeName = "Period",
                             Name = "Portal Crane Prof"
                         },
                         new
@@ -827,7 +785,8 @@ namespace Persistence.Migrations
                             Description = "Vizual Inspection",
                             IsActive = true,
                             IsDeleted = false,
-                            MetricType = "Period",
+                            MetricType = 1,
+                            MetricTypeName = "Period",
                             Name = "Fork Lift"
                         },
                         new
@@ -837,7 +796,8 @@ namespace Persistence.Migrations
                             Description = "Vizual Inspection of Railway",
                             IsActive = true,
                             IsDeleted = false,
-                            MetricType = "Period",
+                            MetricType = 1,
+                            MetricTypeName = "Period",
                             Name = "Railway"
                         },
                         new
@@ -847,7 +807,8 @@ namespace Persistence.Migrations
                             Description = "Engine Oil Change",
                             IsActive = true,
                             IsDeleted = false,
-                            MetricType = "MotoHours",
+                            MetricType = 1,
+                            MetricTypeName = "Period",
                             Name = "Fork Lift"
                         });
                 });
@@ -2578,6 +2539,64 @@ namespace Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Oil Filter"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Air Filter"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Engine Oil"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "TransMission Oil"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Gear_Box Oil"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Wheels"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Antifiriz"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            IsActive = true,
+                            IsDeleted = false,
+                            Name = "Break pads"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Service", b =>

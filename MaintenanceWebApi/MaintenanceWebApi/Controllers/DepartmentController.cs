@@ -5,6 +5,7 @@ using Application.Exceptions.EquipmentException;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
+using Persistence.Services.Common;
 
 namespace MaintenanceWebApi.Controllers
 {
@@ -36,8 +37,22 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetDepartments(int page, int pageSize)
         {
-            var departments = _departmentService.GetDepartmentsAsync(page, pageSize);
-            return Ok(departments);
+            //var departments = _departmentService.GetDepartmentsAsync(page, pageSize);
+
+
+            var serviceResult = _departmentService.GetDepartmentsAsync(page, pageSize).Result;
+
+            if (!serviceResult.IsSuccess)
+            {
+                if (serviceResult.ErrorMessage == "Params is not okay")
+                    return BadRequest();
+                else if (serviceResult.ErrorMessage == "There is no Equipment in DB")
+                    return NotFound();
+            }
+
+            return Ok(serviceResult.Data);
+
+            //return Ok(departments);
         }
 
         [HttpPost("NewDepartment")]

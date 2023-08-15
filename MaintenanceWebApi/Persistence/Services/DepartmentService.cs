@@ -150,12 +150,12 @@ namespace Persistence.Services
             {
                 return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
-
+            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false).Count();
             int pageValue = page.Value;
             int takeValue = pagesize.Value;
             int skipCount = (pageValue - 1) * takeValue;
 
-            var items = _readRepository
+              var items = _readRepository
                .GetAll()
                .Skip(skipCount)
                .Take(takeValue)
@@ -166,7 +166,7 @@ namespace Persistence.Services
             {
                 return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
             }
-            var totalCount = items.Count;
+            var totalCount = count;
             var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
             var departmentListDto = _mapper.Map<List<DepartmentListDto>>(items);
             var paginatesDepartments = new Pagination<DepartmentListDto>(departmentListDto, pageValue, pageCount, totalCount);

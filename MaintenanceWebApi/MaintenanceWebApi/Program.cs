@@ -100,6 +100,16 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
+// disable cors
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
 
 var app = builder.Build();
 
@@ -114,7 +124,8 @@ app.UseStaticFiles();
 app.UseSerilogRequestLogging();
 app.UseHttpLogging();
 
-
+// disable cors
+app.UseCors();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
