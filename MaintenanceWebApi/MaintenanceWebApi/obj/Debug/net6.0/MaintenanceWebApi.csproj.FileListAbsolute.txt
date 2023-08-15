@@ -70,3 +70,4 @@ C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bi
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\AutoMapper.dll
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\MaintenanceWebApi.staticwebassets.runtime.json
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll

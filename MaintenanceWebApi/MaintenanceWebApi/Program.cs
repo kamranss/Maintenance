@@ -1,18 +1,24 @@
 
+using Domain.Entities;
 using MaintenanceWebApi;
+using MaintenanceWebApi.Configuration.EnumConfig;
 using MaintenanceWebApi.Configuration.LogColumnWriter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.HttpLogging;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 using NpgsqlTypes;
 using Persistence;
 using Serilog;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Sinks.PostgreSQL;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
@@ -52,10 +58,23 @@ builder.Services.AddHttpLogging(logging =>
 
 builder.Host.UseSerilog();
 
-builder.Services.AddControllers();
+//builder.Services.AddControllers();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(o => o.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+
+//builder.Services.AddSwaggerGen(c =>
+//{
+//c.SwaggerDoc("v1", new OpenApiInfo { Title = "Your API", Version = "v1" });
+//// Configure the Swagger generator to use string values for enums
+//c.SchemaFilter<EnumSchemaFilter>();
+//});
+// Create a custom schema filter to handle enums
+
 
 
 builder.Services.AddAuthentication(x =>

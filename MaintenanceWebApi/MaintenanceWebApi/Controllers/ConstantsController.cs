@@ -6,7 +6,7 @@ namespace MaintenanceWebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EntityFieldsController : ControllerBase
+    public class ConstantsController : ControllerBase
     {
         [HttpGet("EquipmentStatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]

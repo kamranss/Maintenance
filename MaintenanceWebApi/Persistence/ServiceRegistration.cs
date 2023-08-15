@@ -3,7 +3,9 @@ using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentRepo;
 using Application.Repositories.ManufactureRepo;
+using Application.Repositories.ModelRepo;
 using Application.Repositories.MpRepo;
+using Application.Repositories.OperationSiteRepo;
 using Application.Repositories.ServiceRepo;
 using Application.Repositories.UsageHistoryRepo;
 using Domain.Entities;
@@ -15,7 +17,9 @@ using Persistence.Context;
 using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentRepo;
 using Persistence.Repositories.ManufactureRepo;
+using Persistence.Repositories.ModelRepo;
 using Persistence.Repositories.MpRepo;
+using Persistence.Repositories.OperationSiteRepo;
 using Persistence.Repositories.ServiceRepo;
 using Persistence.Repositories.UsageHistoryRepo;
 using Persistence.Services;
@@ -82,6 +86,13 @@ namespace Persistence
 
             services.AddScoped<IUsageHistoryReadRepository, UsageHistoryReadRepository>();
             services.AddScoped<IUsageHistoryWriteRepository, UsageHistoryWriteRepository>();
+
+            services.AddScoped<IModelReadRepository, ModelReadRepository>();
+            services.AddScoped<IModelWriteRepository, ModelWriteRepository>();
+
+            services.AddScoped<IReadOperationSiteRepository, OperationSiteReadRepository>();
+            services.AddScoped<IWriteOperationSiteRepository, OperationSiteWriteRepository>();
+
             
 
             services.AddScoped<IDepartmentService, DepartmentService>();
@@ -89,6 +100,8 @@ namespace Persistence
             services.AddScoped<IMPService, MPService>();
             services.AddScoped<IServeServices, ServeService>();
             services.AddScoped<IManufactureService, ManufactureService>();
+            services.AddScoped<IModelService, ModelService>();
+            services.AddScoped<IOperationSiteService, OperationSiteService>();
 
         }
     }

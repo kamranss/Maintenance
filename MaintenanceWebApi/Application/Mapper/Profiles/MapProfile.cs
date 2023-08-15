@@ -2,6 +2,8 @@
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Manufacture;
+using Application.DTOs.Model;
+using Application.DTOs.OperationSite;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using AutoMapper;
@@ -58,6 +60,8 @@ namespace Application.Mapper.Profiles
 
 
             CreateMap<Manufacture, ManufactureDto>();
+            CreateMap<Model, ModelDto>();
+            CreateMap<OperationSite, OperationSiteDto>();
 
 
             //CreateMap<Department, Depar>()

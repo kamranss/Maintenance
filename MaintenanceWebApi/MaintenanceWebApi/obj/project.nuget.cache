@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "GhSIW2D1BWe4yXdrYVVgdvcVb5ZAq347I/BdYk3vUXrRBkjdWupdyU4+XrVL0QiPeAzrG5T7Y8sd96977SHk4Q==",
+  "dgSpecHash": "NlZ0gOS9b/Lek81hvl29vfAh/7+hy15yOcMLrC5zReWI2QGgeATMpze0xn8e9kRODfDVQwxKPin9EXG6ywYnbg==",
   "success": true,
   "projectFilePath": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\MaintenanceWebApi.csproj",
   "expectedPackageFiles": [
@@ -50,6 +50,7 @@
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.protocols.openidconnect\\6.10.0\\microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.identitymodel.tokens\\6.10.0\\microsoft.identitymodel.tokens.6.10.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\user\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\npgsql\\6.0.0\\npgsql.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.0\\npgsql.entityframeworkcore.postgresql.6.0.0.nupkg.sha512",
     "C:\\Users\\user\\.nuget\\packages\\serilog\\3.0.1\\serilog.3.0.1.nupkg.sha512",
