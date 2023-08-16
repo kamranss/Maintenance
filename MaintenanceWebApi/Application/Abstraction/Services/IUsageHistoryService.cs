@@ -13,9 +13,9 @@ namespace Application.Abstraction.Services
     public interface IUsageHistoryService
     {
         
-        Task<IServiceResult<Pagination<UsageHistoryDto>>> FindEquipmentUSageAsync(int? id);
+        Task<IServiceResult<Pagination<UsageHistoryDto>>> FindEquipmentUsageHistoryAsync(int? equipmentId, int? page, int? pageSize);
         Task<IServiceResult<UsageHistoryCreateDto>> CreateUsageHistoryAsync(UsageHistoryCreateDto usageHistoryCreate);
-        Task<IServiceResult<UsageHistoryEndDto>> EndUsageHistoryAsync(UsageHistoryEndDto usageHistoryEnd);
+        Task<IServiceResult<UsageHistoryEndDto>> EndUsageHistoryAsync(UsageHistoryEndDto? usageHistoryEnd);
 
     }
 }

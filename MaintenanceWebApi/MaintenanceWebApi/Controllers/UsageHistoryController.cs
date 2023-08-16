@@ -55,5 +55,27 @@ namespace MaintenanceWebApi.Controllers
 
             return BadRequest(result.ErrorMessage);
         }
+
+
+
+        [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> GetEquipmentUsageHistory(int? equipmentId, int? page, int? pageSize)
+        {
+
+            var serviceResult = _usageHistoryService.FindEquipmentUsageHistoryAsync(equipmentId, page, pageSize).Result;
+
+            if (!serviceResult.IsSuccess)
+            {
+               
+                return  BadRequest(serviceResult.ErrorMessage);
+            }
+
+            return Ok(serviceResult.Data);
+
+        }
+
     }
 }
