@@ -8,11 +8,13 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.Department
 {
-    public class DepartmentListDto:BaseDto
+    public class DepartmentListDto
     {
+        public int? Id { get; set; }
         public string? Name { get; set; }
         public string? DepartmentHead { get; set; }
         public string? Description { get; set; }
-        public List<EquipmentListDto>? Equipments { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        //public List<EquipmentListDto>? Equipments { get; set; }
     }
 }

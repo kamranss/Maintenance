@@ -35,7 +35,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetDepartments(int page, int pageSize)
+        public IActionResult GetDepartments(int? page, int? pageSize)
         {
             //var departments = _departmentService.GetDepartmentsAsync(page, pageSize);
 
@@ -44,9 +44,9 @@ namespace MaintenanceWebApi.Controllers
 
             if (!serviceResult.IsSuccess)
             {
-                if (serviceResult.ErrorMessage == "Params is not okay")
-                    return BadRequest();
-                else if (serviceResult.ErrorMessage == "There is no Equipment in DB")
+                if (serviceResult.ErrorMessage == "Params is not okay") return BadRequest();
+
+                else if (serviceResult.ErrorMessage == "There is no Equipment in DB");
                     return NotFound();
             }
 

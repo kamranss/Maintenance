@@ -75,17 +75,17 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new Department { Id = 1, Name = "Planning", IsDeleted = false, IsActive = true },
-                    new Department { Id = 2, Name = "Takelaj", IsDeleted = false, IsActive = true },
-                    new Department { Id = 3, Name = "Operation", IsDeleted = false, IsActive = true },
-                    new Department { Id = 4, Name = "Electrical", IsDeleted = false, IsActive = true },
-                    new Department { Id = 5, Name = "MarineFleet", IsDeleted = false, IsActive = true },
-                    new Department { Id = 6, Name = "Mechanical", IsDeleted = false, IsActive = true },
-                    new Department { Id = 7, Name = "Cranes", IsDeleted = false, IsActive = true },
-                    new Department { Id = 8, Name = "Railway", IsDeleted = false, IsActive = true },
-                    new Department { Id = 9, Name = "Transport", IsDeleted = false, IsActive = true },
-                    new Department { Id = 10, Name = "Engineering", IsDeleted = false, IsActive = true },
-                    new Department { Id = 11, Name = "Berth", IsDeleted = false, IsActive = true }
+                    new Department { Id = 1, Name = "Planning", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 2, Name = "Takelaj", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System", DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 3, Name = "Operation", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 4, Name = "Electrical", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 5, Name = "MarineFleet", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 6, Name = "Mechanical", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 7, Name = "Cranes", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System"  , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 8, Name = "Railway", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 9, Name = "Transport", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1", Description = "Unknown" },
+                    new Department { Id = 10, Name = "Engineering", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1" , Description = "Unknown" },
+                    new Department { Id = 11, Name = "Berth", IsDeleted = false, IsActive = true , CreatedDate = DateTime.UtcNow, CreatedBy = "System" , DepartmentHead = "User1" , Description = "Unknown" }
 
                 );
             });

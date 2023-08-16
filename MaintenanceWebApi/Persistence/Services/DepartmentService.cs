@@ -146,16 +146,45 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<Pagination<DepartmentListDto>>> GetDepartmentsAsync(int? page, int? pagesize)
         {
+      
+            if (page == null && pagesize == null)
+            {
+                var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt/2;
+
+                 var deps = _readRepository
+                .GetAll()
+                .Take(takeValuee)
+                .Include(d => d.Equipments)
+                .Where(d => d.IsDeleted == false)
+                .ToList();
+
+                if (deps == null)
+                {
+                    return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Department in DB" };
+                }
+
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var departmentListDtoo = _mapper.Map<List<DepartmentListDto>>(deps);
+                var paginatesDepartmentss = new Pagination<DepartmentListDto>(departmentListDtoo, pageValuee, pageCountt, totalCountt);
+                return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = true, Data = paginatesDepartmentss };
+
+
+            }
+
+
             if (!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0)
             {
                 return new ServiceResult<Pagination<DepartmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
-            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false).Count();
+            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
             int pageValue = page.Value;
             int takeValue = pagesize.Value;
-            int skipCount = (pageValue - 1) * takeValue;
+            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
 
-              var items = _readRepository
+            var items = _readRepository
                .GetAll()
                .Skip(skipCount)
                .Take(takeValue)

@@ -14,7 +14,7 @@ namespace Application.DTOs.Common
         public bool? IsDeleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
-        public DataType? RemovalDate { get; set; }
+        public DateTime? RemovalDate { get; set; }
         public string? CreatedBy { get; set; }
         public string? ModifiedBy { get; set; }
     }

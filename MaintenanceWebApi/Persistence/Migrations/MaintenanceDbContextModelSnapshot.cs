@@ -133,8 +133,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -147,6 +147,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(117),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Planning"
@@ -154,6 +156,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(124),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Takelaj"
@@ -161,6 +165,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(125),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Operation"
@@ -168,6 +174,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 4,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(126),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Electrical"
@@ -175,6 +183,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 5,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(127),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "MarineFleet"
@@ -182,6 +192,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 6,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(130),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Mechanical"
@@ -189,6 +201,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 7,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(131),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Cranes"
@@ -196,6 +210,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 8,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(132),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Railway"
@@ -203,6 +219,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 9,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(133),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Transport"
@@ -210,6 +228,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 10,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(134),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Engineering"
@@ -217,6 +237,8 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 11,
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(135),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Berth"
@@ -288,8 +310,8 @@ namespace Persistence.Migrations
                     b.Property<int?>("ProductionYear")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("SeriaNumber")
                         .HasColumnType("text");
@@ -348,8 +370,8 @@ namespace Persistence.Migrations
                     b.Property<int?>("PartId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -389,8 +411,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -693,8 +715,8 @@ namespace Persistence.Migrations
                     b.Property<string>("ModifiedBy")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -742,8 +764,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("Status")
                         .HasColumnType("integer");
@@ -842,8 +864,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("RemovalReason")
                         .HasColumnType("text");
@@ -1083,8 +1105,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("RemovalReason")
                         .HasColumnType("text");
@@ -2388,8 +2410,8 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -2530,8 +2552,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("timestamp with time zone");
@@ -2628,8 +2650,8 @@ namespace Persistence.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ServiceDescription")
                         .HasColumnType("text");
@@ -2728,8 +2750,8 @@ namespace Persistence.Migrations
                     b.Property<string>("OperatorName")
                         .HasColumnType("text");
 
-                    b.Property<int?>("RemovalDate")
-                        .HasColumnType("integer");
+                    b.Property<DateTime?>("RemovalDate")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime?>("StartDate")
                         .HasColumnType("timestamp with time zone");
