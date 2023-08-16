@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Concrets;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,13 @@ namespace Application.DTOs.UsageHistory
     {
         public int? EquipmentId { get; set; }
         public string? EquipmentName { get; set; }
-        public string? OperationName { get; set; }
+        public Operation? OperationName { get; set; }
         public int? StartUsageHourValue { get; set; }
         public int? EndUsageHourValue { get; set; }
-        public string? OperatorName { get; set; }
+        //public string? OperatorName { get; set; }
         public int? TotalUsageValue { get; set; }
         public DateTime? StartDate { get; set; }
+        public string? Remark { get; set; }
         //public DateTime? EndDate { get; set; }
         public decimal? TotalTime { get; set; }
      

@@ -8,7 +8,7 @@ namespace Application.DTOs.UsageHistory
 {
     public class UsageHistoryEndDto
     {
-        public int id { get; set; }
+        public int? UsageHistoryId { get; set; }
         public DateTime? EndDate { get; set; }
     }
 }
