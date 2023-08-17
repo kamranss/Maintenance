@@ -73,9 +73,16 @@ namespace Persistence.Services
             }
 
             existUsageStory.EndDate = usageHistoryEnd.EndDate;
+            existUsageStory.TotalUsageValue = usageHistoryEnd.EndUsageHourValue - existUsageStory.StartUsageHourValue;
 
              _writeRepository.Update(existUsageStory);
             var endresult = await _writeRepository.SaveAsync();
+            var updateEquipmentValue =  _equipmentReadRepository.GetAll().FirstOrDefault(e => e.Id == existUsageStory.EquipmentId);
+            if (updateEquipmentValue==null)
+            {
+                return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "SomethingWnetWrong" };
+            }
+            updateEquipmentValue.CurrentValue = usageHistoryEnd.EndUsageHourValue;
             return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
        
 

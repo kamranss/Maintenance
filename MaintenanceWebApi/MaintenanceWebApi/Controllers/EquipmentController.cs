@@ -4,6 +4,7 @@ using Application.DTOs.Equipment;
 using Application.Exceptions.EquipmentException;
 using Application.Repositories.EquipmentRepo;
 using Domain.Concrets;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
@@ -65,8 +66,14 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetEquipments(int pageSize, int pageNumber)
         {
-           var equipments =  _equipmentService.GetEquipmentsAsync(pageSize, pageNumber);
-            return Ok(equipments);
+
+           var result =  _equipmentService.GetEquipmentsAsync(pageSize, pageNumber).Result;
+            if (result.IsSuccess == true)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.ErrorMessage);
+           
         }
 
 
@@ -119,7 +126,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Update(int id, EquipmentStatus newStatus)
+        public IActionResult ChangeStatus(int id, EquipmentStatus newStatus)
         {
             _equipmentService.ChangeEquipmentStatusAsync(id, newStatus);
 

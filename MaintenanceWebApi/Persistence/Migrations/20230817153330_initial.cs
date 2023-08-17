@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace Persistence.Migrations
 {
-    public partial class inital : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -482,6 +482,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EquipmentId = table.Column<int>(type: "integer", nullable: true),
                     EquipmentName = table.Column<string>(type: "text", nullable: true),
                     OperationName = table.Column<int>(type: "integer", nullable: true),
                     StartUsageHourValue = table.Column<int>(type: "integer", nullable: true),
@@ -491,7 +492,7 @@ namespace Persistence.Migrations
                     StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     TotalTime = table.Column<decimal>(type: "numeric", nullable: true),
-                    EquipmentId = table.Column<int>(type: "integer", nullable: true),
+                    Remark = table.Column<string>(type: "text", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -515,17 +516,17 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "DepartmentHead", "Description", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(117), null, null, true, false, null, "Planning", null, null },
-                    { 2, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(124), null, null, true, false, null, "Takelaj", null, null },
-                    { 3, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(125), null, null, true, false, null, "Operation", null, null },
-                    { 4, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(126), null, null, true, false, null, "Electrical", null, null },
-                    { 5, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(127), null, null, true, false, null, "MarineFleet", null, null },
-                    { 6, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(130), null, null, true, false, null, "Mechanical", null, null },
-                    { 7, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(131), null, null, true, false, null, "Cranes", null, null },
-                    { 8, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(132), null, null, true, false, null, "Railway", null, null },
-                    { 9, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(133), null, null, true, false, null, "Transport", null, null },
-                    { 10, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(134), null, null, true, false, null, "Engineering", null, null },
-                    { 11, "System", new DateTime(2023, 8, 15, 18, 55, 57, 217, DateTimeKind.Utc).AddTicks(135), null, null, true, false, null, "Berth", null, null }
+                    { 1, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(445), "User1", "Unknown", true, false, null, "Planning", null, null },
+                    { 2, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(450), "User1", "Unknown", true, false, null, "Takelaj", null, null },
+                    { 3, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(451), "User1", "Unknown", true, false, null, "Operation", null, null },
+                    { 4, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(452), "User1", "Unknown", true, false, null, "Electrical", null, null },
+                    { 5, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(453), "User1", "Unknown", true, false, null, "MarineFleet", null, null },
+                    { 6, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(454), "User1", "Unknown", true, false, null, "Mechanical", null, null },
+                    { 7, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(455), "User1", "Unknown", true, false, null, "Cranes", null, null },
+                    { 8, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(455), "User1", "Unknown", true, false, null, "Railway", null, null },
+                    { 9, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(456), "User1", "Unknown", true, false, null, "Transport", null, null },
+                    { 10, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(490), "User1", "Unknown", true, false, null, "Engineering", null, null },
+                    { 11, "System", new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(491), "User1", "Unknown", true, false, null, "Berth", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -846,6 +847,17 @@ namespace Persistence.Migrations
                 {
                     { 3, null, null, true, false, null, null, "Engine Oil Change", null, "Engine Oil change", "Refill", null },
                     { 4, null, null, true, false, null, null, "Engine Oil Change", null, "Engine Oil change", "Refill", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Equipments",
+                columns: new[] { "Id", "Capacity", "Color", "CreatedBy", "CreatedDate", "CurrentValue", "DepartmentId", "Description", "EquipmentTypeId", "Identification", "ImagUrl", "IsActive", "IsDeleted", "LastMaintenaceDate", "ManufactureId", "ModelId", "ModifiedBy", "Name", "OperationSiteid", "ProductionYear", "RemovalDate", "SeriaNumber", "Status", "UnitNumber", "UpdatedDate", "usageLocation" },
+                values: new object[,]
+                {
+                    { 1, "2000 ton", null, null, new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(1860), 145m, 6, "Cargo Handling equipment", 1, "no", null, true, false, null, 10, 14, null, "ForkLift ", 4, 1998, null, null, 0, "FK-100000", null, 2 },
+                    { 2, "4000 ton", null, null, new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(1866), 450m, 3, "Cargo Handling equipment", 2, "no", null, true, false, null, 9, 13, null, "ForkLift ", 3, 2004, null, null, 0, "FK-100001", null, 2 },
+                    { 3, "40000 ton", null, null, new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(1868), 500m, 1, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 3, 2003, null, null, 0, "CR-100003", null, 6 },
+                    { 4, "80000 ton", null, null, new DateTime(2023, 8, 17, 15, 33, 30, 639, DateTimeKind.Utc).AddTicks(1879), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, 0, "CR-100004", null, 6 }
                 });
 
             migrationBuilder.InsertData(

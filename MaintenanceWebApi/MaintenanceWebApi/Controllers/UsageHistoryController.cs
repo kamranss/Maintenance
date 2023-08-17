@@ -20,7 +20,7 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        [HttpPost("NewUsageHistory")]
+        [HttpPost("StartUsageHistory")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -39,7 +39,7 @@ namespace MaintenanceWebApi.Controllers
 
         }
 
-        [Route("ModUsageStory")]
+        [Route("EndUsageStory")]
         [HttpPatch]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

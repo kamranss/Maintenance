@@ -13,9 +13,9 @@ namespace Application.DTOs.UsageHistory
         public string? EquipmentName { get; set; }
         public Operation? OperationName { get; set; }
         public int? StartUsageHourValue { get; set; }
-        public int? EndUsageHourValue { get; set; }
+     
         //public string? OperatorName { get; set; }
-        public int? TotalUsageValue { get; set; }
+     
         public DateTime? StartDate { get; set; }
         public string? Remark { get; set; }
         //public DateTime? EndDate { get; set; }

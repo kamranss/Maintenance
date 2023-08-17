@@ -419,6 +419,17 @@ namespace Persistence.Context
                 );
             });
 
+            modelBuilder.Entity<Equipment>(entity =>
+            {
+                entity.Property(d => d.Id).ValueGeneratedOnAdd();
+                entity.HasData(
+                    new Equipment { Id = 1, Name = "ForkLift ", UnitNumber = "FK-100000", Description = "Cargo Handling equipment", Identification = "no", ModelId=14, EquipmentTypeId=1, ManufactureId=10, DepartmentId = 6, OperationSiteid = 4, Status = EquipmentStatus.ACTIVE, usageLocation = Location.GARADAGH, ProductionYear = 1998, CreatedDate = DateTime.UtcNow, Capacity= "2000 ton", CurrentValue = 145,IsDeleted = false, IsActive = true },
+                    new Equipment { Id = 2, Name = "ForkLift ", UnitNumber = "FK-100001", Description = "Cargo Handling equipment", Identification = "no", ModelId = 13, EquipmentTypeId = 2, ManufactureId = 9, DepartmentId = 3, OperationSiteid = 3, Status = EquipmentStatus.ACTIVE, usageLocation = Location.GARADAGH, ProductionYear = 2004, CreatedDate = DateTime.UtcNow, Capacity = "4000 ton", CurrentValue = 450, IsDeleted = false, IsActive = true },
+                    new Equipment { Id = 3, Name = "Crane ", UnitNumber = "CR-100003", Description = "Cargo Lifting equipment", Identification = "no", ModelId = 17, EquipmentTypeId = 4, ManufactureId = 4, DepartmentId = 1, OperationSiteid = 3, Status = EquipmentStatus.ACTIVE, usageLocation = Location.SUMGAYIT, ProductionYear = 2003, CreatedDate = DateTime.UtcNow, Capacity = "40000 ton", CurrentValue = 500, IsDeleted = false, IsActive = true },
+                    new Equipment { Id = 4, Name = "Crane ", UnitNumber = "CR-100004", Description = "Cargo Lifting equipment", Identification = "no", ModelId = 17, EquipmentTypeId = 4, ManufactureId = 4, DepartmentId = 5, OperationSiteid = 6, Status = EquipmentStatus.ACTIVE, usageLocation = Location.SUMGAYIT, ProductionYear = 2010, CreatedDate = DateTime.UtcNow, Capacity = "80000 ton", CurrentValue = 320, IsDeleted = false, IsActive = true }
+                );
+            });
+
         }
 
     }
