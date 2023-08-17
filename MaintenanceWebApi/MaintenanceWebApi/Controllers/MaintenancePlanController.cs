@@ -46,7 +46,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> CreateDepartment(MaintenancePlanCreateDto maintenancePlanCreateDto)
+        public async Task<IActionResult> CreateMP(MaintenancePlanCreateDto maintenancePlanCreateDto)
         {
             var result = await _mpService.CreateMPAsync(maintenancePlanCreateDto);
 
@@ -109,7 +109,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Update(int id, MaintenencePlanStatus newStatus)
+        public IActionResult ChangeStatus(int id, MaintenencePlanStatus newStatus)
         {
             _mpService.ChangeMpStatusAsync(id, newStatus);
 

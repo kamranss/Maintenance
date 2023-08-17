@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction.Services;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,8 +22,15 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetManufactures(int? pageSize, int? pageNumber)
         {
-            var manufactures = _manufactureService.GetManufacturesAsync(pageSize, pageNumber);
-            return Ok(manufactures);
+
+            var result = _manufactureService.GetManufacturesAsync(pageSize, pageNumber).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
+            
         }
     }
 }

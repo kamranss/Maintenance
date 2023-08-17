@@ -1,5 +1,6 @@
 ﻿using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.EquipmentType;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Manufacture;
 using Application.DTOs.Model;
@@ -64,6 +65,7 @@ namespace Application.Mapper.Profiles
             CreateMap<Model, ModelDto>();
             CreateMap<OperationSite, OperationSiteDto>();
             CreateMap<Part, PartDto>();
+            CreateMap<EquipmentType, EquipmentTypeDto>();
 
 
             //CreateMap<Department, Depar>()

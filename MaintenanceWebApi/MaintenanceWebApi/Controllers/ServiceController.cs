@@ -55,7 +55,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> CreateDepartment(ServiceCreateDto serviceCreateDto)
+        public async Task<IActionResult> CreateService(ServiceCreateDto serviceCreateDto)
         {
             var result = await _servService.CreateServiceAsync(serviceCreateDto);
 

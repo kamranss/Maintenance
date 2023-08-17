@@ -144,7 +144,34 @@ namespace Persistence.Services
       
         public async Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? pagesize)
         {
-          
+
+            if (page == null && pagesize == null)
+            {
+                var countt = _equipmentReadRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt / 2;
+
+                var deps = _equipmentReadRepository
+               .GetAll()
+               .Take(takeValuee)
+               .Where(d => d.IsDeleted == false && d.IsActive == true)
+               .ToList();
+
+                if (deps == null)
+                { 
+                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+                }
+
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var equipmentListDtoo = _mapper.Map<List<EquipmentListDto>>(deps);
+                var paginationEquipemnts = new Pagination<EquipmentListDto>(equipmentListDtoo, pageValuee, pageCountt, totalCountt);
+                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = paginationEquipemnts };
+
+
+            }
+
+
             if ((!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0))
             {
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
@@ -363,8 +390,6 @@ namespace Persistence.Services
             return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = pagination };
 
         }
-
-    
 
         public async Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, EquipmentStatus newStatus)
         {
