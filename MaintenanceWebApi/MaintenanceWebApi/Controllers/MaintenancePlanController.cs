@@ -3,6 +3,7 @@ using Application.DTOs.Department;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Service;
 using Domain.Concrets;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
@@ -37,8 +38,14 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetMpServices(int? page, int? pageSize, int? id)
         {
-            var Services = _mpService.FindServicesByMPidAsync(page,pageSize,id);
-            return Ok(Services);
+
+            var result = _mpService.FindServicesByMPidAsync(page,pageSize,id).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.ErrorMessage);
+          
         }
 
 

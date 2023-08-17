@@ -131,6 +131,42 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? pagesize, int? id)
         {
+
+            if (page == null && pagesize == null)
+            {
+                var MpFromDbb = _readRepository.GetWhere(mp => mp.Id == id);
+                if (MpFromDbb == null)
+                {
+                    return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = false, ErrorMessage = "Mp not found" };
+                }
+
+                var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt / 2;
+
+                var services = _readRepository
+               .GetAll()
+               .Where(d => d.IsDeleted == false && d.IsActive == true && d.Id == id)
+               .Include(mp => mp.Services)
+               .Take(takeValuee);
+               //./*ToList*/();
+                var servicesfromMP = services.Select(item => item.Services).ToList();
+
+                if (servicesfromMP == null)
+                {
+                    return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = false, ErrorMessage = "There is no Service in DB" };
+                }
+
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var servicesListDto = _mapper.Map<List<ServiceDto>>(servicesfromMP);
+                var paginationServices = new Pagination<ServiceDto>(servicesListDto, pageValuee, pageCountt, totalCountt);
+                return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = true, Data = paginationServices };
+
+            }
+
+
+
             if ((!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0))
             {
                 return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
