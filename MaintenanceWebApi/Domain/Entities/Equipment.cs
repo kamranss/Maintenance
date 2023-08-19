@@ -31,12 +31,12 @@ namespace Domain.Entities
         public DateTime? LastMaintenaceDate { get; set; }
         public decimal? CurrentValue { get; set; }
         public int? DepartmentId { get; set; }
-        public Department? Department { get; set; }
-        public List<MaintenancePlan>? MaintenancePlan { get; set; }
-        public List<Part>? Part { get; set; }
+        public Department Department { get; set; }
+        public List<MaintenancePlan> MaintenancePlan { get; set; }
+        public List<Part> Part { get; set; }
         public EquipmentType EquipmentType { get; set; }
-        public List<OperationSite> OperationSite { get; set; }
-        public Model? Model { get; set; }
+        public OperationSite OperationSite { get; set; }
+        public Model Model { get; set; }
         public Manufacture Manufacture { get; set; }
 
         public List<UsageHistory> UsageHistories { get; set; }

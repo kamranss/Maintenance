@@ -121,6 +121,22 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
+
+        [HttpGet("FindEquipmentsByDepartmentId")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetEquipmentsByDepartment(int? page, int? pageSize, int id)
+        {
+            var result = _equipmentService.FindByDepartmentId(page, pageSize, id).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
+        }
+
         [Route("StatusChange")]
         [HttpPatch]
         [ProducesResponseType(StatusCodes.Status200OK)]

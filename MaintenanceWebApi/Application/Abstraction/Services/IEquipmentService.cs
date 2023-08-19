@@ -22,6 +22,8 @@ namespace Application.Abstraction.Services
         Task StockUpdateToEquipmentAsync(string equipmentId, int stock);
 
         Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? pageSize);
+
+      
         //List<EquipmentGetDto> GetEquipment();
         Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment);
 
@@ -41,6 +43,12 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<Pagination<UsageHistoryDto>>> GetUsageHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id);
 
         Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, EquipmentStatus newStatus);
+
+        Task<IServiceResult<Pagination<EquipmentListDto>>> FindByDepartmentId(int? page, int? pageSize, int id);
+
+        //Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid);
+
+
         //void SaveChanges();
         //EquipmentGetDto IsEquipmentExist(int? id);
         //Image FindImage(int? id);

@@ -9,6 +9,7 @@ namespace Application.DTOs.Equipment
 {
     public class EquipmentGetDto
     {
+        public int? Id { get; set; }
         public EquipmentStatus? Status { get; set; }
         public string? Name { get; set; }
         public string? UnitNumber { get; set; }
