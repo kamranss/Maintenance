@@ -169,7 +169,7 @@ namespace Persistence.Services
             {
                 var countt = _equipmentReadRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
                 int pageValuee = 1;
-                int takeValuee = countt / 2;
+                int takeValuee = countt;
 
                 var equipments = _equipmentReadRepository
                .GetAll()
@@ -468,30 +468,127 @@ namespace Persistence.Services
             var equipmentStatusDto = _mapper.Map<EquipmentStatusDto>(existEquipment);
 
             return new ServiceResult<EquipmentStatusDto> { IsSuccess = true, Data = equipmentStatusDto };
-        }
+        } // done
 
         public async Task<IServiceResult<Pagination<EquipmentListDto>>> FindByDepartmentId(int? page, int? pageSize, int id)
         {
             if (id == null || id <= 0)
             {
-                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+         
+
+                if (page == null && pageSize == null)
+                {
+                    //var countt = _equipmentReadRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                    int pageValuee = 1;
+                    int takeValuee = 10;
+
+                    var equipments = _equipmentReadRepository
+                   .GetAll()
+                   //.Take(takeValuee)
+                   .Where(e => e.IsDeleted == false && e.IsActive == true)
+                   .Select(e => new EquipmentListDto
+                   {
+                       Id = e.Id,
+                       Status = e.Status,
+                       Name = e.Name,
+                       Description = e.Description,
+                       LastMaintenace = e.LastMaintenaceDate,
+                       CurrentValue = e.CurrentValue,
+                       Model = e.ModelId.HasValue ? e.Model.Name : null,
+                       OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
+                       Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                       Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                       Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
+                       ProductionYear = e.ProductionYear,
+                       SeriaNumber = e.SeriaNumber,
+                       UsageLocation = e.usageLocation,
+                       
+                   })
+                   .ToList();
+
+                    if (equipments == null)
+                    {
+                        return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+                    }
+
+                    var totalCountt = equipments.Count;
+                    var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                    var equipmentListDtoo = _mapper.Map<List<EquipmentListDto>>(equipments);
+
+
+                    var paginationEquipemnts = new Pagination<EquipmentListDto>(equipmentListDtoo, pageValuee, pageCountt, totalCountt);
+                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = paginationEquipemnts };
+                }
+
+                if ((page <= 0 || pageSize <= 0))
+                {
+                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+                }
+
+
+                int pageValueee = page.Value;
+                int takeValueee = pageSize.Value;
+                int skipCountt = (pageValueee > 1) ? (pageValueee - 1) * takeValueee : 0;
+
+                var EquipmentsFromDbb = _equipmentReadRepository.GetAll(tracking: false);
+
+                var itemss = EquipmentsFromDbb
+                 .Skip((pageValueee - 1) * takeValueee)
+                 .Take(takeValueee)
+                 .Where(e => e.IsDeleted == false && e.IsDeleted == false)
+                   .Select(e => new EquipmentListDto
+                   {
+                       Id = e.Id,
+                       Status = e.Status,
+                       Name = e.Name,
+                       Description = e.Description,  
+                       LastMaintenace = e.LastMaintenaceDate,
+                       CurrentValue = e.CurrentValue,
+                       Model = e.ModelId.HasValue ? e.Model.Name : null,
+                       OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
+                       Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                       Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                       Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
+                       ProductionYear = e.ProductionYear,
+                       SeriaNumber = e.SeriaNumber,
+                       UsageLocation = e.usageLocation
+                   })
+                 .ToList();
+
+
+                if (itemss == null)
+                {
+                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+                }
+                var equipmentCount = EquipmentsFromDbb.Count();
+                var totalCounttt = equipmentCount;
+                var pageCounttt = (int)Math.Ceiling((double)totalCounttt / takeValueee);
+
+                var equipmentListDtooo = _mapper.Map<List<EquipmentListDto>>(itemss);
+                var paginationn = new Pagination<EquipmentListDto>(equipmentListDtooo, pageValueee, pageCounttt, totalCounttt);
+
+
+                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = paginationn };
+
+                //return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Id is wrong" };
             }
 
             var department = await _departmentReadRepository.GetByIdAsync(id);
-            if (department ==null)
+            if (department == null)
             {
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Department with this Id in DB" };
             }
-            if (page == null && pageSize == null)
-            {
-                var countt = _equipmentReadRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
-                int pageValuee = 1;
-                int takeValuee = countt / 2;
 
-                var equipments = _equipmentReadRepository
-               .GetAll()
-               .Take(takeValuee)
-               .Where(e => e.IsDeleted == false && e.IsActive == true && e.DepartmentId == id)
+            int pageValue = page.Value;
+            int takeValue = pageSize.Value;
+            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+
+            var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).Where(e => e.DepartmentId == id);
+
+            var items = EquipmentsFromDb
+             .Skip((pageValue - 1) * takeValue)
+             .Take(takeValue)
+             .Where(e => e.IsDeleted == false && e.IsDeleted == false && e.DepartmentId == id)
                .Select(e => new EquipmentListDto
                {
                    Id = e.Id,
@@ -505,50 +602,9 @@ namespace Persistence.Services
                    Department = e.DepartmentId.HasValue ? e.Department.Name : null,
                    Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                    Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
-               })
-               .ToList();
-
-                if (equipments == null)
-                {
-                    return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
-                }
-
-                var totalCountt = countt;
-                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
-                var equipmentListDtoo = _mapper.Map<List<EquipmentListDto>>(equipments);
-
-
-                var paginationEquipemnts = new Pagination<EquipmentListDto>(equipmentListDtoo, pageValuee, pageCountt, totalCountt);
-                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = paginationEquipemnts };
-            }
-
-            if ((!page.HasValue || !pageSize.HasValue || page <= 0 || pageSize <= 0))
-            {
-                return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
-            }
-            int pageValue = page.Value;
-            int takeValue = pageSize.Value;
-            int skipCount = (pageValue - 1) * takeValue;
-
-            var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false);
-
-            var items = EquipmentsFromDb
-             .Skip((pageValue - 1) * takeValue)
-             .Take(takeValue)
-             .Where(e => e.IsDeleted == false && e.IsDeleted == null &&  e.DepartmentId == id)
-               .Select(e => new EquipmentListDto
-               {
-                   Id = e.Id,
-                   Status = e.Status,
-                   Name = e.Name,
-                   Description = e.Description,
-                   LastMaintenace = e.LastMaintenaceDate,
-                   CurrentValue = e.CurrentValue,
-                   Model = e.ModelId.HasValue ? e.Model.Name : null,
-                   OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-                   Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-                   Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
-                   Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null
+                   ProductionYear = e.ProductionYear,
+                   SeriaNumber = e.SeriaNumber,
+                   UsageLocation = e.usageLocation,
                })
              .ToList();
 
@@ -557,7 +613,8 @@ namespace Persistence.Services
             {
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
             }
-            var totalCount = items.Count;
+            var equipmentCountt = EquipmentsFromDb.Count();
+            var totalCount = equipmentCountt;
             var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
 
             var equipmentListDto = _mapper.Map<List<EquipmentListDto>>(items);
@@ -566,7 +623,18 @@ namespace Persistence.Services
 
             return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
 
-        }  
+         
+
+
+        }   // done
+
+
+
+
+
+
+
+
 
         //public async Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid)
         //{
