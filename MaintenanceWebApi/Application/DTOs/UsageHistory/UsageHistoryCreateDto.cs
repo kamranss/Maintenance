@@ -12,14 +12,14 @@ namespace Application.DTOs.UsageHistory
         public int? EquipmentId { get; set; }
         public string? EquipmentName { get; set; }
         public Operation? OperationName { get; set; }
-        public int? StartUsageHourValue { get; set; }
+        //public decimal? StartUsageHourValue { get; set; }
      
         //public string? OperatorName { get; set; }
      
         public DateTime? StartDate { get; set; }
         public string? Remark { get; set; }
         //public DateTime? EndDate { get; set; }
-        public decimal? TotalTime { get; set; }
+        //public decimal? TotalTime { get; set; }
      
    
     }

@@ -45,8 +45,9 @@ namespace Persistence.Services
             {
                 return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
             }
-
+            
             var newUsageHistory = _mapper.Map<UsageHistory>(usageHistoryCreate);
+             newUsageHistory.StartUsageHourValue = existEquipment.CurrentValue;
 
             var result = await _writeRepository.AddAsync(newUsageHistory);
             if (result)

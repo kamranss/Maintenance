@@ -13,10 +13,10 @@ namespace Domain.Entities
         public int? EquipmentId { get; set; }
         public string? EquipmentName { get; set; }
         public Operation? OperationName { get; set; }
-        public int? StartUsageHourValue { get; set; }
-        public int? EndUsageHourValue { get; set; }
+        public decimal? StartUsageHourValue { get; set; }
+        public decimal? EndUsageHourValue { get; set; }
         public string? OperatorName { get; set; }
-        public int? TotalUsageValue { get; set; }
+        public decimal? TotalUsageValue { get; set; }
         public DateTime? StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public decimal? TotalTime { get; set; }

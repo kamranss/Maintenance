@@ -11,7 +11,7 @@ namespace Application.DTOs.Equipment
     public class EquipmentListDto
     {
         public int? Id { get; set; }
-        public EquipmentStatus? Status { get; set; }
+       
         public string? Name { get; set; }
         //public string? UnitNumber { get; set; }
         public string? Description { get; set; }
@@ -28,6 +28,7 @@ namespace Application.DTOs.Equipment
         //public int ModelId { get; set; }
         //public int OperationSiteid { get; set; }
         public string? Type { get; set; }
+        public EquipmentStatus? Status { get; set; }
         public Location? UsageLocation { get; set; }
        
         public string? Department { get; set; }

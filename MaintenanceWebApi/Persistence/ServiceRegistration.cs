@@ -108,6 +108,7 @@ namespace Persistence
             services.AddScoped<IEquipmentService, EquipmentService>();
             services.AddScoped<IMPService, MPService>();
             services.AddScoped<IServeServices, ServeService>();
+            services.AddScoped<IUsageHistoryService, UsageHistoryService>();
             services.AddScoped<IManufactureService, ManufactureService>();
             services.AddScoped<IModelService, ModelService>();
             services.AddScoped<IOperationSiteService, OperationSiteService>();
