@@ -15,7 +15,7 @@ namespace Domain.Entities
         public Operation? OperationName { get; set; }
         public decimal? StartUsageHourValue { get; set; }
         public decimal? EndUsageHourValue { get; set; }
-        public string? OperatorNameValue { get; set; }
+        public string? OperationNameValue { get; set; }
         public string? OperatorName { get; set; }
         public decimal? TotalUsageValue { get; set; }
         public DateTime StartDate { get; set; }

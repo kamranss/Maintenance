@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.Abstraction.Services;
 using Application.DTOs.Manufacture;
+using Application.DTOs.Parts;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using Application.Repositories.ManufactureRepo;
@@ -30,36 +31,58 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<Pagination<ManufactureDto>>> GetManufacturesAsync(int? page, int? pageSize)
         {
-            if (page == null && pageSize == null)
+            if (page == null || pageSize == null)
             {
-                //int pageValue = page.Value;
-                //int takeValue = pageSize.Value;
-                //int skipCount = (pageValue - 1) * takeValue;
 
+                var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt;
 
-                var manufactureList = _readRepository.GetAll();
+                var partss = _readRepository.GetAll();
 
-                if (manufactureList == null)
+                if (partss == null)
                 {
                     return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
                 }
-                var items = manufactureList.ToList();
+                var itemss = partss.ToList();
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var partsDto = _mapper.Map<List<ManufactureDto>>(itemss);
 
-                var totalCount = items.Count;
-                //var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
-                var manufactureDto = _mapper.Map<List<ManufactureDto>>(items);
+                var paginationn = new Pagination<ManufactureDto>(partsDto, pageValuee, pageCountt, totalCountt);
 
-                var pagination = new Pagination<ManufactureDto>(manufactureDto, 0, 0, totalCount);
-
-                return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = true, Data = pagination };
+                return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = true, Data = paginationn };
             }
             if ((!page.HasValue || !pageSize.HasValue || page <= 0 || pageSize <= 0))
             {
                 return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
-          
 
-            return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "SomeThing Went wrong" };
+            int pageValue = page.Value;
+            int takeValue = pageSize.Value;
+            //int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+            var parts = _readRepository.GetAll(tracking: false);
+
+            var items = parts
+                    .Skip((pageValue - 1) * takeValue)
+                    .Take(takeValue)
+                    .Where(e => e.IsDeleted == false && e.IsActive == true)
+                    .ToList();
+
+
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "There is no parts in DB" };
+            }
+
+            var manufactureCount = _readRepository.GetAll(tracking: false).ToList();
+            var totalCount = manufactureCount.Count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+
+            var partsDtoo = _mapper.Map<List<ManufactureDto>>(items);
+            var pagination = new Pagination<ManufactureDto>(partsDtoo, pageValue, pageCount, totalCount);
+
+            return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = true, Data = pagination };
 
         }
     }

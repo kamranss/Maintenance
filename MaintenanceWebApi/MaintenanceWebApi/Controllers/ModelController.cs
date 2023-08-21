@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Services;
 
 namespace MaintenanceWebApi.Controllers
 {
@@ -21,8 +22,15 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetManufactures(int? pageSize, int? pageNumber)
         {
-            var models = _modelService.GetModelsAsync(pageSize, pageNumber);
-            return Ok(models);
+
+            var result = _modelService.GetModelsAsync(pageSize, pageNumber).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
+          
         }
     }
 }

@@ -29,36 +29,58 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<Pagination<ModelDto>>> GetModelsAsync(int? page, int? pageSize)
         {
-            if (page == null && pageSize == null)
+             if (page == null || pageSize == null)
             {
-                //int pageValue = page.Value;
-                //int takeValue = pageSize.Value;
-                //int skipCount = (pageValue - 1) * takeValue;
 
+                var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt;
 
-                var manufactureList = _readRepository.GetAll();
+                var partss = _readRepository.GetAll();
 
-                if (manufactureList == null)
+                if (partss == null)
                 {
                     return new ServiceResult<Pagination<ModelDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
                 }
-                var items = manufactureList.ToList();
+                var itemss = partss.ToList();
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var partsDto = _mapper.Map<List<ModelDto>>(itemss);
 
-                var totalCount = items.Count;
-                //var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
-                var manufactureDto = _mapper.Map<List<ModelDto>>(items);
+                var paginationn = new Pagination<ModelDto>(partsDto, pageValuee, pageCountt, totalCountt);
 
-                var pagination = new Pagination<ModelDto>(manufactureDto, 0, 0, totalCount);
-
-                return new ServiceResult<Pagination<ModelDto>> { IsSuccess = true, Data = pagination };
+                return new ServiceResult<Pagination<ModelDto>> { IsSuccess = true, Data = paginationn };
             }
             if ((!page.HasValue || !pageSize.HasValue || page <= 0 || pageSize <= 0))
             {
                 return new ServiceResult<Pagination<ModelDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
 
+            int pageValue = page.Value;
+            int takeValue = pageSize.Value;
+            //int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+            var parts = _readRepository.GetAll(tracking: false);
 
-            return new ServiceResult<Pagination<ModelDto>> { IsSuccess = false, ErrorMessage = "SomeThing Went wrong" };
+            var items = parts
+                    .Skip((pageValue - 1) * takeValue)
+                    .Take(takeValue)
+                    .Where(e => e.IsDeleted == false && e.IsActive == true)
+                    .ToList();
+
+
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<ModelDto>> { IsSuccess = false, ErrorMessage = "There is no parts in DB" };
+            }
+
+        
+            var totalCount = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count(); ;
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+
+            var partsDtoo = _mapper.Map<List<ModelDto>>(items);
+            var pagination = new Pagination<ModelDto>(partsDtoo, pageValue, pageCount, totalCount);
+
+            return new ServiceResult<Pagination<ModelDto>> { IsSuccess = true, Data = pagination };
         }
     }
 }
