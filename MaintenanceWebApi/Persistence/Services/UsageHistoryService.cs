@@ -46,7 +46,9 @@ namespace Persistence.Services
                 return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
             }
             
+            
             var newUsageHistory = _mapper.Map<UsageHistory>(usageHistoryCreate);
+            newUsageHistory.OperatorNameValue = usageHistoryCreate.OperationName.Value.ToString();
              newUsageHistory.StartUsageHourValue = existEquipment.CurrentValue;
 
             var result = await _writeRepository.AddAsync(newUsageHistory);
@@ -73,10 +75,29 @@ namespace Persistence.Services
                 return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "There is no Info with this Id in Db" };
             }
 
-            existUsageStory.EndDate = usageHistoryEnd.EndDate;
+            if (usageHistoryEnd.EndDate.HasValue)
+            {
+                existUsageStory.EndDate = usageHistoryEnd.EndDate.Value;
+              
+            }
+          
+
+            existUsageStory.EndDate = DateTime.UtcNow;
+
+            DateTime startDate = existUsageStory.StartDate;
+            DateTime endDate = existUsageStory.EndDate;
+
+            TimeSpan duration = endDate - startDate;
+            double durationInMinutes = duration.TotalMinutes;
+            decimal durationDecimal = (decimal)durationInMinutes;
+
+            existUsageStory.EndUsageHourValue = usageHistoryEnd.EndUsageHourValue;
+            existUsageStory.TotalUsageTime = durationDecimal;
             existUsageStory.TotalUsageValue = usageHistoryEnd.EndUsageHourValue - existUsageStory.StartUsageHourValue;
 
-             _writeRepository.Update(existUsageStory);
+            var existEqu = _equipmentReadRepository.GetAll().FirstOrDefault(d => d.Id == existUsageStory.EquipmentId);
+            existEqu.CurrentValue = existUsageStory.EndUsageHourValue;
+            _writeRepository.Update(existUsageStory);
             var endresult = await _writeRepository.SaveAsync();
             var updateEquipmentValue =  _equipmentReadRepository.GetAll().FirstOrDefault(e => e.Id == existUsageStory.EquipmentId);
             if (updateEquipmentValue==null)

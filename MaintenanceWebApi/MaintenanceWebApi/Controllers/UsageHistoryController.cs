@@ -30,7 +30,7 @@ namespace MaintenanceWebApi.Controllers
 
             if (result.IsSuccess)
             {
-                return Ok("Department created successfully.");
+                return Ok("History created successfully.");
             }
             else
             {

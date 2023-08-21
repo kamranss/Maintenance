@@ -10,14 +10,25 @@ namespace MaintenanceWebApi.Controllers
     {
         private readonly IPartService _partService;
 
+        public PartController(IPartService partService)
+        {
+            _partService = partService;
+        }
+
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetOperationSites(int? pageSize, int? pageNumber)
+        public  IActionResult GetPartsSites(int? page, int? pageSize)
         {
-            var parts = _partService.GetPartsAsync(pageSize, pageNumber);
-            return Ok(parts);
+            var result =  _partService.GetPartsAsync(page, pageSize).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.ErrorMessage);
+       
+          
         }
     }
 }

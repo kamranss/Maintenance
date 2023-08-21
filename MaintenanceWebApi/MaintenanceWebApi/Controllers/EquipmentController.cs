@@ -151,5 +151,25 @@ namespace MaintenanceWebApi.Controllers
 
 
 
+        [HttpPost("AddMpToEquipment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AddMpToEquipment(int equipmentId,  int mpid)
+        {
+            var result = await _equipmentService.AddMptoEquipment(equipmentId, mpid);
+
+            if (result.IsSuccess)
+            {
+                return Ok("Mp added");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
+
+
     }
 }

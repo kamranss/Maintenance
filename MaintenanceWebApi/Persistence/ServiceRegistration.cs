@@ -99,6 +99,7 @@ namespace Persistence
 
             services.AddScoped<IPartReadRepository, PartReadRepository>();
             services.AddScoped<IPartWriteRepository, PartWriteRepository>();
+
             services.AddScoped<IEquipmentTypeReadRepository, EquipmentTypeReadRepository>();
             services.AddScoped<IEquipmentTypeWriteRepository, EquipmentTypeWriteRepository>();
 

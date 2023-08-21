@@ -10,7 +10,7 @@ namespace Application.DTOs.UsageHistory
     {
         public int? UsageHistoryId { get; set; }
         public decimal? EndUsageHourValue { get; set; }
-        public decimal? TotalUsageValue { get; set; }
+        //public decimal? TotalUsageValue { get; set; }
         public DateTime? EndDate { get; set; }
     }
 }

@@ -22,8 +22,14 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetOperationSites(int? pageSize, int? pageNumber)
         {
-            var operationSite = _operationSiteService.GetOperationSitesAsync(pageSize, pageNumber);
-            return Ok(operationSite);
+            var result = _operationSiteService.GetOperationSitesAsync(pageSize, pageNumber).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            
+            return BadRequest(result.ErrorMessage);
+          
         }
     }
 }

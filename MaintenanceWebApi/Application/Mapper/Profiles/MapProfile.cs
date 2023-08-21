@@ -64,7 +64,7 @@ namespace Application.Mapper.Profiles
             CreateMap<Manufacture, ManufactureDto>();
             CreateMap<Model, ModelDto>();
             CreateMap<OperationSite, OperationSiteDto>();
-            CreateMap<Part, PartDto>();
+            CreateMap<Part, PartDto>().ReverseMap();
             CreateMap<EquipmentType, EquipmentTypeDto>();
 
 

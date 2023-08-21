@@ -629,35 +629,46 @@ namespace Persistence.Services
         }   // done
 
 
+        public async Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid)
+        {
+            if (equipmentId == null || equipmentId <= 0 || Mpid == null || Mpid <= 0)
+            {
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "params is wrong" };
+            }
+
+            var existEquipment = _equipmentReadRepository.GetWhere(e => e.Id == equipmentId).Include(e => e.MaintenancePlan);
+            if (existEquipment == null)
+            {
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+            }
+            var existMp = _readRepository.GetWhere(mp => mp.Id == Mpid).FirstOrDefault();
+            if (existMp == null)
+            {
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Mp in DB" };
+            }
 
 
+            var item = existEquipment.FirstOrDefault();
 
+            foreach (var mp in item.MaintenancePlan)
+            {
+                if (mp.Name == existMp.Name )
+                {
+                    return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "Equipment already have this Mp" };
+                }
+            }
 
+            item.MaintenancePlan.Add(existMp);
 
+            _equipmentWriteRepository.SaveAsync();
 
+            EquipmentAndMp equipmentAndMp = new EquipmentAndMp();
+            equipmentAndMp.EquipmentId = equipmentId;
+            equipmentAndMp.MpId = Mpid;
+            equipmentAndMp.EquipmentName = item.Name;
 
-        //public async Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid)
-        //{
-        //    if (equipmentId ==null || equipmentId <=0 || Mpid == null || Mpid>=0)
-        //    {
-        //        return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "params is wrong" };
-        //    }
+            return new ServiceResult<EquipmentAndMp> { IsSuccess = false, Data=equipmentAndMp };
 
-        //    var existEquipment = _equipmentReadRepository.GetWhere(e=> e.Id == equipmentId).Include(e=>e.MaintenancePlan);
-        //    if (existEquipment == null)
-        //    {
-        //        return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
-        //    }
-        //    var existMp = _readRepository.GetWhere(mp => mp.Id == Mpid);
-        //    if (existMp == null)
-        //    {
-        //        return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Mp in DB" };
-        //    }
-
-        //    var items = existEquipment.ToList();
-
-
-
-        //}
+        }
     }
 }
