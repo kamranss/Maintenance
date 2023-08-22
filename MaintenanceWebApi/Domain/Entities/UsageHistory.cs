@@ -18,6 +18,7 @@ namespace Domain.Entities
         public string? OperationNameValue { get; set; }
         public string? OperatorName { get; set; }
         public decimal? TotalUsageValue { get; set; }
+        public UsageHistoryStatus Status { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public decimal? TotalUsageTime { get; set; }

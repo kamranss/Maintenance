@@ -240,6 +240,28 @@ namespace Persistence.Services
 
         } // done
 
+        public async Task<IServiceResult<MpCompleted>> IsMpCompleted(MpCompleted mpCompleted)
+        {
+            var existMp = _readRepository.GetAll()
+                .Include(mp => mp.MaintenanceSettings)
+                .Include(mp => mp.Equipments)
+                .FirstOrDefault(mp => mp.Id == mpCompleted.MaintenancePlanId);
+            if (existMp == null) return new  ServiceResult<MpCompleted> { IsSuccess = false, ErrorMessage = "Mp not found" };
+
+
+            if (existMp.Equipments == null) return new ServiceResult<MpCompleted> { IsSuccess = false, ErrorMessage = "no Equipnment Assigned to this Mp" };
+
+            var mpSetting = existMp.MaintenanceSettings.FirstOrDefault(s => s.EquipmentId == mpCompleted.EquipmentId);
+            if(mpSetting == null) return new ServiceResult<MpCompleted> { IsSuccess = false, ErrorMessage = "No settings find related to this Equipment" };
+
+            mpSetting.IsMpCompleted = true;
+            var equipment = existMp.Equipments.FirstOrDefault(e => e.Id == mpCompleted.EquipmentId);
+            mpSetting.StartValue = equipment.CurrentValue;
+
+            return new ServiceResult<MpCompleted> { IsSuccess = false, Data=mpCompleted };
+
+        }
+
         public async Task<IServiceResult<MsSetDto>> SetMpSettings(MsSetDto msSetDto)
         {
             if (msSetDto ==null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "data missing" };
@@ -258,6 +280,7 @@ namespace Persistence.Services
                 if (existMpEquipment == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
                 var msDto = _mapper.Map<MaintenanceSetting>(msSetDto);
                 msDto.StartValue = existMpEquipment.CurrentValue;
+                msDto.IsMpCompleted = false;
                 existMp.MaintenanceSettings.Add(msDto);
                var result =  _settingsWriteRepository.SaveAsync();
                 Console.WriteLine("salam");

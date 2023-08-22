@@ -50,11 +50,15 @@ namespace Persistence.Services
             {
                 return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
             }
-            
-            
+            if (existEquipment.Status != Domain.Concrets.EquipmentStatus.ACTIVE)
+            {
+                return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "Equipment cannot be used" };
+            }
+
             var newUsageHistory = _mapper.Map<UsageHistory>(usageHistoryCreate);
             newUsageHistory.OperationNameValue = usageHistoryCreate.OperationName.Value.ToString();
              newUsageHistory.StartUsageHourValue = existEquipment.CurrentValue;
+            newUsageHistory.Status = Domain.Concrets.UsageHistoryStatus.ONGOING;
 
             var result = await _writeRepository.AddAsync(newUsageHistory);
             if (result)
@@ -78,6 +82,10 @@ namespace Persistence.Services
             if (existUsageStory == null)
             {
                 return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "There is no Info with this Id in Db" };
+            }
+            if (existUsageStory.Status != Domain.Concrets.UsageHistoryStatus.ONGOING)
+            {
+                return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "The History already Ended" };
             }
 
             existUsageStory.EndDate = usageHistoryEnd.EndDate ?? DateTime.UtcNow;
