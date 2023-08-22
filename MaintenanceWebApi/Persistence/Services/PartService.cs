@@ -72,7 +72,7 @@ namespace Persistence.Services
             {
                 return new ServiceResult<Pagination<PartDto>> { IsSuccess = false, ErrorMessage = "There is no parts in DB" };
             }
-            var totalCount = items.Count;
+            var totalCount = _readRepository.GetAll(tracking: false).ToList().Count;
             var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
 
             var partsDtoo = _mapper.Map<List<PartDto>>(items);

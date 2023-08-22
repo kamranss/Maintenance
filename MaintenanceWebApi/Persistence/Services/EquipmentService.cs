@@ -667,7 +667,7 @@ namespace Persistence.Services
             equipmentAndMp.MpId = Mpid;
             equipmentAndMp.EquipmentName = item.Name;
 
-            return new ServiceResult<EquipmentAndMp> { IsSuccess = false, Data=equipmentAndMp };
+            return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data=equipmentAndMp };
 
         }
     }

@@ -83,7 +83,7 @@ namespace MaintenanceWebApi.Controllers
         {
            
             var result = await _departmentService.DeleteDepartmentAsync(id);
-            if (result.IsSuccess == true)
+            if (result.IsSuccess)
             {
                 return Ok("Department Deleted succesfully");
             }

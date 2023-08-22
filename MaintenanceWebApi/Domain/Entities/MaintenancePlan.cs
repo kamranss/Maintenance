@@ -17,7 +17,10 @@ namespace Domain.Entities
         //public int MetricTypeId { get; set; }
         public Metrictype? MetricType { get; set; }
         public string? MetricTypeName { get; set; }
+        //public int? MaintenanceSettingId { get; set; }
+        public bool? MPChecked { get; set; } // 
         public List<Equipment>? Equipments { get; set; }
         public List<Service>? Services { get; set; }
+        public List<MaintenanceSetting>? MaintenanceSettings{ get; set; }
     }
 }

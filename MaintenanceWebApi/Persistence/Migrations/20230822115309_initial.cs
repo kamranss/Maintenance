@@ -86,6 +86,7 @@ namespace Persistence.Migrations
                     Status = table.Column<int>(type: "integer", nullable: true),
                     MetricType = table.Column<int>(type: "integer", nullable: true),
                     MetricTypeName = table.Column<string>(type: "text", nullable: true),
+                    MPChecked = table.Column<bool>(type: "boolean", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
                     CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -353,10 +354,13 @@ namespace Persistence.Migrations
                     SeriaNumber = table.Column<string>(type: "text", nullable: true),
                     Capacity = table.Column<string>(type: "text", nullable: true),
                     EquipmentTypeId = table.Column<int>(type: "integer", nullable: true),
+                    IsNotified = table.Column<bool>(type: "boolean", nullable: true),
                     Status = table.Column<int>(type: "integer", nullable: true),
                     usageLocation = table.Column<int>(type: "integer", nullable: true),
                     LastMaintenaceDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     CurrentValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    ResetValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    SquenceValue = table.Column<decimal>(type: "numeric", nullable: true),
                     DepartmentId = table.Column<int>(type: "integer", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
@@ -476,6 +480,44 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "MaintenanceSettings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StartValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    UpdatedValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    SequenceValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    SsequencePeriod = table.Column<decimal>(type: "numeric", nullable: true),
+                    ResetDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    SequenceDateValue = table.Column<int>(type: "integer", nullable: true),
+                    DatePeriod = table.Column<int>(type: "integer", nullable: true),
+                    EquipmentId = table.Column<int>(type: "integer", nullable: true),
+                    MaintenancePlanId = table.Column<int>(type: "integer", nullable: true),
+                    IsActive = table.Column<bool>(type: "boolean", nullable: true),
+                    IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    UpdatedDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    RemovalDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    CreatedBy = table.Column<string>(type: "text", nullable: true),
+                    ModifiedBy = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MaintenanceSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MaintenanceSettings_Equipments_EquipmentId",
+                        column: x => x.EquipmentId,
+                        principalTable: "Equipments",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_MaintenanceSettings_MaintenancePlan_MaintenancePlanId",
+                        column: x => x.MaintenancePlanId,
+                        principalTable: "MaintenancePlan",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UsageHistories",
                 columns: table => new
                 {
@@ -484,13 +526,14 @@ namespace Persistence.Migrations
                     EquipmentId = table.Column<int>(type: "integer", nullable: true),
                     EquipmentName = table.Column<string>(type: "text", nullable: true),
                     OperationName = table.Column<int>(type: "integer", nullable: true),
-                    StartUsageHourValue = table.Column<int>(type: "integer", nullable: true),
-                    EndUsageHourValue = table.Column<int>(type: "integer", nullable: true),
+                    StartUsageHourValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    EndUsageHourValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    OperationNameValue = table.Column<string>(type: "text", nullable: true),
                     OperatorName = table.Column<string>(type: "text", nullable: true),
-                    TotalUsageValue = table.Column<int>(type: "integer", nullable: true),
-                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    TotalTime = table.Column<decimal>(type: "numeric", nullable: true),
+                    TotalUsageValue = table.Column<decimal>(type: "numeric", nullable: true),
+                    StartDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    TotalUsageTime = table.Column<decimal>(type: "numeric", nullable: true),
                     Remark = table.Column<string>(type: "text", nullable: true),
                     IsActive = table.Column<bool>(type: "boolean", nullable: true),
                     IsDeleted = table.Column<bool>(type: "boolean", nullable: true),
@@ -515,17 +558,17 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "DepartmentHead", "Description", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7707), "User1", "Unknown", true, false, null, "Planning", null, null },
-                    { 2, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7720), "User1", "Unknown", true, false, null, "Takelaj", null, null },
-                    { 3, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7722), "User1", "Unknown", true, false, null, "Operation", null, null },
-                    { 4, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7723), "User1", "Unknown", true, false, null, "Electrical", null, null },
-                    { 5, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7726), "User1", "Unknown", true, false, null, "MarineFleet", null, null },
-                    { 6, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7727), "User1", "Unknown", true, false, null, "Mechanical", null, null },
-                    { 7, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7728), "User1", "Unknown", true, false, null, "Cranes", null, null },
-                    { 8, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7730), "User1", "Unknown", true, false, null, "Railway", null, null },
-                    { 9, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7731), "User1", "Unknown", true, false, null, "Transport", null, null },
-                    { 10, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7732), "User1", "Unknown", true, false, null, "Engineering", null, null },
-                    { 11, "System", new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(7733), "User1", "Unknown", true, false, null, "Berth", null, null }
+                    { 1, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5709), "User1", "Unknown", true, false, null, "Planning", null, null },
+                    { 2, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5714), "User1", "Unknown", true, false, null, "Takelaj", null, null },
+                    { 3, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5715), "User1", "Unknown", true, false, null, "Operation", null, null },
+                    { 4, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5716), "User1", "Unknown", true, false, null, "Electrical", null, null },
+                    { 5, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5720), "User1", "Unknown", true, false, null, "MarineFleet", null, null },
+                    { 6, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5721), "User1", "Unknown", true, false, null, "Mechanical", null, null },
+                    { 7, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5723), "User1", "Unknown", true, false, null, "Cranes", null, null },
+                    { 8, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5724), "User1", "Unknown", true, false, null, "Railway", null, null },
+                    { 9, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5725), "User1", "Unknown", true, false, null, "Transport", null, null },
+                    { 10, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5726), "User1", "Unknown", true, false, null, "Engineering", null, null },
+                    { 11, "System", new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5752), "User1", "Unknown", true, false, null, "Berth", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -533,55 +576,55 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "CreatedBy", "CreatedDate", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, null, null, true, false, null, "Forklift 1.5", null, null },
-                    { 2, null, null, true, false, null, "Forklift 2.5", null, null },
-                    { 3, null, null, true, false, null, "Forklift 4", null, null },
-                    { 4, null, null, true, false, null, "Forklift 10", null, null },
-                    { 5, null, null, true, false, null, "Forklift 20", null, null },
-                    { 6, null, null, true, false, null, "Reach Stacker 45", null, null },
-                    { 7, null, null, true, false, null, "Portal Crane 80T", null, null },
-                    { 8, null, null, true, false, null, "Portal Crane 40T", null, null },
-                    { 9, null, null, true, false, null, "Loader 25", null, null },
-                    { 10, null, null, true, false, null, "GC_Berth", null, null },
-                    { 11, null, null, true, false, null, "Ferry_Berth", null, null },
-                    { 12, null, null, true, false, null, "Ro-Ro_Berth", null, null },
-                    { 13, null, null, true, false, null, "Tug_Boat", null, null },
-                    { 14, null, null, true, false, null, "Mobile_Crane 220T", null, null },
-                    { 15, null, null, true, false, null, "Building", null, null },
-                    { 16, null, null, true, false, null, "Container_Spreader", null, null },
-                    { 17, null, null, true, false, null, "Terminal_Tractor", null, null },
-                    { 18, null, null, true, false, null, "Oil_Cleaner_Boat", null, null },
-                    { 19, null, null, true, false, null, "Greifer", null, null },
-                    { 20, null, null, true, false, null, "Lifting_Magnet", null, null },
-                    { 21, null, null, true, false, null, "Fender", null, null },
-                    { 22, null, null, true, false, null, "Railway", null, null },
-                    { 23, null, null, true, false, null, "Wire_Rope_Sling", null, null },
-                    { 24, null, null, true, false, null, "Chain_Connector", null, null },
-                    { 25, null, null, true, false, null, "Lifting_Lug", null, null },
-                    { 26, null, null, true, false, null, "Hook", null, null },
-                    { 27, null, null, true, false, null, "Websling", null, null },
-                    { 28, null, null, true, false, null, "Bunker", null, null },
-                    { 29, null, null, true, false, null, "Generator", null, null },
-                    { 30, null, null, true, false, null, "Shalves", null, null },
-                    { 31, null, null, true, false, null, "Plate_Clamp", null, null },
-                    { 32, null, null, true, false, null, "Harness", null, null },
-                    { 33, null, null, true, false, null, "Roads", null, null },
-                    { 34, null, null, true, false, null, "Drum_Lifter", null, null },
-                    { 35, null, null, true, false, null, "Working_Platform", null, null },
-                    { 36, null, null, true, false, null, "Single leg chain sling", null, null },
-                    { 37, null, null, true, false, null, "Portal Crane 32T", null, null }
+                    { 1, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6002), true, false, null, "Forklift 1.5", null, null },
+                    { 2, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6003), true, false, null, "Forklift 2.5", null, null },
+                    { 3, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6004), true, false, null, "Forklift 4", null, null },
+                    { 4, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6004), true, false, null, "Forklift 10", null, null },
+                    { 5, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6005), true, false, null, "Forklift 20", null, null },
+                    { 6, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6006), true, false, null, "Reach Stacker 45", null, null },
+                    { 7, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6006), true, false, null, "Portal Crane 80T", null, null },
+                    { 8, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6007), true, false, null, "Portal Crane 40T", null, null },
+                    { 9, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6008), true, false, null, "Loader 25", null, null },
+                    { 10, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6009), true, false, null, "GC_Berth", null, null },
+                    { 11, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6010), true, false, null, "Ferry_Berth", null, null },
+                    { 12, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6010), true, false, null, "Ro-Ro_Berth", null, null },
+                    { 13, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6011), true, false, null, "Tug_Boat", null, null },
+                    { 14, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6012), true, false, null, "Mobile_Crane 220T", null, null },
+                    { 15, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6013), true, false, null, "Building", null, null },
+                    { 16, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6013), true, false, null, "Container_Spreader", null, null },
+                    { 17, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6014), true, false, null, "Terminal_Tractor", null, null },
+                    { 18, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6015), true, false, null, "Oil_Cleaner_Boat", null, null },
+                    { 19, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6015), true, false, null, "Greifer", null, null },
+                    { 20, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6016), true, false, null, "Lifting_Magnet", null, null },
+                    { 21, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6017), true, false, null, "Fender", null, null },
+                    { 22, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6018), true, false, null, "Railway", null, null },
+                    { 23, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6018), true, false, null, "Wire_Rope_Sling", null, null },
+                    { 24, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6019), true, false, null, "Chain_Connector", null, null },
+                    { 25, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6020), true, false, null, "Lifting_Lug", null, null },
+                    { 26, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6020), true, false, null, "Hook", null, null },
+                    { 27, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6044), true, false, null, "Websling", null, null },
+                    { 28, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6045), true, false, null, "Bunker", null, null },
+                    { 29, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6045), true, false, null, "Generator", null, null },
+                    { 30, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6046), true, false, null, "Shalves", null, null },
+                    { 31, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6047), true, false, null, "Plate_Clamp", null, null },
+                    { 32, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6047), true, false, null, "Harness", null, null },
+                    { 33, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6048), true, false, null, "Roads", null, null },
+                    { 34, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6049), true, false, null, "Drum_Lifter", null, null },
+                    { 35, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6050), true, false, null, "Working_Platform", null, null },
+                    { 36, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6050), true, false, null, "Single leg chain sling", null, null },
+                    { 37, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6051), true, false, null, "Portal Crane 32T", null, null }
                 });
 
             migrationBuilder.InsertData(
                 table: "MaintenancePlan",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "IsActive", "IsDeleted", "MetricType", "MetricTypeName", "ModifiedBy", "Name", "RemovalDate", "Status", "UpdatedDate" },
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "Description", "IsActive", "IsDeleted", "MPChecked", "MetricType", "MetricTypeName", "ModifiedBy", "Name", "RemovalDate", "Status", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "POCR-1", null, null, "Vizual Inspection", true, false, 1, "Period", null, "Portal Crane", null, null, null },
-                    { 2, "POCR-2", null, null, "Profilaktik Inspection", true, false, 1, "Period", null, "Portal Crane Prof", null, null, null },
-                    { 3, "FRKL-1", null, null, "Vizual Inspection", true, false, 1, "Period", null, "Fork Lift", null, null, null },
-                    { 4, "RAIL-1", null, null, "Vizual Inspection of Railway", true, false, 1, "Period", null, "Railway", null, null, null },
-                    { 5, "FRKL-2", null, null, "Engine Oil Change", true, false, 1, "Period", null, "Fork Lift", null, null, null }
+                    { 1, "POCR-1", null, null, "Vizual Inspection", true, false, null, 1, "Period", null, "Portal Crane", null, null, null },
+                    { 2, "POCR-2", null, null, "Profilaktik Inspection", true, false, null, 2, "MotoHour", null, "Portal Crane Prof", null, null, null },
+                    { 3, "FRKL-1", null, null, "Vizual Inspection", true, false, null, 1, "Period", null, "Fork Lift", null, null, null },
+                    { 4, "RAIL-1", null, null, "Vizual Inspection of Railway", true, false, null, 1, "Period", null, "Railway", null, null, null },
+                    { 5, "FRKL-2", null, null, "Engine Oil Change", true, false, null, 1, "Period", null, "Fork Lift", null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -589,34 +632,34 @@ namespace Persistence.Migrations
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "RemovalReason", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, null, null, null, true, false, null, "Single leg chain sling", null, null, null },
-                    { 2, null, null, null, true, false, null, "Working platform", null, null, null },
-                    { 3, null, null, null, true, false, null, "Hangcha", null, null, null },
-                    { 4, null, null, null, true, false, null, "XCMG", null, null, null },
-                    { 5, null, null, null, true, false, null, "Kalmar", null, null, null },
-                    { 6, null, null, null, true, false, null, "Terberq", null, null, null },
-                    { 7, null, null, null, true, false, null, "Sisu", null, null, null },
-                    { 8, null, null, null, true, false, null, "Toyoto", null, null, null },
-                    { 9, null, null, null, true, false, null, "Bobkat", null, null, null },
-                    { 10, null, null, null, true, false, null, "Hyster", null, null, null },
-                    { 11, null, null, null, true, false, null, "Boss", null, null, null },
-                    { 12, null, null, null, true, false, null, "Ardelt", null, null, null },
-                    { 13, null, null, null, true, false, null, "None", null, null, null },
-                    { 14, null, null, null, true, false, null, "VDL", null, null, null },
-                    { 15, null, null, null, true, false, null, "Sunny", null, null, null },
-                    { 16, null, null, null, true, false, null, "Camry", null, null, null },
-                    { 17, null, null, null, true, false, null, "Engine", null, null, null },
-                    { 18, null, null, null, true, false, null, "023-2 №-li dizel generator", null, null, null },
-                    { 19, null, null, null, true, false, null, "022-1 №-li dizel generator", null, null, null },
-                    { 20, null, null, null, true, false, null, "021-TQM 23 B48-754", null, null, null },
-                    { 21, null, null, null, true, false, null, "Service berth-N4", null, null, null },
-                    { 22, null, null, null, true, false, null, "Molino", null, null, null },
-                    { 23, null, null, null, true, false, null, "Service berth-N3 ", null, null, null },
-                    { 24, null, null, null, true, false, null, "Shackle", null, null, null },
-                    { 25, null, null, null, true, false, null, "County", null, null, null },
-                    { 26, null, null, null, true, false, null, "Santafe", null, null, null },
-                    { 27, null, null, null, true, false, null, "Sonata", null, null, null },
-                    { 28, null, null, null, true, false, null, "Kartal SLX", null, null, null }
+                    { 1, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6129), true, false, null, "Single leg chain sling", null, null, null },
+                    { 2, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6130), true, false, null, "Working platform", null, null, null },
+                    { 3, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6131), true, false, null, "Hangcha", null, null, null },
+                    { 4, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6131), true, false, null, "XCMG", null, null, null },
+                    { 5, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6132), true, false, null, "Kalmar", null, null, null },
+                    { 6, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6133), true, false, null, "Terberq", null, null, null },
+                    { 7, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6134), true, false, null, "Sisu", null, null, null },
+                    { 8, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6134), true, false, null, "Toyoto", null, null, null },
+                    { 9, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6135), true, false, null, "Bobkat", null, null, null },
+                    { 10, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6136), true, false, null, "Hyster", null, null, null },
+                    { 11, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6137), true, false, null, "Boss", null, null, null },
+                    { 12, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6137), true, false, null, "Ardelt", null, null, null },
+                    { 13, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6138), true, false, null, "None", null, null, null },
+                    { 14, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6139), true, false, null, "VDL", null, null, null },
+                    { 15, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6139), true, false, null, "Sunny", null, null, null },
+                    { 16, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6140), true, false, null, "Camry", null, null, null },
+                    { 17, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6141), true, false, null, "Engine", null, null, null },
+                    { 18, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6142), true, false, null, "023-2 №-li dizel generator", null, null, null },
+                    { 19, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6142), true, false, null, "022-1 №-li dizel generator", null, null, null },
+                    { 20, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6143), true, false, null, "021-TQM 23 B48-754", null, null, null },
+                    { 21, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6146), true, false, null, "Service berth-N4", null, null, null },
+                    { 22, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6147), true, false, null, "Molino", null, null, null },
+                    { 23, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6148), true, false, null, "Service berth-N3 ", null, null, null },
+                    { 24, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6149), true, false, null, "Shackle", null, null, null },
+                    { 25, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6150), true, false, null, "County", null, null, null },
+                    { 26, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6150), true, false, null, "Santafe", null, null, null },
+                    { 27, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6151), true, false, null, "Sonata", null, null, null },
+                    { 28, null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6152), true, false, null, "Kartal SLX", null, null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -806,25 +849,6 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "OperationSites",
-                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "DepartmentId", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
-                values: new object[,]
-                {
-                    { 1, 0, null, null, null, true, false, null, "Building_1", null, null },
-                    { 2, 0, null, null, null, true, false, null, "Building_2", null, null },
-                    { 3, 0, null, null, null, true, false, null, "OperationArea_1", null, null },
-                    { 4, 0, null, null, null, true, false, null, "WareHause_1", null, null },
-                    { 5, 0, null, null, null, true, false, null, "WareHause_2", null, null },
-                    { 6, 0, null, null, null, true, false, null, "WareHause_3", null, null },
-                    { 7, 0, null, null, null, true, false, null, "OperationArea_2", null, null },
-                    { 8, 0, null, null, null, true, false, null, "ST-1", null, null },
-                    { 9, 0, null, null, null, true, false, null, "ST-2", null, null },
-                    { 10, 0, null, null, null, true, false, null, "ST-3", null, null },
-                    { 11, 0, null, null, null, true, false, null, "ST-4", null, null },
-                    { 12, 0, null, null, null, true, false, null, "ST-5", null, null }
-                });
-
-            migrationBuilder.InsertData(
                 table: "Parts",
                 columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
                 values: new object[,]
@@ -849,50 +873,22 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Equipments",
-                columns: new[] { "Id", "Capacity", "Color", "CreatedBy", "CreatedDate", "CurrentValue", "DepartmentId", "Description", "EquipmentTypeId", "Identification", "ImagUrl", "IsActive", "IsDeleted", "LastMaintenaceDate", "ManufactureId", "ModelId", "ModifiedBy", "Name", "OperationSiteid", "ProductionYear", "RemovalDate", "SeriaNumber", "Status", "UnitNumber", "UpdatedDate", "usageLocation" },
+                table: "OperationSites",
+                columns: new[] { "Id", "Code", "CreatedBy", "CreatedDate", "DepartmentId", "IsActive", "IsDeleted", "ModifiedBy", "Name", "RemovalDate", "UpdatedDate" },
                 values: new object[,]
                 {
-                    { 1, "2000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9215), 145m, 6, "Cargo Handling equipment", 1, "no", null, true, false, null, 10, 14, null, "ForkLift1 ", 4, 1998, null, null, 0, "FK-100000", null, 2 },
-                    { 2, "4000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9223), 450m, 3, "Cargo Handling equipment", 2, "no", null, true, false, null, 9, 13, null, "ForkLift2", 3, 2004, null, null, 0, "FK-100001", null, 2 },
-                    { 3, "40000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9226), 500m, 1, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 3, 2003, null, null, 0, "CR-100003", null, 6 },
-                    { 4, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9228), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Buldozer ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 5, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9230), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Buldozer ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 6, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9234), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Buldozer ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 7, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9236), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 8, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9239), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 9, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9241), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 10, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9243), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 11, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9246), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 12, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9252), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 13, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9254), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 14, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9257), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 15, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9259), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Platform ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 16, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9261), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "MiniBus ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 17, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9294), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Minibus ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 18, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9297), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Tractor ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 19, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9301), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Tractor ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 20, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9303), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Spreider ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 21, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9306), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Building001 ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 22, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9308), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Building002 ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 23, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9310), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Building003 ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 24, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9313), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Car ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 25, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9316), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Car ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 26, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9321), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Car ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 27, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9323), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Station ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 28, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9325), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Station ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 29, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9328), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 30, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9330), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 31, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9333), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 32, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9336), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 33, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9338), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 34, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9341), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 35, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9343), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 36, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9346), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 37, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9349), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 38, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9351), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 39, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9353), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, 0, "CR-100004", null, 6 },
-                    { 40, "80000 ton", null, null, new DateTime(2023, 8, 19, 21, 40, 10, 952, DateTimeKind.Utc).AddTicks(9359), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, 0, "CR-100004", null, 6 }
+                    { 1, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5925), 1, true, false, null, "Building_1", null, null },
+                    { 2, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5926), 1, true, false, null, "Building_2", null, null },
+                    { 3, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5927), 1, true, false, null, "OperationArea_1", null, null },
+                    { 4, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5928), 5, true, false, null, "WareHause_1", null, null },
+                    { 5, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5929), 5, true, false, null, "WareHause_2", null, null },
+                    { 6, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5929), 6, true, false, null, "WareHause_3", null, null },
+                    { 7, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5930), 3, true, false, null, "OperationArea_2", null, null },
+                    { 8, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5931), 2, true, false, null, "ST-1", null, null },
+                    { 9, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5932), 2, true, false, null, "ST-2", null, null },
+                    { 10, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5933), 3, true, false, null, "ST-3", null, null },
+                    { 11, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5934), 3, true, false, null, "ST-4", null, null },
+                    { 12, 0, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(5934), 4, true, false, null, "ST-5", null, null }
                 });
 
             migrationBuilder.InsertData(
@@ -902,6 +898,53 @@ namespace Persistence.Migrations
                 {
                     { 1, null, null, true, false, 5, null, "Engine Oil ", null, "Engine Oil change", "Refill", null },
                     { 2, null, null, true, false, 5, null, "Engine Oil Filter", null, "Engine Oil filter change", "Replace", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Equipments",
+                columns: new[] { "Id", "Capacity", "Color", "CreatedBy", "CreatedDate", "CurrentValue", "DepartmentId", "Description", "EquipmentTypeId", "Identification", "ImagUrl", "IsActive", "IsDeleted", "IsNotified", "LastMaintenaceDate", "ManufactureId", "ModelId", "ModifiedBy", "Name", "OperationSiteid", "ProductionYear", "RemovalDate", "ResetValue", "SeriaNumber", "SquenceValue", "Status", "UnitNumber", "UpdatedDate", "usageLocation" },
+                values: new object[,]
+                {
+                    { 1, "2000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6762), 145m, 6, "Cargo Handling equipment", 1, "no", null, true, false, false, null, 10, 14, null, "ForkLift1 ", 4, 1998, null, null, null, null, 0, "FK-100000", null, 2 },
+                    { 2, "4000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6767), 450m, 3, "Cargo Handling equipment", 2, "no", null, true, false, false, null, 9, 13, null, "ForkLift2", 3, 2004, null, null, null, null, 0, "FK-100001", null, 2 },
+                    { 3, "40000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6773), 500m, 1, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Crane ", 3, 2003, null, null, null, null, 0, "CR-100003", null, 6 },
+                    { 4, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6775), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Buldozer ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 5, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6777), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Buldozer ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 6, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6779), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Buldozer ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 7, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6781), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 8, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6782), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 9, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6784), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 10, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6786), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ReachStacker ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 11, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6788), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 12, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6790), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 13, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6792), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 14, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6794), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Truck ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 15, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6796), 320m, 6, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Platform ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 16, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6798), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "MiniBus ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 17, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6799), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Minibus ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 18, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6825), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Tractor ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 19, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6827), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Tractor ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 20, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6830), 320m, 2, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Spreider ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 21, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6831), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Building001 ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 22, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6833), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Building002 ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 23, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6835), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Building003 ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 24, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6837), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Car ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 25, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6839), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Car ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 26, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6840), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Car ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 27, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6842), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Station ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 28, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6844), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Station ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 29, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6846), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 30, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6848), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 31, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6849), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 32, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6855), 320m, 3, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 33, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6857), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 34, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6859), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 35, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6861), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "ElectroCar ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 36, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6863), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 37, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6865), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 38, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6866), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 39, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6894), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 },
+                    { 40, "80000 ton", null, null, new DateTime(2023, 8, 22, 11, 53, 9, 4, DateTimeKind.Utc).AddTicks(6896), 320m, 5, "Cargo Lifting equipment", 4, "no", null, true, false, false, null, 4, 17, null, "Crane ", 6, 2010, null, null, null, null, 0, "CR-100004", null, 6 }
                 });
 
             migrationBuilder.CreateIndex(
@@ -950,6 +993,16 @@ namespace Persistence.Migrations
                 column: "OperationSiteid");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceSettings_EquipmentId",
+                table: "MaintenanceSettings",
+                column: "EquipmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MaintenanceSettings_MaintenancePlanId",
+                table: "MaintenanceSettings",
+                column: "MaintenancePlanId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OperationSites_DepartmentId",
                 table: "OperationSites",
                 column: "DepartmentId");
@@ -978,6 +1031,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "MaintenanceAct");
+
+            migrationBuilder.DropTable(
+                name: "MaintenanceSettings");
 
             migrationBuilder.DropTable(
                 name: "RoleClaims");

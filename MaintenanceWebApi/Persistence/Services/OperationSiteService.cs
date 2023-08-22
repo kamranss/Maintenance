@@ -1,5 +1,6 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.Abstraction.Services;
+using Application.DTOs.Equipment;
 using Application.DTOs.Manufacture;
 using Application.DTOs.Model;
 using Application.DTOs.OperationSite;
@@ -7,6 +8,7 @@ using Application.DTOs.Parts;
 using Application.Repositories.OperationSiteRepo;
 using Application.RequestParameters;
 using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -36,13 +38,33 @@ namespace Persistence.Services
                 int pageValuee = 1;
                 int takeValuee = countt;
 
-                var partss = _readRepository.GetAll();
+                var partss = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true);
 
                 if (partss == null)
                 {
                     return new ServiceResult<Pagination<OperationSiteDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
                 }
-                var itemss = partss.ToList();
+                var itemss = partss
+                    .Include(o => o.Department)
+                    .Where(e => e.IsDeleted == false && e.IsActive == true)
+                    .Select(e => new OperationSiteDto
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        Code = e.Code,
+                        Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                        DepartmentId = e.DepartmentId,
+                        IsActive = e.IsActive,
+                        IsDeleted = e.IsDeleted,
+                        CreatedDate = e.CreatedDate,
+                        CreatedBy = e.CreatedBy,
+                        ModifiedBy = e.ModifiedBy,
+                        UpdatedDate = e.UpdatedDate,
+                        RemovalDate = e.RemovalDate
+                    })
+                    .ToList();
+
+
                 var totalCountt = countt;
                 var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
                 var partsDto = _mapper.Map<List<OperationSiteDto>>(itemss);
@@ -64,7 +86,23 @@ namespace Persistence.Services
             var items = parts
                     .Skip((pageValue - 1) * takeValue)
                     .Take(takeValue)
+                    .Include(o => o.Department)
                     .Where(e => e.IsDeleted == false && e.IsActive == true)
+                    .Select(e => new OperationSiteDto
+                    {
+                        Id = e.Id,
+                        Name = e.Name,
+                        Code = e.Code,
+                        Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                        DepartmentId = e.DepartmentId,
+                        IsActive = e.IsActive,
+                        IsDeleted = e.IsDeleted,
+                        CreatedDate = e.CreatedDate,
+                        CreatedBy = e.CreatedBy,
+                        ModifiedBy = e.ModifiedBy,
+                        UpdatedDate = e.UpdatedDate,
+                        RemovalDate = e.RemovalDate
+                    })
                     .ToList();
 
 

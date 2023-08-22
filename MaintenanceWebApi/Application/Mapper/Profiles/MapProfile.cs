@@ -4,6 +4,7 @@ using Application.DTOs.EquipmentType;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Manufacture;
 using Application.DTOs.Model;
+using Application.DTOs.MS;
 using Application.DTOs.OperationSite;
 using Application.DTOs.Parts;
 using Application.DTOs.Service;
@@ -66,7 +67,7 @@ namespace Application.Mapper.Profiles
             CreateMap<OperationSite, OperationSiteDto>();
             CreateMap<Part, PartDto>().ReverseMap();
             CreateMap<EquipmentType, EquipmentTypeDto>();
-
+            CreateMap<MsSetDto, MaintenanceSetting>().ReverseMap();
 
             //CreateMap<Department, Depar>()
             //        .ForMember(ds => ds.ProductCount, map => map.MapFrom(c => c.Products.Count)); // we are doing it because of types are different within mapped objects

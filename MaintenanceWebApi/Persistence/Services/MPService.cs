@@ -3,8 +3,11 @@ using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Model;
+using Application.DTOs.MS;
 using Application.DTOs.Service;
 using Application.Repositories.DepartmentRepo;
+using Application.Repositories.MaintenanceSettingsRepo;
 using Application.Repositories.MpRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -27,15 +30,17 @@ namespace Persistence.Services
 
         private readonly IMpReadRepository _readRepository;
         private readonly IMpWriteRepository _writeRepository;
+        private readonly IMSettingsWriteRepository _settingsWriteRepository;
         private readonly IMapper _mapper;
         private IMemoryCache _memoryCach;
 
-        public MPService(IMpReadRepository readRepository, IMpWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach)
+        public MPService(IMpReadRepository readRepository, IMpWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach, IMSettingsWriteRepository settingsWriteRepository)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _mapper = mapper;
             _memoryCach = memoryCach;
+            _settingsWriteRepository = settingsWriteRepository;
         }
 
         public async Task<IServiceResult<MaintenencePlanStatusDto>> ChangeMpStatusAsync(int id, MaintenencePlanStatus newStatus)
@@ -235,6 +240,41 @@ namespace Persistence.Services
 
         } // done
 
+        public async Task<IServiceResult<MsSetDto>> SetMpSettings(MsSetDto msSetDto)
+        {
+            if (msSetDto ==null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "data missing" };
+          
+            var existMp=  _readRepository.GetAll()
+                .Include(mp => mp.Equipments)
+                .Include(mp => mp.MaintenanceSettings)
+                .FirstOrDefault(mp => mp.Id == msSetDto.MaintenancePlanId);
+
+            if (existMp == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no MP with this id" };
+
+           
+            if (existMp.Equipments != null)
+            {
+                var existMpEquipment = existMp.Equipments?.FirstOrDefault(e => e.Id == msSetDto.EquipmentId);
+                if (existMpEquipment == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
+                var msDto = _mapper.Map<MaintenanceSetting>(msSetDto);
+                msDto.StartValue = existMpEquipment.CurrentValue;
+                existMp.MaintenanceSettings.Add(msDto);
+               var result =  _settingsWriteRepository.SaveAsync();
+                Console.WriteLine("salam");
+                Console.WriteLine(result);
+                return new ServiceResult<MsSetDto> { IsSuccess = true, Data = msSetDto };
+                //return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "Something went wrong" };
+            }
+
+            //var msDtoo = _mapper.Map<MaintenanceSetting>(msSetDto);
+            //msDtoo.StartValue = existMpEquipment.CurrentValue;
+            //existMp.MaintenanceSettings.Add(msDtoo);
+            //return new ServiceResult<MsSetDto> { IsSuccess = false, Data = msSetDto };
+            return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
+
+
+        } // Save method is not working 
+
         public async Task<IServiceResult<MaintenancePlanUpdateDto>> UpdateMPAsync(MaintenancePlanUpdateDto maintenancePlanUpdateDto)
         {
             var existMP = _readRepository.GetWhere(d => d.Id == maintenancePlanUpdateDto.Id).FirstOrDefault();
@@ -263,7 +303,7 @@ namespace Persistence.Services
             _writeRepository.SaveAsync();
 
             return new ServiceResult<MaintenancePlanUpdateDto> { IsSuccess = true, Data = maintenancePlanUpdateDto };
-        } // done
+        } // doner
 
     
     }

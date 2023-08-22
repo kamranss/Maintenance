@@ -26,10 +26,13 @@ namespace Domain.Entities
         public string? SeriaNumber { get; set; }
         public string? Capacity { get; set; }
         public int? EquipmentTypeId { get; set; }
+        public bool? IsNotified { get; set; } = false;
         public EquipmentStatus? Status { get; set; }
         public Location? usageLocation { get; set; }
         public DateTime? LastMaintenaceDate { get; set; }
         public decimal? CurrentValue { get; set; }
+        public decimal? ResetValue { get; set; }
+        public decimal? SquenceValue { get; set; }
         public int? DepartmentId { get; set; }
         public Department Department { get; set; }
         public List<MaintenancePlan> MaintenancePlan { get; set; }

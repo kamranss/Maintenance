@@ -4,6 +4,7 @@ using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentPartRepo;
 using Application.Repositories.EquipmentRepo;
 using Application.Repositories.EquipmentTypeRepo;
+using Application.Repositories.MaintenanceSettingsRepo;
 using Application.Repositories.ManufactureRepo;
 using Application.Repositories.ModelRepo;
 using Application.Repositories.MpRepo;
@@ -19,6 +20,7 @@ using Persistence.Context;
 using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentRepo;
 using Persistence.Repositories.EquipmentTypeRepo;
+using Persistence.Repositories.MaintSettingRepo;
 using Persistence.Repositories.ManufactureRepo;
 using Persistence.Repositories.ModelRepo;
 using Persistence.Repositories.MpRepo;
@@ -102,6 +104,9 @@ namespace Persistence
 
             services.AddScoped<IEquipmentTypeReadRepository, EquipmentTypeReadRepository>();
             services.AddScoped<IEquipmentTypeWriteRepository, EquipmentTypeWriteRepository>();
+
+            services.AddScoped<IMSettingsReadRepository, MSettingsReadRepository>();
+            services.AddScoped<IMSettingsWriteRepository, MSettingsWriteRepository>();
 
             
 

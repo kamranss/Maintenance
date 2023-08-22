@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
+
 
 namespace Persistence.Services
 {
@@ -19,13 +21,26 @@ namespace Persistence.Services
         private readonly IModelReadRepository _readRepository;
         private readonly IModelWriteRepository _writeRepository;
         private readonly IMapper _mapper;
+        private readonly System.Timers.Timer _dailyTimer;
 
-        public ModelService(IModelReadRepository readRepository, IModelWriteRepository writeRepository, IMapper mapper)
+        public ModelService(IModelReadRepository readRepository, IModelWriteRepository writeRepository, IMapper mapper )
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _mapper = mapper;
+
+            //System.Timers.Timer dailyTimer
+            //_dailyTimer = new System.Timers.Timer(TimeSpan.FromHours(24).TotalMilliseconds);
+            //_dailyTimer.Elapsed += DailyTimerElapsed;
+            //_dailyTimer.Start();
         }
+
+        //private async void DailyTimerElapsed(object sender, ElapsedEventArgs e)
+        //{
+        //    // Run the method when the timer elapses
+        //    await GetModelsAsync(null, null);
+        //}
+
 
         public async Task<IServiceResult<Pagination<ModelDto>>> GetModelsAsync(int? page, int? pageSize)
         {
@@ -80,7 +95,7 @@ namespace Persistence.Services
             var partsDtoo = _mapper.Map<List<ModelDto>>(items);
             var pagination = new Pagination<ModelDto>(partsDtoo, pageValue, pageCount, totalCount);
 
-            return new ServiceResult<Pagination<ModelDto>> { IsSuccess = true, Data = pagination };
+            return new ServiceResult<Pagination<ModelDto>>{ IsSuccess = true, Data = pagination };
         }
     }
 }

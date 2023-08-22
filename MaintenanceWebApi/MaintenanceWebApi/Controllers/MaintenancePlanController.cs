@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.MS;
 using Application.DTOs.Service;
 using Domain.Concrets;
 using Domain.Entities;
@@ -121,6 +122,25 @@ namespace MaintenanceWebApi.Controllers
             _mpService.ChangeMpStatusAsync(id, newStatus);
 
             return StatusCode(200, "Status Updated");
+        }
+
+        [HttpPost("SetMpSetting")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> SetMpSettings(MsSetDto msSetDto)
+        {
+            var result = await _mpService.SetMpSettings(msSetDto);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+
         }
 
     }

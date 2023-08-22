@@ -2,6 +2,7 @@
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.MS;
 using Application.DTOs.Service;
 using Application.RequestParameters;
 using Domain.Concrets;
@@ -22,6 +23,8 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<Pagination<ServiceDto>>> FindServicesByMPidAsync(int? page, int? take, int? id);
         Task<IServiceResult<MaintenancePlanDto>> DeleteMPAsync(int id);
         Task<IServiceResult<MaintenencePlanStatusDto>> ChangeMpStatusAsync(int id, MaintenencePlanStatus newStatus);
+        Task<IServiceResult<MsSetDto>> SetMpSettings(MsSetDto msSetDto);
+
         //Task<IServiceResult<MaintenencePlanStatusDto>> AddServicesToMP(int id, MaintenencePlanStatus newStatus);
     }
 }

@@ -4,6 +4,7 @@ using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.UsageHistory;
 using Application.Repositories.EquipmentRepo;
+using Application.Repositories.MaintenanceSettingsRepo;
 using Application.Repositories.UsageHistoryRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -24,14 +25,18 @@ namespace Persistence.Services
         private readonly IUsageHistoryReadRepository _readRepository;
         private readonly IUsageHistoryWriteRepository _writeRepository;
         private readonly IEquipmentReadRepository _equipmentReadRepository;
+        private readonly IMSettingsReadRepository _settingsReadRepository;
+        private readonly IMSettingsWriteRepository  _settingsWriteRepository;
         private readonly IMapper _mapper;
 
-        public UsageHistoryService(IUsageHistoryReadRepository readRepository, IUsageHistoryWriteRepository writeRepository, IEquipmentReadRepository equipmentReadRepository, IMapper mapper)
+        public UsageHistoryService(IUsageHistoryReadRepository readRepository, IUsageHistoryWriteRepository writeRepository, IEquipmentReadRepository equipmentReadRepository, IMapper mapper, IMSettingsReadRepository settingsReadRepository, IMSettingsWriteRepository settingsWriteRepository)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _equipmentReadRepository = equipmentReadRepository;
             _mapper = mapper;
+            _settingsReadRepository = settingsReadRepository;
+            _settingsWriteRepository = settingsWriteRepository;
         }
 
         public async Task<IServiceResult<UsageHistoryCreateDto>> CreateUsageHistoryAsync(UsageHistoryCreateDto usageHistoryCreate)
@@ -48,7 +53,7 @@ namespace Persistence.Services
             
             
             var newUsageHistory = _mapper.Map<UsageHistory>(usageHistoryCreate);
-            newUsageHistory.OperatorNameValue = usageHistoryCreate.OperationName.Value.ToString();
+            newUsageHistory.OperationNameValue = usageHistoryCreate.OperationName.Value.ToString();
              newUsageHistory.StartUsageHourValue = existEquipment.CurrentValue;
 
             var result = await _writeRepository.AddAsync(newUsageHistory);
@@ -75,14 +80,9 @@ namespace Persistence.Services
                 return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "There is no Info with this Id in Db" };
             }
 
-            if (usageHistoryEnd.EndDate.HasValue)
-            {
-                existUsageStory.EndDate = usageHistoryEnd.EndDate.Value;
-              
-            }
-          
+            existUsageStory.EndDate = usageHistoryEnd.EndDate ?? DateTime.UtcNow;
 
-            existUsageStory.EndDate = DateTime.UtcNow;
+
 
             DateTime startDate = existUsageStory.StartDate;
             DateTime endDate = existUsageStory.EndDate;
@@ -105,9 +105,19 @@ namespace Persistence.Services
                 return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "SomethingWnetWrong" };
             }
             updateEquipmentValue.CurrentValue = usageHistoryEnd.EndUsageHourValue;
-            return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
-       
 
+            var existSetting = _settingsReadRepository.GetAll().FirstOrDefault(es => es.EquipmentId == existUsageStory.EquipmentId);
+            if (existSetting==null) 
+            {
+                return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
+            }
+
+            existSetting.UpdatedValue = usageHistoryEnd.EndUsageHourValue;
+       
+            _settingsWriteRepository.Update(existSetting);
+            _settingsWriteRepository.SaveAsync();
+
+            return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
             //return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
         }
 
