@@ -258,7 +258,7 @@ namespace Persistence.Services
             var equipment = existMp.Equipments.FirstOrDefault(e => e.Id == mpCompleted.EquipmentId);
             mpSetting.StartValue = equipment.CurrentValue;
 
-            return new ServiceResult<MpCompleted> { IsSuccess = false, Data=mpCompleted };
+            return new ServiceResult<MpCompleted> { IsSuccess = true, Data=mpCompleted };
 
         }
 
@@ -280,11 +280,11 @@ namespace Persistence.Services
                 if (existMpEquipment == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
                 var msDto = _mapper.Map<MaintenanceSetting>(msSetDto);
                 msDto.StartValue = existMpEquipment.CurrentValue;
-                msDto.IsMpCompleted = false;
+                msDto.IsMpCompleted = true;
                 existMp.MaintenanceSettings.Add(msDto);
                var result =  _settingsWriteRepository.SaveAsync();
-                Console.WriteLine("salam");
-                Console.WriteLine(result);
+                //Console.WriteLine("salam");
+                //Console.WriteLine(result);
                 return new ServiceResult<MsSetDto> { IsSuccess = true, Data = msSetDto };
                 //return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "Something went wrong" };
             }

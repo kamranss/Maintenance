@@ -121,7 +121,10 @@ namespace Persistence.Services
             }
 
             existSetting.UpdatedValue = usageHistoryEnd.EndUsageHourValue;
-       
+            if ((existSetting.UpdatedValue - existSetting.StartValue) >= existSetting.SequenceValue)
+            {
+                existSetting.IsMpCompleted = false;
+            }
             _settingsWriteRepository.Update(existSetting);
             _settingsWriteRepository.SaveAsync();
 
