@@ -11,15 +11,15 @@ namespace Domain.Concrets
     public enum EquipmentStatus
     {
         [Description("ACTIVE")]
-        ACTIVE = 0,
+        ACTIVE = 1,
         [Description("INACTIVE")]
-        INACTIVE = 1,
+        INACTIVE = 2,
         [Description("REPAIR")]
-        REPAIR = 2,
+        REPAIR = 3,
         [Description("ACTIVE")]
-        IN_USE = 3,
+        IN_USE = 4,
         [Description("CONCERVATED")]
-        CONCERVATED = 4,
+        CONCERVATED = 5,
    
     }
 }

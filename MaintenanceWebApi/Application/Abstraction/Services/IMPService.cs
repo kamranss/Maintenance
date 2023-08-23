@@ -25,6 +25,10 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<MaintenencePlanStatusDto>> ChangeMpStatusAsync(int id, MaintenencePlanStatus newStatus);
         Task<IServiceResult<MsSetDto>> SetMpSettings(MsSetDto msSetDto);
 
+        Task<IServiceResult<MpCompleted>> IsMpCompleted(MpCompleted mpCompleted);
+
+        //Task<IServiceResult<MsUpdateDto>> UpdateMsAsync(MsUpdateDto? id);
+
         //Task<IServiceResult<MaintenencePlanStatusDto>> AddServicesToMP(int id, MaintenencePlanStatus newStatus);
     }
 }

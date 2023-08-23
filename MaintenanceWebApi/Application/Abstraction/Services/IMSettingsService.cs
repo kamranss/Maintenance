@@ -17,6 +17,8 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<MsSetDto>> SetMStoMpAsync(MsSetDto? id);
         Task<IServiceResult<MsUpdateDto>> UpdateMsAsync(MsUpdateDto? id);
 
+        Task<IServiceResult<bool>> CheckALLMpSetting();
+
 
         //Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto service);
         //Task<IServiceResult<MaintenancePlanUpdateDto>> UpdateMPAsync(MaintenancePlanUpdateDto department);

@@ -15,6 +15,8 @@ namespace Domain.Entities
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public bool IsCompleted { get; set; }
+        public int? PartId { get; set; }
+        public Part Part { get; set; }
         public string? WorkerName { get; set; }
     }
 }

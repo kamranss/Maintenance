@@ -13,6 +13,9 @@ namespace Domain.Entities
         public string? ServiceType { get; set; }
         public string? ServiceDescription { get; set; }
         public int? MaintenancePlanId { get; set; }
+        public int? PartId { get; set; }
+        public string? PartName { get; set; }
+        public Part? Part { get; set; }
         //public int? ChangedPartId { get; set; }
         //public EquipmentPart EquipmentPart { get; set; }
         public MaintenancePlan? MaintenancePlan { get; set; }

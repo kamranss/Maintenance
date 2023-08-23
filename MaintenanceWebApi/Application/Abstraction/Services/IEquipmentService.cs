@@ -42,6 +42,8 @@ namespace Application.Abstraction.Services
 
         Task<IServiceResult<Pagination<UsageHistoryDto>>> GetUsageHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id);
 
+        //Task<IServiceResult<Pagination<ServiceHistoryDto>>> GetServiceHistoryByEquipmentIdAsync(int? page, int? pagesize, int? id);
+
         Task<IServiceResult<EquipmentStatusDto>> ChangeEquipmentStatusAsync(int id, EquipmentStatus newStatus);
 
         Task<IServiceResult<Pagination<EquipmentListDto>>> FindByDepartmentId(int? page, int? pageSize, int id);

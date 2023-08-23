@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Services;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Service;
+using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
@@ -27,8 +28,12 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update(ServiceUpdateDto serviceUpdateDto)
         {
-            await _servService.UpdateServiceAsync(serviceUpdateDto);
-            return StatusCode(200, "Service Updated");
+            var result = await _servService.UpdateServiceAsync(serviceUpdateDto);
+            if (result.IsSuccess)
+            {
+                StatusCode(200, "Service Updated");
+            }
+            return  BadRequest(result.ErrorMessage);
         }
 
 
@@ -76,8 +81,31 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetService(int? id)
         {
-            var Service = _servService.FindServiceAsync( id);
-            return Ok(Service);
+            var result = _servService.FindServiceAsync( id).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest(result.ErrorMessage);
+        }
+
+        [HttpPost("NewMP")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> IsServiceCompleted(ServiceHistoryDto serviceHistoryDto)
+        {
+            var result = await _servService.IsServiceCompleted(serviceHistoryDto);
+
+            if (result.IsSuccess)
+            {
+                return Ok("Service completed successfully.");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+
         }
 
 

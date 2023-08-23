@@ -19,7 +19,7 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<ServiceCreateDto>> CreateServiceAsync(ServiceCreateDto service);
         Task<IServiceResult<ServiceUpdateDto>> UpdateServiceAsync(ServiceUpdateDto department);
         Task<IServiceResult<ServiceDto>> DeleteServiceAsync(int id);
-        //Task<IServiceResult<ServiceDto>> IsServiceCompleted(int id);
+        Task<IServiceResult<ServiceHistoryDto>> IsServiceCompleted(ServiceHistoryDto serviceHistoryDto);
 
 
     }

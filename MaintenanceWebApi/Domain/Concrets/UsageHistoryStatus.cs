@@ -10,10 +10,10 @@ namespace Domain.Concrets
     public enum UsageHistoryStatus
     {
         [Description("Ongoing")]
-        ONGOING = 0,
+        ONGOING = 1,
         [Description("Finished")]
-        FINISHED = 1,
+        FINISHED = 2,
         [Description("Canceled")]
-        CANCELED = 2,
+        CANCELED = 3,
     }
 }

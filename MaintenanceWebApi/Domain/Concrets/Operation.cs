@@ -10,7 +10,7 @@ namespace Domain.Concrets
     public enum Operation
     {
         [Description("TRUCK_TO_WAREHOUSE")]
-        TRUCK_TO_WAREHOUSE,
+        TRUCK_TO_WAREHOUSE = 1,
         [Description("TRUCK_TO_VESSEL")]
         TRUCK_TO_VESSEL,
         [Description("TRUCK_TO_TRUCK")]

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,8 +9,14 @@ namespace Domain.Concrets
 {
     public enum Roles
     {
-        SUPER_ADMIN,
+        [Description("SUPER_ADMIN")]
+        SUPER_ADMIN = 1,
+        [Description("ADMIN")]
         ADMIN,
-        MEMBER
+        [Description("MEMBER")]
+        MEMBER,
+        [Description("VIEWER")]
+        VIEWER
+
     }
 }

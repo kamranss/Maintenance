@@ -46,6 +46,7 @@ namespace Application.Mapper.Profiles
             CreateMap<Service, ServiceDto>();
             CreateMap<ServiceCreateDto, Service>();
             CreateMap<ServiceUpdateDto, Service>();
+            CreateMap<ServiceHistoryDto, ServiceHistory>().ReverseMap();
 
 
             CreateMap<MaintenancePlan, MaintenancePlanDto>();

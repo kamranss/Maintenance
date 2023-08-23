@@ -4,6 +4,7 @@ using Application.DTOs.Department;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Service;
 using Application.Repositories.MpRepo;
+using Application.Repositories.ServiceHistoryRepo;
 using Application.Repositories.ServiceRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -24,13 +25,15 @@ namespace Persistence.Services
         private readonly IServiceReadRepository _readRepository;
         private readonly IServiceWriteRepository _writeRepository;
         private readonly IMpReadRepository _mpReadRepository;
+        private readonly IServiceHistoryWriteRepository _serviceHistoryWriteRepository;
         private readonly IMapper _mapper;
 
-        public ServeService(IServiceReadRepository readRepository, IServiceWriteRepository writeRepository, IMapper mapper)
+        public ServeService(IServiceReadRepository readRepository, IServiceWriteRepository writeRepository, IMapper mapper, IServiceHistoryWriteRepository serviceHistoryWriteRepository)
         {
             this._readRepository = readRepository;
             this._writeRepository = writeRepository;
             _mapper = mapper;
+            _serviceHistoryWriteRepository = serviceHistoryWriteRepository;
         }
 
         public async Task<IServiceResult<ServiceCreateDto>> CreateServiceAsync(ServiceCreateDto service)
@@ -42,7 +45,7 @@ namespace Persistence.Services
 
             if (service.MaintenancePlanId == null || service.MaintenancePlanId<= 0)
             {
-                return new ServiceResult<ServiceCreateDto> { IsSuccess = false, ErrorMessage = "MP id is wring" };
+                return new ServiceResult<ServiceCreateDto> { IsSuccess = false, ErrorMessage = "MP id is wrong" };
             }
             var existMp = _mpReadRepository.GetWhere(mp => mp.Id == service.MaintenancePlanId);
             if (existMp == null)
@@ -114,6 +117,31 @@ namespace Persistence.Services
         public Task<IServiceResult<Pagination<ServiceDto>>> GetServicesAsync(int? page, int? take)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IServiceResult<ServiceHistoryDto>> IsServiceCompleted(ServiceHistoryDto serviceHistoryDto) // createServiceHistory
+        {
+            var existService = _readRepository.GetAll().FirstOrDefault(s => s.Id == serviceHistoryDto.ServiceId);
+            if (existService == null) return new ServiceResult<ServiceHistoryDto> { IsSuccess = false, ErrorMessage = "Service not found" };
+            var serviceHistoryDTO = _mapper.Map<ServiceHistory>(existService);
+
+            var result = await _serviceHistoryWriteRepository.AddAsync(serviceHistoryDTO);
+
+            if (result)
+            {
+                var endresult = await _serviceHistoryWriteRepository.SaveAsync();
+
+                if (endresult > 0)
+                {
+                    return new ServiceResult<ServiceHistoryDto> { IsSuccess = true, Data = serviceHistoryDto };
+                }
+                return new ServiceResult<ServiceHistoryDto> { IsSuccess = false, ErrorMessage = "Service could not be saved." };
+            }
+         
+
+            return new ServiceResult<ServiceHistoryDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
+
+
         }
 
         public async Task<IServiceResult<ServiceUpdateDto>> UpdateServiceAsync(ServiceUpdateDto serviceUpdateDto)

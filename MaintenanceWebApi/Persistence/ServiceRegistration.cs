@@ -9,6 +9,7 @@ using Application.Repositories.ManufactureRepo;
 using Application.Repositories.ModelRepo;
 using Application.Repositories.MpRepo;
 using Application.Repositories.OperationSiteRepo;
+using Application.Repositories.ServiceHistoryRepo;
 using Application.Repositories.ServiceRepo;
 using Application.Repositories.UsageHistoryRepo;
 using Domain.Entities;
@@ -26,6 +27,7 @@ using Persistence.Repositories.ModelRepo;
 using Persistence.Repositories.MpRepo;
 using Persistence.Repositories.OperationSiteRepo;
 using Persistence.Repositories.PartRepo;
+using Persistence.Repositories.ServiceHistoryRepo;
 using Persistence.Repositories.ServiceRepo;
 using Persistence.Repositories.UsageHistoryRepo;
 using Persistence.Services;
@@ -67,14 +69,6 @@ namespace Persistence
             }); // Config for Automapper package
 
 
-
-
-
-
-
-
-
-
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
 
@@ -107,6 +101,9 @@ namespace Persistence
 
             services.AddScoped<IMSettingsReadRepository, MSettingsReadRepository>();
             services.AddScoped<IMSettingsWriteRepository, MSettingsWriteRepository>();
+
+            services.AddScoped<IServiceHistoryReadRepository, ServiceHistoryReadRepository>();
+            services.AddScoped<IServiceHistoryWriteRepository, ServiceHistoryWriteRepository>();
 
             
 
