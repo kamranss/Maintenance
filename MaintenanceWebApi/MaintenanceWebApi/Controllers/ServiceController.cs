@@ -21,7 +21,7 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        [Route("ModMP")]
+        [Route("ModService")]
         [HttpPut]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -56,7 +56,7 @@ namespace MaintenanceWebApi.Controllers
             }
         }
 
-        [HttpPost("NewMP")]
+        [HttpPost("NewService")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -89,7 +89,7 @@ namespace MaintenanceWebApi.Controllers
             return BadRequest(result.ErrorMessage);
         }
 
-        [HttpPost("NewMP")]
+        [HttpPost("ServiceCompleted")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

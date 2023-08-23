@@ -124,6 +124,8 @@ namespace Persistence.Services
             if ((existSetting.UpdatedValue - existSetting.StartValue) >= existSetting.SequenceValue)
             {
                 existSetting.IsMpCompleted = false;
+                existEqu.MpCompleted = false;
+
             }
             _settingsWriteRepository.Update(existSetting);
             _settingsWriteRepository.SaveAsync();

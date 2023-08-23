@@ -99,6 +99,7 @@ namespace Persistence.Services
             newEquipment.ImagUrl = imageUrl;
             newEquipment.Status = EquipmentStatus.ACTIVE;
             newEquipment.usageLocation = equipment.UsageLocation;
+            newEquipment.MpCompleted = true;
 
 
 
@@ -188,6 +189,7 @@ namespace Persistence.Services
                    Department = e.DepartmentId.HasValue ? e.Department.Name : null,
                    Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                    Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
+                   MpTime = e.MpCompleted
                    //ModelId = e.Model.Id,
                    //OperationSiteid = e.OperationSite.Id,
                    //DepartmentId = e.Department.Id,
@@ -243,7 +245,8 @@ namespace Persistence.Services
                            OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
                            Department = e.DepartmentId.HasValue ? e.Department.Name : null,
                            Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
-                           Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null                
+                           Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
+                           MpTime = e.MpCompleted
                        })
                      .ToList();
 
@@ -260,7 +263,7 @@ namespace Persistence.Services
 
                 EquipmentsFromDb.ToList();
                  var cachEntryOption = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromDays(10));
+                    .SetSlidingExpiration(TimeSpan.FromSeconds(5));
                 _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
 
 
@@ -502,7 +505,8 @@ namespace Persistence.Services
                        ProductionYear = e.ProductionYear,
                        SeriaNumber = e.SeriaNumber,
                        UsageLocation = e.usageLocation,
-                       
+                       MpTime = e.MpCompleted
+
                    })
                    .ToList();
 
@@ -551,7 +555,8 @@ namespace Persistence.Services
                        Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
                        ProductionYear = e.ProductionYear,
                        SeriaNumber = e.SeriaNumber,
-                       UsageLocation = e.usageLocation
+                       UsageLocation = e.usageLocation,
+                       MpTime = e.MpCompleted
                    })
                  .ToList();
 
@@ -605,6 +610,7 @@ namespace Persistence.Services
                    ProductionYear = e.ProductionYear,
                    SeriaNumber = e.SeriaNumber,
                    UsageLocation = e.usageLocation,
+                   MpTime = e.MpCompleted
                })
              .ToList();
 

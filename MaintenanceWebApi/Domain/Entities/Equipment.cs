@@ -27,6 +27,7 @@ namespace Domain.Entities
         public string? Capacity { get; set; }
         public int? EquipmentTypeId { get; set; }
         public bool? IsNotified { get; set; } = false;
+        public bool? MpCompleted { get; set; }
         public EquipmentStatus? Status { get; set; }
         public Location? usageLocation { get; set; }
         public DateTime? LastMaintenaceDate { get; set; }

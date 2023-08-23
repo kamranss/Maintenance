@@ -252,9 +252,11 @@ namespace Persistence.Services
             if (existMp.Equipments == null) return new ServiceResult<MpCompleted> { IsSuccess = false, ErrorMessage = "no Equipnment Assigned to this Mp" };
 
             var mpSetting = existMp.MaintenanceSettings.FirstOrDefault(s => s.EquipmentId == mpCompleted.EquipmentId);
+            var mpEquipment = existMp.Equipments.FirstOrDefault(e => e.Id == mpCompleted.EquipmentId);
             if(mpSetting == null) return new ServiceResult<MpCompleted> { IsSuccess = false, ErrorMessage = "No settings find related to this Equipment" };
 
-            mpSetting.IsMpCompleted = true;
+            //mpSetting.IsMpCompleted = true;
+            mpEquipment.MpCompleted = true;
             var equipment = existMp.Equipments.FirstOrDefault(e => e.Id == mpCompleted.EquipmentId);
             mpSetting.StartValue = equipment.CurrentValue;
 
