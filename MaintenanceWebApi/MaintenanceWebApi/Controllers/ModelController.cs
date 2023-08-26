@@ -41,14 +41,7 @@ namespace MaintenanceWebApi.Controllers
         {
 
             var result = _modelService.GetModelsForInput(name).Result;
-
             return Ok(result.Data);
-            //if (result.IsSuccess)
-            //{
-
-            //}
-
-            //return BadRequest(result.ErrorMessage);
 
         }
     }

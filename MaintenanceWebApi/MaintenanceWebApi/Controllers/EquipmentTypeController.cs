@@ -34,5 +34,17 @@ namespace MaintenanceWebApi.Controllers
             return BadRequest(result.ErrorMessage);
            
         }
+
+        [HttpGet("DropDown")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetModelsforInput(string? name)
+        {
+
+            var result = _equipmentTypeService.GetTypesForInput(name).Result;
+            return Ok(result.Data);
+
+        }
     }
 }

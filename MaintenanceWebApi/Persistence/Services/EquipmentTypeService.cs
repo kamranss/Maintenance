@@ -2,6 +2,7 @@
 using Application.Abstraction.Services;
 using Application.DTOs.EquipmentType;
 using Application.DTOs.Manufacture;
+using Application.DTOs.Model;
 using Application.Repositories.EquipmentTypeRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -55,6 +56,32 @@ namespace Persistence.Services
 
 
             return new ServiceResult<Pagination<EquipmentTypeDto>> { IsSuccess = false, ErrorMessage = "SomeThing Went wrong" };
+        }
+
+        public async Task<IServiceResult<List<EquipmentTypeDto>>> GetTypesForInput(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                var types = _readRepository.GetAll().Take(5);
+                if (types == null)
+                {
+                    return new ServiceResult<List<EquipmentTypeDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = types.ToList();
+                var typesDto = _mapper.Map<List<EquipmentTypeDto>>(itemss);
+                return new ServiceResult<List<EquipmentTypeDto>> { IsSuccess = true, Data = typesDto };
+            }
+            else
+            {
+                var typess = _readRepository.GetAll().Where(m => m.Name.ToLower().Contains(name));
+                if (typess == null)
+                {
+                    return new ServiceResult<List<EquipmentTypeDto>> { IsSuccess = true, Data = new List<EquipmentTypeDto>() };
+                }
+                var itemsss = typess.ToList();
+                var typesDtos = _mapper.Map<List<EquipmentTypeDto>>(itemsss);
+                return new ServiceResult<List<EquipmentTypeDto>> { IsSuccess = true, Data = typesDtos };
+            }
         }
     }
 }

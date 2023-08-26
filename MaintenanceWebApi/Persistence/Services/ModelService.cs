@@ -136,7 +136,7 @@ namespace Persistence.Services
             }
             else
             {
-                var modelss = _readRepository.GetAll().Where(m => m.Name.Contains(name));
+                var modelss = _readRepository.GetAll().Where(m => m.Name.ToLower().Contains(name));
                 if (modelss == null)
                 {
                     return new ServiceResult<List<ModelDto>> { IsSuccess = true, Data = new List<ModelDto>() };

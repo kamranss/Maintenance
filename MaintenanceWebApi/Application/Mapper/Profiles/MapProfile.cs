@@ -28,6 +28,7 @@ namespace Application.Mapper.Profiles
             CreateMap<Equipment,EquipmentListDto>();
             CreateMap<EquipmentCachedDto, EquipmentListDto>().ReverseMap();
             CreateMap<Equipment,EquipmentStatusDto>();
+            CreateMap<EquipmentType, EquipmentTypeDto>();
 
 
 
