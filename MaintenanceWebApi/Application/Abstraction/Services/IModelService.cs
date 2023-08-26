@@ -14,5 +14,7 @@ namespace Application.Abstraction.Services
     public interface IModelService
     {
         Task<IServiceResult<Pagination<ModelDto>>> GetModelsAsync(int? page, int? pageSize);
+
+        Task<IServiceResult<List<ModelDto>>> GetModelsForInput(string name);
     }
 }

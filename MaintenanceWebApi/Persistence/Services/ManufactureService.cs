@@ -75,8 +75,8 @@ namespace Persistence.Services
                 return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "There is no parts in DB" };
             }
 
-            var manufactureCount = _readRepository.GetAll(tracking: false).ToList();
-            var totalCount = manufactureCount.Count;
+            var totalCount = _readRepository.GetAll(tracking: false).ToList().Count();
+     
             var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
 
             var partsDtoo = _mapper.Map<List<ManufactureDto>>(items);

@@ -16,7 +16,7 @@ namespace Domain.Concrets
         INACTIVE = 2,
         [Description("REPAIR")]
         REPAIR = 3,
-        [Description("ACTIVE")]
+        [Description("IN_USE")]
         IN_USE = 4,
         [Description("CONCERVATED")]
         CONCERVATED = 5,

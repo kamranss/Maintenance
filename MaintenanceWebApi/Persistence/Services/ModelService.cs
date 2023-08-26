@@ -8,6 +8,7 @@ using AutoMapper;
 using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,6 +97,57 @@ namespace Persistence.Services
             var pagination = new Pagination<ModelDto>(partsDtoo, pageValue, pageCount, totalCount);
 
             return new ServiceResult<Pagination<ModelDto>>{ IsSuccess = true, Data = pagination };
+        }
+
+        public async Task<IServiceResult<List<ModelDto>>> GetModelsForInput(string? name)
+        {
+            //if (name == null)
+            //{
+            //    var models = _readRepository.GetAll().Take(5);
+            //    if (models == null)
+            //    {
+            //        return new ServiceResult<List<ModelDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+            //    }
+            //    var itemss = models.ToList();
+            //    var modelsDto = _mapper.Map<List<ModelDto>>(itemss);
+            //    return new ServiceResult<List<ModelDto>> { IsSuccess = true, Data = modelsDto };
+            //}
+
+
+            //var modelss = _readRepository.GetAll().Where(m => m.Name.Contains(name));
+            //if (modelss == null)
+            //{
+
+            //}
+            //var itemsss = modelss.ToList();
+            //var modelsDtoo = _mapper.Map<List<ModelDto>>(itemsss);
+            //return new ServiceResult<List<ModelDto>> { IsSuccess = true, Data = modelsDtoo };
+
+            if (string.IsNullOrEmpty(name))
+            {
+                var models = _readRepository.GetAll().Take(5);
+                if (models == null)
+                {
+                    return new ServiceResult<List<ModelDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = models.ToList();
+                var modelsDto = _mapper.Map<List<ModelDto>>(itemss);
+                return new ServiceResult<List<ModelDto>> { IsSuccess = true, Data = modelsDto };
+            }
+            else
+            {
+                var modelss = _readRepository.GetAll().Where(m => m.Name.Contains(name));
+                if (modelss == null)
+                {
+                    return new ServiceResult<List<ModelDto>> { IsSuccess = true, Data = new List<ModelDto>() };
+                }
+                var itemsss = modelss.ToList();
+                var modelsDtoo = _mapper.Map<List<ModelDto>>(itemsss);
+                return new ServiceResult<List<ModelDto>> { IsSuccess = true, Data = modelsDtoo };
+            }
+
+
+
         }
     }
 }

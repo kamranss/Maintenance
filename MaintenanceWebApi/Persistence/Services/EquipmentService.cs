@@ -539,7 +539,7 @@ namespace Persistence.Services
                 var itemss = EquipmentsFromDbb
                  .Skip((pageValueee - 1) * takeValueee)
                  .Take(takeValueee)
-                 .Where(e => e.IsDeleted == false && e.IsDeleted == false)
+                 .Where(e => e.IsDeleted == false && e.IsActive == true)
                    .Select(e => new EquipmentListDto
                    {
                        Id = e.Id,
@@ -586,14 +586,14 @@ namespace Persistence.Services
 
             int pageValue = page.Value;
             int takeValue = pageSize.Value;
-            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+            int skipCount = (pageValue >= 1) ? (pageValue - 1) * takeValue : 0;
 
             var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).Where(e => e.DepartmentId == id);
 
             var items = EquipmentsFromDb
              .Skip((pageValue - 1) * takeValue)
              .Take(takeValue)
-             .Where(e => e.IsDeleted == false && e.IsDeleted == false && e.DepartmentId == id)
+             .Where(e => e.IsDeleted == false && e.IsActive == true && e.DepartmentId == id)
                .Select(e => new EquipmentListDto
                {
                    Id = e.Id,
