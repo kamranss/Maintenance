@@ -1,0 +1,24 @@
+.header {
+  width: 100%;
+  padding: 0 50px;
+  height: 80px;
+  .container {
+    // background-color: #32a89c;
+    // background-color: #c6c9c8;
+    background-color: #506266;
+    border: #eee3ff solid;
+    width: 100%;
+    height: 100%;
+    border-bottom-right-radius: 1rem;
+    border-bottom-left-radius: 1rem;
+    .userinfo {
+      display: flex;
+      justify-content: center;
+      padding: 1.5%;
+      margin-left: 90%;
+      .username {
+        margin-right: 10px;
+      }
+    }
+  }
+}
