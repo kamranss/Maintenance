@@ -28,10 +28,17 @@ const FormCreateEquipment = () => {
   // const [enteredName, setEnteredName] = useState("");
 
   const [models, setModels] = useState([]); // State to hold fetched models
-  const [selectedModelId, setSelectedModelId] = useState(""); // State to hold selected model ID
-  const [formData, setFormData] = useState({}); // State to hold form data
-  const [searchQuery, setSearchQuery] = useState(""); // State to hold search query
   const [selectedModel, setSelectedModel] = useState(null);
+  const [selectedModelId, setSelectedModelId] = useState(""); // State to hold selected model ID
+  const [searchQuery, setSearchQuery] = useState(""); // State to hold search query
+
+  const [Types, setTypes] = useState([]);
+  const [selectedType, setSelectedType] = useState(null);
+  const [selectedTypelId, setSelectedTypeId] = useState(""); // State to hold selected model ID
+  const [searchQueryfortypes, setSearchQueryfortypes] = useState(""); // State to hold search query
+
+  const [formData, setFormData] = useState({}); // State to hold form data
+
   // const [filteredModels, setFilteredModels] = useState([]); // State to hold filtered models
   const theme = createTheme();
 
@@ -53,10 +60,10 @@ const FormCreateEquipment = () => {
   //   );
   // });
 
-  useEffect(() => {
-    // Fetch models from the API when the component mounts
-    fetchModels(searchQuery);
-  }, [searchQuery]);
+  // useEffect(() => {
+  //   // Fetch models from the API when the component mounts
+  //   fetchModels(searchQuery);
+  // }, [searchQuery]);
 
   const useStyles = styled((theme) => ({
     select: {
@@ -91,11 +98,41 @@ const FormCreateEquipment = () => {
     }
   };
 
+  const fetchTypes = async (name) => {
+    try {
+      const params = new URLSearchParams({
+        name: name, // Use the search query as the 'name' parameter
+      });
+
+      const url = `https://localhost:7066/api/EquipmentType/DropDown?${params}`;
+      const response = await axios.get(url);
+      console.log("API response:", response.data); // Log the API response
+
+      if (response.data && Array.isArray(response.data)) {
+        console.log("Fetched models:", response.data); // Log the fetched models
+        setTypes(response.data);
+      } else {
+        console.error(
+          "API response does not contain an array of models:",
+          response.data
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
   const fetchModelsDebounced = debounce(fetchModels, 300);
   useEffect(() => {
     // Fetch models from the API when the component mounts or searchQuery changes
     fetchModels(searchQuery);
   }, [searchQuery]);
+
+  const fetchTypesDebounced = debounce(fetchTypes, 300);
+  useEffect(() => {
+    // Fetch models from the API when the component mounts or searchQuery changes
+    fetchTypes(searchQueryfortypes);
+  }, [searchQueryfortypes]);
 
   // const StyledSelect = styled(Select)({
   //   width: "100%",
@@ -185,7 +222,40 @@ const FormCreateEquipment = () => {
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Type</FormLabel>
-                <TextField type="text" name="EquipmentTypeId" />
+                <Autocomplete
+                  id="type-autocomplete"
+                  options={Types}
+                  getOptionLabel={(type) => type.name}
+                  value={selectedType} // Bind selectedModelId to the Autocomplete value
+                  onChange={(event, newValue) => {
+                    setSelectedType(newValue); // Update selectedModel when a model is selected
+                  }}
+                  onInputChange={(event, newInputValue) => {
+                    setSearchQueryfortypes(newInputValue); // Update searchQuery as input changes
+                  }}
+                  inputValue={searchQueryfortypes}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Search or Select Model"
+                      variant="outlined"
+                    />
+                  )}
+                  renderOption={(props, option) => (
+                    <li {...props}>{option.name}</li>
+                  )}
+                  PopperProps={{
+                    placement: "bottom-start", // Adjust the placement as needed
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, 8], // Adjust the offset to position the dropdown
+                        },
+                      },
+                    ],
+                  }}
+                />
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Model</FormLabel>
