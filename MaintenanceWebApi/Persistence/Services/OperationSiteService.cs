@@ -118,6 +118,33 @@ namespace Persistence.Services
 
             return new ServiceResult<Pagination<OperationSiteDto>> { IsSuccess = true, Data = pagination };
         }
+
+        public async Task<IServiceResult<List<OperationSiteDto>>> GetOperationSitesForInput(string name)
+        {
+
+            if (string.IsNullOrEmpty(name))
+            {
+                var oprSites = _readRepository.GetAll().Take(5);
+                if (oprSites == null)
+                {
+                    return new ServiceResult<List<OperationSiteDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = oprSites.ToList();
+                var oprSitesDto = _mapper.Map<List<OperationSiteDto>>(itemss);
+                return new ServiceResult<List<OperationSiteDto>> { IsSuccess = true, Data = oprSitesDto };
+            }
+            else
+            {
+                var oprSitess = _readRepository.GetAll().Where(m => m.Name.ToLower().Contains(name));
+                if (oprSitess == null)
+                {
+                    return new ServiceResult<List<OperationSiteDto>> { IsSuccess = true, Data = new List<OperationSiteDto>() };
+                }
+                var itemsss = oprSitess.ToList();
+                var oprSitessDTO = _mapper.Map<List<OperationSiteDto>>(itemsss);
+                return new ServiceResult<List<OperationSiteDto>> { IsSuccess = true, Data = oprSitessDTO };
+            }
+        }
     }
 }
 

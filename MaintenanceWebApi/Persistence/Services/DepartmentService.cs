@@ -2,6 +2,7 @@
 using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.Model;
 using Application.Repositories.DepartmentRepo;
 using Application.RequestParameters;
 using AutoMapper;
@@ -269,6 +270,32 @@ namespace Persistence.Services
 
             return new ServiceResult<DepartmentUpdateDto> { IsSuccess = true, Data = department };
         } // done
+
+        public async Task<IServiceResult<List<DepartmentDto>>> GetDepartmentsForInput(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                var deps = _readRepository.GetAll().Take(5);
+                if (deps == null)
+                {
+                    return new ServiceResult<List<DepartmentDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = deps.ToList();
+                var depsDto = _mapper.Map<List<DepartmentDto>>(itemss);
+                return new ServiceResult<List<DepartmentDto>> { IsSuccess = true, Data = depsDto };
+            }
+            else
+            {
+                var departments = _readRepository.GetAll().Where(m => m.Name.ToLower().Contains(name));
+                if (departments == null)
+                {
+                    return new ServiceResult<List<DepartmentDto>> { IsSuccess = true, Data = new List<DepartmentDto>() };
+                }
+                var itemsss = departments.ToList();
+                var depssDto = _mapper.Map<List<DepartmentDto>>(itemsss);
+                return new ServiceResult<List<DepartmentDto>> { IsSuccess = true, Data = depssDto };
+            }
+        }
     }
 
         

@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Persistence.Services;
 
 namespace MaintenanceWebApi.Controllers
 {
@@ -30,6 +31,18 @@ namespace MaintenanceWebApi.Controllers
             
             return BadRequest(result.ErrorMessage);
           
+        }
+
+        [HttpGet("DropDown")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetoprSitesforInput(string? name)
+        {
+
+            var result = _operationSiteService.GetOperationSitesForInput(name).Result;
+            return Ok(result.Data);
+
         }
     }
 }

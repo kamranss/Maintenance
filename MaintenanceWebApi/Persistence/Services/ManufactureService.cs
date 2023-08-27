@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.Abstraction.Services;
 using Application.DTOs.Manufacture;
+using Application.DTOs.Model;
 using Application.DTOs.Parts;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
@@ -27,6 +28,33 @@ namespace Persistence.Services
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _mapper = mapper;
+        }
+
+        public async Task<IServiceResult<List<ManufactureDto>>> GetManufactureForInput(string? name)
+        {
+
+            if (string.IsNullOrEmpty(name))
+            {
+                var manufactures = _readRepository.GetAll().Take(5);
+                if (manufactures == null)
+                {
+                    return new ServiceResult<List<ManufactureDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = manufactures.ToList();
+                var manufacturesDto = _mapper.Map<List<ManufactureDto>>(itemss);
+                return new ServiceResult<List<ManufactureDto>> { IsSuccess = true, Data = manufacturesDto };
+            }
+            else
+            {
+                var manufacturess = _readRepository.GetAll().Where(m => m.Name.ToLower().Contains(name));
+                if (manufacturess == null)
+                {
+                    return new ServiceResult<List<ManufactureDto>> { IsSuccess = true, Data = new List<ManufactureDto>() };
+                }
+                var itemsss = manufacturess.ToList();
+                var modelsDtoo = _mapper.Map<List<ManufactureDto>>(itemsss);
+                return new ServiceResult<List<ManufactureDto>> { IsSuccess = true, Data = modelsDtoo };
+            }
         }
 
         public async Task<IServiceResult<Pagination<ManufactureDto>>> GetManufacturesAsync(int? page, int? pageSize)

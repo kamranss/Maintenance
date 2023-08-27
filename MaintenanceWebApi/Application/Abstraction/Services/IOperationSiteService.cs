@@ -13,5 +13,6 @@ namespace Application.Abstraction.Services
     public interface IOperationSiteService
     {
         Task<IServiceResult<Pagination<OperationSiteDto>>> GetOperationSitesAsync(int? page, int? pageSize);
+        Task<IServiceResult<List<OperationSiteDto>>> GetOperationSitesForInput(string name);
     }
 }

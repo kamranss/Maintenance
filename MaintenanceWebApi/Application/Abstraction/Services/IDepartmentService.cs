@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.Model;
 using Application.RequestParameters;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +31,8 @@ namespace Application.Abstraction.Services
         //Equipment MapDtoToEntity(EquipmentUpdateDto product);
         EquipmentGetDto Deatil(int? id);
         EquipmentGetDto IsDepartmentExist(int? id);
+
+        Task<IServiceResult<List<DepartmentDto>>> GetDepartmentsForInput(string name);
         //void SaveChanges();
 
     }
