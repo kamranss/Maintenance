@@ -66,22 +66,28 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
-            if (equipment.Image == null)
+            //if (equipment.Image != null)
+            //{
+            //    //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Image ismissing" };
+
+            //    if (!equipment.Image.CheckFileType())
+            //    {
+            //        return new ServiceResult<EquipmentCreateDto>
+            //        {
+            //            IsSuccess = false,
+            //            ErrorMessage = "File Type is not correct"
+            //        };
+            //    }
+            //}
+
+            if (equipment.UsageLocation != null)
             {
-                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage="Image ismissing" };
-            }
-            if (!equipment.Image.CheckFileType())
-            {
-                return new ServiceResult<EquipmentCreateDto>
+                if (!Enum.IsDefined(typeof(Location), equipment.UsageLocation))
                 {
-                    IsSuccess = false,
-                    ErrorMessage = "File Type is not correct"
-                };
+                    return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Invalid UsageLocation value" };
+                }
             }
-            if (!Enum.IsDefined(typeof(Location), equipment.UsageLocation))
-            {
-                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Invalid UsageLocation value" };
-            }
+            
             //if (!equipment.Image.CheckFileLenght(10000))
             //{
             //    return new ServiceResult<EquipmentCreateDto>
@@ -90,13 +96,13 @@ namespace Persistence.Services
             //        ErrorMessage = "File Size is bigger"
             //    };
             //}
-            string imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
+            //string imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
 
             var newEquipment = _mapper.Map<Equipment>(equipment);
             newEquipment.IsActive = true;
             newEquipment.IsDeleted = true;
-            imageUrl = imageUrl + Guid.NewGuid();
-            newEquipment.ImagUrl = imageUrl;
+            //imageUrl = imageUrl + Guid.NewGuid();
+            //newEquipment.ImagUrl = imageUrl;
             newEquipment.Status = EquipmentStatus.ACTIVE;
             newEquipment.usageLocation = equipment.UsageLocation;
             newEquipment.MpCompleted = true;

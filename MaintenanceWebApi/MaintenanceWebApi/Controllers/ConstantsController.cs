@@ -33,10 +33,20 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetEquipmentLocation()
+        public IActionResult GetEquipmentLocation(string? name)
         {
-            var location = Enum.GetNames(typeof(Location)).ToList();
-            return Ok(location);
+            if (name == null)
+            {
+                var locationNames = Enum.GetNames(typeof(Location)).ToList();
+                return Ok(locationNames);
+            }
+
+            var matchingLocations = Enum.GetNames(typeof(Location))
+                .Where(location => location.ToString().Contains(name, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            return Ok(matchingLocations);
+
         }
 
         [HttpGet("MetricType")]

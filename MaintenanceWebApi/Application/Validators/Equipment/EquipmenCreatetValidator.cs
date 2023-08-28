@@ -15,17 +15,17 @@ namespace Application.Validators.Equipment
     {
         public EquipmenCreatetValidator()
         {
-            //RuleFor(e => e.Name)
-            //    .NotEmpty().WithMessage("Not leave empty")
-            //    .MaximumLength(20).WithMessage("Max lenght should be 20");
+            RuleFor(e => e.Name)
+                .NotEmpty().WithMessage("Not leave empty")
+                .MaximumLength(20).WithMessage("Max lenght should be 20");
 
-            //RuleFor(e => e.Description)
-            //    .NotEmpty().WithMessage("Can not be null")
-            //    .MaximumLength(20).WithMessage("Max lenght should be 20");
+            RuleFor(e => e.Description)
+                .NotEmpty().WithMessage("Can not be empty")
+                .MaximumLength(20).WithMessage("Max lenght should be 20");
 
-            ////RuleFor(e => e.ProductionYear)
-            ////    .NotEmpty().WithMessage("Can not be null")
-            ////    .MaximumLength(4).WithMessage("Should be date and time");
+            RuleFor(e => e.ProductionYear)
+                .NotEmpty().WithMessage("Can not be null");
+
 
             //RuleFor(e => e.MadeBy)
             //   .NotEmpty().WithMessage("Can not be null")
@@ -39,9 +39,9 @@ namespace Application.Validators.Equipment
             //    .NotEmpty().WithMessage("Can not be null")
             //    .MaximumLength(4).WithMessage("You should select from the list");
 
-            //RuleFor(e => e.SeriaNumber)
-            //    .NotEmpty().WithMessage("Can not be null")
-            //    .MaximumLength(4).WithMessage("You should select from the list");
+            RuleFor(e => e.SeriaNumber)
+                .NotEmpty().WithMessage("Can not be empty")
+                .MinimumLength(4).WithMessage("Min lenght should be 4");
 
             //RuleFor(e => e.EquipmentType)
             //    .NotEmpty().WithMessage("Can not be null")
