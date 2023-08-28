@@ -486,7 +486,40 @@ const FormCreateEquipment = () => {
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Manufacture</FormLabel>
-                <TextField type="text" name="ManufactureId" />
+                <Autocomplete
+                  id="manufacture-autocomplete"
+                  options={Manufactures}
+                  getOptionLabel={(manufacture) => manufacture.name}
+                  value={selectedManufacture} // Bind selectedModelId to the Autocomplete value
+                  onChange={(event, newValue) => {
+                    setSelectedDepartments(newValue); // Update selectedModel when a model is selected
+                  }}
+                  onInputChange={(event, newInputValue) => {
+                    setSearchQueryforManufactures(newInputValue); // Update searchQuery as input changes
+                  }}
+                  inputValue={searchQueryforManufactures}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Search or Select Manufactures"
+                      variant="outlined"
+                    />
+                  )}
+                  renderOption={(props, option) => (
+                    <li {...props}>{option.name}</li>
+                  )}
+                  PopperProps={{
+                    placement: "bottom-start", // Adjust the placement as needed
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, 8], // Adjust the offset to position the dropdown
+                        },
+                      },
+                    ],
+                  }}
+                />
               </FormGroup>
             </div>
             <div>

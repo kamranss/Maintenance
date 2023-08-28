@@ -26,6 +26,10 @@ namespace Application.Validators.Equipment
             RuleFor(e => e.ProductionYear)
                 .NotEmpty().WithMessage("Can not be null");
 
+            RuleFor(e => e.SeriaNumber)
+                .NotEmpty().WithMessage("Can not be empty")
+                .MinimumLength(4).WithMessage("Min lenght should be 4");
+
 
             //RuleFor(e => e.MadeBy)
             //   .NotEmpty().WithMessage("Can not be null")
@@ -39,9 +43,6 @@ namespace Application.Validators.Equipment
             //    .NotEmpty().WithMessage("Can not be null")
             //    .MaximumLength(4).WithMessage("You should select from the list");
 
-            RuleFor(e => e.SeriaNumber)
-                .NotEmpty().WithMessage("Can not be empty")
-                .MinimumLength(4).WithMessage("Min lenght should be 4");
 
             //RuleFor(e => e.EquipmentType)
             //    .NotEmpty().WithMessage("Can not be null")
