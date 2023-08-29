@@ -29,6 +29,7 @@ namespace Application.Mapper.Profiles
             CreateMap<EquipmentCachedDto, EquipmentListDto>().ReverseMap();
             CreateMap<Equipment,EquipmentStatusDto>();
             CreateMap<EquipmentType, EquipmentTypeDto>();
+            CreateMap<Equipment, EquipmentDetailDto>();
 
 
 
@@ -49,8 +50,13 @@ namespace Application.Mapper.Profiles
             CreateMap<ServiceUpdateDto, Service>();
             CreateMap<ServiceHistoryDto, ServiceHistory>().ReverseMap();
 
+            CreateMap<Part, PartDto>();
+            CreateMap<UsageHistory, UsageHistoryDto>();
+            CreateMap<MaintenancePlan, MaintenancePlanDto>();
+
 
             CreateMap<MaintenancePlan, MaintenancePlanDto>();
+            CreateMap<MaintenancePlan, MpDto>();
             CreateMap<MaintenancePlan, MaintenencePlanStatusDto>();
             CreateMap<MaintenancePlanCreateDto, MaintenancePlan>();
             CreateMap<MaintenancePlanUpdateDto, MaintenancePlan>()

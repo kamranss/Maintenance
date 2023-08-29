@@ -17,6 +17,7 @@ namespace Application.Abstraction.Services
     public interface IMPService
     {
         Task<IServiceResult<Pagination<MaintenancePlanDto>>> GetMPsAsync(int? page, int? pageSize);
+        Task<IServiceResult<Pagination<MpDto>>> GetMPsToListAsync(int? page, int? pageSize);
         Task<IServiceResult<MaintenancePlanDto>> FindMPAsync(int? id);
         Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto service);
         Task<IServiceResult<MaintenancePlanUpdateDto>> UpdateMPAsync(MaintenancePlanUpdateDto department);

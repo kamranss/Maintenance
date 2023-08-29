@@ -31,7 +31,7 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<EquipmentDto>> DeleteEquipmentAsync(int id);
         Task<IServiceResult<EquipmentUpdateDto>> UpdateEquipemntAsync(EquipmentUpdateDto department);
         //EquipmentGetDto FindEquipment(int? id);
-        Task<IServiceResult<EquipmentListDto>> FindEquipmentAsync(int? id);
+        Task<IServiceResult<EquipmentDetailDto>> FindEquipmentAsync(int? id);
         //Equipment MapEquipemntDtoToEntity(EquipmentUpdateDto equipment);
 
         //void RemoveImage(int? id);

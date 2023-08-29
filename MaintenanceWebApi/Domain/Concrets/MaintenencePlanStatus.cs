@@ -10,11 +10,11 @@ namespace Domain.Concrets
     public enum MaintenencePlanStatus
     {
         [Description("STARTED")]
-        STARTED = 0,
+        STARTED = 1,
         [Description("PENDING")]
-        PENDING = 1,
+        PENDING = 2,
         [Description("COMPLETED")]
-        COMPLETED = 2
+        COMPLETED = 3
 
     }
 }

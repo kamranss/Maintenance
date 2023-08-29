@@ -3,6 +3,7 @@ using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Parts;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using Application.Exceptions.EquipmentException;
@@ -158,7 +159,7 @@ namespace Persistence.Services
 
 
 
-        } // done
+        } // should be modified
 
         //readonly IQRCodeService _qrCodeService;
 
@@ -166,7 +167,7 @@ namespace Persistence.Services
         public EquipmentGetDto Deatil(int? id)
         {
             throw new NotImplementedException();
-        }
+        } // will not use
 
       
         public async Task<IServiceResult<Pagination<EquipmentListDto>>> GetEquipmentsAsync(int? page, int? pagesize)
@@ -303,38 +304,101 @@ namespace Persistence.Services
         public EquipmentGetDto IsEquipmentExist(int? id)
         {
             throw new NotImplementedException();
-        }
+        } // will not use
 
 
         public Task<byte[]> QrCodeToEquipmentAsync(string equipmentId)
         {
             throw new NotImplementedException();
-        }
+        } // will no use
 
         public void SaveEquipmentImage(IFormFile newImage, Equipment equipment)
         {
             throw new NotImplementedException();
-        }
+        } // will not use
 
         public Task StockUpdateToEquipmentAsync(string equipmentId, int stock)
         {
             throw new NotImplementedException();
-        }
+        } // will not use
 
-        public async Task<IServiceResult<EquipmentListDto>> FindEquipmentAsync(int? id)
+        public async Task<IServiceResult<EquipmentDetailDto>> FindEquipmentAsync(int? id)
         {
+            if (id == null)
+            {
+                return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "Should not be null" };
+            }
             if (!id.HasValue && id <= 0)
             {
-                return new ServiceResult<EquipmentListDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
+                return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
             }
-            var existEquipment = _equipmentReadRepository.GetAll().FirstOrDefault(d => d.Id == id);
-            if (existEquipment == null)
-            {
-                return new ServiceResult<EquipmentListDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
-            }
-            var equipmentListDto = _mapper.Map<EquipmentListDto>(existEquipment);
+            //var existEquipment = _equipmentReadRepository.GetAll().FirstOrDefault(d => d.Id == id);
+            //var equipment = _equipmentReadRepository
+            //  .GetAll()
+            //  .Where(e => e.Id == id)
+            //  .Include(e => e.MaintenancePlan)
+            //  .Include(e=>e.UsageHistories)
+            //  .Include(e => e.Part)
+            //  .Select(e => new EquipmentDetailDto
+            //  {
+            //      Id = e.Id,
+            //      Status = e.Status,
+            //      Name = e.Name,
+            //      Description = e.Description,
+            //      LastMaintenace = e.LastMaintenaceDate,
+            //      CurrentValue = e.CurrentValue,
+            //      Model = e.ModelId.HasValue ? e.Model.Name : null,
+            //      OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
+            //      Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+            //      Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+            //      Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
+            //      MpTime = e.MpCompleted,
+            //      UsageHistoryList = _mapper.Map<List<UsageHistoryDto>>(e.UsageHistories),
+            //      MpList = _mapper.Map<List<MaintenancePlanDto>>(e.MaintenancePlan),
+            //      PartList = _mapper.Map<List<PartDto>>(e.Part)
 
-            return new ServiceResult<EquipmentListDto> { IsSuccess = true, Data = equipmentListDto };
+
+            //  })
+            //  .ToList();
+            //if (equipment == null)
+            //{
+            //    return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
+            //}
+            //var equipmentListDto = _mapper.Map<EquipmentDetailDto>(equipment);
+
+            var equipment = await _equipmentReadRepository
+                .GetAll()
+                .Where(e => e.Id == id)
+                .Include(e => e.MaintenancePlan)
+                .Include(e => e.UsageHistories)
+                .Include(e => e.Part)
+                .SingleOrDefaultAsync();
+
+            if (equipment == null)
+            {
+                return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
+            }
+
+            var equipmentDetailDto = new EquipmentDetailDto
+            {
+                Id = equipment.Id,
+                Status = equipment.Status,
+                Name = equipment.Name,
+                Description = equipment.Description,
+                LastMaintenace = equipment.LastMaintenaceDate,
+                CurrentValue = equipment.CurrentValue,
+                Model = equipment.ModelId.HasValue ? equipment.Model.Name : null,
+                OperationSite = equipment.OperationSiteid.HasValue ? equipment.OperationSite.Name : null,
+                Department = equipment.DepartmentId.HasValue ? equipment.Department.Name : null,
+                Manufacture = equipment.ManufactureId.HasValue ? equipment.Manufacture.Name : null,
+                Type = equipment.EquipmentTypeId.HasValue ? equipment.EquipmentType.Name : null,
+                MpTime = equipment.MpCompleted,
+                UsageHistoryList = _mapper.Map<List<UsageHistoryDto>>(equipment.UsageHistories),
+                MpList = _mapper.Map<List<MaintenancePlanDto>>(equipment.MaintenancePlan),
+                PartList = _mapper.Map<List<PartDto>>(equipment.Part)
+            };
+
+            return new ServiceResult<EquipmentDetailDto> { IsSuccess = true, Data = equipmentDetailDto };
         } // done
 
         public async Task<IServiceResult<EquipmentDto>> DeleteEquipmentAsync(int id)

@@ -38,6 +38,21 @@ namespace MaintenanceWebApi.Controllers
             
         }
 
+        [HttpGet("List")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetMpsToList(int? page, int? pageSize)
+        {
+            var result = _mpService.GetMPsToListAsync(page, pageSize).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
+
+        }
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]

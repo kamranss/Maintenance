@@ -6,7 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import moment from "moment";
+// import moment from "moment";
 
 export default function TableMp({ thead = [], rows = [] }) {
   return (
@@ -28,23 +28,28 @@ export default function TableMp({ thead = [], rows = [] }) {
               key={key}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="left">{row?.id}</TableCell>
-              <TableCell align="left">{row?.Code}</TableCell>
-              <TableCell align="left">{row?.Name || "-"}</TableCell>
+              <TableCell align="left">{row?.id || "-"}</TableCell>
+              <TableCell align="left">{row?.code || "-"}</TableCell>
+              <TableCell align="left">{row?.name || "-"}</TableCell>
               <TableCell align="left">{row?.description || "-"}</TableCell>
-              <TableCell align="left">{row?.Status || "-"}</TableCell>
-              <TableCell align="left">{row?.MetricType || "-"}</TableCell>
-              <TableCell align="left">
-                {moment(row?.createdDate).format("DD-MM-YYYY") || "-"}
+              {/* <TableCell align="left">{row?.isActive || "-"}</TableCell> */}
+              <TableCell
+                className={`${
+                  row.status === "COMPLETED"
+                    ? "row-completed"
+                    : row.status === "INACTIVE"
+                    ? "row-inactive"
+                    : row.status === "REPAIR"
+                    ? "row-repair"
+                    : row.status === "INUSE"
+                    ? "row-inuse"
+                    : ""
+                }`}
+                align="left"
+              >
+                {row?.status || "-"}
               </TableCell>
-              <TableCell align="left">
-                {row?.equipments?.length > 0 ? row?.equipments : "-"}
-              </TableCell>
-              {/* <TableCell align="right">{row?.isActive}</TableCell> */}
-              {/* <TableCell align="right">{row?.isDeleted}</TableCell> */}
-              {/* <TableCell align="right">{row?.updatedDate}</TableCell> */}
-              {/* <TableCell align="right">{row?.createdBy}</TableCell> */}
-              {/* <TableCell align="right">{row?.modifiedBy}</TableCell> */}
+              <TableCell align="left">{row?.metricType || "-"}</TableCell>
             </TableRow>
           ))}
         </TableBody>

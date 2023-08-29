@@ -13,7 +13,7 @@ const MpPage = () => {
 
   useEffect(() => {
     axios
-      .get("https://localhost:7066/api/MaintenancePlan/All", {
+      .get("https://localhost:7066/api/MaintenancePlan/List", {
         params: { page: page, pageSize: size },
       })
       .then((res) => {

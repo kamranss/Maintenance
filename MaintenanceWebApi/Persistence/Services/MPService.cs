@@ -274,6 +274,87 @@ namespace Persistence.Services
 
         } // done
 
+        public async Task<IServiceResult<Pagination<MpDto>>> GetMPsToListAsync(int? page, int? pageSize)
+        {
+            if (page == null || pageSize == null)
+            {
+                var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt / 2;
+
+                var mpss = _readRepository
+               .GetAll()
+               .Take(takeValuee)
+               .Where(d => d.IsDeleted == false)
+                  .Select(e => new MpDto
+                  {
+                      Id = e.Id,
+                      Code = e.Code,
+                      Name = e.Name,
+                      Description = e.Description,
+                      Status = e.Status,
+                      //IsActive = e.IsActive,
+                      MetricType = e.MetricType,
+
+                  })
+               .ToList();
+
+                if (mpss == null)
+                {
+                    return new ServiceResult<Pagination<MpDto>> { IsSuccess = false, ErrorMessage = "There is no Mp in DB" };
+                }
+
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var mpListDto = _mapper.Map<List<MpDto>>(mpss);
+                var paginationMp = new Pagination<MpDto>(mpListDto, pageValuee, pageCountt, totalCountt);
+                return new ServiceResult<Pagination<MpDto>> { IsSuccess = true, Data = paginationMp };
+
+
+            }
+            if ((!page.HasValue || !pageSize.HasValue || page <= 0 || pageSize <= 0))
+            {
+                return new ServiceResult<Pagination<MpDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+            }
+
+            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+            int pageValue = page.Value;
+            int takeValue = pageSize.Value;
+            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+
+            var MpsFromDb = _readRepository.GetAll(tracking: false);
+
+            var items = MpsFromDb
+             .Skip((pageValue - 1) * takeValue)
+             .Take(takeValue)
+             .Where(e => e.IsDeleted == false)
+              .Select(e => new MpDto
+              {
+                  Id = e.Id,
+                  Code = e.Code,
+                  Name = e.Name,
+                  Description = e.Description,
+                  Status = e.Status,
+                  //IsActive = e.IsActive,
+                  MetricType = e.MetricType,
+
+              })
+             .ToList();
+
+
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<MpDto>> { IsSuccess = false, ErrorMessage = "There is no MP in DB" };
+            }
+            var totalCount = items.Count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+
+            var MpListDto = _mapper.Map<List<MpDto>>(items);
+            var pagination = new Pagination<MpDto>(MpListDto, pageValue, pageCount, totalCount);
+
+            return new ServiceResult<Pagination<MpDto>> { IsSuccess = true, Data = pagination };
+        }
+
         public async Task<IServiceResult<MpCompleted>> IsMpCompleted(MpCompleted mpCompleted)
         {
             var existMp = _readRepository.GetAll()
