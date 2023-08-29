@@ -208,20 +208,54 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<Pagination<MaintenancePlanDto>>> GetMPsAsync(int? page, int? pagesize)
         {
+
+            if (page == null || pagesize == null)
+            {
+                var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt / 2;
+
+                var mpss = _readRepository
+               .GetAll()
+               .Take(takeValuee)
+               .Include(d => d.Equipments)
+               .Include(d => d.Services)
+               .Where(d => d.IsDeleted == false)
+               .ToList();
+
+                if (mpss == null)
+                {
+                    return new ServiceResult<Pagination<MaintenancePlanDto>> { IsSuccess = false, ErrorMessage = "There is no Mp in DB" };
+                }
+
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var mpListDto = _mapper.Map<List<MaintenancePlanDto>>(mpss);
+                var paginationMp = new Pagination<MaintenancePlanDto>(mpListDto, pageValuee, pageCountt, totalCountt);
+                return new ServiceResult<Pagination<MaintenancePlanDto>> { IsSuccess = true, Data = paginationMp };
+
+
+            }
             if ((!page.HasValue || !pagesize.HasValue || page <= 0 || pagesize <= 0))
             {
                 return new ServiceResult<Pagination<MaintenancePlanDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
+            //int pageValue = page.Value;
+            //int takeValue = pagesize.Value;
+            //int skipCount = (pageValue - 1) * takeValue;
+
+            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
             int pageValue = page.Value;
             int takeValue = pagesize.Value;
-            int skipCount = (pageValue - 1) * takeValue;
+            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
 
-           
             var MpsFromDb = _readRepository.GetAll(tracking: false);
 
             var items = MpsFromDb
              .Skip((pageValue - 1) * takeValue)
              .Take(takeValue)
+             .Include(d => d.Equipments)
+             .Include(d => d.Services)
              .Where(e => e.IsDeleted == false)
              .ToList();
 

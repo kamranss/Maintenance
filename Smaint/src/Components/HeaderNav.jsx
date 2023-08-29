@@ -18,10 +18,10 @@ const HeaderNav = () => {
           <i class="fa-solid fa-list"></i>
         </NavLink>
         <NavLink
+          to="/mppage"
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
-          to="/department"
         >
           <i class="fa-solid fa-bars-progress"></i>
         </NavLink>

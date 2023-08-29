@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HeaderNav from "./Components/HeaderNav.jsx";
 import EquipmentPage from "./Pages/EquipmentPage.jsx";
 import Departmment from "./Pages/Department.jsx";
+import MpPage from "./Pages/MpPage.jsx";
 import Administration from "./Pages/Administration.jsx";
 import { CreateEquipment } from "./Pages/CreateEquipment.jsx";
 
@@ -24,6 +25,7 @@ const App = () => {
         <Routes>
           <Route path="/department" element={<Departmment />} />
           <Route path="/equipmentPage" element={<EquipmentPage />} />
+          <Route path="/MpPage" element={<MpPage />} />
           <Route path="/administration" element={<Administration />} />
           <Route path="/createequipment" element={<CreateEquipment />} />
 

@@ -271,7 +271,7 @@ const FormCreateEquipment = () => {
 
   const fetchOperationSitesDebounced = debounce(fetchOperationSites, 300);
   useEffect(() => {
-    fetchManufacture(searchQueryforOperationSite);
+    fetchOperationSites(searchQueryforOperationSite);
   }, [searchQueryforOperationSite]);
 
   const fetchUsageLocationDebounced = debounce(fetchUsageLoacation, 300);
@@ -482,7 +482,40 @@ const FormCreateEquipment = () => {
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>OperationSite</FormLabel>
-                <TextField type="number" name="OperationSiteid" />
+                <Autocomplete
+                  id="operationSite-autocomplete"
+                  options={OperationSite}
+                  getOptionLabel={(operationSite) => operationSite.name}
+                  value={selectedOperationSite} // Bind selectedModelId to the Autocomplete value
+                  onChange={(event, newValue) => {
+                    setSelectedOperationSite(newValue); // Update selectedModel when a model is selected
+                  }}
+                  onInputChange={(event, newInputValue) => {
+                    setSearchQueryforOperationSite(newInputValue); // Update searchQuery as input changes
+                  }}
+                  inputValue={searchQueryforOperationSite}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Search or Select Operation Sites"
+                      variant="outlined"
+                    />
+                  )}
+                  renderOption={(props, option) => (
+                    <li {...props}>{option.name}</li>
+                  )}
+                  PopperProps={{
+                    placement: "bottom-start", // Adjust the placement as needed
+                    modifiers: [
+                      {
+                        name: "offset",
+                        options: {
+                          offset: [0, 8], // Adjust the offset to position the dropdown
+                        },
+                      },
+                    ],
+                  }}
+                />
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Manufacture</FormLabel>
@@ -492,7 +525,7 @@ const FormCreateEquipment = () => {
                   getOptionLabel={(manufacture) => manufacture.name}
                   value={selectedManufacture} // Bind selectedModelId to the Autocomplete value
                   onChange={(event, newValue) => {
-                    setSelectedDepartments(newValue); // Update selectedModel when a model is selected
+                    setSelectedManufactures(newValue); // Update selectedModel when a model is selected
                   }}
                   onInputChange={(event, newInputValue) => {
                     setSearchQueryforManufactures(newInputValue); // Update searchQuery as input changes
@@ -525,7 +558,13 @@ const FormCreateEquipment = () => {
             <div>
               <FormGroup className="mb-3">
                 <FormLabel>ProductionYear</FormLabel>
-                <TextField type="number" name="ProductionYear" />
+                <TextField
+                  type="number"
+                  name="ProductionYear"
+                  onChange={(e) =>
+                    handleInputChange("ProductionYear", e.target.value)
+                  }
+                />
                 {validationErrors.ProductionYear && (
                   <span className="validation-error">
                     {validationErrors.ProductionYear[0]}

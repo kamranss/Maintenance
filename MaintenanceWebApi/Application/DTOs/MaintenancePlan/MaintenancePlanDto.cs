@@ -1,4 +1,5 @@
-﻿using Application.DTOs.Equipment;
+﻿using Application.DTOs.Common;
+using Application.DTOs.Equipment;
 using Application.DTOs.Service;
 using Domain.Common;
 using Domain.Concrets;
@@ -11,8 +12,9 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.MaintenancePlan
 {
-    public class MaintenancePlanDto:BaseEntity
+    public class MaintenancePlanDto:BaseDto
     {
+        public int Id { get; set; }
         public string? Code { get; set; }
         public string? Name { get; set; }
         public string? Description { get; set; }

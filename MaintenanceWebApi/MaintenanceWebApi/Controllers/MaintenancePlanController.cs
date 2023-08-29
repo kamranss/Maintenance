@@ -26,10 +26,16 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetMPs(int page, int pageSize)
+        public IActionResult GetMPs(int? page, int? pageSize)
         {
-            var Mps = _mpService.GetMPsAsync(page, pageSize);
-            return Ok(Mps);
+            var result = _mpService.GetMPsAsync(page, pageSize).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
+            
         }
 
 

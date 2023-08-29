@@ -46,7 +46,7 @@ namespace MaintenanceWebApi.Controllers
             {
                 if (serviceResult.ErrorMessage == "Params is not okay") return BadRequest();
 
-                else if (serviceResult.ErrorMessage == "There is no Equipment in DB");
+                else if (serviceResult.ErrorMessage == "There is no Department in DB");
                     return NotFound();
             }
 
