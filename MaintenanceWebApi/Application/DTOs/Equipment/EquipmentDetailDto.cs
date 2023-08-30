@@ -30,5 +30,14 @@ namespace Application.DTOs.Equipment
         public List<MaintenancePlanDto>? MpList { get; set; }
         public List<UsageHistoryDto>? UsageHistoryList { get; set; }
         public List<PartDto>? PartList { get; set; }
+
+        public EquipmentDetailDto()
+        {
+            MpList = new List<MaintenancePlanDto>();
+            UsageHistoryList = new List<UsageHistoryDto>();
+            PartList = new List<PartDto>();
+        }
+        
+
     }
 }

@@ -8,22 +8,17 @@ import PaginationComponent from "../Components/PaginationComponent";
 import SideBarEquipment from "../Components/SideBarEquipment";
 import TableHeader from "../Components/TableHeader";
 import TableEquipment from "../Components/Tables/TableEquipment";
+import EquipmentModal from "../Components/EquipmentModal";
+import Dialog from "@mui/material/Dialog"; // Import Dialog component
+import DialogContent from "@mui/material/DialogContent"; // Import DialogContent component
 
 const EquipmentPage = () => {
-  // const [page, setPage] = useState(3);
-
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(5);
   const [activeTab, setActiveTab] = useState(0); // Track the active tab
   const [data, setData] = useState();
-
-  // useEffect(() => {
-  //   axios
-  //     .get("https://localhost:7066/api/Department/All", {
-  //       params: { page: page, pageSize: size },
-  //     })
-  //     .then((res) => setDepartmentdata(res.data.result.data));
-  // }, [page, size]);
+  const [modalData, setModalData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const apiEndpoints = [
     "https://localhost:7066/api/Equipment/FindEquipmentsByDepartmentId",
@@ -37,6 +32,24 @@ const EquipmentPage = () => {
     "https://localhost:7066/api/Equipment/FindEquipmentsByDepartmentId",
   ];
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleTableRowClick = async (rowId) => {
+    console.log("handleTableRowClick called with rowId:", rowId);
+    try {
+      const response = await axios.get(`https://localhost:7066/api/Equipment`, {
+        params: { id: rowId }, // Pass rowId as a parameter
+      });
+      const responseData = response.data;
+      console.log("Fetched data:", responseData);
+      setModalData(responseData);
+      setIsModalOpen(true);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
   const fetchData = (index) => {
     const endpoint = apiEndpoints[index];
 
@@ -51,65 +64,27 @@ const EquipmentPage = () => {
   };
 
   useEffect(() => {
-    fetchData(activeTab);
+    fetchData(activeTab); // Call fetchData with the activeTab index
   }, [activeTab, page, size]);
 
   console.log(data);
-  // useEffect(() => {
-  //   axios
-  //     .get(
-  //       "https://localhost:7066/api/Equipment/FindEquipmentsByDepartmentId",
-  //       {
-  //         params: { page: page, pageSize: size },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       console.log("Response:", res.data); // Log the entire response
-  //       console.log("Items:", res.data); // Log the items array
-  //       console.log("Current Page:", res.data.currentPage); // Log the current page
-  //       console.log("Page Count:", res.data.pageCount); // Log the page count
-  //       console.log("Total Count:", res.data.totalCount); // Log the total count
-  //       setEquipmentData(res.data); // Set the department data
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, [page, size]);
 
   return (
-    // <div className="department-main">
-    //   <div className="dep-mid">
-    //     <SideBarEquipment />
-    //     <div className="page-content">
-    //       {/* <div>
-    //         <TableHeader />
-    //         <TableMui className="table" />
-    //         <PaginationComponent page={page} setPage={setPage} />
-    //       </div> */}
-
-    //       <div>
-    //         <TableHeader />
-    //         {equipmentData && (
-    //           <>
-    //             <TableEquipment
-    //               className="table"
-    //               thead={Object.keys(equipmentData?.items?.[0])}
-    //               rows={equipmentData?.items}
-    //             />
-    //             <PaginationComponent
-    //               page={page}
-    //               setPage={setPage}
-    //               recordSize={size}
-    //               count={equipmentData?.totalCount} // *4
-    //               size={size}
-    //               setSize={setSize}
-    //             />
-    //           </>
-    //         )}
-    //       </div>
-    //     </div>
-    //   </div>
-    // </div>
-
     <div className="department-main">
+      {/* <Dialog open={isModalOpen} onClose={handleModalClose}>
+        <DialogContent>
+          
+        </DialogContent>
+      </Dialog> */}
+
+      {modalData && (
+        <EquipmentModal
+          isOpen={isModalOpen}
+          onClose={handleModalClose}
+          data={modalData}
+        />
+      )}
+
       <div className="dep-mid">
         <SideBarEquipment activeTab={activeTab} onTabChange={setActiveTab} />
         <div className="page-content">
@@ -121,6 +96,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)}
               />
             )}
             {activeTab === 1 && data && (
@@ -128,6 +104,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 2 && data && (
@@ -135,6 +112,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 3 && data && (
@@ -142,6 +120,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 4 && data && (
@@ -149,6 +128,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 5 && data && (
@@ -156,6 +136,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 6 && data && (
@@ -163,6 +144,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 7 && data && (
@@ -170,6 +152,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             {activeTab === 8 && data && (
@@ -177,6 +160,7 @@ const EquipmentPage = () => {
                 className="table"
                 thead={Object.keys(data?.items?.[0])}
                 rows={data?.items}
+                onRowClick={(rowId) => handleTableRowClick(rowId)} // Pass the row click handler
               />
             )}
             <PaginationComponent

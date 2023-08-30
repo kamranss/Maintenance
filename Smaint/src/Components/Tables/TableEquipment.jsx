@@ -20,7 +20,7 @@ import moment from "moment";
 //   createData("Gingerbread", 356, 16.0, 49, 3.9),
 // ];
 
-export default function TableEquipment({ thead = [], rows = [] }) {
+export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
   return (
     <TableContainer
       component={Paper}
@@ -55,6 +55,7 @@ export default function TableEquipment({ thead = [], rows = [] }) {
             return (
               <TableRow
                 key={key}
+                onClick={() => onRowClick(row.id)}
                 // className={`row ${statusClass}`} // Add 'row' class and status class
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >

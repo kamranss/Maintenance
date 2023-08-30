@@ -30,6 +30,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Persistence.Services
 {
@@ -366,37 +367,42 @@ namespace Persistence.Services
             //}
             //var equipmentListDto = _mapper.Map<EquipmentDetailDto>(equipment);
 
-            var equipment = await _equipmentReadRepository
+            var equipment =  _equipmentReadRepository
                 .GetAll()
                 .Where(e => e.Id == id)
                 .Include(e => e.MaintenancePlan)
                 .Include(e => e.UsageHistories)
                 .Include(e => e.Part)
-                .SingleOrDefaultAsync();
+                .FirstOrDefault();
+
+            Console.WriteLine(equipment);
 
             if (equipment == null)
             {
                 return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
             }
 
-            var equipmentDetailDto = new EquipmentDetailDto
-            {
-                Id = equipment.Id,
-                Status = equipment.Status,
-                Name = equipment.Name,
-                Description = equipment.Description,
-                LastMaintenace = equipment.LastMaintenaceDate,
-                CurrentValue = equipment.CurrentValue,
-                Model = equipment.ModelId.HasValue ? equipment.Model.Name : null,
-                OperationSite = equipment.OperationSiteid.HasValue ? equipment.OperationSite.Name : null,
-                Department = equipment.DepartmentId.HasValue ? equipment.Department.Name : null,
-                Manufacture = equipment.ManufactureId.HasValue ? equipment.Manufacture.Name : null,
-                Type = equipment.EquipmentTypeId.HasValue ? equipment.EquipmentType.Name : null,
-                MpTime = equipment.MpCompleted,
-                UsageHistoryList = _mapper.Map<List<UsageHistoryDto>>(equipment.UsageHistories),
-                MpList = _mapper.Map<List<MaintenancePlanDto>>(equipment.MaintenancePlan),
-                PartList = _mapper.Map<List<PartDto>>(equipment.Part)
-            };
+            EquipmentDetailDto equipmentDetailDto = new EquipmentDetailDto();
+
+            //EquipmentDetailDto equipmentDetailDto = new EquipmentDetailDto
+            //{
+
+            //};
+            equipmentDetailDto.Id = equipment.Id;
+            equipmentDetailDto.Status = equipment.Status;
+            equipmentDetailDto.Name = equipment.Name;
+            equipmentDetailDto.Description = equipment.Description;
+            equipmentDetailDto.LastMaintenace = equipment.LastMaintenaceDate;
+            equipmentDetailDto.CurrentValue = equipment.CurrentValue;
+            equipmentDetailDto.Model = equipment.ModelId.HasValue ? equipment.Model?.Name : null;
+            equipmentDetailDto.OperationSite = equipment.OperationSiteid.HasValue ? equipment.OperationSite?.Name : null;
+            equipmentDetailDto.Department = equipment.DepartmentId.HasValue ? equipment.Department?.Name : null;
+            equipmentDetailDto.Manufacture = equipment.ManufactureId.HasValue ? equipment.Manufacture?.Name : null;
+            equipmentDetailDto.Type = equipment.EquipmentTypeId.HasValue ? equipment.EquipmentType?.Name : null;
+            equipmentDetailDto.MpTime = equipment.MpCompleted;
+            equipmentDetailDto.UsageHistoryList = equipment.UsageHistories != null ? _mapper.Map<List<UsageHistoryDto>>(equipment.UsageHistories) : null;
+            equipmentDetailDto.MpList = equipment.MaintenancePlan != null ? _mapper.Map<List<MaintenancePlanDto>>(equipment.MaintenancePlan) : null;
+            equipmentDetailDto.PartList = equipment.Part != null ? _mapper.Map<List<PartDto>>(equipment.Part) : null;
 
             return new ServiceResult<EquipmentDetailDto> { IsSuccess = true, Data = equipmentDetailDto };
         } // done
