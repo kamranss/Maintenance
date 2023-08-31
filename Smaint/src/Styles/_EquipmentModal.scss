@@ -35,8 +35,9 @@
       }
     }
     .second_part {
-      display: flex;
-      justify-content: space-around;
+      // display: flex;
+      // justify-content: space-around;
+      margin-left: 6rem;
       .second_part_header_box1 {
         padding-top: 4%;
         //   padding-left: 5%;
@@ -68,5 +69,6 @@
   align-items: center;
   border: solid 0.2px grey;
   border-radius: 5px;
+  padding: 5px;
   margin: 3px;
 }

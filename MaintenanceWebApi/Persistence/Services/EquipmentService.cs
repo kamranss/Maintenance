@@ -192,10 +192,10 @@ namespace Persistence.Services
                    Description = e.Description,
                    LastMaintenace = e.LastMaintenaceDate,
                    CurrentValue = e.CurrentValue,
-                   Model = e.ModelId.HasValue ? e.Model.Name : null,
+                   //Model = e.ModelId.HasValue ? e.Model.Name : null,
                    OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-                   Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-                   Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                   //Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                   //Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                    Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
                    MpTime = e.MpCompleted
                    //ModelId = e.Model.Id,
@@ -249,10 +249,10 @@ namespace Persistence.Services
                            Description = e.Description,
                            LastMaintenace = e.LastMaintenaceDate,
                            CurrentValue = e.CurrentValue,
-                           Model = e.ModelId.HasValue ? e.Model.Name : null,
+                           //Model = e.ModelId.HasValue ? e.Model.Name : null,
                            OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-                           Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-                           Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                           //Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                           //Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                            Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
                            MpTime = e.MpCompleted
                        })
@@ -578,14 +578,14 @@ namespace Persistence.Services
                        Description = e.Description,
                        LastMaintenace = e.LastMaintenaceDate,
                        CurrentValue = e.CurrentValue,
-                       Model = e.ModelId.HasValue ? e.Model.Name : null,
+                       //Model = e.ModelId.HasValue ? e.Model.Name : null,
                        OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-                       Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-                       Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                       //Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                       //Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                        Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
                        ProductionYear = e.ProductionYear,
                        SeriaNumber = e.SeriaNumber,
-                       UsageLocation = e.usageLocation,
+                       //UsageLocation = e.usageLocation,
                        MpTime = e.MpCompleted
 
                    })
@@ -629,14 +629,14 @@ namespace Persistence.Services
                        Description = e.Description,  
                        LastMaintenace = e.LastMaintenaceDate,
                        CurrentValue = e.CurrentValue,
-                       Model = e.ModelId.HasValue ? e.Model.Name : null,
+                       //Model = e.ModelId.HasValue ? e.Model.Name : null,
                        OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-                       Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-                       Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                       //Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                       //Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                        Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
                        ProductionYear = e.ProductionYear,
                        SeriaNumber = e.SeriaNumber,
-                       UsageLocation = e.usageLocation,
+                       //UsageLocation = e.usageLocation,
                        MpTime = e.MpCompleted
                    })
                  .ToList();
@@ -683,14 +683,14 @@ namespace Persistence.Services
                    Description = e.Description,
                    LastMaintenace = e.LastMaintenaceDate,
                    CurrentValue = e.CurrentValue,
-                   Model = e.ModelId.HasValue ? e.Model.Name : null,
+                   //Model = e.ModelId.HasValue ? e.Model.Name : null,
                    OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-                   Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-                   Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
+                   //Department = e.DepartmentId.HasValue ? e.Department.Name : null,
+                   //Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
                    Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
                    ProductionYear = e.ProductionYear,
                    SeriaNumber = e.SeriaNumber,
-                   UsageLocation = e.usageLocation,
+                   //UsageLocation = e.usageLocation,
                    MpTime = e.MpCompleted
                })
              .ToList();

@@ -10,6 +10,7 @@ import Departmment from "./Pages/Department.jsx";
 import MpPage from "./Pages/MpPage.jsx";
 import Administration from "./Pages/Administration.jsx";
 import { CreateEquipment } from "./Pages/CreateEquipment.jsx";
+import EquipmentDetail from "./Pages/EquipmentDetail.jsx";
 
 const App = () => {
   return (
@@ -28,6 +29,7 @@ const App = () => {
           <Route path="/MpPage" element={<MpPage />} />
           <Route path="/administration" element={<Administration />} />
           <Route path="/createequipment" element={<CreateEquipment />} />
+          <Route path="/equipmentDetail" element={<EquipmentDetail />} />
 
           {/* <Route path="/" element={<Home/>}/> */}
         </Routes>

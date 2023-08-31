@@ -7,6 +7,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
+import { NavLink } from "react-router-dom";
 
 // function createData(name, calories, fat, carbs, protein) {
 //   return { name, calories, fat, carbs, protein };
@@ -96,18 +97,18 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 >
                   {row?.status || "-"}
                 </TableCell>
-                <TableCell align="left">{row?.usageLocation || "-"}</TableCell>
+                {/* <TableCell align="left">{row?.usageLocation || "-"}</TableCell>
                 <TableCell align="left">{row?.department || "-"}</TableCell>
                 <TableCell align="left">{row?.manufacture || "-"}</TableCell>
 
-                <TableCell align="left">{row?.model || "-"}</TableCell>
+                <TableCell align="left">{row?.model || "-"}</TableCell> */}
                 <TableCell align="left">
                   {moment(row?.lastMaintenace).format("DD-MM-YYYY") || "-"}
                 </TableCell>
                 <TableCell align="left">{row?.currentValue || "-"}</TableCell>
-                <TableCell align="left">
+                {/* <TableCell align="left">
                   {row?.equipments?.length > 0 ? row?.equipments : "-"}
-                </TableCell>
+                </TableCell> */}
                 {/* <TableCell align="left">
                 {row?.equipments?.length > 0 ? row?.equipments : "-"}
               </TableCell> */}
@@ -116,6 +117,18 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 {/* <TableCell align="right">{row?.updatedDate}</TableCell> */}
                 {/* <TableCell align="right">{row?.createdBy}</TableCell> */}
                 {/* <TableCell align="right">{row?.modifiedBy}</TableCell> */}
+                <TableCell align="left">
+                  <NavLink
+                    to={{
+                      pathname: "/equipmentDetail",
+                      search: `?id=${row.id}`,
+                    }}
+                  >
+                    <button>
+                      <i class="fa-solid fa-circle-info"></i>
+                    </button>
+                  </NavLink>
+                </TableCell>
               </TableRow>
             );
           })}

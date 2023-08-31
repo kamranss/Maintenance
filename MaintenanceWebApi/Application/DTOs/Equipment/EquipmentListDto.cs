@@ -19,10 +19,10 @@ namespace Application.DTOs.Equipment
         public string? SeriaNumber { get; set; }    
         public string? Type { get; set; }
         public EquipmentStatus? Status { get; set; }
-        public Location? UsageLocation { get; set; } 
-        public string? Department { get; set; }      
-        public string? Manufacture { get; set; }     
-        public string Model { get; set; }
+        //public Location? UsageLocation { get; set; } 
+        //public string? Department { get; set; }      
+        //public string? Manufacture { get; set; }     
+        //public string Model { get; set; }
         public DateTime? LastMaintenace { get; set; }
         public decimal? CurrentValue { get; set; }
 
