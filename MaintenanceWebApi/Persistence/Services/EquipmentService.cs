@@ -370,6 +370,11 @@ namespace Persistence.Services
             var equipment =  _equipmentReadRepository
                 .GetAll()
                 .Where(e => e.Id == id)
+                .Include(e => e.Department)
+                .Include(e => e.Manufacture)
+                .Include(e => e.OperationSite)
+                .Include(e => e.Model)
+                .Include(e => e.EquipmentType)
                 .Include(e => e.MaintenancePlan)
                 .Include(e => e.UsageHistories)
                 .Include(e => e.Part)

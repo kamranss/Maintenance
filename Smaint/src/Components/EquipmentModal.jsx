@@ -33,7 +33,8 @@ const AccordionSection = ({ data, title }) => {
     <div key={index} className="accordion-item">
       <p>Operation Name: {item.operationName}</p>
       <p>Start Value: {item.startUsageHourValue}</p>
-      <p>End Value: {item.endtUsageHourValue}</p>
+      <p>End Value: {item.endUsageHourValue}</p>
+      <p>Total: {item.totalUsageValue}</p>
     </div>
   ));
 
@@ -81,13 +82,22 @@ const EquipmentModal = ({ isOpen, handleClose, modalData }) => {
       <div className="modal-container">
         {" "}
         <div className="modal_Header">
-          <div className="header_box">
-            <p>Name: {modalData.name}</p>
-            <p>Description: {modalData.description}</p>
-            <p>MpTime: {modalData.mpTime}</p>
+          <div className="first_part">
+            <div className="first_part_header_box1">
+              <p>Name: {modalData.name}</p>
+              <p>Description: {modalData.description}</p>
+              <p>MpTime: {modalData.mpTime}</p>
+            </div>
+            <div className="first_part_header_box2">
+              <p>Status: {modalData.status}</p>
+            </div>
           </div>
-          <div className="header_box2">
-            <p>Status: {modalData.status}</p>
+          <div className="second_part">
+            <div className="second_part_header_box1">
+              <p>Department: {modalData.department}</p>
+              <p>Manufacture: {modalData.manufacture}</p>
+              <p>OperationSite: {modalData.operationSite}</p>
+            </div>
           </div>
         </div>
         {modalData && (
