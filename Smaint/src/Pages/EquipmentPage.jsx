@@ -80,8 +80,8 @@ const EquipmentPage = () => {
       {modalData && (
         <EquipmentModal
           isOpen={isModalOpen}
-          onClose={handleModalClose}
-          data={modalData}
+          handleClose={handleModalClose}
+          modalData={modalData}
         />
       )}
 
