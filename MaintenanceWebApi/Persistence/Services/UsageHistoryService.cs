@@ -2,6 +2,8 @@
 using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Parts;
 using Application.DTOs.UsageHistory;
 using Application.Repositories.EquipmentRepo;
 using Application.Repositories.MaintenanceSettingsRepo;
@@ -100,6 +102,7 @@ namespace Persistence.Services
             decimal durationDecimal = (decimal)durationInMinutes;
 
             existUsageStory.EndUsageHourValue = usageHistoryEnd.EndUsageHourValue;
+            existUsageStory.Status = Domain.Concrets.UsageHistoryStatus.FINISHED;
             existUsageStory.TotalUsageTime = durationDecimal;
             existUsageStory.TotalUsageValue = usageHistoryEnd.EndUsageHourValue - existUsageStory.StartUsageHourValue;
 
@@ -204,6 +207,70 @@ namespace Persistence.Services
             //var mappedHistory = _mapper.Map<List<UsageHistoryDto>>(history);
 
             //return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data=mappedHistory };
+
+        }
+
+        public async Task<IServiceResult<Pagination<UsageHistoryDto>>> UsageHistoriesAsync(int? page, int? pageSize)
+        {
+
+            if (page == null && pageSize == null)
+            {
+                var countt = _readRepository.GetAll().Where(uh => uh.IsDeleted == false && uh.IsActive == true).Count();
+                int pageValuee = 1;
+                int takeValuee = countt / 2;
+
+                var usageHistory = _readRepository
+               .GetAll()
+               .Take(takeValuee)
+               .ToList();
+
+                if (usageHistory == null)
+                {
+                    return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "There is no UsageHistory in DB" };
+                }
+
+                var totalCountt = countt;
+                var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
+                var usaageHistoryDto = _mapper.Map<List<UsageHistoryDto>>(usageHistory);
+                var paginationUsageHistory = new Pagination<UsageHistoryDto>(usaageHistoryDto, pageValuee, pageCountt, totalCountt);
+                return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = paginationUsageHistory };
+
+
+            }
+
+
+            if (!page.HasValue || !pageSize.HasValue || page <= 0 || pageSize <= 0)
+            {
+                return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
+            }
+            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+            int pageValue = page.Value;
+            int takeValue = pageSize.Value;
+            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+
+            var items = _readRepository
+               .GetAll()
+               .Include(u => u.Equipment)
+               .Skip(skipCount)
+               .Take(takeValue)
+               //.Where(uh => uh.IsDeleted == false && uh.IsActive == true)
+               .ToList();
+
+            if (items == null)
+            {
+                return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "There is no UsageHistory in DB" };
+            }
+
+           
+            var totalCount = count;
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+            var usageHistoryDto = _mapper.Map<List<UsageHistoryDto>>(items);
+
+            var paginationUsageHistoryy = new Pagination<UsageHistoryDto>(usageHistoryDto, pageValue, pageCount, totalCount);
+            return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = paginationUsageHistoryy };
+
+
+
 
         }
     }

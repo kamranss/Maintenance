@@ -14,7 +14,7 @@ import DialogContent from "@mui/material/DialogContent"; // Import DialogContent
 
 const EquipmentPage = () => {
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(5);
+  const [size, setSize] = useState(10);
   const [activeTab, setActiveTab] = useState(0); // Track the active tab
   const [data, setData] = useState();
   const [modalData, setModalData] = useState(null);

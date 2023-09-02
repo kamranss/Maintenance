@@ -1,0 +1,42 @@
+.equipment-detail-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+
+  .equipment-info {
+    width: 40%;
+    .heading {
+      background-color: rgb(6, 88, 61);
+      height: 80%;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      h2 {
+        color: white;
+      }
+    }
+    .equipment-info-box {
+      background-color: white;
+      border-radius: 10px;
+      height: 100%;
+      margin-left: 1rem;
+      margin-top: 2rem;
+      .info-field {
+        margin-top: 1rem;
+        width: 40%;
+        display: flex;
+        justify-content: space-between;
+        .info-label {
+          font-weight: 500;
+        }
+      }
+    }
+  }
+
+  .list-info {
+    display: flex;
+    justify-content: space-around;
+    width: 60%;
+  }
+}

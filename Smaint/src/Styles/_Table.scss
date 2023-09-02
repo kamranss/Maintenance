@@ -59,3 +59,18 @@ i.fa-clock {
   color: #f2668b;
   font-size: larger;
 }
+
+.row-start {
+  background-color: #03a688;
+  :last-child {
+    color: white;
+  }
+}
+
+.row-end {
+  background-color: rgb(114, 112, 112);
+}
+
+.row-cnl {
+  background-color: red;
+}

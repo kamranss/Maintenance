@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useTable, usePagination } from "react-table";
 
 const EquipmentDetail = () => {
   const { id } = useParams();
@@ -28,29 +29,41 @@ const EquipmentDetail = () => {
   return (
     <div className="equipment-detail-container">
       <div className="equipment-info">
-        <h2>Equipment Information</h2>
-        {/* Display equipment information here */}
+        <div className="heading">
+          <h2>Equipment Information</h2>
+        </div>
+
         {equipmentDetail && (
-          <div>
-            <p>Name: {equipmentDetail.name}</p>
-            <p>Description: {equipmentDetail.description}</p>
-            {/* ...other fields */}
+          <div className="equipment-info-box">
+            <div className="info-field">
+              <p className="info-label">Name:</p>
+              <p className="info-value">{equipmentDetail.name}</p>
+            </div>
+            <div className="info-field">
+              <p className="info-label">Description:</p>
+              <p className="info-value">{equipmentDetail.description}</p>
+            </div>
+            <div className="info-field">
+              <p className="info-label">Department:</p>
+              <p className="info-value">{equipmentDetail.department}</p>
+            </div>
+            <div className="info-field">
+              <p className="info-label">Manufacture:</p>
+              <p className="info-value">{equipmentDetail.manufacture}</p>
+            </div>
+            <div className="info-field">
+              <p className="info-label">Model:</p>
+              <p className="info-value">{equipmentDetail.model}</p>
+            </div>
+            <div className="info-field">
+              <p className="info-label">OperationSite:</p>
+              <p className="info-value">{equipmentDetail.operationSite}</p>
+            </div>
+            {/* Add more fields as needed */}
           </div>
         )}
       </div>
-      <div className="list-info">
-        <div>
-          <h2>Usage History</h2>
-          {/* Display usage history list here */}
-          {/* ... */}
-        </div>
-        <div>
-          <h2>Maintenance Plans</h2>
-          {/* Display maintenance plans list here */}
-          {/* ... */}
-        </div>
-        {/* Add more list sections as needed */}
-      </div>
+      <div className="list-info"></div>
     </div>
   );
 };

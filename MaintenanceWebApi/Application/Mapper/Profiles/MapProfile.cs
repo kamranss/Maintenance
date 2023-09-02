@@ -66,7 +66,9 @@ namespace Application.Mapper.Profiles
                 .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
 
    
-            CreateMap<UsageHistory, UsageHistoryDto>().ReverseMap();
+            CreateMap<UsageHistory, UsageHistoryDto>().ReverseMap()
+            .ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.EquipmentName));
+
             CreateMap<UsageHistoryCreateDto, UsageHistory>();
 
 

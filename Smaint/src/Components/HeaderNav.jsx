@@ -29,7 +29,7 @@ const HeaderNav = () => {
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
-          to="/department"
+          to="/usageHistory"
         >
           <i class="fa-solid fa-calendar-check"></i>
         </NavLink>

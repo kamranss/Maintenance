@@ -58,7 +58,7 @@ namespace MaintenanceWebApi.Controllers
 
 
 
-        [HttpGet("All")]
+        [HttpGet("ByEquipmentId")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -71,6 +71,27 @@ namespace MaintenanceWebApi.Controllers
             {
                
                 return  BadRequest(serviceResult.ErrorMessage);
+            }
+
+            return Ok(serviceResult.Data);
+
+        }
+
+
+
+        [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> UsageHistories( int? page, int? pageSize)
+        {
+
+            var serviceResult = _usageHistoryService.UsageHistoriesAsync( page, pageSize).Result;
+
+            if (!serviceResult.IsSuccess)
+            {
+
+                return BadRequest(serviceResult.ErrorMessage);
             }
 
             return Ok(serviceResult.Data);

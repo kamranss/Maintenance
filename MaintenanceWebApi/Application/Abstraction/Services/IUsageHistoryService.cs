@@ -17,5 +17,7 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<UsageHistoryCreateDto>> CreateUsageHistoryAsync(UsageHistoryCreateDto usageHistoryCreate);
         Task<IServiceResult<UsageHistoryEndDto>> EndUsageHistoryAsync(UsageHistoryEndDto? usageHistoryEnd);
 
+        Task<IServiceResult<Pagination<UsageHistoryDto>>> UsageHistoriesAsync(int? page, int? pageSize);
+
     }
 }
