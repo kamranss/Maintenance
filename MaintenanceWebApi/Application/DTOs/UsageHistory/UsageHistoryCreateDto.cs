@@ -10,11 +10,11 @@ namespace Application.DTOs.UsageHistory
     public class UsageHistoryCreateDto
     {
         public int? EquipmentId { get; set; }
-        public string? EquipmentName { get; set; }
+        //public string? EquipmentName { get; set; }
         public Operation? OperationName { get; set; }
         //public decimal? StartUsageHourValue { get; set; }
 
-        public string? OperatorName { get; set; }
+        //public string? OperatorName { get; set; }
 
         public DateTime? StartDate { get; set; }
         public string? Remark { get; set; }

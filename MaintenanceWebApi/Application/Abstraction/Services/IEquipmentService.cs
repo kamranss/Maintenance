@@ -1,6 +1,7 @@
 ﻿using Application.Abstraction.Contracts;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
+using Application.DTOs.Manufacture;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
 using Application.RequestParameters;
@@ -49,6 +50,8 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<Pagination<EquipmentListDto>>> FindByDepartmentId(int? page, int? pageSize, int id);
 
         Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid);
+
+        Task<IServiceResult<List<EquipmentInputDto>>> GetEquipmentsForInput(string? name);
 
 
         //void SaveChanges();

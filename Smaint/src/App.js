@@ -12,6 +12,7 @@ import Administration from "./Pages/Administration.jsx";
 import { CreateEquipment } from "./Pages/CreateEquipment.jsx";
 import EquipmentDetail from "./Pages/EquipmentDetail.jsx";
 import UsageHistory from "./Pages/UsageHistory.jsx";
+import CreateUsageHistory from "./Pages/CreateUsageHistory.jsx";
 
 const App = () => {
   return (
@@ -32,6 +33,7 @@ const App = () => {
           <Route path="/createequipment" element={<CreateEquipment />} />
           <Route path="/equipmentDetail" element={<EquipmentDetail />} />
           <Route path="/usageHistory" element={<UsageHistory />} />
+          <Route path="/createUsageHistory" element={<CreateUsageHistory />} />
 
           {/* <Route path="/" element={<Home/>}/> */}
         </Routes>

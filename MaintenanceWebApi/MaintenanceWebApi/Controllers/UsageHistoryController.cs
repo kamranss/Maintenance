@@ -24,7 +24,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> CreateUsageHistory([FromBody]UsageHistoryCreateDto usageHistoryCreateDto)
+        public async Task<IActionResult> CreateUsageHistory([FromForm]UsageHistoryCreateDto usageHistoryCreateDto)
         {
             var result = await _usageHistoryService.CreateUsageHistoryAsync(usageHistoryCreateDto);
 

@@ -3,6 +3,7 @@ using Application.Abstraction.Services;
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
+using Application.DTOs.Manufacture;
 using Application.DTOs.Parts;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
@@ -732,6 +733,35 @@ namespace Persistence.Services
 
             return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data=equipmentAndMp };
 
+        }
+
+        public async Task<IServiceResult<List<EquipmentInputDto>>> GetEquipmentsForInput(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                var equipments = _equipmentReadRepository.GetAll()
+                    .Include(e => e.EquipmentType)
+                    .Take(5);
+                if (equipments == null)
+                {
+                    return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = equipments.ToList();
+               
+                var equDto = _mapper.Map<List<EquipmentInputDto>>(itemss);
+                return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = equDto };
+            }
+            else
+            {
+                var equipmentss = _equipmentReadRepository.GetAll().Where(m => m.EquipmentType.Name.ToLower().Contains(name));
+                if (equipmentss == null)
+                {
+                    return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = new List<EquipmentInputDto>() };
+                }
+                var itemsss = equipmentss.ToList();
+                var equDtoss = _mapper.Map<List<EquipmentInputDto>>(itemsss);
+                return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = equDtoss };
+            }
         }
     }
 }

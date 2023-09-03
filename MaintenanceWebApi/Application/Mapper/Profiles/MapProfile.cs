@@ -23,13 +23,15 @@ namespace Application.Mapper.Profiles
     {
         public MapProfile()
         {
-            CreateMap<EquipmentCreateDto, Equipment>()
-                .ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap(); //  should be fixed
+            CreateMap<EquipmentCreateDto, Equipment>();
+                //.ForMember(ds => ds.ImagUrl, map => map.MapFrom(o => "https://localhost:7066/" + Guid.NewGuid())).ReverseMap(); //  should be fixed
             CreateMap<Equipment,EquipmentListDto>();
             CreateMap<EquipmentCachedDto, EquipmentListDto>().ReverseMap();
             CreateMap<Equipment,EquipmentStatusDto>();
             CreateMap<EquipmentType, EquipmentTypeDto>();
             CreateMap<Equipment, EquipmentDetailDto>();
+            CreateMap<Equipment, EquipmentInputDto>()
+                  .ForMember(dto => dto.Type, opt => opt.MapFrom(src => src.EquipmentType.Name));
 
 
 
