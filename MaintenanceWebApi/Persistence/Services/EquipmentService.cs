@@ -68,19 +68,30 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
-            //if (equipment.Image != null)
-            //{
-            //    //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Image ismissing" };
+            string imageUrl = "";
+            if (equipment.Image != null)
+            {
+                //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Image ismissing" };
 
-            //    if (!equipment.Image.CheckFileType())
-            //    {
-            //        return new ServiceResult<EquipmentCreateDto>
-            //        {
-            //            IsSuccess = false,
-            //            ErrorMessage = "File Type is not correct"
-            //        };
-            //    }
-            //}
+                if (!equipment.Image.CheckFileType())
+                {
+                    return new ServiceResult<EquipmentCreateDto>
+                    {
+                        IsSuccess = false,
+                        ErrorMessage = "File Type is not correct"
+                    };
+                }
+                if (!equipment.Image.CheckFileLenght(9000000))
+                {
+                    return new ServiceResult<EquipmentCreateDto>
+                    {
+                        IsSuccess = false,
+                        ErrorMessage = "File Size is bigger"
+                    };
+                }
+                imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
+            }
+           
 
             if (equipment.UsageLocation != null)
             {
@@ -89,22 +100,15 @@ namespace Persistence.Services
                     return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Invalid UsageLocation value" };
                 }
             }
-            
-            //if (!equipment.Image.CheckFileLenght(10000))
-            //{
-            //    return new ServiceResult<EquipmentCreateDto>
-            //    {
-            //        IsSuccess = false,
-            //        ErrorMessage = "File Size is bigger"
-            //    };
-            //}
-            //string imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
+
+          
+
 
             var newEquipment = _mapper.Map<Equipment>(equipment);
             newEquipment.IsActive = true;
             newEquipment.IsDeleted = true;
-            //imageUrl = imageUrl + Guid.NewGuid();
-            //newEquipment.ImagUrl = imageUrl;
+            var imageurl = imageUrl;
+            newEquipment.ImagUrl = imageurl;
             newEquipment.Status = EquipmentStatus.ACTIVE;
             newEquipment.usageLocation = equipment.UsageLocation;
             newEquipment.MpCompleted = true;
@@ -119,39 +123,9 @@ namespace Persistence.Services
 
                 if (endresult > 0)
                 {
-                    var mappedEquipment = _mapper.Map<EquipmentCreateDto>(newEquipment);
-
-                    List<EquipmentCreateDto> cachedEquipments;
-                    bool EquipmentsAlreadyExist = _memoryCach.TryGetValue("CachedEquipmentss", out cachedEquipments);
-                    if (!EquipmentsAlreadyExist)
-                    {
-                        //var EquipmentsFromDb = _equipmentReadRepository.GetWhere(e => e.Id == newEquipment.Id);
-                        var EquipmentsFromDb = _equipmentReadRepository.GetAll(tracking: false).ToList();
-
-
-                        var cachEntryOption = new MemoryCacheEntryOptions()
-                            .SetSlidingExpiration(TimeSpan.FromDays(10));
-                        _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
-                    }
-                    else
-                    {
-
-                        var equipments = cachedEquipments;
-             
-                        var newlyAddedEquipment = _equipmentReadRepository.GetWhere(d => d.Name == newEquipment.Name).ToList();
-                        if (newlyAddedEquipment != null)
-                        {
-                            var mappedEquipment2 = _mapper.Map<EquipmentCreateDto>(newlyAddedEquipment);
-                            equipments.Add(mappedEquipment2);
-
-                            // Update the cache with the updated products list
-                            var cacheEntryOptions = new MemoryCacheEntryOptions()
-                                .SetSlidingExpiration(TimeSpan.FromDays(10));
-                            _memoryCach.Set("CachedEquipmentss", equipments, cacheEntryOptions);
-                        }
-                    }
-
-                    return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = mappedEquipment };
+                    return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = equipment };
+                   
+                  
                 }
                 return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
             }
@@ -408,6 +382,8 @@ namespace Persistence.Services
             equipmentDetailDto.UsageHistoryList = equipment.UsageHistories != null ? _mapper.Map<List<UsageHistoryDto>>(equipment.UsageHistories) : null;
             equipmentDetailDto.MpList = equipment.MaintenancePlan != null ? _mapper.Map<List<MaintenancePlanDto>>(equipment.MaintenancePlan) : null;
             equipmentDetailDto.PartList = equipment.Part != null ? _mapper.Map<List<PartDto>>(equipment.Part) : null;
+            equipmentDetailDto.ImagUrl =  "/images/" + equipment.ImagUrl;
+            
 
             return new ServiceResult<EquipmentDetailDto> { IsSuccess = true, Data = equipmentDetailDto };
         } // done

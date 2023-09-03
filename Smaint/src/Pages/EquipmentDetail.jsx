@@ -2,6 +2,7 @@ import { useParams, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTable, usePagination } from "react-table";
+import { fileBaseUrl } from "../Contants/Urls"; // Adjust the path accordingly
 
 const EquipmentDetail = () => {
   const { id } = useParams();
@@ -20,11 +21,18 @@ const EquipmentDetail = () => {
         // Set the equipment detail data in state
         setEquipmentDetail(response.data);
         console.log(response.data);
+        console.log(response.data.imagUrl);
       })
       .catch((error) => {
         console.error("Error fetching equipment detail:", error);
       });
   }, [id]);
+
+  const imageUrl =
+    equipmentDetail && equipmentDetail.imagUrl
+      ? fileBaseUrl + equipmentDetail.imagUrl
+      : null;
+  console.log(imageUrl);
 
   return (
     <div className="equipment-detail-container">
@@ -63,7 +71,19 @@ const EquipmentDetail = () => {
           </div>
         )}
       </div>
-      <div className="list-info"></div>
+      <div className="list-info">
+        <div className="image_Container">
+          {/* {equipmentDetail && ( */}
+          <div className="image_Box">
+            {imageUrl ? (
+              <img src={imageUrl} alt="" />
+            ) : (
+              <p>No image available</p>
+            )}
+          </div>
+          {/* )} */}
+        </div>
+      </div>
     </div>
   );
 };

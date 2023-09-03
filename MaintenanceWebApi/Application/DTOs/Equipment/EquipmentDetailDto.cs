@@ -30,6 +30,7 @@ namespace Application.DTOs.Equipment
         public List<MaintenancePlanDto>? MpList { get; set; }
         public List<UsageHistoryDto>? UsageHistoryList { get; set; }
         public List<PartDto>? PartList { get; set; }
+        public string? ImagUrl { get; set; }
 
         public EquipmentDetailDto()
         {

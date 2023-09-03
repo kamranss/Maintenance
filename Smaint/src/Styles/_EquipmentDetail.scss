@@ -38,5 +38,12 @@
     display: flex;
     justify-content: space-around;
     width: 60%;
+
+    .image_Container {
+      width: 40%;
+      height: 100%;
+      .image_Box {
+      }
+    }
   }
 }

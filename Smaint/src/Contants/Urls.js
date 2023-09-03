@@ -1,4 +1,5 @@
 export const BaseUrl = "https://localhost:7066/api";
+export const fileBaseUrl = "https://localhost:7066/";
 
 export const DepartmentAll = `${BaseUrl}/Department/All`;
 export const ManufactureAll = `${BaseUrl}/Manufacture/All`;

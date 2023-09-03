@@ -22,6 +22,7 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
+var allowedOrigins = config["AllowedOrigins"].Split(',');
 
 builder.Services.AddPersistenceService();
 builder.Services.AddValidationService();
@@ -101,11 +102,14 @@ builder.Services.AddAuthentication(x =>
 });
 
 // disable cors
+
+
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        builder.AllowAnyOrigin()
+        //builder.AllowAnyOrigin()
+        builder.WithOrigins(allowedOrigins)
                .AllowAnyMethod()
                .AllowAnyHeader();
     });

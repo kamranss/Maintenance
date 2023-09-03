@@ -67,7 +67,7 @@ const FormCreateEquipment = () => {
   const [validationErrors, setValidationErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const [formData, setFormData] = useState({}); // State to hold form data
+  const [formDataa, setFormData] = useState({}); // State to hold form data
 
   // const [filteredModels, setFilteredModels] = useState([]); // State to hold filtered models
   const theme = createTheme();
@@ -338,19 +338,39 @@ const FormCreateEquipment = () => {
 
   const submitForm = async (e) => {
     e.preventDefault();
-
+    setValidationErrors({});
     try {
       const formData = new FormData(); // Create a new FormData object
 
-      formData.append("Name", formData.Name || "");
-      formData.append("UnitNumber", formData.UnitNumber || "");
-      formData.append("Description", formData.Description || "");
-      formData.append("Identification", formData.Identification || "");
-      formData.append("OperationSiteid", formData.OperationSiteid || "");
-      formData.append("ManufactureId", formData.ManufactureId || "");
-      formData.append("ProductionYear", formData.ProductionYear || "");
-      formData.append("SeriaNumber", formData.SeriaNumber || "");
-      formData.append("Capacity", formData.Capacity || "");
+      formData.append("Name", formDataa.Name || "");
+      formData.append("UnitNumber", formDataa.UnitNumber || "");
+      formData.append(
+        "Description",
+        JSON.stringify(formDataa.Description || "")
+      );
+      formData.append(
+        "Identification",
+        JSON.stringify(formDataa.Identification || "")
+      );
+      formData.append(
+        "OperationSiteid",
+        selectedOperationSite ? selectedOperationSite.id : ""
+      );
+      formData.append(
+        "ManufactureId",
+        selectedManufacture ? selectedManufacture.id : ""
+      );
+      formData.append("ProductionYear", formDataa.ProductionYear || "");
+      formData.append("SerialNumber", formDataa.SerialNumber || "");
+      formData.append("Capacity", formDataa.Capacity || "");
+      // formData.append(
+      //   "EquipmentTypeId",
+      //   JSON.stringify(selectedType ? selectedType.id : null)
+      // );
+      formData.append(
+        "DepartmentId",
+        selectedDepartments ? selectedDepartments.id : ""
+      );
       formData.append("EquipmentTypeId", selectedType ? selectedType.id : "");
       // formData.append(
       //   "UsageLocation",
@@ -361,14 +381,18 @@ const FormCreateEquipment = () => {
         selectedDepartments ? selectedDepartments.id : ""
       );
       formData.append("ModelId", selectedModel ? selectedModel.id : "");
-      if (formData.Image instanceof File) {
-        formData.append("Image", formData.Image);
+      if (formDataa.Image instanceof File) {
+        formData.append("Image", formDataa.Image);
       }
-      console.log(formData.Image);
-      formData.append("LastMaintenaceDate", formData.LastMaintenaceDate || "");
-      formData.append("CurrentValue", formData.CurrentValue || "");
+      console.log(formDataa.Image);
+      formData.append("LastMaintenaceDate", formDataa.LastMaintenaceDate || "");
+      formData.append("CurrentValue", formDataa.CurrentValue || "");
       console.log(selectedUsageLocationsId);
       console.log(selectedUsageLocations);
+      console.log("Form Data - Name:", formDataa.Name);
+      console.log("Form Data - UnitNumber:", formDataa.UnitNumber);
+      console.log("Form Data - Description:", formDataa.Description);
+      console.log("Form Data - Image:", formDataa.Image);
       formData.append(
         "UsageLocation",
         selectedUsageLocations ? selectedUsageLocations : ""
@@ -378,9 +402,16 @@ const FormCreateEquipment = () => {
         "https://localhost:7066/api/Equipment/NewEquipment",
         {
           method: "POST",
-          body: formData, // Use the FormData object as the request body
+          body: JSON.stringify(formData), // Use the FormData object as the request body
         }
       );
+      console.log("Form Data - Name:", formDataa.Name);
+      console.log("Form Data - UnitNumber:", formDataa.UnitNumber);
+      console.log("Form Data - Description:", formDataa.Description);
+      console.log("Form Data - Image:", formDataa.Image);
+      for (const entry of formData.entries()) {
+        console.log(entry);
+      }
 
       if (response.ok) {
         MySwal.fire({
@@ -392,6 +423,7 @@ const FormCreateEquipment = () => {
           setIsSubmitted(true);
         });
         console.log("Equipment created successfully.");
+        console.log(formData);
         setValidationErrors({});
       } else if (response.status === 400) {
         // Bad request with validation errors
@@ -439,11 +471,11 @@ const FormCreateEquipment = () => {
                   name="Name"
                   onChange={(e) => handleInputChange("Name", e.target.value)}
                 />
-                {validationErrors.Name && (
+                {validationErrors.Name && validationErrors.Name.length > 0 ? (
                   <span className="validation-error">
                     {validationErrors.Name[0]}
                   </span>
-                )}
+                ) : null}
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Unit Number</FormLabel>
@@ -454,11 +486,12 @@ const FormCreateEquipment = () => {
                     handleInputChange("UnitNumber", e.target.value)
                   }
                 />
-                {validationErrors.UnitNumber && (
+                {validationErrors.UnitNumber &&
+                validationErrors.UnitNumber.length > 0 ? (
                   <span className="validation-error">
                     {validationErrors.UnitNumber[0]}
                   </span>
-                )}
+                ) : null}
               </FormGroup>
 
               <FormGroup className="mb-3">
@@ -470,11 +503,17 @@ const FormCreateEquipment = () => {
                     handleInputChange("Description", e.target.value)
                   }
                 />
-                {validationErrors.Description && (
+                {/* {validationErrors.Description && (
                   <span className="validation-error">
                     {validationErrors.Description[0]}
                   </span>
-                )}
+                )} */}
+                {validationErrors.Description &&
+                validationErrors.Description.length > 0 ? (
+                  <span className="validation-error">
+                    {validationErrors.Description[0]}
+                  </span>
+                ) : null}
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Identification</FormLabel>
@@ -553,6 +592,12 @@ const FormCreateEquipment = () => {
                     ],
                   }}
                 />
+                {validationErrors.Manufactures &&
+                validationErrors.Manufactures.length > 0 ? (
+                  <span className="validation-error">
+                    {validationErrors.Manufactures[0]}
+                  </span>
+                ) : null}
               </FormGroup>
             </div>
             <div>
@@ -565,24 +610,44 @@ const FormCreateEquipment = () => {
                     handleInputChange("ProductionYear", e.target.value)
                   }
                 />
-                {validationErrors.ProductionYear && (
+                {validationErrors.ProductionYear &&
+                validationErrors.ProductionYear.length > 0 ? (
                   <span className="validation-error">
                     {validationErrors.ProductionYear[0]}
                   </span>
-                )}
+                ) : null}
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>SerialNumber</FormLabel>
-                <TextField type="text" name="SerialNumber" />
-                {validationErrors.SeriaNumber && (
+                <TextField
+                  type="text"
+                  name="SerialNumber"
+                  onChange={(e) =>
+                    handleInputChange("SerialNumber", e.target.value)
+                  }
+                />
+                {validationErrors.SerialNumber &&
+                validationErrors.SerialNumber.length > 0 ? (
                   <span className="validation-error">
-                    {validationErrors.SeriaNumber[0]}
+                    {validationErrors.SerialNumber[0]}
                   </span>
-                )}
+                ) : null}
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Capacity</FormLabel>
-                <TextField type="text" name="Capacity" />
+                <TextField
+                  type="text"
+                  name="Capacity"
+                  onChange={(e) =>
+                    handleInputChange("Capacity", e.target.value)
+                  }
+                />
+                {validationErrors.Capacity &&
+                validationErrors.Capacity.length > 0 ? (
+                  <span className="validation-error">
+                    {validationErrors.Capacity[0]}
+                  </span>
+                ) : null}
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Type</FormLabel>
@@ -660,7 +725,14 @@ const FormCreateEquipment = () => {
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Image</FormLabel>
-                <TextField type="file" name="Image" accept="image/*" />
+                <TextField
+                  type="file"
+                  name="Image"
+                  accept="image/*"
+                  onChange={(e) =>
+                    handleInputChange("Image", e.target.files[0])
+                  }
+                />
               </FormGroup>
             </div>
           </div>
@@ -761,7 +833,7 @@ const FormCreateEquipment = () => {
           </div>
         </div>
         <Button type="submit" variant="contained" color="primary">
-          Submit
+          Create
         </Button>
       </form>
     </>
