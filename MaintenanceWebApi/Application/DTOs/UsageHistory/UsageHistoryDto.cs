@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Application.DTOs.UsageHistory
 {
-    public class UsageHistoryDto:BaseDto
+    public class UsageHistoryDto
     {
         public int Id { get; set; }
         public string? EquipmentName { get; set; }

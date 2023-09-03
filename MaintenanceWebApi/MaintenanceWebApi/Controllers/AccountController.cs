@@ -29,19 +29,23 @@ namespace MaintenanceWebApi.Controllers
 
         [Route("register")]
         [HttpPost]
-        public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
+        public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
         {
             AppUser existUser = await _userManager.FindByNameAsync(userRegisterDto.UserName);
             if (existUser != null) return BadRequest();
 
             //string otp = OtpService.GenerateOTP();
+
+
+            Random random = new Random();
+            int otpnumber = random.Next(100000, 999999);
             AppUser user = new AppUser();
             user.Email = userRegisterDto.Email;
             user.Name = userRegisterDto.Name;
             user.Surname = userRegisterDto.Surname;
             user.UserName = userRegisterDto.UserName;
             user.ConnectionId = null;
-            //user.OTP = otp;
+            user.OTP = otpnumber;
             var result = await _userManager.CreateAsync(user, userRegisterDto.Password);
 
             if (!result.Succeeded)

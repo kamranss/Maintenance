@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Persistence.Configuration;
 using Persistence.Context;
+using Persistence.Helper;
 using Persistence.Repositories.DepartmentRepo;
 using Persistence.Repositories.EquipmentRepo;
 using Persistence.Repositories.EquipmentTypeRepo;
@@ -60,8 +61,9 @@ namespace Persistence
                 options.Lockout.MaxFailedAccessAttempts = 3;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
             }).AddEntityFrameworkStores<MaintenanceDbContext>()
-              .AddDefaultTokenProviders(); 
-          
+              .AddDefaultTokenProviders()
+              .AddErrorDescriber<CustomidentityErrorDescriber>(); // this is serving for get error descriptions which we indicated within helper 
+
 
             services.AddAutoMapper(option =>
             {
