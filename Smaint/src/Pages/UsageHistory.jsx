@@ -10,6 +10,7 @@ import SideBarEquipment from "../Components/SideBarEquipment";
 import TableDepartment from "../Components/Tables/TableDepartment";
 import TableHeaderUsageHistory from "../Components/TableHeaderUsageHistory";
 import TableUsageHistory from "../Components/Tables/TableUsageHistory";
+import SideBarUsageHistory from "../Components/SideBars/SideBarUsageHistory";
 
 const UsageHistory = () => {
   const [page, setPage] = useState(1);
@@ -43,6 +44,7 @@ const UsageHistory = () => {
   return (
     <div className="department-main">
       <div className="dep-mid">
+        <SideBarUsageHistory />
         {/* <SideBarEquipment /> */}
         <div className="page-content">
           <div>

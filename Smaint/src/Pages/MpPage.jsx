@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TableHeader from "../Components/TableHeader";
 import PaginationComponent from "../Components/PaginationComponent";
+import SideBarMp from "../Components/SideBars/SideBarMp";
 import axios from "axios";
 
 import SideBarEquipment from "../Components/SideBarEquipment";
@@ -30,7 +31,8 @@ const MpPage = () => {
   return (
     <div className="department-main">
       <div className="dep-mid">
-        <SideBarEquipment />
+        {/* <SideBarEquipment /> */}
+        <SideBarMp />
         <div className="page-content">
           <div>
             <TableHeader />
