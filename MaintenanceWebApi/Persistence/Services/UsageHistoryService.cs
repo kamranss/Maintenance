@@ -10,6 +10,7 @@ using Application.Repositories.MaintenanceSettingsRepo;
 using Application.Repositories.UsageHistoryRepo;
 using Application.RequestParameters;
 using AutoMapper;
+using Domain.Concrets;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Persistence.Repositories.EquipmentRepo;
@@ -27,11 +28,12 @@ namespace Persistence.Services
         private readonly IUsageHistoryReadRepository _readRepository;
         private readonly IUsageHistoryWriteRepository _writeRepository;
         private readonly IEquipmentReadRepository _equipmentReadRepository;
+        private readonly IEquipmentWriteRepository _equipmentWritwepository;
         private readonly IMSettingsReadRepository _settingsReadRepository;
         private readonly IMSettingsWriteRepository  _settingsWriteRepository;
         private readonly IMapper _mapper;
 
-        public UsageHistoryService(IUsageHistoryReadRepository readRepository, IUsageHistoryWriteRepository writeRepository, IEquipmentReadRepository equipmentReadRepository, IMapper mapper, IMSettingsReadRepository settingsReadRepository, IMSettingsWriteRepository settingsWriteRepository)
+        public UsageHistoryService(IUsageHistoryReadRepository readRepository, IUsageHistoryWriteRepository writeRepository, IEquipmentReadRepository equipmentReadRepository, IMapper mapper, IMSettingsReadRepository settingsReadRepository, IMSettingsWriteRepository settingsWriteRepository, IEquipmentWriteRepository equipmentWritwepository)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
@@ -39,6 +41,7 @@ namespace Persistence.Services
             _mapper = mapper;
             _settingsReadRepository = settingsReadRepository;
             _settingsWriteRepository = settingsWriteRepository;
+            _equipmentWritwepository = equipmentWritwepository;
         }
 
         public async Task<IServiceResult<UsageHistoryCreateDto>> CreateUsageHistoryAsync(UsageHistoryCreateDto usageHistoryCreate)
@@ -52,7 +55,7 @@ namespace Persistence.Services
             {
                 return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
             }
-            if (existEquipment.Status != Domain.Concrets.EquipmentStatus.ACTIVE)
+            if (existEquipment.Status != Domain.Concrets.EquipmentStatus.ACTIVE && existEquipment.IsIdle!=true)
             {
                 return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "Equipment cannot be used" };
             }
@@ -61,11 +64,19 @@ namespace Persistence.Services
             newUsageHistory.OperationNameValue = usageHistoryCreate.OperationName.Value.ToString();
              newUsageHistory.StartUsageHourValue = existEquipment.CurrentValue;
             newUsageHistory.Status = Domain.Concrets.UsageHistoryStatus.ONGOING;
+            if (usageHistoryCreate.StartDate == null)
+            {
+                newUsageHistory.StartDate = DateTime.UtcNow;
+            }
+            //newUsageHistory.StartDate = usageHistoryCreate.StartDate;
+            existEquipment.IsIdle = false;
 
             var result = await _writeRepository.AddAsync(newUsageHistory);
+
             if (result)
             {
                 var endresult = await _writeRepository.SaveAsync();
+                var endEquResult = await _equipmentWritwepository.SaveAsync();
 
                 return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = true, Data = usageHistoryCreate };
 
@@ -215,12 +226,18 @@ namespace Persistence.Services
 
             if (page == null && pageSize == null)
             {
-                var countt = _readRepository.GetAll().Where(uh => uh.IsDeleted == false && uh.IsActive == true).Count();
+                var countt = _readRepository
+                    .GetAll()
+                    .Where(uh => uh.IsDeleted == false && uh.IsActive == true)
+                    .Count();
+
+
                 int pageValuee = 1;
                 int takeValuee = countt / 2;
 
                 var usageHistory = _readRepository
                .GetAll()
+               .Include(u => u.Equipment) // Include the Equipment navigation property
                .Take(takeValuee)
                .ToList();
 
@@ -231,8 +248,23 @@ namespace Persistence.Services
 
                 var totalCountt = countt;
                 var pageCountt = (int)Math.Ceiling((double)totalCountt / takeValuee);
-                var usaageHistoryDto = _mapper.Map<List<UsageHistoryDto>>(usageHistory);
-                var paginationUsageHistory = new Pagination<UsageHistoryDto>(usaageHistoryDto, pageValuee, pageCountt, totalCountt);
+                //var usaageHistoryDto = _mapper.Map<List<UsageHistoryDto>>(usageHistory);
+
+                var usageHistoryDtoo = usageHistory.Select(uh => new UsageHistoryDto
+                {
+                    Id = uh.Id,
+                    OperationName = uh.OperationNameValue,
+                    StartUsageHourValue = uh.StartUsageHourValue,
+                    EndUsageHourValue = uh.EndUsageHourValue,
+                    OperatorName = uh.OperatorName,
+                    TotalUsageValue = uh.TotalUsageValue,
+                    StartDate = uh.StartDate,
+                    EndDate = uh.EndDate,
+                    Status = uh.Status,
+                    TotalTime = uh.TotalUsageTime,
+                    EquipmentName = uh.Equipment.Name // Include Equipment Name in DTO
+                }).ToList();
+                var paginationUsageHistory = new Pagination<UsageHistoryDto>(usageHistoryDtoo, pageValuee, pageCountt, totalCountt);
                 return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = paginationUsageHistory };
 
 
@@ -261,12 +293,26 @@ namespace Persistence.Services
                 return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "There is no UsageHistory in DB" };
             }
 
-           
+            var usageHistoryDtooo = items.Select(uh => new UsageHistoryDto
+            {
+                Id = uh.Id,
+                OperationName = uh.OperationNameValue,
+                StartUsageHourValue = uh.StartUsageHourValue,
+                EndUsageHourValue = uh.EndUsageHourValue,
+                OperatorName = uh.OperatorName,
+                TotalUsageValue = uh.TotalUsageValue,
+                StartDate = uh.StartDate,
+                EndDate = uh.EndDate,
+                Status = uh.Status,
+                TotalTime = uh.TotalUsageTime,
+                EquipmentName = uh.Equipment.Name // Include Equipment Name in DTO
+            }).ToList();
+
             var totalCount = count;
             var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
-            var usageHistoryDto = _mapper.Map<List<UsageHistoryDto>>(items);
+            //var usageHistoryDto = _mapper.Map<List<UsageHistoryDto>>(items);
 
-            var paginationUsageHistoryy = new Pagination<UsageHistoryDto>(usageHistoryDto, pageValue, pageCount, totalCount);
+            var paginationUsageHistoryy = new Pagination<UsageHistoryDto>(usageHistoryDtooo, pageValue, pageCount, totalCount);
             return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = true, Data = paginationUsageHistoryy };
 
 

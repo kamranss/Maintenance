@@ -148,7 +148,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2601),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9522),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -159,7 +159,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2607),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9528),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -170,7 +170,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2608),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9529),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -181,7 +181,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2609),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9530),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -192,7 +192,7 @@ namespace Persistence.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2610),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9531),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -203,7 +203,7 @@ namespace Persistence.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2611),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9532),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -214,7 +214,7 @@ namespace Persistence.Migrations
                         {
                             Id = 7,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2612),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9534),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -225,7 +225,7 @@ namespace Persistence.Migrations
                         {
                             Id = 8,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2613),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9538),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -236,7 +236,7 @@ namespace Persistence.Migrations
                         {
                             Id = 9,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2614),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9540),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -247,7 +247,7 @@ namespace Persistence.Migrations
                         {
                             Id = 10,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2614),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9541),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -258,7 +258,7 @@ namespace Persistence.Migrations
                         {
                             Id = 11,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2615),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9542),
                             DepartmentHead = "User1",
                             Description = "Unknown",
                             IsActive = true,
@@ -309,6 +309,9 @@ namespace Persistence.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<bool?>("IsDeleted")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool?>("IsIdle")
                         .HasColumnType("boolean");
 
                     b.Property<bool?>("IsNotified")
@@ -382,19 +385,21 @@ namespace Persistence.Migrations
                             Id = 1,
                             Capacity = "2000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3828),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(960),
                             CurrentValue = 145m,
-                            DepartmentId = 6,
+                            DepartmentId = 1,
                             Description = "Cargo Handling equipment",
                             EquipmentTypeId = 1,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 10,
                             ModelId = 14,
                             MpCompleted = true,
-                            Name = "ForkLift1 ",
+                            Name = "ForkLift-1 ",
                             OperationSiteid = 4,
                             ProductionYear = 1998,
                             Status = 1,
@@ -406,19 +411,21 @@ namespace Persistence.Migrations
                             Id = 2,
                             Capacity = "4000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3833),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(967),
                             CurrentValue = 450m,
-                            DepartmentId = 3,
+                            DepartmentId = 1,
                             Description = "Cargo Handling equipment",
                             EquipmentTypeId = 2,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 9,
                             ModelId = 13,
                             MpCompleted = true,
-                            Name = "ForkLift2",
+                            Name = "ForkLift-2",
                             OperationSiteid = 3,
                             ProductionYear = 2004,
                             Status = 1,
@@ -430,19 +437,21 @@ namespace Persistence.Migrations
                             Id = 3,
                             Capacity = "40000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3839),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(970),
                             CurrentValue = 500m,
                             DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Crane ",
+                            Name = "Crane-3 ",
                             OperationSiteid = 3,
                             ProductionYear = 2003,
                             Status = 1,
@@ -454,19 +463,21 @@ namespace Persistence.Migrations
                             Id = 4,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3844),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(972),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Buldozer ",
+                            Name = "Buldozer-4 ",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -478,19 +489,21 @@ namespace Persistence.Migrations
                             Id = 5,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3847),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(974),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Buldozer ",
+                            Name = "Buldozer-5 ",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -502,19 +515,21 @@ namespace Persistence.Migrations
                             Id = 6,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3849),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(977),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Buldozer ",
+                            Name = "Buldozer-6 ",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -526,19 +541,21 @@ namespace Persistence.Migrations
                             Id = 7,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3851),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(979),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ReachStacker ",
+                            Name = "ReachStacker-7",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -550,19 +567,21 @@ namespace Persistence.Migrations
                             Id = 8,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3853),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(981),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ReachStacker ",
+                            Name = "ReachStacker-8",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -574,19 +593,21 @@ namespace Persistence.Migrations
                             Id = 9,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3855),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(984),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ReachStacker ",
+                            Name = "ReachStacker-9",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -598,19 +619,21 @@ namespace Persistence.Migrations
                             Id = 10,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3857),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(986),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 1,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ReachStacker ",
+                            Name = "ReachStacker-10",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -622,19 +645,21 @@ namespace Persistence.Migrations
                             Id = 11,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3859),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(988),
                             CurrentValue = 320m,
-                            DepartmentId = 6,
+                            DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Truck ",
+                            Name = "Truck-11",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -646,19 +671,21 @@ namespace Persistence.Migrations
                             Id = 12,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3861),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(991),
                             CurrentValue = 320m,
-                            DepartmentId = 6,
+                            DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Truck ",
+                            Name = "Truck-12",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -670,19 +697,21 @@ namespace Persistence.Migrations
                             Id = 13,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3884),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(993),
                             CurrentValue = 320m,
-                            DepartmentId = 6,
+                            DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Truck ",
+                            Name = "Truck-13",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -694,19 +723,21 @@ namespace Persistence.Migrations
                             Id = 14,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3887),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(995),
                             CurrentValue = 320m,
-                            DepartmentId = 6,
+                            DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Truck ",
+                            Name = "Truck-14",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -718,19 +749,21 @@ namespace Persistence.Migrations
                             Id = 15,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3888),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(997),
                             CurrentValue = 320m,
-                            DepartmentId = 6,
+                            DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Platform ",
+                            Name = "Platform-15",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -742,19 +775,21 @@ namespace Persistence.Migrations
                             Id = 16,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3890),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1003),
                             CurrentValue = 320m,
                             DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "MiniBus ",
+                            Name = "MiniBus-16",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -766,19 +801,21 @@ namespace Persistence.Migrations
                             Id = 17,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3892),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1026),
                             CurrentValue = 320m,
-                            DepartmentId = 2,
+                            DepartmentId = 6,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Minibus ",
+                            Name = "Minibus-17",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -790,19 +827,21 @@ namespace Persistence.Migrations
                             Id = 18,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3894),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1028),
                             CurrentValue = 320m,
-                            DepartmentId = 2,
+                            DepartmentId = 6,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Tractor ",
+                            Name = "Tractor-18",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -814,19 +853,21 @@ namespace Persistence.Migrations
                             Id = 19,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3896),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1031),
                             CurrentValue = 320m,
-                            DepartmentId = 2,
+                            DepartmentId = 6,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Tractor ",
+                            Name = "Tractor-19",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -838,19 +879,21 @@ namespace Persistence.Migrations
                             Id = 20,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3898),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1036),
                             CurrentValue = 320m,
                             DepartmentId = 2,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Spreider ",
+                            Name = "Spreider-20",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -862,19 +905,21 @@ namespace Persistence.Migrations
                             Id = 21,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3901),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1039),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Building001 ",
+                            Name = "Building001-21",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -886,19 +931,21 @@ namespace Persistence.Migrations
                             Id = 22,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3903),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1041),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Building002 ",
+                            Name = "Building002-22",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -910,19 +957,21 @@ namespace Persistence.Migrations
                             Id = 23,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3905),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1044),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Building003 ",
+                            Name = "Building003-23",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -934,19 +983,21 @@ namespace Persistence.Migrations
                             Id = 24,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3906),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1046),
                             CurrentValue = 320m,
                             DepartmentId = 5,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Car ",
+                            Name = "Car-24",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -958,19 +1009,21 @@ namespace Persistence.Migrations
                             Id = 25,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3909),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1048),
                             CurrentValue = 320m,
                             DepartmentId = 5,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Car ",
+                            Name = "Car-25",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -982,19 +1035,21 @@ namespace Persistence.Migrations
                             Id = 26,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3911),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1050),
                             CurrentValue = 320m,
                             DepartmentId = 5,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Car ",
+                            Name = "Car-26",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1006,19 +1061,21 @@ namespace Persistence.Migrations
                             Id = 27,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3916),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1053),
                             CurrentValue = 320m,
                             DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Station ",
+                            Name = "Station-27",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1030,19 +1087,21 @@ namespace Persistence.Migrations
                             Id = 28,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3921),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1056),
                             CurrentValue = 320m,
                             DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Station ",
+                            Name = "Station-28",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1054,19 +1113,21 @@ namespace Persistence.Migrations
                             Id = 29,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3922),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1058),
                             CurrentValue = 320m,
                             DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-29",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1078,19 +1139,21 @@ namespace Persistence.Migrations
                             Id = 30,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3925),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1060),
                             CurrentValue = 320m,
                             DepartmentId = 5,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-30",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1102,19 +1165,21 @@ namespace Persistence.Migrations
                             Id = 31,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3926),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1063),
                             CurrentValue = 320m,
                             DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-31",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1126,19 +1191,21 @@ namespace Persistence.Migrations
                             Id = 32,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3929),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1065),
                             CurrentValue = 320m,
                             DepartmentId = 3,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-32",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1150,19 +1217,21 @@ namespace Persistence.Migrations
                             Id = 33,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3949),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1067),
                             CurrentValue = 320m,
                             DepartmentId = 5,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-33",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1174,19 +1243,21 @@ namespace Persistence.Migrations
                             Id = 34,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3951),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1069),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 6,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-34",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1198,19 +1269,21 @@ namespace Persistence.Migrations
                             Id = 35,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3956),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1076),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 6,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "ElectroCar ",
+                            Name = "ElectroCar-35",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1222,19 +1295,21 @@ namespace Persistence.Migrations
                             Id = 36,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3961),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1078),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 4,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Crane ",
+                            Name = "Crane-36",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1246,19 +1321,21 @@ namespace Persistence.Migrations
                             Id = 37,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3964),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1100),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 4,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Crane ",
+                            Name = "Crane-37",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1270,19 +1347,21 @@ namespace Persistence.Migrations
                             Id = 38,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3966),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1102),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 4,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Crane ",
+                            Name = "Crane-38",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1294,19 +1373,21 @@ namespace Persistence.Migrations
                             Id = 39,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3968),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1104),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 4,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Crane ",
+                            Name = "Crane-39",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1318,19 +1399,1061 @@ namespace Persistence.Migrations
                             Id = 40,
                             Capacity = "80000 ton",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3970),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1106),
                             CurrentValue = 320m,
-                            DepartmentId = 5,
+                            DepartmentId = 4,
                             Description = "Cargo Lifting equipment",
                             EquipmentTypeId = 4,
                             Identification = "no",
+                            ImagUrl = "forklift.jpeg",
                             IsActive = true,
                             IsDeleted = false,
+                            IsIdle = true,
                             IsNotified = false,
                             ManufactureId = 4,
                             ModelId = 17,
                             MpCompleted = true,
-                            Name = "Crane ",
+                            Name = "Crane-40",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Capacity = "2000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1108),
+                            CurrentValue = 145m,
+                            DepartmentId = 7,
+                            Description = "Cargo Handling equipment",
+                            EquipmentTypeId = 1,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 10,
+                            ModelId = 14,
+                            MpCompleted = true,
+                            Name = "ForkLift-41 ",
+                            OperationSiteid = 4,
+                            ProductionYear = 1998,
+                            Status = 1,
+                            UnitNumber = "FK-100000",
+                            usageLocation = 2
+                        },
+                        new
+                        {
+                            Id = 42,
+                            Capacity = "4000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1111),
+                            CurrentValue = 450m,
+                            DepartmentId = 7,
+                            Description = "Cargo Handling equipment",
+                            EquipmentTypeId = 2,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 9,
+                            ModelId = 13,
+                            MpCompleted = true,
+                            Name = "ForkLift-42",
+                            OperationSiteid = 3,
+                            ProductionYear = 2004,
+                            Status = 1,
+                            UnitNumber = "FK-100001",
+                            usageLocation = 2
+                        },
+                        new
+                        {
+                            Id = 43,
+                            Capacity = "40000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1114),
+                            CurrentValue = 500m,
+                            DepartmentId = 7,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Crane-43 ",
+                            OperationSiteid = 3,
+                            ProductionYear = 2003,
+                            Status = 1,
+                            UnitNumber = "CR-100003",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 44,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1116),
+                            CurrentValue = 320m,
+                            DepartmentId = 8,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Buldozer-44 ",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 45,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1118),
+                            CurrentValue = 320m,
+                            DepartmentId = 8,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Buldozer-45 ",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 46,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1121),
+                            CurrentValue = 320m,
+                            DepartmentId = 8,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Buldozer-46 ",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 47,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1127),
+                            CurrentValue = 320m,
+                            DepartmentId = 8,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ReachStacker-47",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 48,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1129),
+                            CurrentValue = 320m,
+                            DepartmentId = 8,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ReachStacker-48",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 49,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1133),
+                            CurrentValue = 320m,
+                            DepartmentId = 8,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ReachStacker-49",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 50,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1135),
+                            CurrentValue = 320m,
+                            DepartmentId = 9,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ReachStacker-50",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 51,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1137),
+                            CurrentValue = 320m,
+                            DepartmentId = 9,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Truck-51",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 52,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1139),
+                            CurrentValue = 320m,
+                            DepartmentId = 9,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Truck-52",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 53,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1143),
+                            CurrentValue = 320m,
+                            DepartmentId = 9,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Truck-53",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 54,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1145),
+                            CurrentValue = 320m,
+                            DepartmentId = 9,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Truck-54",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 55,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1147),
+                            CurrentValue = 320m,
+                            DepartmentId = 9,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Platform-55",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 56,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1149),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "MiniBus-56",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 57,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1171),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Minibus-57",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 58,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1174),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Tractor-58",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 59,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1176),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Tractor-59",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 60,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1179),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Spreider-60",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 61,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1181),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Building001-61",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 62,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1183),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Building002-62",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 63,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1186),
+                            CurrentValue = 320m,
+                            DepartmentId = 10,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Building003-63",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 64,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1192),
+                            CurrentValue = 320m,
+                            DepartmentId = 1,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Car-64",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 65,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1194),
+                            CurrentValue = 320m,
+                            DepartmentId = 1,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Car-65",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 66,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1196),
+                            CurrentValue = 320m,
+                            DepartmentId = 1,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Car-66",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 67,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1199),
+                            CurrentValue = 320m,
+                            DepartmentId = 3,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Station-67",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 68,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1201),
+                            CurrentValue = 320m,
+                            DepartmentId = 3,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Station-68",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 69,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1204),
+                            CurrentValue = 320m,
+                            DepartmentId = 2,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-69",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 70,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1206),
+                            CurrentValue = 320m,
+                            DepartmentId = 2,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-70",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 71,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1209),
+                            CurrentValue = 320m,
+                            DepartmentId = 2,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-71",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 72,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1211),
+                            CurrentValue = 320m,
+                            DepartmentId = 2,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-72",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 73,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1213),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-73",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 74,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1215),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-74",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 75,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1219),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "ElectroCar-75",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 76,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1221),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Crane-76",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 77,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1255),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Crane-77",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 78,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1257),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Crane-78",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 79,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1260),
+                            CurrentValue = 320m,
+                            DepartmentId = 11,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Crane-79",
+                            OperationSiteid = 6,
+                            ProductionYear = 2010,
+                            Status = 1,
+                            UnitNumber = "CR-100004",
+                            usageLocation = 6
+                        },
+                        new
+                        {
+                            Id = 80,
+                            Capacity = "80000 ton",
+                            CreatedBy = "System",
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(1262),
+                            CurrentValue = 320m,
+                            DepartmentId = 4,
+                            Description = "Cargo Lifting equipment",
+                            EquipmentTypeId = 4,
+                            Identification = "no",
+                            ImagUrl = "forklift.jpeg",
+                            IsActive = true,
+                            IsDeleted = false,
+                            IsIdle = true,
+                            IsNotified = false,
+                            ManufactureId = 4,
+                            ModelId = 17,
+                            MpCompleted = true,
+                            Name = "Crane-80",
                             OperationSiteid = 6,
                             ProductionYear = 2010,
                             Status = 1,
@@ -1424,7 +2547,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2900),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9937),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Forklift 1.5"
@@ -1433,7 +2556,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2901),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9938),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Forklift 2.5"
@@ -1442,7 +2565,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2902),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9939),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Forklift 4"
@@ -1451,7 +2574,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2903),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9942),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Forklift 10"
@@ -1460,7 +2583,7 @@ namespace Persistence.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2906),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9943),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Forklift 20"
@@ -1469,7 +2592,7 @@ namespace Persistence.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2907),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9944),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Reach Stacker 45"
@@ -1478,7 +2601,7 @@ namespace Persistence.Migrations
                         {
                             Id = 7,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2908),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9945),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Portal Crane 80T"
@@ -1487,7 +2610,7 @@ namespace Persistence.Migrations
                         {
                             Id = 8,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2909),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9946),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Portal Crane 40T"
@@ -1496,7 +2619,7 @@ namespace Persistence.Migrations
                         {
                             Id = 9,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2909),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9947),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Loader 25"
@@ -1505,7 +2628,7 @@ namespace Persistence.Migrations
                         {
                             Id = 10,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2910),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9947),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "GC_Berth"
@@ -1514,7 +2637,7 @@ namespace Persistence.Migrations
                         {
                             Id = 11,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2944),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9948),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Ferry_Berth"
@@ -1523,7 +2646,7 @@ namespace Persistence.Migrations
                         {
                             Id = 12,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2945),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9949),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Ro-Ro_Berth"
@@ -1532,7 +2655,7 @@ namespace Persistence.Migrations
                         {
                             Id = 13,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2946),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9950),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Tug_Boat"
@@ -1541,7 +2664,7 @@ namespace Persistence.Migrations
                         {
                             Id = 14,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2946),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9951),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Mobile_Crane 220T"
@@ -1550,7 +2673,7 @@ namespace Persistence.Migrations
                         {
                             Id = 15,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2947),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9952),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Building"
@@ -1559,7 +2682,7 @@ namespace Persistence.Migrations
                         {
                             Id = 16,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2948),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9953),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Container_Spreader"
@@ -1568,7 +2691,7 @@ namespace Persistence.Migrations
                         {
                             Id = 17,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2949),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9954),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Terminal_Tractor"
@@ -1577,7 +2700,7 @@ namespace Persistence.Migrations
                         {
                             Id = 18,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2949),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9955),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Oil_Cleaner_Boat"
@@ -1586,7 +2709,7 @@ namespace Persistence.Migrations
                         {
                             Id = 19,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2950),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9956),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Greifer"
@@ -1595,7 +2718,7 @@ namespace Persistence.Migrations
                         {
                             Id = 20,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2951),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9956),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Lifting_Magnet"
@@ -1604,7 +2727,7 @@ namespace Persistence.Migrations
                         {
                             Id = 21,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2952),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9957),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Fender"
@@ -1613,7 +2736,7 @@ namespace Persistence.Migrations
                         {
                             Id = 22,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2953),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9958),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Railway"
@@ -1622,7 +2745,7 @@ namespace Persistence.Migrations
                         {
                             Id = 23,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2954),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9959),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Wire_Rope_Sling"
@@ -1631,7 +2754,7 @@ namespace Persistence.Migrations
                         {
                             Id = 24,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2955),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9960),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Chain_Connector"
@@ -1640,7 +2763,7 @@ namespace Persistence.Migrations
                         {
                             Id = 25,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2956),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9961),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Lifting_Lug"
@@ -1649,7 +2772,7 @@ namespace Persistence.Migrations
                         {
                             Id = 26,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2956),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9962),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Hook"
@@ -1658,7 +2781,7 @@ namespace Persistence.Migrations
                         {
                             Id = 27,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2957),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9963),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Websling"
@@ -1667,7 +2790,7 @@ namespace Persistence.Migrations
                         {
                             Id = 28,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2958),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9964),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Bunker"
@@ -1676,7 +2799,7 @@ namespace Persistence.Migrations
                         {
                             Id = 29,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2960),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9964),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Generator"
@@ -1685,7 +2808,7 @@ namespace Persistence.Migrations
                         {
                             Id = 30,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2961),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9965),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Shalves"
@@ -1694,7 +2817,7 @@ namespace Persistence.Migrations
                         {
                             Id = 31,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2962),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9990),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Plate_Clamp"
@@ -1703,7 +2826,7 @@ namespace Persistence.Migrations
                         {
                             Id = 32,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2962),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9991),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Harness"
@@ -1712,7 +2835,7 @@ namespace Persistence.Migrations
                         {
                             Id = 33,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2963),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9992),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Roads"
@@ -1721,7 +2844,7 @@ namespace Persistence.Migrations
                         {
                             Id = 34,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2964),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9993),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Drum_Lifter"
@@ -1730,7 +2853,7 @@ namespace Persistence.Migrations
                         {
                             Id = 35,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2965),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9994),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Working_Platform"
@@ -1739,7 +2862,7 @@ namespace Persistence.Migrations
                         {
                             Id = 36,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2965),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9994),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Single leg chain sling"
@@ -1748,7 +2871,7 @@ namespace Persistence.Migrations
                         {
                             Id = 37,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2966),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9995),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Portal Crane 32T"
@@ -1858,7 +2981,7 @@ namespace Persistence.Migrations
                             Id = 1,
                             Code = "POCR-1",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3636),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(767),
                             Description = "Vizual Inspection",
                             IsActive = true,
                             IsDeleted = false,
@@ -1871,7 +2994,7 @@ namespace Persistence.Migrations
                             Id = 2,
                             Code = "POCR-2",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3637),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(768),
                             Description = "Profilaktik Inspection",
                             IsActive = true,
                             IsDeleted = false,
@@ -1884,7 +3007,7 @@ namespace Persistence.Migrations
                             Id = 3,
                             Code = "FRKL-1",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3638),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(769),
                             Description = "Vizual Inspection",
                             IsActive = true,
                             IsDeleted = false,
@@ -1897,7 +3020,7 @@ namespace Persistence.Migrations
                             Id = 4,
                             Code = "RAIL-1",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3639),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(770),
                             Description = "Vizual Inspection of Railway",
                             IsActive = true,
                             IsDeleted = false,
@@ -1910,7 +3033,7 @@ namespace Persistence.Migrations
                             Id = 5,
                             Code = "FRKL-2",
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3640),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(771),
                             Description = "Engine Oil Change",
                             IsActive = true,
                             IsDeleted = false,
@@ -2035,7 +3158,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3044),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(85),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Single leg chain sling"
@@ -2044,7 +3167,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3045),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(86),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Working platform"
@@ -2053,7 +3176,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3046),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(87),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Hangcha"
@@ -2062,7 +3185,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3047),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(88),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "XCMG"
@@ -2071,7 +3194,7 @@ namespace Persistence.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3047),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(89),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Kalmar"
@@ -2080,7 +3203,7 @@ namespace Persistence.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3048),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(90),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Terberq"
@@ -2089,7 +3212,7 @@ namespace Persistence.Migrations
                         {
                             Id = 7,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3049),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(91),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Sisu"
@@ -2098,7 +3221,7 @@ namespace Persistence.Migrations
                         {
                             Id = 8,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3050),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(92),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Toyoto"
@@ -2107,7 +3230,7 @@ namespace Persistence.Migrations
                         {
                             Id = 9,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3051),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(92),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Bobkat"
@@ -2116,7 +3239,7 @@ namespace Persistence.Migrations
                         {
                             Id = 10,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3051),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(93),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Hyster"
@@ -2125,7 +3248,7 @@ namespace Persistence.Migrations
                         {
                             Id = 11,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3052),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(94),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Boss"
@@ -2134,7 +3257,7 @@ namespace Persistence.Migrations
                         {
                             Id = 12,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3053),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(95),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Ardelt"
@@ -2143,7 +3266,7 @@ namespace Persistence.Migrations
                         {
                             Id = 13,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3054),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(99),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "None"
@@ -2152,7 +3275,7 @@ namespace Persistence.Migrations
                         {
                             Id = 14,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3054),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(100),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "VDL"
@@ -2161,7 +3284,7 @@ namespace Persistence.Migrations
                         {
                             Id = 15,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3055),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(100),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Sunny"
@@ -2170,7 +3293,7 @@ namespace Persistence.Migrations
                         {
                             Id = 16,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3056),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(101),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Camry"
@@ -2179,7 +3302,7 @@ namespace Persistence.Migrations
                         {
                             Id = 17,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3057),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(102),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Engine"
@@ -2188,7 +3311,7 @@ namespace Persistence.Migrations
                         {
                             Id = 18,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3057),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(103),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "023-2 №-li dizel generator"
@@ -2197,7 +3320,7 @@ namespace Persistence.Migrations
                         {
                             Id = 19,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3058),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(104),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "022-1 №-li dizel generator"
@@ -2206,7 +3329,7 @@ namespace Persistence.Migrations
                         {
                             Id = 20,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3063),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(106),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "021-TQM 23 B48-754"
@@ -2215,7 +3338,7 @@ namespace Persistence.Migrations
                         {
                             Id = 21,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3063),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(107),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Service berth-N4"
@@ -2224,7 +3347,7 @@ namespace Persistence.Migrations
                         {
                             Id = 22,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3064),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(107),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Molino"
@@ -2233,7 +3356,7 @@ namespace Persistence.Migrations
                         {
                             Id = 23,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3065),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(108),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Service berth-N3 "
@@ -2242,7 +3365,7 @@ namespace Persistence.Migrations
                         {
                             Id = 24,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3093),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(109),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Shackle"
@@ -2251,7 +3374,7 @@ namespace Persistence.Migrations
                         {
                             Id = 25,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3094),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(110),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "County"
@@ -2260,7 +3383,7 @@ namespace Persistence.Migrations
                         {
                             Id = 26,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3095),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(111),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Santafe"
@@ -2269,7 +3392,7 @@ namespace Persistence.Migrations
                         {
                             Id = 27,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3095),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(112),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Sonata"
@@ -2278,7 +3401,7 @@ namespace Persistence.Migrations
                         {
                             Id = 28,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3096),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(112),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Kartal SLX"
@@ -2332,7 +3455,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3180),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(242),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "RS45-31CH"
@@ -2341,7 +3464,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3181),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(243),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "CPCD200-W36"
@@ -2350,7 +3473,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3182),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(244),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "CPCD100-W17"
@@ -2359,7 +3482,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3182),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(245),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "CPCD40-RC24"
@@ -2368,7 +3491,7 @@ namespace Persistence.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3183),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(246),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "CPCD25N-RC2"
@@ -2377,7 +3500,7 @@ namespace Persistence.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3184),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(247),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "CPCD15N-RC26"
@@ -2386,7 +3509,7 @@ namespace Persistence.Migrations
                         {
                             Id = 7,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3185),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(248),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "XT760"
@@ -2395,7 +3518,7 @@ namespace Persistence.Migrations
                         {
                             Id = 8,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3185),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(249),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "DRD420-60S5"
@@ -2404,7 +3527,7 @@ namespace Persistence.Migrations
                         {
                             Id = 9,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3186),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(249),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "DSD420-12CSG"
@@ -2413,7 +3536,7 @@ namespace Persistence.Migrations
                         {
                             Id = 10,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3187),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(253),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "T-1"
@@ -2422,7 +3545,7 @@ namespace Persistence.Migrations
                         {
                             Id = 11,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3188),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(254),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "TV-10EIT-4x4/2600"
@@ -2431,7 +3554,7 @@ namespace Persistence.Migrations
                         {
                             Id = 12,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3188),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(255),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "FD-100F50"
@@ -2440,7 +3563,7 @@ namespace Persistence.Migrations
                         {
                             Id = 13,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3189),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(256),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "843"
@@ -2449,7 +3572,7 @@ namespace Persistence.Migrations
                         {
                             Id = 14,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3190),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(257),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "HS1"
@@ -2458,7 +3581,7 @@ namespace Persistence.Migrations
                         {
                             Id = 15,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3191),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(257),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "B1"
@@ -2467,7 +3590,7 @@ namespace Persistence.Migrations
                         {
                             Id = 16,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3192),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(258),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "FD-15"
@@ -2476,7 +3599,7 @@ namespace Persistence.Migrations
                         {
                             Id = 17,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3192),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(259),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Kondor 1500"
@@ -2485,7 +3608,7 @@ namespace Persistence.Migrations
                         {
                             Id = 18,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3193),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(260),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "QAY220 All Terrain Crane"
@@ -2494,7 +3617,7 @@ namespace Persistence.Migrations
                         {
                             Id = 19,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3194),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(261),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "None"
@@ -2503,7 +3626,7 @@ namespace Persistence.Migrations
                         {
                             Id = 20,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3195),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(262),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Sokol 500"
@@ -2512,7 +3635,7 @@ namespace Persistence.Migrations
                         {
                             Id = 21,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3195),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(262),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Mobil Pnevmatik Transporter"
@@ -2521,7 +3644,7 @@ namespace Persistence.Migrations
                         {
                             Id = 22,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3196),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(263),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 1"
@@ -2530,7 +3653,7 @@ namespace Persistence.Migrations
                         {
                             Id = 23,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3197),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(264),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 2"
@@ -2539,7 +3662,7 @@ namespace Persistence.Migrations
                         {
                             Id = 24,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3198),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(265),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 3"
@@ -2548,7 +3671,7 @@ namespace Persistence.Migrations
                         {
                             Id = 25,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3198),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(266),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 4"
@@ -2557,7 +3680,7 @@ namespace Persistence.Migrations
                         {
                             Id = 26,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3199),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(267),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 4"
@@ -2566,7 +3689,7 @@ namespace Persistence.Migrations
                         {
                             Id = 27,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3200),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(267),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 5"
@@ -2575,7 +3698,7 @@ namespace Persistence.Migrations
                         {
                             Id = 28,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3201),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(268),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 6"
@@ -2584,7 +3707,7 @@ namespace Persistence.Migrations
                         {
                             Id = 29,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3201),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(269),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 7"
@@ -2593,7 +3716,7 @@ namespace Persistence.Migrations
                         {
                             Id = 30,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3202),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(270),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 8"
@@ -2602,7 +3725,7 @@ namespace Persistence.Migrations
                         {
                             Id = 31,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3203),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(271),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 8"
@@ -2611,7 +3734,7 @@ namespace Persistence.Migrations
                         {
                             Id = 32,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3204),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(272),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 9"
@@ -2620,7 +3743,7 @@ namespace Persistence.Migrations
                         {
                             Id = 33,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3204),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(272),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "ST 10"
@@ -2629,7 +3752,7 @@ namespace Persistence.Migrations
                         {
                             Id = 34,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3205),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(273),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Ferry Terminal"
@@ -2638,7 +3761,7 @@ namespace Persistence.Migrations
                         {
                             Id = 35,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3206),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(274),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "YT180-04"
@@ -2647,7 +3770,7 @@ namespace Persistence.Migrations
                         {
                             Id = 36,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3207),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(275),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "CH 6600"
@@ -2656,7 +3779,7 @@ namespace Persistence.Migrations
                         {
                             Id = 37,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3210),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(276),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "AM 140/76/36"
@@ -2665,7 +3788,7 @@ namespace Persistence.Migrations
                         {
                             Id = 38,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3211),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(277),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "VSG/020.0-2.2-6400"
@@ -2674,7 +3797,7 @@ namespace Persistence.Migrations
                         {
                             Id = 39,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3212),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(277),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "VSG/015.0.07.13500"
@@ -2683,7 +3806,7 @@ namespace Persistence.Migrations
                         {
                             Id = 40,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3236),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(278),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "VSG/016.0-2.2-5000"
@@ -2692,7 +3815,7 @@ namespace Persistence.Migrations
                         {
                             Id = 41,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3237),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(279),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "VSG/020.0-0.7-17500"
@@ -2701,7 +3824,7 @@ namespace Persistence.Migrations
                         {
                             Id = 42,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3238),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(280),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Sabir Babayev yedək gəmisi"
@@ -2710,7 +3833,7 @@ namespace Persistence.Migrations
                         {
                             Id = 43,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3238),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(281),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Ələt yedək gəmisi"
@@ -2719,7 +3842,7 @@ namespace Persistence.Migrations
                         {
                             Id = 44,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3239),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(282),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Silkway yedək gəmisi"
@@ -2728,7 +3851,7 @@ namespace Persistence.Migrations
                         {
                             Id = 45,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3240),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(282),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "045-TQM 23 B - 48"
@@ -2737,7 +3860,7 @@ namespace Persistence.Migrations
                         {
                             Id = 46,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3240),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(283),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "046-MNMS-73"
@@ -2746,7 +3869,7 @@ namespace Persistence.Migrations
                         {
                             Id = 47,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3241),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(284),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "047-Şəfəq"
@@ -2755,7 +3878,7 @@ namespace Persistence.Migrations
                         {
                             Id = 48,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3242),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(285),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "048-Kür"
@@ -2764,7 +3887,7 @@ namespace Persistence.Migrations
                         {
                             Id = 49,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3243),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(286),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "049-Günəşli"
@@ -2773,7 +3896,7 @@ namespace Persistence.Migrations
                         {
                             Id = 50,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3243),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(287),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "050-Nüsrət Şirinov"
@@ -2782,7 +3905,7 @@ namespace Persistence.Migrations
                         {
                             Id = 51,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3245),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(291),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "051-Elxan Kazımov"
@@ -2791,7 +3914,7 @@ namespace Persistence.Migrations
                         {
                             Id = 52,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3249),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(292),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "052-Limançı"
@@ -2800,7 +3923,7 @@ namespace Persistence.Migrations
                         {
                             Id = 53,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3250),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(293),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "053-TQM 23 B48 - 2494"
@@ -2809,7 +3932,7 @@ namespace Persistence.Migrations
                         {
                             Id = 54,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3250),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(294),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Nissan"
@@ -2818,7 +3941,7 @@ namespace Persistence.Migrations
                         {
                             Id = 55,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3251),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(295),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Toyota"
@@ -2827,7 +3950,7 @@ namespace Persistence.Migrations
                         {
                             Id = 56,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3252),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(295),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "QAZ"
@@ -2836,7 +3959,7 @@ namespace Persistence.Migrations
                         {
                             Id = 57,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3253),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(296),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "HOWO"
@@ -2845,7 +3968,7 @@ namespace Persistence.Migrations
                         {
                             Id = 58,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3253),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(297),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Fiat"
@@ -2854,7 +3977,7 @@ namespace Persistence.Migrations
                         {
                             Id = 59,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3254),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(298),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "111111"
@@ -2863,7 +3986,7 @@ namespace Persistence.Migrations
                         {
                             Id = 60,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3255),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(319),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Vaz"
@@ -2872,7 +3995,7 @@ namespace Persistence.Migrations
                         {
                             Id = 61,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3256),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(319),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Tofash"
@@ -2881,7 +4004,7 @@ namespace Persistence.Migrations
                         {
                             Id = 62,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3256),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(320),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Volkswagen"
@@ -2890,7 +4013,7 @@ namespace Persistence.Migrations
                         {
                             Id = 63,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3257),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(321),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Hyundai"
@@ -2899,7 +4022,7 @@ namespace Persistence.Migrations
                         {
                             Id = 64,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3262),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(323),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Mersedes Benz"
@@ -2908,7 +4031,7 @@ namespace Persistence.Migrations
                         {
                             Id = 65,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3263),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(324),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "5 Tonne 5mtr x 26mm dia"
@@ -2917,7 +4040,7 @@ namespace Persistence.Migrations
                         {
                             Id = 66,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3263),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(324),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "5 Tonne 4mtr x 26mm dia"
@@ -2926,7 +4049,7 @@ namespace Persistence.Migrations
                         {
                             Id = 67,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3264),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(325),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne 5.5mtr x 32mm dia"
@@ -2935,7 +4058,7 @@ namespace Persistence.Migrations
                         {
                             Id = 68,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3265),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(326),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "15 Tonne 4mtr x 38mm dia"
@@ -2944,7 +4067,7 @@ namespace Persistence.Migrations
                         {
                             Id = 69,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3265),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(327),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "5 Tonne 3mtr x 26mm dia"
@@ -2953,7 +4076,7 @@ namespace Persistence.Migrations
                         {
                             Id = 70,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3266),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(328),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8.6 Tonne 1.9mtr x26mm dia"
@@ -2962,7 +4085,7 @@ namespace Persistence.Migrations
                         {
                             Id = 71,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3267),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(329),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8.6 Tonne 10 mtr x 26mm dia"
@@ -2971,7 +4094,7 @@ namespace Persistence.Migrations
                         {
                             Id = 72,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3268),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(329),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.2 Tonne 11.06mtr x 22mm dia"
@@ -2980,7 +4103,7 @@ namespace Persistence.Migrations
                         {
                             Id = 73,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3268),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(330),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8.6 Tonne 10 mtr x 26mm dia"
@@ -2989,7 +4112,7 @@ namespace Persistence.Migrations
                         {
                             Id = 74,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3269),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(331),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.2 Tonne 11.06mtr x 22mm dia"
@@ -2998,7 +4121,7 @@ namespace Persistence.Migrations
                         {
                             Id = 75,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3270),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(332),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.2 Tonne 10 mtr x 22mm dia"
@@ -3007,7 +4130,7 @@ namespace Persistence.Migrations
                         {
                             Id = 76,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3271),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(333),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.2 Tonne 6 mtr x 22 mm dia"
@@ -3016,7 +4139,7 @@ namespace Persistence.Migrations
                         {
                             Id = 77,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3271),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(336),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "077-5.1 6 mtr x 22 mm dia"
@@ -3025,7 +4148,7 @@ namespace Persistence.Migrations
                         {
                             Id = 78,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3272),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(337),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "078-5.1 Tonne 1.3 mtr x 20 mm dia"
@@ -3034,7 +4157,7 @@ namespace Persistence.Migrations
                         {
                             Id = 79,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3273),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(338),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "079-5.1 Tonne 2.93 mtr x 20 mm dia"
@@ -3043,7 +4166,7 @@ namespace Persistence.Migrations
                         {
                             Id = 80,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3274),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(340),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "080-10.1 Tonne 12 mtr x 28 mm dia"
@@ -3052,7 +4175,7 @@ namespace Persistence.Migrations
                         {
                             Id = 81,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3274),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(341),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "081-5 Tonne 8 mtr x 20 mm dia"
@@ -3061,7 +4184,7 @@ namespace Persistence.Migrations
                         {
                             Id = 82,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3275),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(341),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "082-8 Tonne 8 mtr x 26 mm dia"
@@ -3070,7 +4193,7 @@ namespace Persistence.Migrations
                         {
                             Id = 83,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3276),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(342),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "083-10 Tonne 10 mtr x 28 mm dia"
@@ -3079,7 +4202,7 @@ namespace Persistence.Migrations
                         {
                             Id = 84,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3277),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(343),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "084-10.1 Tonne 6 mtr x 28 mm dia"
@@ -3088,7 +4211,7 @@ namespace Persistence.Migrations
                         {
                             Id = 85,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3277),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(344),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "085-10.1 Tonne 6 mtr x 28 mm dia"
@@ -3097,7 +4220,7 @@ namespace Persistence.Migrations
                         {
                             Id = 86,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3278),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(345),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "086-12 Tonne"
@@ -3106,7 +4229,7 @@ namespace Persistence.Migrations
                         {
                             Id = 87,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3279),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(346),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "087-25 Tonne"
@@ -3115,7 +4238,7 @@ namespace Persistence.Migrations
                         {
                             Id = 88,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3280),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(347),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.5 Tonne"
@@ -3124,7 +4247,7 @@ namespace Persistence.Migrations
                         {
                             Id = 89,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3281),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(348),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "4.75 Tonne"
@@ -3133,7 +4256,7 @@ namespace Persistence.Migrations
                         {
                             Id = 90,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3281),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(349),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3.25 Tonne"
@@ -3142,7 +4265,7 @@ namespace Persistence.Migrations
                         {
                             Id = 91,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3282),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(349),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8.5 Tonne"
@@ -3151,7 +4274,7 @@ namespace Persistence.Migrations
                         {
                             Id = 92,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3283),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(350),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "12 Tonne"
@@ -3160,7 +4283,7 @@ namespace Persistence.Migrations
                         {
                             Id = 93,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3284),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(351),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "12.5 Tonne"
@@ -3169,7 +4292,7 @@ namespace Persistence.Migrations
                         {
                             Id = 94,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3284),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(352),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8 Tonne"
@@ -3178,7 +4301,7 @@ namespace Persistence.Migrations
                         {
                             Id = 95,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3285),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(353),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne"
@@ -3187,7 +4310,7 @@ namespace Persistence.Migrations
                         {
                             Id = 96,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3286),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(354),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne"
@@ -3196,7 +4319,7 @@ namespace Persistence.Migrations
                         {
                             Id = 97,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(354),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "4064 Kgs"
@@ -3205,7 +4328,7 @@ namespace Persistence.Migrations
                         {
                             Id = 98,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3287),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(355),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "5 Tonne"
@@ -3214,7 +4337,7 @@ namespace Persistence.Migrations
                         {
                             Id = 99,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3288),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(356),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 1 mtr"
@@ -3223,7 +4346,7 @@ namespace Persistence.Migrations
                         {
                             Id = 100,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3289),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(357),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 2 mtr"
@@ -3232,7 +4355,7 @@ namespace Persistence.Migrations
                         {
                             Id = 101,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3290),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(359),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 2 mtr"
@@ -3241,7 +4364,7 @@ namespace Persistence.Migrations
                         {
                             Id = 102,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3293),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(360),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 3 mtr"
@@ -3250,7 +4373,7 @@ namespace Persistence.Migrations
                         {
                             Id = 103,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3293),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(360),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 5 mtr"
@@ -3259,7 +4382,7 @@ namespace Persistence.Migrations
                         {
                             Id = 104,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3294),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(361),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 6 mtr"
@@ -3268,7 +4391,7 @@ namespace Persistence.Migrations
                         {
                             Id = 105,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3296),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(362),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 Tonne 10 mtr"
@@ -3277,7 +4400,7 @@ namespace Persistence.Migrations
                         {
                             Id = 106,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3296),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(363),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "106-5 tonne 3 mtr"
@@ -3286,7 +4409,7 @@ namespace Persistence.Migrations
                         {
                             Id = 107,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3297),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(364),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "107-5 Tonne 5 mtr"
@@ -3295,7 +4418,7 @@ namespace Persistence.Migrations
                         {
                             Id = 108,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3298),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(365),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "108-5 Tonne 6 mtr"
@@ -3304,7 +4427,7 @@ namespace Persistence.Migrations
                         {
                             Id = 109,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3298),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(366),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "109-10 Tonne 5 mtr"
@@ -3313,7 +4436,7 @@ namespace Persistence.Migrations
                         {
                             Id = 110,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3299),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(366),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "110-6 Tonne 4 mtr"
@@ -3322,7 +4445,7 @@ namespace Persistence.Migrations
                         {
                             Id = 111,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3300),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(369),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6 Tonne 6 mtr"
@@ -3331,7 +4454,7 @@ namespace Persistence.Migrations
                         {
                             Id = 112,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3301),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(370),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "112-6 Tonne 10mtr"
@@ -3340,7 +4463,7 @@ namespace Persistence.Migrations
                         {
                             Id = 113,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3327),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(373),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "113-14 Tonne"
@@ -3349,7 +4472,7 @@ namespace Persistence.Migrations
                         {
                             Id = 114,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3328),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(374),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "114-15 Tonne"
@@ -3358,7 +4481,7 @@ namespace Persistence.Migrations
                         {
                             Id = 115,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3329),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(375),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "115-136 kgs"
@@ -3367,7 +4490,7 @@ namespace Persistence.Migrations
                         {
                             Id = 116,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3330),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(376),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "116-30 Tonne"
@@ -3376,7 +4499,7 @@ namespace Persistence.Migrations
                         {
                             Id = 117,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3330),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(377),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "117-Model: H2000/3 MFB"
@@ -3385,7 +4508,7 @@ namespace Persistence.Migrations
                         {
                             Id = 118,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3331),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(378),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "118-Model: KP 25"
@@ -3394,7 +4517,7 @@ namespace Persistence.Migrations
                         {
                             Id = 119,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3332),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(378),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "119-Model: 71022"
@@ -3403,7 +4526,7 @@ namespace Persistence.Migrations
                         {
                             Id = 120,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3333),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(379),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "120-2250 kgs"
@@ -3412,7 +4535,7 @@ namespace Persistence.Migrations
                         {
                             Id = 121,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3336),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(380),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "121-1.5 Tonne"
@@ -3421,7 +4544,7 @@ namespace Persistence.Migrations
                         {
                             Id = 122,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3337),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(381),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "122-SİNGLE LİNE LANYARD"
@@ -3430,7 +4553,7 @@ namespace Persistence.Migrations
                         {
                             Id = 123,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3338),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(382),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "123-Takelaj sahəsi"
@@ -3439,7 +4562,7 @@ namespace Persistence.Migrations
                         {
                             Id = 124,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3339),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(383),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8 Tonne 8 mtr"
@@ -3448,7 +4571,7 @@ namespace Persistence.Migrations
                         {
                             Id = 125,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3340),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(384),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8 Tonne 6mtr"
@@ -3457,7 +4580,7 @@ namespace Persistence.Migrations
                         {
                             Id = 126,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3341),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(385),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "126- Qarmaq   KE-40"
@@ -3466,7 +4589,7 @@ namespace Persistence.Migrations
                         {
                             Id = 127,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3342),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(385),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "127-Qarmaq    KE-80"
@@ -3475,7 +4598,7 @@ namespace Persistence.Migrations
                         {
                             Id = 128,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3343),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(386),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "128-Qarmaq   KE-32"
@@ -3484,7 +4607,7 @@ namespace Persistence.Migrations
                         {
                             Id = 129,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3343),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(387),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonee x 3 mtr x 28 dia"
@@ -3493,7 +4616,7 @@ namespace Persistence.Migrations
                         {
                             Id = 130,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3344),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(388),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 tonne x 1.5 mtr x 20 mm"
@@ -3502,7 +4625,7 @@ namespace Persistence.Migrations
                         {
                             Id = 131,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3345),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(389),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "7 Tonne"
@@ -3511,7 +4634,7 @@ namespace Persistence.Migrations
                         {
                             Id = 132,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3346),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(389),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3 tonne x 1 mtr"
@@ -3520,7 +4643,7 @@ namespace Persistence.Migrations
                         {
                             Id = 133,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3346),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(412),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne 6 mtr"
@@ -3529,7 +4652,7 @@ namespace Persistence.Migrations
                         {
                             Id = 134,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3347),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(413),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 tonne 4 mtr"
@@ -3538,7 +4661,7 @@ namespace Persistence.Migrations
                         {
                             Id = 135,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3348),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(414),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "1 tonne 2mtr"
@@ -3547,7 +4670,7 @@ namespace Persistence.Migrations
                         {
                             Id = 136,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3348),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(415),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "5 tonne 10 mtr"
@@ -3556,7 +4679,7 @@ namespace Persistence.Migrations
                         {
                             Id = 137,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3349),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(415),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8 Tonne 2mtr"
@@ -3565,7 +4688,7 @@ namespace Persistence.Migrations
                         {
                             Id = 138,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3350),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(417),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne 10 mtr"
@@ -3574,7 +4697,7 @@ namespace Persistence.Migrations
                         {
                             Id = 139,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3351),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(418),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "17 Tonne"
@@ -3583,7 +4706,7 @@ namespace Persistence.Migrations
                         {
                             Id = 140,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3351),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(419),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "3.2 tonne x  3 mtr x 16 mm"
@@ -3592,7 +4715,7 @@ namespace Persistence.Migrations
                         {
                             Id = 141,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3352),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(419),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 tonne x 5.5 mtr x 28 mm"
@@ -3601,7 +4724,7 @@ namespace Persistence.Migrations
                         {
                             Id = 142,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3353),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(420),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 tonne x 5 mtr x 28 mm"
@@ -3610,7 +4733,7 @@ namespace Persistence.Migrations
                         {
                             Id = 143,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3354),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(421),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 tonne x 4 mtr x 28 mm"
@@ -3619,7 +4742,7 @@ namespace Persistence.Migrations
                         {
                             Id = 144,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3354),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(422),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne x 6 mtr x 28 mm"
@@ -3628,7 +4751,7 @@ namespace Persistence.Migrations
                         {
                             Id = 145,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3355),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(423),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.2 Tonne x 3mtr x 22mm"
@@ -3637,7 +4760,7 @@ namespace Persistence.Migrations
                         {
                             Id = 146,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3356),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(423),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "6.2 Tonne x 5 mtr x 22mm"
@@ -3646,7 +4769,7 @@ namespace Persistence.Migrations
                         {
                             Id = 147,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3357),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(424),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "18.5 Tonne x 3 mtr x 38 mm"
@@ -3655,7 +4778,7 @@ namespace Persistence.Migrations
                         {
                             Id = 148,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3357),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(425),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "18.5 Tonne x 5 mtr x 38 mm"
@@ -3664,7 +4787,7 @@ namespace Persistence.Migrations
                         {
                             Id = 149,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3358),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(426),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "2 tonne 2 mtr"
@@ -3673,7 +4796,7 @@ namespace Persistence.Migrations
                         {
                             Id = 150,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3359),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(427),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "1.74mtr x 4.24mtr x 1.32mtr - 300kgs"
@@ -3682,7 +4805,7 @@ namespace Persistence.Migrations
                         {
                             Id = 151,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3360),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(428),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "400 kgs"
@@ -3691,7 +4814,7 @@ namespace Persistence.Migrations
                         {
                             Id = 152,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3361),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(428),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "18.5 Tonne x 8 mtr x 38 mm"
@@ -3700,7 +4823,7 @@ namespace Persistence.Migrations
                         {
                             Id = 153,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3361),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(429),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne x 12 mtr x 28 mm"
@@ -3709,7 +4832,7 @@ namespace Persistence.Migrations
                         {
                             Id = 154,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3362),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(430),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "5.3  Tonne x 15 mtr x 13 mm"
@@ -3718,7 +4841,7 @@ namespace Persistence.Migrations
                         {
                             Id = 155,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3363),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(431),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "8 tonne 4 mtr"
@@ -3727,7 +4850,7 @@ namespace Persistence.Migrations
                         {
                             Id = 156,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3364),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(432),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "85 Tonne"
@@ -3736,7 +4859,7 @@ namespace Persistence.Migrations
                         {
                             Id = 157,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3364),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(433),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "35 Tonne"
@@ -3745,7 +4868,7 @@ namespace Persistence.Migrations
                         {
                             Id = 158,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3365),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(434),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "9.5 Tonne"
@@ -3754,7 +4877,7 @@ namespace Persistence.Migrations
                         {
                             Id = 159,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3366),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(434),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "13.5 tonne"
@@ -3763,7 +4886,7 @@ namespace Persistence.Migrations
                         {
                             Id = 160,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3369),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(435),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "10 Tonne x 8 mtr x 28 mm"
@@ -3772,7 +4895,7 @@ namespace Persistence.Migrations
                         {
                             Id = 161,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3370),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(436),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "161-İnzibati bina CR-2 və qazanxan HB-1"
@@ -3781,7 +4904,7 @@ namespace Persistence.Migrations
                         {
                             Id = 162,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3371),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(437),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "162-Ümumi yük terminalı binaları CR-7 , CR-9 , CR-8"
@@ -3790,7 +4913,7 @@ namespace Persistence.Migrations
                         {
                             Id = 163,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3374),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(438),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "163-Texniki xidmət binaları CR-3, CR-4, CR-10, CR-15, CR-16, WS-3"
@@ -3799,7 +4922,7 @@ namespace Persistence.Migrations
                         {
                             Id = 164,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3374),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(438),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "164-RO-RO terminalı binaları CR-17, FS-5 , FS-10, FS-11, FS-16, FS-17, FS-18"
@@ -3808,7 +4931,7 @@ namespace Persistence.Migrations
                         {
                             Id = 165,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3375),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(439),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "165-BƏRƏ terminalı binaları FS-3, FS-9, FS-12, FS-13, FS-14 , FS-19"
@@ -3817,7 +4940,7 @@ namespace Persistence.Migrations
                         {
                             Id = 166,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3376),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(440),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "166-DƏMİRYOLU binaları RM-1, RM-2 ,RM-4 ,RM-5, RM-6, RM- 7, RM-8, RM-13, RM-14, RM15, RM-16"
@@ -3826,7 +4949,7 @@ namespace Persistence.Migrations
                         {
                             Id = 167,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3377),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(441),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "167-Mühafizə xidməti binaları AB-1, AB-2, AB-7"
@@ -3835,7 +4958,7 @@ namespace Persistence.Migrations
                         {
                             Id = 168,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3377),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(442),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "142 tonne x 3,4 mtr x 56 mm"
@@ -3844,7 +4967,7 @@ namespace Persistence.Migrations
                         {
                             Id = 169,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3378),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(443),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "50 Tonne"
@@ -3853,7 +4976,7 @@ namespace Persistence.Migrations
                         {
                             Id = 170,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3379),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(444),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "300 kgs"
@@ -3862,7 +4985,7 @@ namespace Persistence.Migrations
                         {
                             Id = 171,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3380),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(444),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "4 tonne 2 mtr"
@@ -3871,7 +4994,7 @@ namespace Persistence.Migrations
                         {
                             Id = 172,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3380),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(445),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "172-Abşeron Neft Terminalı binaları"
@@ -3880,7 +5003,7 @@ namespace Persistence.Migrations
                         {
                             Id = 173,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3381),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(446),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "173-Abşeron Neft Terminalı hidrotexniki qurğuları 1 saylı körpü"
@@ -3896,7 +5019,7 @@ namespace Persistence.Migrations
                         {
                             Id = 175,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3382),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(447),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "175-Dəniz vağzalı binası"
@@ -3905,7 +5028,7 @@ namespace Persistence.Migrations
                         {
                             Id = 176,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3383),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(448),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "176-Dəniz vağzalı hidrotexniki qurğuları"
@@ -3914,7 +5037,7 @@ namespace Persistence.Migrations
                         {
                             Id = 177,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3384),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(449),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "177-İdarə binası və mədəniyyət evi"
@@ -3923,7 +5046,7 @@ namespace Persistence.Migrations
                         {
                             Id = 178,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3385),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(450),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "178-Qaradağ mülki-müdafiə binaları"
@@ -3932,7 +5055,7 @@ namespace Persistence.Migrations
                         {
                             Id = 179,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3385),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(451),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "179-Liman ərazisi yollar (Kargo , Ro-Ro , Bərə terminal)"
@@ -3989,7 +5112,7 @@ namespace Persistence.Migrations
                             Id = 1,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2823),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9847),
                             DepartmentId = 1,
                             IsActive = true,
                             IsDeleted = false,
@@ -4000,7 +5123,7 @@ namespace Persistence.Migrations
                             Id = 2,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2824),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9848),
                             DepartmentId = 1,
                             IsActive = true,
                             IsDeleted = false,
@@ -4011,7 +5134,7 @@ namespace Persistence.Migrations
                             Id = 3,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2825),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9849),
                             DepartmentId = 1,
                             IsActive = true,
                             IsDeleted = false,
@@ -4022,7 +5145,7 @@ namespace Persistence.Migrations
                             Id = 4,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2826),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9850),
                             DepartmentId = 5,
                             IsActive = true,
                             IsDeleted = false,
@@ -4033,7 +5156,7 @@ namespace Persistence.Migrations
                             Id = 5,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2827),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9851),
                             DepartmentId = 5,
                             IsActive = true,
                             IsDeleted = false,
@@ -4044,7 +5167,7 @@ namespace Persistence.Migrations
                             Id = 6,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2828),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9852),
                             DepartmentId = 6,
                             IsActive = true,
                             IsDeleted = false,
@@ -4055,7 +5178,7 @@ namespace Persistence.Migrations
                             Id = 7,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2829),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9853),
                             DepartmentId = 3,
                             IsActive = true,
                             IsDeleted = false,
@@ -4066,7 +5189,7 @@ namespace Persistence.Migrations
                             Id = 8,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2830),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9854),
                             DepartmentId = 2,
                             IsActive = true,
                             IsDeleted = false,
@@ -4077,7 +5200,7 @@ namespace Persistence.Migrations
                             Id = 9,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2830),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9855),
                             DepartmentId = 2,
                             IsActive = true,
                             IsDeleted = false,
@@ -4088,7 +5211,7 @@ namespace Persistence.Migrations
                             Id = 10,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2831),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9856),
                             DepartmentId = 3,
                             IsActive = true,
                             IsDeleted = false,
@@ -4099,7 +5222,7 @@ namespace Persistence.Migrations
                             Id = 11,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2832),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9857),
                             DepartmentId = 3,
                             IsActive = true,
                             IsDeleted = false,
@@ -4110,7 +5233,7 @@ namespace Persistence.Migrations
                             Id = 12,
                             Code = 0,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(2833),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 260, DateTimeKind.Utc).AddTicks(9858),
                             DepartmentId = 4,
                             IsActive = true,
                             IsDeleted = false,
@@ -4162,7 +5285,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3558),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(677),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Oil Filter"
@@ -4171,7 +5294,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3559),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(678),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Air Filter"
@@ -4180,7 +5303,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3560),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(679),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Engine Oil"
@@ -4189,7 +5312,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3563),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(680),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "TransMission Oil"
@@ -4198,7 +5321,7 @@ namespace Persistence.Migrations
                         {
                             Id = 5,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3563),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(681),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Gear_Box Oil"
@@ -4207,7 +5330,7 @@ namespace Persistence.Migrations
                         {
                             Id = 6,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3564),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(684),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Wheels"
@@ -4216,7 +5339,7 @@ namespace Persistence.Migrations
                         {
                             Id = 7,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3565),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(684),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Antifiriz"
@@ -4225,7 +5348,7 @@ namespace Persistence.Migrations
                         {
                             Id = 8,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3566),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(685),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Break pads"
@@ -4292,7 +5415,7 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3754),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(846),
                             IsActive = true,
                             IsDeleted = false,
                             MaintenancePlanId = 5,
@@ -4304,7 +5427,7 @@ namespace Persistence.Migrations
                         {
                             Id = 2,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3756),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(848),
                             IsActive = true,
                             IsDeleted = false,
                             MaintenancePlanId = 5,
@@ -4316,7 +5439,7 @@ namespace Persistence.Migrations
                         {
                             Id = 3,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3756),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(849),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Engine Oil Change",
@@ -4327,7 +5450,7 @@ namespace Persistence.Migrations
                         {
                             Id = 4,
                             CreatedBy = "System",
-                            CreatedDate = new DateTime(2023, 8, 23, 7, 53, 19, 230, DateTimeKind.Utc).AddTicks(3759),
+                            CreatedDate = new DateTime(2023, 9, 4, 12, 5, 37, 261, DateTimeKind.Utc).AddTicks(850),
                             IsActive = true,
                             IsDeleted = false,
                             Name = "Engine Oil Change",

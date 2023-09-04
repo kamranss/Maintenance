@@ -13,6 +13,7 @@ import { CreateEquipment } from "./Pages/CreateEquipment.jsx";
 import EquipmentDetail from "./Pages/EquipmentDetail.jsx";
 import UsageHistory from "./Pages/UsageHistory.jsx";
 import CreateUsageHistory from "./Pages/CreateUsageHistory.jsx";
+import Register from "./Pages/Register.jsx";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/equipmentDetail" element={<EquipmentDetail />} />
           <Route path="/usageHistory" element={<UsageHistory />} />
           <Route path="/createUsageHistory" element={<CreateUsageHistory />} />
+          <Route path="/register" element={<Register />} />
 
           {/* <Route path="/" element={<Home/>}/> */}
         </Routes>

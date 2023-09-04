@@ -19,6 +19,7 @@ import {
   // InputLabel,
   styled,
   // ThemeProvider,
+  // makeStyles,
   createTheme,
   Autocomplete,
   debounce,
@@ -29,38 +30,15 @@ import {
 const FormCreateEquipment = () => {
   // const [enteredName, setEnteredName] = useState("");
 
-  const [models, setModels] = useState([]); // State to hold fetched models
-  const [selectedModel, setSelectedModel] = useState(null);
-  const [selectedModelId, setSelectedModelId] = useState(""); // State to hold selected model ID
-  const [searchQuery, setSearchQuery] = useState(""); // State to hold search query
+  const [Equipments, setEquipments] = useState([]);
+  const [selectedEquipments, setSelectedEquipments] = useState(null);
+  const [selectedEquipmentId, setSelectedEquipmentsId] = useState(""); // State to hold selected model ID
+  const [searchQueryforEquipments, setSearchQueryforEquipments] = useState("");
 
-  const [Types, setTypes] = useState([]);
-  const [selectedType, setSelectedType] = useState(null);
-  const [selectedTypelId, setSelectedTypeId] = useState(""); // State to hold selected model ID
-  const [searchQueryfortypes, setSearchQueryfortypes] = useState(""); // State to hold search query
-
-  const [Departments, setDepartments] = useState([]);
-  const [selectedDepartments, setSelectedDepartments] = useState(null);
-  const [selectedDepartmentsId, setSelectedDepartmentsId] = useState(""); // State to hold selected model ID
-  const [searchQueryforDepartments, setSearchQueryforDepartments] =
-    useState(""); // State to hold search query
-
-  const [UsageLocations, setUsageLocations] = useState([]);
-  const [selectedUsageLocations, setSelectedUsageLocations] = useState(null);
-  const [selectedUsageLocationsId, setSelectedUsageLocationsId] = useState(""); // State to hold selected model ID
-  const [searchQueryforUsageLocations, setSearchQueryforUsageLocations] =
-    useState("");
-
-  const [Manufactures, setManufactures] = useState([]);
-  const [selectedManufacture, setSelectedManufactures] = useState(null);
-  const [selectedManufacturesId, setSelectedManufactureId] = useState(""); // State to hold selected model ID
-  const [searchQueryforManufactures, setSearchQueryforManufactures] =
-    useState("");
-
-  const [OperationSite, setOperationSite] = useState([]);
-  const [selectedOperationSite, setSelectedOperationSite] = useState(null);
-  const [selectedOperationSiteId, setSelectedOperationSiteId] = useState(""); // State to hold selected model ID
-  const [searchQueryforOperationSite, setSearchQueryforOperationSite] =
+  const [OperationName, setOperationName] = useState([]);
+  const [selectedOperationName, setSelectedOperationName] = useState(null);
+  const [selectedOperationNameId, setSelectedOperationNameId] = useState(""); // State to hold selected model ID
+  const [searchQueryforOperationName, setSearchQueryforOperationName] =
     useState("");
 
   const MySwal = withReactContent(Swal);
@@ -68,55 +46,41 @@ const FormCreateEquipment = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [formDataa, setFormData] = useState({}); // State to hold form data
-
-  // const [filteredModels, setFilteredModels] = useState([]); // State to hold filtered models
   const theme = createTheme();
 
-  // const CustomPopper = React.forwardRef(function CustomPopper(props, ref) {
-  //   return (
-  //     <Popper
-  //       {...props}
-  //       placement="bottom-start" // Adjust the placement as needed
-  //       modifiers={[
-  //         {
-  //           name: "offset",
-  //           options: {
-  //             offset: [0, 8], // Adjust the offset to position the dropdown
-  //           },
-  //         },
-  //       ]}
-  //       ref={ref}
-  //     />
-  //   );
-  // });
+  // const useStyles = styled((theme) => ({
+  //   select: {
+  //     width: "100%", // Adjust the width as needed
+  //     "& .MuiSelect-select.MuiSelect-select": {
+  //       paddingBottom: theme.spacing(1), // Adds spacing below the dropdown icon
+  //     },
+  //   },
+  // }));
 
-  // useEffect(() => {
-  //   // Fetch models from the API when the component mounts
-  //   fetchModels(searchQuery);
-  // }, [searchQuery]);
-
-  const useStyles = styled((theme) => ({
-    select: {
-      width: "100%", // Adjust the width as needed
-      "& .MuiSelect-select.MuiSelect-select": {
-        paddingBottom: theme.spacing(1), // Adds spacing below the dropdown icon
-      },
+  const CustomTextField = styled(TextField)({
+    "& .MuiInputBase-input": {
+      color: "black",
     },
-  }));
+  });
 
-  const fetchModels = async (name) => {
+  const CustomOption = styled("li")({
+    backgroundColor: "white",
+    color: "black",
+  });
+
+  const fetchEquipemnts = async (name) => {
     try {
       const params = new URLSearchParams({
         name: name, // Use the search query as the 'name' parameter
       });
 
-      const url = `https://localhost:7066/api/Model/DropDown?${params}`;
+      const url = `https://localhost:7066/api/Equipment/DropDown?${params}`;
       const response = await axios.get(url);
       console.log("API response:", response.data); // Log the API response
 
       if (response.data && Array.isArray(response.data)) {
         console.log("Fetched models:", response.data); // Log the fetched models
-        setModels(response.data);
+        setEquipments(response.data);
       } else {
         console.error(
           "API response does not contain an array of models:",
@@ -128,19 +92,19 @@ const FormCreateEquipment = () => {
     }
   };
 
-  const fetchTypes = async (name) => {
+  const fetchOperationNames = async (name) => {
     try {
       const params = new URLSearchParams({
         name: name, // Use the search query as the 'name' parameter
       });
 
-      const url = `https://localhost:7066/api/EquipmentType/DropDown?${params}`;
+      const url = `https://localhost:7066/api/Constants/OperationType?${params}`;
       const response = await axios.get(url);
       console.log("API response:", response.data); // Log the API response
 
       if (response.data && Array.isArray(response.data)) {
         console.log("Fetched models:", response.data); // Log the fetched models
-        setTypes(response.data);
+        setOperationName(response.data);
       } else {
         console.error(
           "API response does not contain an array of models:",
@@ -152,122 +116,51 @@ const FormCreateEquipment = () => {
     }
   };
 
-  const fetchDepartments = async (name) => {
-    try {
-      const params = new URLSearchParams({
-        name: name, // Use the search query as the 'name' parameter
-      });
-
-      const url = `https://localhost:7066/api/Department/DropDown?${params}`;
-      const response = await axios.get(url);
-      console.log("API response:", response.data); // Log the API response
-
-      if (response.data && Array.isArray(response.data)) {
-        console.log("Fetched models:", response.data); // Log the fetched models
-        setDepartments(response.data);
-      } else {
-        console.error(
-          "API response does not contain an array of models:",
-          response.data
-        );
-      }
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
-
-  const fetchModelsDebounced = debounce(fetchModels, 300);
+  const fetchEquipmentsDebounced = debounce(fetchEquipemnts, 300);
   useEffect(() => {
     // Fetch models from the API when the component mounts or searchQuery changes
-    fetchModels(searchQuery);
-  }, [searchQuery]);
+    fetchEquipemnts(searchQueryforEquipments);
+  }, [searchQueryforEquipments]);
 
-  const fetchTypesDebounced = debounce(fetchTypes, 300);
+  const fetchOperationTypesDebounced = debounce(fetchOperationNames, 300);
   useEffect(() => {
-    fetchTypes(searchQueryfortypes);
-  }, [searchQueryfortypes]);
-
-  const fetchDepartmentsDebounced = debounce(fetchDepartments, 300);
-  useEffect(() => {
-    fetchDepartments(searchQueryforDepartments);
-  }, [searchQueryforDepartments]);
+    // Fetch models from the API when the component mounts or searchQuery changes
+    fetchOperationNames(searchQueryforOperationName);
+  }, [searchQueryforOperationName]);
 
   const submitForm = async (e) => {
     e.preventDefault();
     setValidationErrors({});
     try {
       const formData = new FormData(); // Create a new FormData object
-
-      formData.append("Name", formDataa.Name || "");
-      formData.append("UnitNumber", formDataa.UnitNumber || "");
-      formData.append(
-        "Description",
-        JSON.stringify(formDataa.Description || "")
-      );
-      formData.append(
-        "Identification",
-        JSON.stringify(formDataa.Identification || "")
-      );
-      formData.append(
-        "OperationSiteid",
-        selectedOperationSite ? selectedOperationSite.id : ""
-      );
-      formData.append(
-        "ManufactureId",
-        selectedManufacture ? selectedManufacture.id : ""
-      );
-      formData.append("ProductionYear", formDataa.ProductionYear || "");
-      formData.append("SerialNumber", formDataa.SerialNumber || "");
-      formData.append("Capacity", formDataa.Capacity || "");
       // formData.append(
-      //   "EquipmentTypeId",
-      //   JSON.stringify(selectedType ? selectedType.id : null)
+      //   "EquipmentId",
+      //   selectedEquipments ? selectedEquipments.id : null
       // );
-      formData.append(
-        "DepartmentId",
-        selectedDepartments ? selectedDepartments.id : ""
-      );
-      formData.append("EquipmentTypeId", selectedType ? selectedType.id : "");
-      // formData.append(
-      //   "UsageLocation",
-      //   selectedUsageLocations ? selectedUsageLocations.label : ""
-      // );
-      formData.append(
-        "DepartmentId",
-        selectedDepartments ? selectedDepartments.id : ""
-      );
-      formData.append("ModelId", selectedModel ? selectedModel.id : "");
-      if (formDataa.Image instanceof File) {
-        formData.append("Image", formDataa.Image);
+      if (selectedEquipments && selectedEquipments.id !== null) {
+        formData.append("EquipmentId", selectedEquipments.id);
       }
-      console.log(formDataa.Image);
-      formData.append("LastMaintenaceDate", formDataa.LastMaintenaceDate || "");
-      formData.append("CurrentValue", formDataa.CurrentValue || "");
-      console.log(selectedUsageLocationsId);
-      console.log(selectedUsageLocations);
-      console.log("Form Data - Name:", formDataa.Name);
-      console.log("Form Data - UnitNumber:", formDataa.UnitNumber);
-      console.log("Form Data - Description:", formDataa.Description);
-      console.log("Form Data - Image:", formDataa.Image);
-      formData.append(
-        "UsageLocation",
-        selectedUsageLocations ? selectedUsageLocations : ""
-      );
+      if (formDataa.Remark !== null) {
+        formData.append("Remark", formDataa.Remark);
+      }
+      if (selectedOperationName && selectedOperationName.id !== null) {
+        formData.append("OperationNameid", selectedOperationName.id);
+      }
+      formData.append("StartDate", formDataa.StartDate || "");
+      // formData.append("Remark", formDataa.Remark || null);
+      // formData.append(
+      //   "OperationNameid",
+      //   selectedOperationName ? selectedOperationName.id : null
+      // );
+      // formData.append("StartDate", formDataa.StartDate || "");
 
       const response = await fetch(
-        "https://localhost:7066/api/Equipment/NewEquipment",
+        "https://localhost:7066/api/UsageHistory/StartUsageHistory",
         {
           method: "POST",
-          body: JSON.stringify(formData), // Use the FormData object as the request body
+          body: formData, // Use the FormData object as the request body
         }
       );
-      console.log("Form Data - Name:", formDataa.Name);
-      console.log("Form Data - UnitNumber:", formDataa.UnitNumber);
-      console.log("Form Data - Description:", formDataa.Description);
-      console.log("Form Data - Image:", formDataa.Image);
-      for (const entry of formData.entries()) {
-        console.log(entry);
-      }
 
       if (response.ok) {
         MySwal.fire({
@@ -310,93 +203,47 @@ const FormCreateEquipment = () => {
       [fieldName]: value,
     }));
   };
-  const classes = useStyles();
+  // const classes = useStyles();
 
   return (
     <>
       <form className="FormMain" onSubmit={submitForm}>
         <h2 className="heading">Create Usage History</h2>
         <div className="FormContainer">
-          <div className="FormLeftSide">
+          <div className="Form_box">
             {/* <h2>Identification</h2> */}
             <div>
               <FormGroup className="mb-3">
-                <FormLabel>Equipment Name</FormLabel>
-                <TextField
-                  type="text"
-                  name="Name"
-                  onChange={(e) => handleInputChange("Name", e.target.value)}
-                />
-                {validationErrors.Name && validationErrors.Name.length > 0 ? (
-                  <span className="validation-error">
-                    {validationErrors.Name[0]}
-                  </span>
-                ) : null}
-              </FormGroup>
-              <FormGroup className="mb-3">
-                <FormLabel>Unit Number</FormLabel>
-                <TextField
-                  type="number"
-                  name="UnitNumber"
-                  onChange={(e) =>
-                    handleInputChange("UnitNumber", e.target.value)
-                  }
-                />
-                {validationErrors.UnitNumber &&
-                validationErrors.UnitNumber.length > 0 ? (
-                  <span className="validation-error">
-                    {validationErrors.UnitNumber[0]}
-                  </span>
-                ) : null}
-              </FormGroup>
-              <FormGroup className="mb-3">
-                <FormLabel>Description</FormLabel>
-                <TextField
-                  type="text"
-                  name="Description"
-                  onChange={(e) =>
-                    handleInputChange("Description", e.target.value)
-                  }
-                />
-                {/* {validationErrors.Description && (
-                  <span className="validation-error">
-                    {validationErrors.Description[0]}
-                  </span>
-                )} */}
-                {validationErrors.Description &&
-                validationErrors.Description.length > 0 ? (
-                  <span className="validation-error">
-                    {validationErrors.Description[0]}
-                  </span>
-                ) : null}
-              </FormGroup>
-              <FormGroup className="mb-3">
-                <FormLabel>Identification</FormLabel>
-                <TextField type="number" name="Identification" />
-              </FormGroup>
-              <FormGroup className="mb-3">
-                <FormLabel>OperationSite</FormLabel>
+                <FormLabel>Operation Name</FormLabel>
                 <Autocomplete
-                  id="operationSite-autocomplete"
-                  options={OperationSite}
-                  getOptionLabel={(operationSite) => operationSite.name}
-                  value={selectedOperationSite} // Bind selectedModelId to the Autocomplete value
+                  id="operationName-autocomplete"
+                  options={OperationName}
+                  // getOptionLabel={(operationName) => operationName}
+                  value={selectedOperationName} // Bind selectedModelId to the Autocomplete value
                   onChange={(event, newValue) => {
-                    setSelectedOperationSite(newValue); // Update selectedModel when a model is selected
+                    setSelectedOperationName(newValue); // Update selectedModel when a model is selected
                   }}
                   onInputChange={(event, newInputValue) => {
-                    setSearchQueryforOperationSite(newInputValue); // Update searchQuery as input changes
+                    setSearchQueryforOperationName(newInputValue); // Update searchQuery as input changes
                   }}
-                  inputValue={searchQueryforOperationSite}
+                  inputValue={searchQueryforOperationName}
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Search or Select Operation Sites"
+                      label="Search or Select Operation Names"
                       variant="outlined"
                     />
                   )}
                   renderOption={(props, option) => (
-                    <li {...props}>{option.name}</li>
+                    <li
+                      {...props}
+                      // style={{
+                      //   backgroundColor: "white", // Change the background color of the dropdown option
+                      //   color: "red", // Change the text color of the dropdown option
+                      // }}
+                    >
+                      {option.name}
+                    </li>
                   )}
                   PopperProps={{
                     placement: "bottom-start", // Adjust the placement as needed
@@ -412,23 +259,28 @@ const FormCreateEquipment = () => {
                 />
               </FormGroup>
               <FormGroup className="mb-3">
-                <FormLabel>Manufacture</FormLabel>
+                <FormLabel>Start Date</FormLabel>
+                <TextField type="date" name="StartDate" />
+              </FormGroup>
+
+              <FormGroup className="mb-3">
+                <FormLabel>Equipments</FormLabel>
                 <Autocomplete
-                  id="manufacture-autocomplete"
-                  options={Manufactures}
-                  getOptionLabel={(manufacture) => manufacture.name}
-                  value={selectedManufacture} // Bind selectedModelId to the Autocomplete value
+                  id="equipment-autocomplete"
+                  options={Equipments}
+                  getOptionLabel={(equipment) => equipment.name}
+                  value={selectedEquipments} // Bind selectedModelId to the Autocomplete value
                   onChange={(event, newValue) => {
-                    setSelectedManufactures(newValue); // Update selectedModel when a model is selected
+                    setSelectedEquipments(newValue); // Update selectedModel when a model is selected
                   }}
                   onInputChange={(event, newInputValue) => {
-                    setSearchQueryforManufactures(newInputValue); // Update searchQuery as input changes
+                    setSearchQueryforEquipments(newInputValue); // Update searchQuery as input changes
                   }}
-                  inputValue={searchQueryforManufactures}
+                  inputValue={searchQueryforEquipments}
                   renderInput={(params) => (
                     <TextField
                       {...params}
-                      label="Search or Select Manufactures"
+                      label="Search or Select Equipment"
                       variant="outlined"
                     />
                   )}
@@ -454,6 +306,27 @@ const FormCreateEquipment = () => {
                   </span>
                 ) : null}
               </FormGroup>
+              <div className="form_Remark">
+                <FormGroup className="mb-3">
+                  <FormLabel>Remark</FormLabel>
+                  <TextField
+                    type="text"
+                    name="Remark"
+                    onChange={(e) =>
+                      handleInputChange("Remark", e.target.value)
+                    }
+                    InputProps={{
+                      style: { height: "150px", width: "600px" }, // Adjust the height as needed
+                    }}
+                  />
+                  {validationErrors.Remark &&
+                  validationErrors.Remark.length > 0 ? (
+                    <span className="validation-error">
+                      {validationErrors.Remark[0]}
+                    </span>
+                  ) : null}
+                </FormGroup>
+              </div>
             </div>
           </div>
         </div>

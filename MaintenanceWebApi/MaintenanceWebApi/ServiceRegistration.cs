@@ -1,6 +1,7 @@
 ﻿
 using Application.Validators.Department;
 using Application.Validators.Equipment;
+using Application.Validators.UsageHistory;
 using Application.Validators.User;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -17,6 +18,7 @@ namespace MaintenanceWebApi
                 option.RegisterValidatorsFromAssemblyContaining<DepartmentCreateValidator>();
                 option.RegisterValidatorsFromAssemblyContaining<UserLoginDtoValidator>();
                 option.RegisterValidatorsFromAssemblyContaining<UserRegisterDtoValidator>();
+                option.RegisterValidatorsFromAssemblyContaining<UsageHistoryCreateValidator>();
             });
 
 

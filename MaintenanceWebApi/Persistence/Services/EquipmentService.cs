@@ -741,6 +741,7 @@ namespace Persistence.Services
             {
                 var equipments = _equipmentReadRepository.GetAll()
                     .Include(e => e.EquipmentType)
+                    .Where(e => e.IsIdle == true)
                     .Take(5);
                 if (equipments == null)
                 {
@@ -753,7 +754,7 @@ namespace Persistence.Services
             }
             else
             {
-                var equipmentss = _equipmentReadRepository.GetAll().Where(m => m.EquipmentType.Name.ToLower().Contains(name));
+                var equipmentss = _equipmentReadRepository.GetAll().Where(m => m.Name.ToLower().Contains(name.ToLower()) && m.IsIdle == false);
                 if (equipmentss == null)
                 {
                     return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = new List<EquipmentInputDto>() };

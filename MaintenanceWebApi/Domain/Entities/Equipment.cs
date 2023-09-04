@@ -14,6 +14,8 @@ namespace Domain.Entities
     public class Equipment:BaseEntity
     {
         public string? Name { get; set; }
+
+        public bool? IsIdle { get; set; }
         public string? UnitNumber { get; set; }
         public string? Description { get; set; }
         public string? Color { get; set; }
@@ -44,6 +46,8 @@ namespace Domain.Entities
         public Manufacture Manufacture { get; set; }
 
         public List<UsageHistory> UsageHistories { get; set; }
+
+       
 
         //public bool? isDeleted { get; set; }
 

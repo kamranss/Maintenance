@@ -11,7 +11,7 @@ const SideBarUsageHistory = ({ activeTab, onTabChange }) => {
         <h2 className="heading_name">EquipmentUsage</h2>
       </div>
       <div>
-        <img src={SideBarEquUsageimg} alt="" />
+        <img className="sideBar_Image" src={SideBarEquUsageimg} alt="" />
       </div>
     </div>
   );

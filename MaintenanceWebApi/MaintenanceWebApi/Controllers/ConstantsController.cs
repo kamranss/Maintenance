@@ -71,14 +71,28 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        [HttpGet("Operationtype")]
+        [HttpGet("OperationType")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetOperationTypes()
+        public IActionResult GetOperationTypes(string? name)
         {
-            var operations = Enum.GetNames(typeof(Operation)).ToList();
-            return Ok(operations);
+
+            if (name == null)
+            {
+                var matchingOperationNames = Enum.GetNames(typeof(Operation)).ToList();
+                return Ok(matchingOperationNames);
+            }
+
+            var matchingOperation = Enum.GetNames(typeof(Operation))
+                .Where(operation => operation.ToString().Contains(name, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            return Ok(matchingOperation);
+
+
+            //var operations = Enum.GetNames(typeof(Operation)).ToList();
+            //return Ok(operations);
         }
 
     }
