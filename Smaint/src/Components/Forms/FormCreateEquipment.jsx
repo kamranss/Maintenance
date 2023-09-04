@@ -348,10 +348,7 @@ const FormCreateEquipment = () => {
         "Description",
         JSON.stringify(formDataa.Description || "")
       );
-      formData.append(
-        "Identification",
-        JSON.stringify(formDataa.Identification || "")
-      );
+      formData.append("Identification", formDataa.Identification || "");
       formData.append(
         "OperationSiteid",
         selectedOperationSite ? selectedOperationSite.id : ""
@@ -402,7 +399,7 @@ const FormCreateEquipment = () => {
         "https://localhost:7066/api/Equipment/NewEquipment",
         {
           method: "POST",
-          body: JSON.stringify(formData), // Use the FormData object as the request body
+          body: formData, // Use the FormData object as the request body
         }
       );
       console.log("Form Data - Name:", formDataa.Name);

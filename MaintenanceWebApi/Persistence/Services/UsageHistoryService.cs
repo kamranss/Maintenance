@@ -64,6 +64,8 @@ namespace Persistence.Services
             newUsageHistory.OperationNameValue = usageHistoryCreate.OperationName.Value.ToString();
              newUsageHistory.StartUsageHourValue = existEquipment.CurrentValue;
             newUsageHistory.Status = Domain.Concrets.UsageHistoryStatus.ONGOING;
+            newUsageHistory.IsActive = true;
+            newUsageHistory.IsDeleted = false;
             if (usageHistoryCreate.StartDate == null)
             {
                 newUsageHistory.StartDate = DateTime.UtcNow;
@@ -275,7 +277,7 @@ namespace Persistence.Services
             {
                 return new ServiceResult<Pagination<UsageHistoryDto>> { IsSuccess = false, ErrorMessage = "Params is not okay" };
             }
-            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+            var count = _readRepository.GetAll()/*.Where(d => d.IsDeleted == false && d.IsActive == true)*/.Count();
             int pageValue = page.Value;
             int takeValue = pageSize.Value;
             int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;

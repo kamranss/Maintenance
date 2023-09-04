@@ -41,21 +41,18 @@ const FormCreateEquipment = () => {
   const [searchQueryforOperationName, setSearchQueryforOperationName] =
     useState("");
 
+  const [OperatorName, setOperatorName] = useState([]);
+  const [selectedOperatorName, setSelectedOperatorName] = useState(null);
+  const [selectedOperatorNameId, setSelectedOperatorNameId] = useState(""); // State to hold selected model ID
+  const [searchQueryforOperatorName, setSearchQueryforOperatorNamee] =
+    useState("");
+
   const MySwal = withReactContent(Swal);
   const [validationErrors, setValidationErrors] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   const [formDataa, setFormData] = useState({}); // State to hold form data
   const theme = createTheme();
-
-  // const useStyles = styled((theme) => ({
-  //   select: {
-  //     width: "100%", // Adjust the width as needed
-  //     "& .MuiSelect-select.MuiSelect-select": {
-  //       paddingBottom: theme.spacing(1), // Adds spacing below the dropdown icon
-  //     },
-  //   },
-  // }));
 
   const CustomTextField = styled(TextField)({
     "& .MuiInputBase-input": {
@@ -133,26 +130,30 @@ const FormCreateEquipment = () => {
     setValidationErrors({});
     try {
       const formData = new FormData(); // Create a new FormData object
-      // formData.append(
-      //   "EquipmentId",
-      //   selectedEquipments ? selectedEquipments.id : null
-      // );
+
       if (selectedEquipments && selectedEquipments.id !== null) {
         formData.append("EquipmentId", selectedEquipments.id);
+      } else {
+        formData.append("EquipmentId", ""); // Append an empty string or any default value if selectedEquipments is null
       }
-      if (formDataa.Remark !== null) {
-        formData.append("Remark", formDataa.Remark);
-      }
-      if (selectedOperationName && selectedOperationName.id !== null) {
-        formData.append("OperationNameid", selectedOperationName.id);
-      }
+
+      // if (formDataa.Remark !== null && formDataa.Remark !== undefined) {
+      //   formData.append("Remark", formDataa.Remark);
+      // }
+
+      // if (
+      //   formDataa.OperatorName !== null &&
+      //   formDataa.OperatorName !== undefined
+      // ) {
+      //   formData.append("OperatorName", formDataa.OperatorName);
+      // }
+      formData.append("Remark", formDataa.Remark || null);
+      formData.append("OperatorName", formDataa.OperatorName || null);
+      formData.append(
+        "OperationName",
+        selectedOperationName ? selectedOperationName : null
+      );
       formData.append("StartDate", formDataa.StartDate || "");
-      // formData.append("Remark", formDataa.Remark || null);
-      // formData.append(
-      //   "OperationNameid",
-      //   selectedOperationName ? selectedOperationName.id : null
-      // );
-      // formData.append("StartDate", formDataa.StartDate || "");
 
       const response = await fetch(
         "https://localhost:7066/api/UsageHistory/StartUsageHistory",
@@ -161,18 +162,23 @@ const FormCreateEquipment = () => {
           body: formData, // Use the FormData object as the request body
         }
       );
-
+      for (const entry of formData.entries()) {
+        console.log(entry);
+      }
+      console.log(formData);
+      console.log("Selected Operation Name:", selectedOperationName);
+      console.log("Selected Operation Name ID:", selectedOperationName);
       if (response.ok) {
         MySwal.fire({
           icon: "success",
           title: "Success!",
-          text: "Equipment created successfully.",
+          text: "UH created successfully.",
         }).then(() => {
-          window.location.href = "/EquipmentPage";
+          window.location.href = "/UsageHistory";
           setIsSubmitted(true);
         });
-        console.log("Equipment created successfully.");
-        console.log(formData);
+        console.log("Usage History created successfully.");
+
         setValidationErrors({});
       } else if (response.status === 400) {
         // Bad request with validation errors
@@ -191,13 +197,10 @@ const FormCreateEquipment = () => {
   };
 
   const handleInputChange = (fieldName, value) => {
-    // Reset validation error for the specific field when the user starts typing
     setValidationErrors((prevErrors) => ({
       ...prevErrors,
       [fieldName]: [],
     }));
-
-    // Update formData state
     setFormData((prevData) => ({
       ...prevData,
       [fieldName]: value,
@@ -235,23 +238,15 @@ const FormCreateEquipment = () => {
                     />
                   )}
                   renderOption={(props, option) => (
-                    <li
-                      {...props}
-                      // style={{
-                      //   backgroundColor: "white", // Change the background color of the dropdown option
-                      //   color: "red", // Change the text color of the dropdown option
-                      // }}
-                    >
-                      {option.name}
-                    </li>
+                    <li {...props}>{option.label}</li>
                   )}
                   PopperProps={{
-                    placement: "bottom-start", // Adjust the placement as needed
+                    placement: "bottom-start",
                     modifiers: [
                       {
                         name: "offset",
                         options: {
-                          offset: [0, 8], // Adjust the offset to position the dropdown
+                          offset: [0, 8],
                         },
                       },
                     ],
@@ -260,7 +255,13 @@ const FormCreateEquipment = () => {
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Start Date</FormLabel>
-                <TextField type="date" name="StartDate" />
+                <TextField
+                  type="date"
+                  name="StartDate" // Make sure the name matches the backend field name
+                  onChange={(e) =>
+                    handleInputChange("StartDate", e.target.value)
+                  }
+                />
               </FormGroup>
 
               <FormGroup className="mb-3">
@@ -306,6 +307,23 @@ const FormCreateEquipment = () => {
                   </span>
                 ) : null}
               </FormGroup>
+              <FormGroup className="mb-3">
+                <FormLabel>Operator Name</FormLabel>
+                <TextField
+                  type="text"
+                  name="OperatorName"
+                  onChange={(e) => handleInputChange("Remark", e.target.value)}
+                  // InputProps={{
+                  //   style: { height: "150px", width: "600px" }, // Adjust the height as needed
+                  // }}
+                />
+                {/* {validationErrors.Remark &&
+                validationErrors.Remark.length > 0 ? (
+                  <span className="validation-error">
+                    {validationErrors.Remark[0]}
+                  </span>
+                ) : null} */}
+              </FormGroup>
               <div className="form_Remark">
                 <FormGroup className="mb-3">
                   <FormLabel>Remark</FormLabel>
@@ -319,12 +337,12 @@ const FormCreateEquipment = () => {
                       style: { height: "150px", width: "600px" }, // Adjust the height as needed
                     }}
                   />
-                  {validationErrors.Remark &&
+                  {/* {validationErrors.Remark &&
                   validationErrors.Remark.length > 0 ? (
                     <span className="validation-error">
                       {validationErrors.Remark[0]}
                     </span>
-                  ) : null}
+                  ) : null} */}
                 </FormGroup>
               </div>
             </div>

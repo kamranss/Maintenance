@@ -106,6 +106,10 @@ namespace Persistence.Services
 
 
             var newEquipment = _mapper.Map<Equipment>(equipment);
+            if (equipment.CurrentValue == null)
+            {
+                newEquipment.CurrentValue = 0;
+            }
             newEquipment.IsActive = true;
             newEquipment.IsDeleted = true;
             var imageurl = imageUrl;
@@ -113,6 +117,7 @@ namespace Persistence.Services
             newEquipment.Status = EquipmentStatus.ACTIVE;
             newEquipment.usageLocation = equipment.UsageLocation;
             newEquipment.MpCompleted = true;
+            newEquipment.IsIdle = true;
 
 
 

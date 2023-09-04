@@ -70,16 +70,16 @@ export default function TableUsageHistory({ thead = [], rows = [] }) {
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="left">{row?.id}</TableCell>
+                  <TableCell align="left">{row?.equipmentName}</TableCell>
+                  <TableCell align="left">{row?.operationName}</TableCell>
                   <TableCell align="left">
                     {row?.startUsageHourValue || "-"}
                   </TableCell>
                   <TableCell align="left">
                     {row?.endUsageHourValue || "-"}
                   </TableCell>
-                  <TableCell align="left">{row?.equipmentName}</TableCell>
-                  <TableCell align="left">
-                    {row?.operationName || "-"}
-                  </TableCell>
+
+                  {/* <TableCell align="left">{row?.operatorName || "-"}</TableCell> */}
                   <TableCell align="left">{row?.operatorName || "-"}</TableCell>
                   <TableCell align="left">
                     {row?.totalUsageValue || "-"}
