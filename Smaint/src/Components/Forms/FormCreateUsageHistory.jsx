@@ -129,24 +129,14 @@ const FormCreateEquipment = () => {
     e.preventDefault();
     setValidationErrors({});
     try {
-      const formData = new FormData(); // Create a new FormData object
+      const formData = new FormData();
 
       if (selectedEquipments && selectedEquipments.id !== null) {
         formData.append("EquipmentId", selectedEquipments.id);
       } else {
-        formData.append("EquipmentId", ""); // Append an empty string or any default value if selectedEquipments is null
+        formData.append("EquipmentId", "");
       }
 
-      // if (formDataa.Remark !== null && formDataa.Remark !== undefined) {
-      //   formData.append("Remark", formDataa.Remark);
-      // }
-
-      // if (
-      //   formDataa.OperatorName !== null &&
-      //   formDataa.OperatorName !== undefined
-      // ) {
-      //   formData.append("OperatorName", formDataa.OperatorName);
-      // }
       formData.append("Remark", formDataa.Remark || null);
       formData.append("OperatorName", formDataa.OperatorName || null);
       formData.append(
@@ -237,9 +227,7 @@ const FormCreateEquipment = () => {
                       variant="outlined"
                     />
                   )}
-                  renderOption={(props, option) => (
-                    <li {...props}>{option.label}</li>
-                  )}
+                  renderOption={(props, option) => <li {...props}>{option}</li>}
                   PopperProps={{
                     placement: "bottom-start",
                     modifiers: [

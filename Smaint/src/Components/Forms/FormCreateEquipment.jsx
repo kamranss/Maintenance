@@ -69,31 +69,7 @@ const FormCreateEquipment = () => {
 
   const [formDataa, setFormData] = useState({}); // State to hold form data
 
-  // const [filteredModels, setFilteredModels] = useState([]); // State to hold filtered models
   const theme = createTheme();
-
-  // const CustomPopper = React.forwardRef(function CustomPopper(props, ref) {
-  //   return (
-  //     <Popper
-  //       {...props}
-  //       placement="bottom-start" // Adjust the placement as needed
-  //       modifiers={[
-  //         {
-  //           name: "offset",
-  //           options: {
-  //             offset: [0, 8], // Adjust the offset to position the dropdown
-  //           },
-  //         },
-  //       ]}
-  //       ref={ref}
-  //     />
-  //   );
-  // });
-
-  // useEffect(() => {
-  //   // Fetch models from the API when the component mounts
-  //   fetchModels(searchQuery);
-  // }, [searchQuery]);
 
   const useStyles = styled((theme) => ({
     select: {
@@ -279,63 +255,6 @@ const FormCreateEquipment = () => {
     fetchUsageLoacation(searchQueryforUsageLocations);
   }, [searchQueryforUsageLocations]);
 
-  // const StyledSelect = styled(Select)({
-  //   width: "100%",
-  //   marginTop: theme.spacing(1),
-  //   "& .MuiSelect-select.MuiSelect-select": {
-  //     paddingBottom: theme.spacing(1),
-  //   },
-  // });
-  // const StyledMenuItem = styled(MenuItem)({
-  //   width: "20%",
-  //   // Match the width of the StyledSelect
-  // });
-
-  // const submitForm = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     const response = await fetch(
-  //       "https://localhost:7066/api/Equipment/NewEquipment",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           Name: formData.Name,
-  //           UnitNumber: formData.UnitNumber,
-  //           Description: formData.Description,
-  //           Identification: formData.Identification,
-  //           OperationSiteid: formData.OperationSiteid,
-  //           ManufactureId: formData.ManufactureId,
-  //           ProductionYear: formData.ProductionYear,
-  //           SeriaNumber: formData.SeriaNumber,
-  //           Capacity: formData.Capacity,
-  //           EquipmentTypeId: selectedType ? selectedType.id : null,
-  //           UsageLocation: selectedUsageLocations
-  //             ? selectedUsageLocations.label
-  //             : null,
-  //           DepartmentId: selectedDepartments ? selectedDepartments.id : null,
-  //           ModelId: selectedModel ? selectedModel.id : null,
-  //           Image: formData.Image, // You'll need to handle file uploads properly
-  //           LastMaintenaceDate: formData.LastMaintenaceDate,
-  //           CurrentValue: formData.CurrentValue,
-  //         }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       console.log("Equipment created successfully.");
-  //     } else {
-  //       const errorMessage = await response.text();
-  //       console.error("Error:", errorMessage);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-
   const submitForm = async (e) => {
     e.preventDefault();
     setValidationErrors({});
@@ -358,7 +277,7 @@ const FormCreateEquipment = () => {
         selectedManufacture ? selectedManufacture.id : ""
       );
       formData.append("ProductionYear", formDataa.ProductionYear || "");
-      formData.append("SerialNumber", formDataa.SerialNumber || "");
+      formData.append("seriaNumber", formDataa.seriaNumber || "");
       formData.append("Capacity", formDataa.Capacity || "");
       // formData.append(
       //   "EquipmentTypeId",
@@ -500,17 +419,17 @@ const FormCreateEquipment = () => {
                     handleInputChange("Description", e.target.value)
                   }
                 />
-                {/* {validationErrors.Description && (
+                {validationErrors.Description && (
                   <span className="validation-error">
                     {validationErrors.Description[0]}
                   </span>
-                )} */}
-                {validationErrors.Description &&
+                )}
+                {/* {validationErrors.Description &&
                 validationErrors.Description.length > 0 ? (
                   <span className="validation-error">
                     {validationErrors.Description[0]}
                   </span>
-                ) : null}
+                ) : null} */}
               </FormGroup>
               <FormGroup className="mb-3">
                 <FormLabel>Identification</FormLabel>
@@ -561,7 +480,9 @@ const FormCreateEquipment = () => {
                   getOptionLabel={(manufacture) => manufacture.name}
                   value={selectedManufacture} // Bind selectedModelId to the Autocomplete value
                   onChange={(event, newValue) => {
-                    setSelectedManufactures(newValue); // Update selectedModel when a model is selected
+                    setSelectedManufactures(newValue);
+                    handleInputChange("ManufactureId", []);
+                    // Update selectedModel when a model is selected
                   }}
                   onInputChange={(event, newInputValue) => {
                     setSearchQueryforManufactures(newInputValue); // Update searchQuery as input changes
@@ -589,10 +510,10 @@ const FormCreateEquipment = () => {
                     ],
                   }}
                 />
-                {validationErrors.Manufactures &&
-                validationErrors.Manufactures.length > 0 ? (
+                {validationErrors.ManufactureId &&
+                validationErrors.ManufactureId.length > 0 ? (
                   <span className="validation-error">
-                    {validationErrors.Manufactures[0]}
+                    {validationErrors.ManufactureId[0]}
                   </span>
                 ) : null}
               </FormGroup>
@@ -615,18 +536,18 @@ const FormCreateEquipment = () => {
                 ) : null}
               </FormGroup>
               <FormGroup className="mb-3">
-                <FormLabel>SerialNumber</FormLabel>
+                <FormLabel>serial Number</FormLabel>
                 <TextField
                   type="text"
-                  name="SerialNumber"
+                  name="seriaNumber"
                   onChange={(e) =>
-                    handleInputChange("SerialNumber", e.target.value)
+                    handleInputChange("seriaNumber", e.target.value)
                   }
                 />
-                {validationErrors.SerialNumber &&
-                validationErrors.SerialNumber.length > 0 ? (
+                {validationErrors.SeriaNumber &&
+                validationErrors.SeriaNumber.length > 0 ? (
                   <span className="validation-error">
-                    {validationErrors.SerialNumber[0]}
+                    {validationErrors.SeriaNumber[0]}
                   </span>
                 ) : null}
               </FormGroup>
@@ -801,9 +722,7 @@ const FormCreateEquipment = () => {
                     variant="outlined"
                   />
                 )}
-                renderOption={(props, option) => (
-                  <li {...props}>{option.label}</li>
-                )}
+                renderOption={(props, option) => <li {...props}>{option}</li>}
                 PopperProps={{
                   placement: "bottom-start",
                   modifiers: [

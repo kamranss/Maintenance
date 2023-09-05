@@ -8,7 +8,7 @@ import PaginationComponent from "../Components/PaginationComponent";
 import SideBarEquipment from "../Components/SideBarEquipment";
 import TableHeader from "../Components/TableHeader";
 import TableEquipment from "../Components/Tables/TableEquipment";
-import EquipmentModal from "../Components/EquipmentModal";
+import EquipmentModal from "../Components/Modals/EquipmentModal";
 import Dialog from "@mui/material/Dialog"; // Import Dialog component
 import DialogContent from "@mui/material/DialogContent"; // Import DialogContent component
 

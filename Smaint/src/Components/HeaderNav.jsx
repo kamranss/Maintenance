@@ -53,7 +53,7 @@ const HeaderNav = () => {
           className={({ isActive }) =>
             isActive ? "active header_nav_icon" : "header_nav_icon"
           }
-          to="/department"
+          to="/"
         >
           <i class="fa-solid fa-chart-line"></i>
         </NavLink>

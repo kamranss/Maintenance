@@ -14,16 +14,18 @@
 }
 
 .MuiTableBody-root {
-  tr:nth-child(odd):hover {
+  tr:nth-child(even):hover {
+    /* Styles for even rows on hover */
     border: 1px solid #e1cfff;
     background: #eee3ff;
   }
-  tr:hover {
+
+  tr:nth-child(odd):hover {
+    /* Styles for odd rows on hover */
     border: 1px solid #e1cfff;
-    background: #6531b3;
+    background: #eee3ff;
   }
 }
-
 .row-active {
   background-color: #03a688;
   :last-child {

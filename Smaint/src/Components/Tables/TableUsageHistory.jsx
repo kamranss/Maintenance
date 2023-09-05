@@ -5,42 +5,45 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
-// import UsageHistoryModal from "../Components/UsageHistoryModal";
+import UsageHistoryModal from "../Modals/UsageHistoryModal";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import moment from "moment";
 import { NavLink } from "react-router-dom";
+// import EquipmentModal from "../Modals/EquipmentModal";
 
 export default function TableUsageHistory({ thead = [], rows = [] }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedRowId, setSelectedRowId] = useState(null);
-  const [userInput, setUserInput] = useState("");
+  const [modalData, setModalData] = useState(null);
 
   const openModal = (rowId) => {
     setSelectedRowId(rowId);
+    // Fetch data for the modal here using rowId and set it in modalData state
+    const rowData = rows.find((row) => row.id === rowId);
+    setModalData(rowData);
     setModalOpen(true);
   };
 
   const closeModal = () => {
     setSelectedRowId(null);
-    setUserInput("");
+    setModalData(null);
     setModalOpen(false);
   };
 
-  const handleUserInput = (e) => {
-    setUserInput(e.target.value);
-  };
-
-  const handleModalSubmit = () => {
-    // TODO: Send Axios request with userInput and selectedRowId
-    // Reset the modal state
-    closeModal();
-  };
   return (
     <div>
+      {modalData && (
+        <UsageHistoryModal
+          isOpen={openModal}
+          handleClose={closeModal}
+          modalData={modalData}
+          rowId={selectedRowId}
+        />
+      )}
       <TableContainer
         component={Paper}
-        sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
+        // sx={{ borderTopLeftRadius: 0, borderTopRightRadius: 0 }}
       >
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -65,7 +68,7 @@ export default function TableUsageHistory({ thead = [], rows = [] }) {
               return (
                 <TableRow
                   key={key}
-                  // onClick={() => onRowClick(row.id)}
+                  onClick={() => openModal(row.id)}
                   // className={`row ${statusClass}`} // Add 'row' class and status class
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
@@ -129,15 +132,6 @@ export default function TableUsageHistory({ thead = [], rows = [] }) {
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <UsageHistoryModal
-        modalOpen={modalOpen}
-        selectedRowId={selectedRowId}
-        userInput={userInput}
-        setModalOpen={setModalOpen}
-        setSelectedRowId={setSelectedRowId}
-        setUserInput={setUserInput}
-        handleModalSubmit={handleModalSubmit}
-      /> */}
     </div>
   );
 }

@@ -39,12 +39,12 @@ namespace MaintenanceWebApi.Controllers
 
         }
 
-        [Route("EndUsageStory")]
+        [Route("EndUsageHistory")]
         [HttpPatch]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> End(UsageHistoryEndDto usageHistoryEndDto)
+        public async Task<IActionResult> End([FromForm] UsageHistoryEndDto usageHistoryEndDto)
         {
            var result = await _usageHistoryService.EndUsageHistoryAsync(usageHistoryEndDto);
 

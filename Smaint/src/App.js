@@ -11,6 +11,7 @@ import MpPage from "./Pages/MpPage.jsx";
 import Administration from "./Pages/Administration.jsx";
 import { CreateEquipment } from "./Pages/CreateEquipment.jsx";
 import EquipmentDetail from "./Pages/EquipmentDetail.jsx";
+import Dashboard from "./Pages/Dashboard.jsx";
 import UsageHistory from "./Pages/UsageHistory.jsx";
 import CreateUsageHistory from "./Pages/CreateUsageHistory.jsx";
 import Register from "./Pages/Register.jsx";
@@ -36,6 +37,7 @@ const App = () => {
           <Route path="/usageHistory" element={<UsageHistory />} />
           <Route path="/createUsageHistory" element={<CreateUsageHistory />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
 
           {/* <Route path="/" element={<Home/>}/> */}
         </Routes>
