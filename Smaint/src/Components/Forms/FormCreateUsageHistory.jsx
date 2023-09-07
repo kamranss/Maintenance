@@ -165,6 +165,7 @@ const FormCreateEquipment = () => {
           text: "UH created successfully.",
         }).then(() => {
           window.location.href = "/UsageHistory";
+
           setIsSubmitted(true);
         });
         console.log("Usage History created successfully.");

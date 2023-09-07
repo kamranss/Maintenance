@@ -1,8 +1,20 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\87f5fb52-ceaf-4899-a621-c26f663037c9Image 1.jpg",
+      "PackagePath": "staticwebassets\\images\\87f5fb52-ceaf-4899-a621-c26f663037c9Image 1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\a401350a-cc09-4728-9afe-122fa69c358b674357.jpg",
+      "PackagePath": "staticwebassets\\images\\a401350a-cc09-4728-9afe-122fa69c358b674357.jpg"
+    },
+    {
       "Id": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\forklift.jpeg",
       "PackagePath": "staticwebassets\\images\\forklift.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\templates\\verify.html",
+      "PackagePath": "staticwebassets\\templates\\verify.html"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.MaintenanceWebApi.Microsoft.AspNetCore.StaticWebAssets.props",

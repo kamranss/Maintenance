@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Persistence.Context
 {
-    public class MaintenanceDbContext : IdentityDbContext<AppUser,IdentityRole,string>
+    public class MaintenanceDbContext : IdentityDbContext<AppUser>
     {
         public MaintenanceDbContext(DbContextOptions options) : base(options)
         {

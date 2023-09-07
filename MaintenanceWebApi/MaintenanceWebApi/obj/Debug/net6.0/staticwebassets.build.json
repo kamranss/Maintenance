@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "f74GJYNdcwpRNSoE4Lr4b19lqWL7X7ID7bs1u3gLumE=",
+  "Hash": "P3F1s7P+6GNaYY3LwCpfOnhX8hzBFViCLc3Duv7gBd4=",
   "Source": "MaintenanceWebApi",
   "BasePath": "_content/MaintenanceWebApi",
   "Mode": "Default",
@@ -17,6 +17,40 @@
   ],
   "Assets": [
     {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\87f5fb52-ceaf-4899-a621-c26f663037c9Image 1.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/87f5fb52-ceaf-4899-a621-c26f663037c9Image 1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\87f5fb52-ceaf-4899-a621-c26f663037c9Image 1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\a401350a-cc09-4728-9afe-122fa69c358b674357.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/a401350a-cc09-4728-9afe-122fa69c358b674357.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\a401350a-cc09-4728-9afe-122fa69c358b674357.jpg"
+    },
+    {
       "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\forklift.jpeg",
       "SourceId": "MaintenanceWebApi",
       "SourceType": "Discovered",
@@ -32,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\forklift.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\templates\\verify.html",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "templates/verify.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\templates\\verify.html"
     }
   ]
 }

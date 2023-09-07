@@ -31,6 +31,9 @@ export default function TableUsageHistory({ thead = [], rows = [] }) {
     setModalOpen(false);
   };
 
+  const ongoingRows = rows.filter((row) => row.status === "ONGOING");
+  const otherRows = rows.filter((row) => row.status !== "ONGOING");
+
   return (
     <div>
       {modalData && (
@@ -64,12 +67,13 @@ export default function TableUsageHistory({ thead = [], rows = [] }) {
                   : row.status === "CANCELED"
                   ? "row-CNL"
                   : "";
-
+              const isClickable = row.status === "ONGOING";
               return (
                 <TableRow
-                  key={key}
-                  onClick={() => openModal(row.id)}
-                  // className={`row ${statusClass}`} // Add 'row' class and status class
+                  onClick={isClickable ? () => openModal(row.id) : null}
+                  className={`row ${statusClass} ${
+                    isClickable ? "clickable" : ""
+                  }`}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell align="left">{row?.id}</TableCell>

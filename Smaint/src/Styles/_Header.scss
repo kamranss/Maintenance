@@ -11,6 +11,20 @@
     height: 100%;
     border-bottom-right-radius: 1rem;
     border-bottom-left-radius: 1rem;
+    .nav-buttons {
+      width: 10%;
+      display: flex;
+      justify-content: space-around;
+      .nav-link {
+        background-color: rgb(16, 152, 194);
+        border-radius: 5px;
+        padding: 10px;
+        color: #eee3ff;
+        margin-top: 10px;
+        font-weight: 600;
+      }
+    }
+
     .userinfo {
       display: flex;
       justify-content: center;

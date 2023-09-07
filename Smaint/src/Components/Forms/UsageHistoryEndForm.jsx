@@ -6,6 +6,16 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const UsageHistoryEndForm = ({ rowId }) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   const [endDate, setEndDate] = useState("");
   const [endUsageHourValue, setEndUsageHourValue] = useState("");
 
@@ -39,8 +49,14 @@ const UsageHistoryEndForm = ({ rowId }) => {
           icon: "success",
           title: "Success!",
           text: "UH ended successfully.",
+          customClass: {
+            // Add your custom CSS class here for SweetAlert2 modal
+            popup: "my-swal-modal",
+          },
         }).then(() => {
           window.location.href = "/UsageHistory";
+          setIsModalOpen(false);
+          // closeModal();
         });
 
         // Clear the form fields

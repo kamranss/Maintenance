@@ -7,6 +7,7 @@ import PaginationComponent from "../Components/PaginationComponent";
 import axios from "axios";
 import { TableHead } from "@mui/material";
 import SideBarEquipment from "../Components/SideBarEquipment";
+
 import TableDepartment from "../Components/Tables/TableDepartment";
 
 const Department = () => {

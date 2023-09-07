@@ -71,3 +71,11 @@ C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bi
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\MaintenanceWebApi.staticwebassets.runtime.json
 C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\BouncyCastle.Cryptography.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\MailKit.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\MimeKit.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\System.Formats.Asn1.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\System.Text.Encoding.CodePages.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+C:\Users\user\Desktop\BackEnd\Maintenance\MaintenanceWebApi\MaintenanceWebApi\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll

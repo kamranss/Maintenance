@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { CircularProgress } from "@mui/material";
 // import TableComponent from "../Components/Table";
 // import TableMui from "../Components/TableMui";
 import TableHeader from "../Components/TableHeader";
@@ -16,6 +17,7 @@ const UsageHistory = () => {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(5);
   const [departmentData, setDepartmentdata] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
   // useEffect(() => {
   //   axios
@@ -37,6 +39,7 @@ const UsageHistory = () => {
         console.log("Page Count:", res.data.pageCount); // Log the page count
         console.log("Total Count:", res.data.totalCount); // Log the total count
         setDepartmentdata(res.data); // Set the department data
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   }, [page, size]);
@@ -49,22 +52,26 @@ const UsageHistory = () => {
         <div className="page-content">
           <div>
             <TableHeaderUsageHistory />
-            {departmentData && (
-              <>
-                <TableUsageHistory
-                  className="table"
-                  thead={Object.keys(departmentData?.items?.[0])}
-                  rows={departmentData?.items}
-                />
-                <PaginationComponent
-                  page={page}
-                  setPage={setPage}
-                  recordSize={size}
-                  count={departmentData?.totalCount} // *4
-                  size={size}
-                  setSize={setSize}
-                />
-              </>
+            {isLoading ? (
+              <CircularProgress /> // Show loading spinner while fetching data
+            ) : (
+              departmentData && (
+                <>
+                  <TableUsageHistory
+                    className="table"
+                    thead={Object.keys(departmentData?.items?.[0])}
+                    rows={departmentData?.items}
+                  />
+                  <PaginationComponent
+                    page={page}
+                    setPage={setPage}
+                    recordSize={size}
+                    count={departmentData?.totalCount} // *4
+                    size={size}
+                    setSize={setSize}
+                  />
+                </>
+              )
             )}
           </div>
         </div>

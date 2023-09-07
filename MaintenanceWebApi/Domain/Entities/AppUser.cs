@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
-    public class AppUser:IdentityUser<string>
+    public class AppUser:IdentityUser
     {
+      
         public string? Name { get; set; }
         public string? Surname { get; set; }
-        public int? OTP { get; set; }
+        public string? OTP { get; set; }
         public bool? IsActive { get; set; }
         public bool? IsOperator { get; set; }
         public bool? IsDivisionHead { get; set; }

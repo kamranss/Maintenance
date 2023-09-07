@@ -13,6 +13,8 @@ import { TableHead } from "@mui/material";
 // import SideBarEquipment from "../Components/SideBarEquipment";
 import SideBarAdministration from "../Components/SideBarAdministration";
 import TableOperation_Sites from "../Components/Tables/TableOperation_Sites";
+// import HeaderNav from "../Components/HeaderNav";
+
 import {
   ModelAll,
   DepartmentAll,
@@ -66,6 +68,7 @@ const Administration = () => {
           activeTab={activeTab}
           onTabChange={setActiveTab}
         />
+
         <div className="page-content">
           <div>
             <TableHeader />

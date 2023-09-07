@@ -1,4 +1,5 @@
 ﻿using Application.Abstraction.Services;
+using Application.Abstraction.Services.Authentications;
 using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentPartRepo;
@@ -32,6 +33,7 @@ using Persistence.Repositories.ServiceHistoryRepo;
 using Persistence.Repositories.ServiceRepo;
 using Persistence.Repositories.UsageHistoryRepo;
 using Persistence.Services;
+using Persistence.Services.Account;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -64,7 +66,7 @@ namespace Persistence
               .AddDefaultTokenProviders()
               .AddErrorDescriber<CustomidentityErrorDescriber>(); // this is serving for get error descriptions which we indicated within helper 
 
-
+            services.AddScoped<UserManager<AppUser>>();
             services.AddAutoMapper(option =>
             {
                 option.AddProfile<MapProfile>();
@@ -119,6 +121,8 @@ namespace Persistence
             services.AddScoped<IOperationSiteService, OperationSiteService>();
             services.AddScoped<IPartService, PartService>();
             services.AddScoped<IEquipmentTypeService, EquipmentTypeService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IFileService, FileService>();
 
         }
     }
