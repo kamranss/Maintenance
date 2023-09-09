@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useTable, usePagination } from "react-table";
 import { fileBaseUrl } from "../Contants/Urls"; // Adjust the path accordingly
+import { CircularProgress } from "@mui/material";
+import EquipmentStatusChangemodal from "../Components/Modals/EquipmentStatusChangemodal";
 
 const EquipmentDetail = () => {
   const { id } = useParams();
@@ -10,6 +12,12 @@ const EquipmentDetail = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const rowId = queryParams.get("id");
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [equipmentIdForStatusChange, setEquipmentIdForStatusChange] =
+    useState(null);
 
   useEffect(() => {
     // Fetch detailed information using the ID and make the request to another URL
@@ -22,6 +30,7 @@ const EquipmentDetail = () => {
         setEquipmentDetail(response.data);
         console.log(response.data);
         console.log(response.data.imagUrl);
+        setIsLoading(false);
       })
       .catch((error) => {
         console.error("Error fetching equipment detail:", error);
@@ -34,10 +43,29 @@ const EquipmentDetail = () => {
       : null;
   console.log(imageUrl);
 
-  const handleStatusChange = () => {};
+  const handleStatusChange = (equipmentId) => {
+    // Open the modal and set the equipment ID
+    setIsModalOpen(true);
+    setEquipmentIdForStatusChange(equipmentId);
+  };
 
   const handleSetMpComplete = () => {};
 
+  const handleSetResetValue = () => {};
+
+  const handlePartChange = () => {};
+
+  const handleAddPartChange = () => {};
+
+  const handleDeleteChange = () => {};
+
+  if (isLoading) {
+    return (
+      <div className="spinner-container">
+        <CircularProgress />
+      </div>
+    );
+  }
   return (
     <div className="equipment-detail-container">
       <div className="equipment-info">
@@ -54,6 +82,10 @@ const EquipmentDetail = () => {
             <div className="info-field">
               <p className="info-label">Description:</p>
               <p className="info-value">{equipmentDetail.description}</p>
+            </div>
+            <div className="info-field">
+              <p className="info-label">Type:</p>
+              <p className="info-value">{equipmentDetail.type}</p>
             </div>
             <div className="info-field">
               <p className="info-label">Department:</p>
@@ -78,7 +110,7 @@ const EquipmentDetail = () => {
       {equipmentDetail && (
         <div className="equipment-info-box_Status">
           <div className="info-field">
-            <p className="info-label">Status:</p>
+            {/* <p className="info-label">Status:</p> */}
             <p
               className={`info-valueee ${
                 equipmentDetail.status === "ACTIVE"
@@ -87,7 +119,7 @@ const EquipmentDetail = () => {
                   ? "row-inactive"
                   : equipmentDetail.status === "REPAIR"
                   ? "row-repair"
-                  : equipmentDetail.status === "INUSE"
+                  : equipmentDetail.status === "IN_USE"
                   ? "row-inuse"
                   : ""
               }`}
@@ -95,15 +127,52 @@ const EquipmentDetail = () => {
               {equipmentDetail.status}
             </p>
           </div>
-          <div className="action-buttons">
-            <button onClick={handleSetMpComplete}>Change Status</button>
+          <div className="button_container">
+            <div className="equ_page_action-buttons_changestatus">
+              <button onClick={handleStatusChange}>Change Status</button>
+            </div>
+            <EquipmentStatusChangemodal
+              isOpen={isModalOpen}
+              onClose={() => setIsModalOpen(false)}
+              equipmentId={equipmentIdForStatusChange}
+            />
+            <div className="equ_page_action-buttons_addPart">
+              <button onClick={handleAddPartChange}>Add Part</button>
+            </div>
+            <div className="equ_page_action-buttons_addMp">
+              <button onClick={handleStatusChange}>Add Mp</button>
+            </div>
+            <div className="equ_page_action-buttons_delete">
+              <button onClick={handleDeleteChange}>Delete</button>
+            </div>
+          </div>
+
+          {equipmentDetail && (
+            <div className="equipment-info-box_2">
+              <div className="info-field">
+                <p className="info-label">Current Value:</p>
+                <p className="info-value">{equipmentDetail.currentValue}</p>
+              </div>
+              <div className="info-field">
+                <p className="info-label">Squence Value:</p>
+                <p className="info-value">{equipmentDetail.squenceValue}</p>
+              </div>
+              <div className="info-field">
+                <p className="info-label">Reset Value:</p>
+                <p className="info-value">{equipmentDetail.resetValue}</p>
+              </div>
+            </div>
+          )}
+
+          <div className="equ_page_action-buttons_resetValue">
+            <button onClick={handleSetResetValue}>Set Reset Value</button>
+          </div>
+          <div className="equ_page_action-buttons_setMp">
+            <button onClick={handleSetMpComplete}>Set Mp Complete</button>
           </div>
         </div>
       )}
 
-      <div className="action-buttons">
-        <button onClick={handleSetMpComplete}>Set Mp Complete</button>
-      </div>
       <div className="list-info">
         <div className="image_Main">
           {/* {equipmentDetail && ( */}

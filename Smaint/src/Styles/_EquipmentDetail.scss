@@ -24,7 +24,7 @@
       margin-top: 2rem;
       .info-field {
         margin-top: 1rem;
-        width: 40%;
+        width: 80%;
         display: flex;
         justify-content: space-between;
         .info-label {
@@ -81,5 +81,105 @@
       font-size: larger;
       margin-left: 10px;
     }
+  }
+  .button_container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    // height: 50%;
+    .equ_page_action-buttons_changestatus {
+      margin-top: 40px;
+      background-color: #1172ce;
+      border-radius: 5px;
+      width: 15%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        color: white;
+        font-weight: 700;
+      }
+    }
+    .equ_page_action-buttons_addPart {
+      margin-top: 40px;
+      background-color: #981ce0;
+      border-radius: 5px;
+      width: 15%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        color: white;
+        font-weight: 700;
+      }
+    }
+    .equ_page_action-buttons_addMp {
+      margin-top: 40px;
+      background-color: #0bd9e0;
+      border-radius: 5px;
+      width: 15%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        color: white;
+        font-weight: 700;
+      }
+    }
+    .equ_page_action-buttons_delete {
+      margin-top: 40px;
+      background-color: #e2202a;
+      border-radius: 5px;
+      width: 15%;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        color: white;
+        font-weight: 700;
+      }
+    }
+  }
+
+  .equ_page_action-buttons_setMp {
+    margin-top: 40px;
+    background-color: #049b7a;
+    border-radius: 5px;
+    width: 15%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      color: white;
+      font-weight: 700;
+    }
+  }
+  .equ_page_action-buttons_resetValue {
+    margin-top: 40px;
+    background-color: #b67b0e;
+    border-radius: 5px;
+    width: 15%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    button {
+      color: white;
+      font-weight: 700;
+    }
+  }
+  .equipment-info-box_2 {
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 }

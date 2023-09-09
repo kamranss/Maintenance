@@ -27,6 +27,8 @@ namespace Application.DTOs.Equipment
         public string Model { get; set; }
         public DateTime? LastMaintenace { get; set; }
         public decimal? CurrentValue { get; set; }
+        public decimal? ResetValue { get; set; }
+        public decimal? SquenceValue { get; set; }
         public List<MaintenancePlanDto>? MpList { get; set; }
         public List<UsageHistoryDto>? UsageHistoryList { get; set; }
         public List<PartDto>? PartList { get; set; }
