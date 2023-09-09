@@ -2,6 +2,7 @@
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { CircularProgress } from "@mui/material";
 // import TableComponent from "../Components/Table";
 // import TableMui from "../Components/TableMui";
 import PaginationComponent from "../Components/PaginationComponent";
@@ -19,6 +20,7 @@ const EquipmentPage = () => {
   const [data, setData] = useState();
   const [modalData, setModalData] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const apiEndpoints = [
     "https://localhost:7066/api/Equipment/FindEquipmentsByDepartmentId",
@@ -46,6 +48,7 @@ const EquipmentPage = () => {
       console.log("Fetched data:", responseData);
       setModalData(responseData);
       setIsModalOpen(true);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -98,6 +101,20 @@ const EquipmentPage = () => {
                 rows={data?.items}
                 onRowClick={(rowId) => handleTableRowClick(rowId)}
               />
+              // <>
+              //   {isLoading ? (
+              //     <div className="loading-container">
+              //       <CircularProgress />{" "}
+              //     </div>
+              //   ) : (
+              //     <TableEquipment
+              //       className="table"
+              //       thead={Object.keys(data?.items?.[0])}
+              //       rows={data?.items}
+              //       onRowClick={(rowId) => handleTableRowClick(rowId)}
+              //     />
+              //   )}
+              // </>
             )}
             {activeTab === 1 && data && (
               <TableEquipment

@@ -32,7 +32,7 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 ? "row-inactive"
                 : row.status === "REPAIR"
                 ? "row-repair"
-                : row.status === "INUSE"
+                : row.status === "IN_USE"
                 ? "row-inuse"
                 : "";
 
@@ -72,7 +72,7 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                       ? "row-inactive"
                       : row.status === "REPAIR"
                       ? "row-repair"
-                      : row.status === "INUSE"
+                      : row.status === "IN_USE"
                       ? "row-inuse"
                       : ""
                   }`}
