@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "P3F1s7P+6GNaYY3LwCpfOnhX8hzBFViCLc3Duv7gBd4=",
+  "Hash": "odP/HLFpSejWaFwUpTQtoX4p0H0OiVpE7oVUByRtKy4=",
   "Source": "MaintenanceWebApi",
   "BasePath": "_content/MaintenanceWebApi",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\a401350a-cc09-4728-9afe-122fa69c358b674357.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\c8acbc15-2057-4c93-8ff0-4db50a4fe0e2Image 7.jpg",
+      "SourceId": "MaintenanceWebApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\",
+      "BasePath": "_content/MaintenanceWebApi",
+      "RelativePath": "images/c8acbc15-2057-4c93-8ff0-4db50a4fe0e2Image 7.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\c8acbc15-2057-4c93-8ff0-4db50a4fe0e2Image 7.jpg"
     },
     {
       "Identity": "C:\\Users\\user\\Desktop\\BackEnd\\Maintenance\\MaintenanceWebApi\\MaintenanceWebApi\\wwwroot\\images\\forklift.jpeg",

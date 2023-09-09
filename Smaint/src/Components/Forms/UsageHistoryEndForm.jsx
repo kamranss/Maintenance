@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const UsageHistoryEndForm = ({ rowId }) => {
+const UsageHistoryEndForm = ({ rowId, handleClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => {
@@ -45,6 +45,7 @@ const UsageHistoryEndForm = ({ rowId }) => {
 
       // Handle the response, e.g., show a success message
       if (response.ok) {
+        handleClose();
         MySwal.fire({
           icon: "success",
           title: "Success!",
@@ -55,7 +56,6 @@ const UsageHistoryEndForm = ({ rowId }) => {
           },
         }).then(() => {
           window.location.href = "/UsageHistory";
-          setIsModalOpen(false);
           // closeModal();
         });
 

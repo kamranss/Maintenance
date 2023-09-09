@@ -38,8 +38,17 @@ namespace MaintenanceWebApi.Controllers
         public async Task<IActionResult> Register([FromForm] UserRegisterDto userRegisterDto)
         {
             AppUser existUser = await _userManager.FindByNameAsync(userRegisterDto.UserName);
-            if (existUser != null) return BadRequest();
+            if (existUser != null) return BadRequest(new { errors = new[] { $"Username '{userRegisterDto.UserName}' is already taken." } });
 
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+
+                return BadRequest(new { errors });
+            }
             //string otp = OtpService.GenerateOTP();
 
 
@@ -57,7 +66,11 @@ namespace MaintenanceWebApi.Controllers
 
             if (!result.Succeeded)
             {
-                return BadRequest(result.Errors);
+                var errors = ModelState.Values
+                   .SelectMany(v => v.Errors)
+                   .Select(e => e.ErrorMessage)
+                   .ToList();
+                return BadRequest(new { errors });
             }
             //var ExistUserAfterCreation = await _userManager.FindByNameAsync(userRegisterDto.UserName);
 
@@ -76,12 +89,11 @@ namespace MaintenanceWebApi.Controllers
             //result = await _userManager.AddToRoleAsync(ExistUserAfterCreation, Roles.MEMBER.ToString());
             if (!result.Succeeded)
             {
-                foreach (var error in result.Errors)
-                {
-                    // Log or handle each error here
-                    Console.WriteLine(error.Description);
-                }
-                return BadRequest("Failed to assign role.");
+                var errors = ModelState.Values
+                   .SelectMany(v => v.Errors)
+                   .Select(e => e.ErrorMessage)
+                   .ToList();
+                return BadRequest(new { errors });
             }
 
             string body = string.Empty;
@@ -94,14 +106,6 @@ namespace MaintenanceWebApi.Controllers
 
             _emailService.Send(user.Email, subject, body);
             return StatusCode(201);
-            //if (ExistUserAfterCreation != null)
-            //{
-
-
-            //}
-
-            //return BadRequest(result.Errors);
-
 
         }
 

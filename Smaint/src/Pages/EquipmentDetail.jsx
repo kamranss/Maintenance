@@ -34,6 +34,10 @@ const EquipmentDetail = () => {
       : null;
   console.log(imageUrl);
 
+  const handleStatusChange = () => {};
+
+  const handleSetMpComplete = () => {};
+
   return (
     <div className="equipment-detail-container">
       <div className="equipment-info">
@@ -71,12 +75,43 @@ const EquipmentDetail = () => {
           </div>
         )}
       </div>
+      {equipmentDetail && (
+        <div className="equipment-info-box_Status">
+          <div className="info-field">
+            <p className="info-label">Status:</p>
+            <p
+              className={`info-valueee ${
+                equipmentDetail.status === "ACTIVE"
+                  ? "row-active"
+                  : equipmentDetail.status === "INACTIVE"
+                  ? "row-inactive"
+                  : equipmentDetail.status === "REPAIR"
+                  ? "row-repair"
+                  : equipmentDetail.status === "INUSE"
+                  ? "row-inuse"
+                  : ""
+              }`}
+            >
+              {equipmentDetail.status}
+            </p>
+          </div>
+          <div className="action-buttons">
+            <button onClick={handleSetMpComplete}>Change Status</button>
+          </div>
+        </div>
+      )}
+
+      <div className="action-buttons">
+        <button onClick={handleSetMpComplete}>Set Mp Complete</button>
+      </div>
       <div className="list-info">
-        <div className="image_Container">
+        <div className="image_Main">
           {/* {equipmentDetail && ( */}
-          <div className="image_Box">
+          <div className="image_Container">
             {imageUrl ? (
-              <img src={imageUrl} alt="" />
+              <div className="image_box">
+                <img src={imageUrl} alt="" />
+              </div>
             ) : (
               <p>No image available</p>
             )}

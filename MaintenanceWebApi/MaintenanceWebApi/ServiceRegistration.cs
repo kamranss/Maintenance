@@ -17,7 +17,7 @@ namespace MaintenanceWebApi
                 option.RegisterValidatorsFromAssemblyContaining<EquipmenCreatetValidator>();
                 option.RegisterValidatorsFromAssemblyContaining<DepartmentCreateValidator>();
                 option.RegisterValidatorsFromAssemblyContaining<UserLoginDtoValidator>();
-                option.RegisterValidatorsFromAssemblyContaining<UserRegisterDtoValidator>();
+                //option.RegisterValidatorsFromAssemblyContaining<UserRegisterDtoValidator>();
                 option.RegisterValidatorsFromAssemblyContaining<UsageHistoryCreateValidator>();
             });
 

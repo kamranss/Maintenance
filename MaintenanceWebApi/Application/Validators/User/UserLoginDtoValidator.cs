@@ -13,8 +13,8 @@ namespace Application.Validators.User
         public UserLoginDtoValidator()
         {
 
-            RuleFor(u => u.UserNameOrEmail).NotEmpty().WithMessage("Please enter a username.");
-            RuleFor(u => u.Password).NotEmpty().WithMessage("Please enter a password.");
+            //RuleFor(u => u.UserNameOrEmail).NotEmpty().WithMessage("Please enter a username.");
+            //RuleFor(u => u.Password).NotEmpty().WithMessage("Please enter a password.");
         }
     }
 }

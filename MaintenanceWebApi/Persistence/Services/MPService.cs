@@ -400,10 +400,9 @@ namespace Persistence.Services
                 msDto.IsMpCompleted = true;
                 existMp.MaintenanceSettings.Add(msDto);
                var result =  _settingsWriteRepository.SaveAsync();
-                //Console.WriteLine("salam");
-                //Console.WriteLine(result);
+     
                 return new ServiceResult<MsSetDto> { IsSuccess = true, Data = msSetDto };
-                //return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "Something went wrong" };
+              
             }
 
             //var msDtoo = _mapper.Map<MaintenanceSetting>(msSetDto);

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+// import { useHistory } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import FormRegister from "../Components/Forms/FormRegister";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,7 +15,11 @@ const Register = () => {
     UserName: "",
     Email: "",
     Password: "",
+    ConfirmedPassword: "",
   });
+  const navigate = useNavigate();
+  const [validationErrors, setValidationErrors] = useState({});
+  // const history = useHistory(); // Initialize the history object
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,111 +28,54 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData);
 
     try {
-      const response = await axios.post("/api/auth/register", formData);
-      console.log("Registration successful", response);
+      const response = await axios.post(
+        "https://localhost:7066/api/Account/register",
+
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log("Response:", response);
+
+      if (response.status === 201) {
+        // Redirect to the verifyEmail page upon receiving an OK response
+        // navigate("/verifyEmail");
+        localStorage.setItem("userEmail", formData.Email);
+        localStorage.setItem("userOTP", "");
+        window.location.href = "/verifyEmail";
+      } else if (response.status === 400) {
+        console.log("Response:", response);
+        // Check if response data contains validation errors
+        if (response.data && response.data.errors) {
+          console.log("Validation errors:", response.data.errors);
+
+          // Update the state with the validation errors
+          setValidationErrors(response.data.errors);
+        } else {
+          console.error("Validation errors not found in response data.");
+        }
+      } else {
+        console.error("Registration failed");
+      }
     } catch (error) {
       console.error("Registration error", error);
     }
   };
 
   return (
-    <Container maxWidth="sm">
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Name"
-              name="Name"
-              value={formData.Name}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true,
-                style: { color: "0f6466" }, // Customize placeholder color
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Surname"
-              name="Surname"
-              value={formData.Surname}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true,
-                style: { color: "0f6466" }, // Customize placeholder color
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Username"
-              name="UserName"
-              value={formData.UserName}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true,
-                style: { color: "0f6466" }, // Customize placeholder color
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Email"
-              name="Email"
-              type="email"
-              value={formData.Email}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true,
-                style: { color: "0f6466" }, // Customize placeholder color
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="Password"
-              name="Password"
-              type="password"
-              value={formData.Password}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true,
-                style: { color: "0f6466" }, // Customize placeholder color
-              }}
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField
-              fullWidth
-              variant="outlined"
-              label="ConfirmPassword"
-              name="ConfirmPassword"
-              type="ConfirmPassword"
-              value={formData.ConfirmPassword}
-              onChange={handleChange}
-              InputLabelProps={{
-                shrink: true,
-                style: { color: "b#0f6466;" }, // Customize placeholder color
-              }}
-            />
-          </Grid>
-        </Grid>
-        <Button type="submit" variant="contained" color="primary" fullWidth>
-          Register
-        </Button>
-      </form>
+    <Container className="register_Container" maxWidth="sm">
+      <FormRegister
+        formData={formData}
+        validationErrors={validationErrors}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+      />
     </Container>
   );
 };

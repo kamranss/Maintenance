@@ -40,7 +40,11 @@ const UsageHistoryModal = ({ isOpen, handleClose, modalData, rowId }) => {
       <div className="modal-container">
         {/* Display data from modalData */}
         <div className="modal_Header">{/* ... */}</div>
-        <UsageHistoryEndForm onSubmit={handleClose} rowId={rowId} />
+        <UsageHistoryEndForm
+          onSubmit={handleClose}
+          rowId={rowId}
+          handleClose={handleClose}
+        />
         <button className="button" onClick={handleClose}>
           Close
         </button>

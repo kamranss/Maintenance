@@ -64,7 +64,7 @@ namespace Persistence.Services
 
                 var countt = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
                 int pageValuee = 1;
-                int takeValuee = countt;
+                int takeValuee = countt/2;
 
                 var partss = _readRepository.GetAll();
 
@@ -88,24 +88,26 @@ namespace Persistence.Services
 
             int pageValue = page.Value;
             int takeValue = pageSize.Value;
-            //int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
+            int skipCount = (pageValue > 1) ? (pageValue - 1) * takeValue : 0;
             var parts = _readRepository.GetAll(tracking: false);
+            var count = _readRepository.GetAll().Where(d => d.IsDeleted == false && d.IsActive == true).Count();
+            //var totalCount = parts.Count(e => e.IsDeleted == false && e.IsActive == true);
+            var totalCount = count;
 
+            // Calculate the pageCount based on the filtered parts.
+            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
+
+            // Adjust the skip and take operations accordingly.
             var items = parts
-                    .Skip((pageValue - 1) * takeValue)
-                    .Take(takeValue)
-                    .Where(e => e.IsDeleted == false && e.IsActive == true)
-                    .ToList();
-
+                .Where(e => e.IsDeleted == false && e.IsActive == true)
+                .Skip(skipCount)
+                .Take(takeValue)
+                .ToList();
 
             if (items == null)
             {
-                return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "There is no parts in DB" };
+                return new ServiceResult<Pagination<ManufactureDto>> { IsSuccess = false, ErrorMessage = "There are no parts in DB" };
             }
-
-            var totalCount = _readRepository.GetAll(tracking: false).ToList().Count();
-     
-            var pageCount = (int)Math.Ceiling((double)totalCount / takeValue);
 
             var partsDtoo = _mapper.Map<List<ManufactureDto>>(items);
             var pagination = new Pagination<ManufactureDto>(partsDtoo, pageValue, pageCount, totalCount);

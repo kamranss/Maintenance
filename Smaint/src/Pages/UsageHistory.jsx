@@ -53,7 +53,12 @@ const UsageHistory = () => {
           <div>
             <TableHeaderUsageHistory />
             {isLoading ? (
-              <CircularProgress /> // Show loading spinner while fetching data
+              <div className="loading-container">
+                {" "}
+                {/* Add this container */}
+                <CircularProgress />{" "}
+                {/* Show loading spinner while fetching data */}
+              </div>
             ) : (
               departmentData && (
                 <>

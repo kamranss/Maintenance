@@ -72,6 +72,7 @@ namespace Persistence.Services
             }
             //newUsageHistory.StartDate = usageHistoryCreate.StartDate;
             existEquipment.IsIdle = false;
+            existEquipment.Status = EquipmentStatus.IN_USE;
 
             var result = await _writeRepository.AddAsync(newUsageHistory);
 
@@ -121,6 +122,8 @@ namespace Persistence.Services
 
             var existEqu = _equipmentReadRepository.GetAll().FirstOrDefault(d => d.Id == existUsageStory.EquipmentId);
             existEqu.CurrentValue = existUsageStory.EndUsageHourValue;
+            existEqu.Status = EquipmentStatus.ACTIVE;
+            existEqu.IsIdle = true;
             _writeRepository.Update(existUsageStory);
             var endresult = await _writeRepository.SaveAsync();
             var updateEquipmentValue =  _equipmentReadRepository.GetAll().FirstOrDefault(e => e.Id == existUsageStory.EquipmentId);

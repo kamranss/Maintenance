@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -31,7 +32,7 @@ const Login = () => {
   };
 
   return (
-    <Container maxWidth="sm">
+    <Container className="login_Container" maxWidth="sm">
       <form onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
@@ -80,6 +81,12 @@ const Login = () => {
           </Button>
         </Box>
       </form>
+      <Box mt={2} textAlign="center">
+        <NavLink to="/Register">
+          Don't have an account?{" "}
+          <span className="register_here">Register here</span>
+        </NavLink>
+      </Box>
     </Container>
   );
 };
