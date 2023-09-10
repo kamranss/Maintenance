@@ -243,6 +243,7 @@ namespace Persistence.Services
                 var usageHistory = _readRepository
                .GetAll()
                .Include(u => u.Equipment) // Include the Equipment navigation property
+               .OrderBy(u => u.Status != UsageHistoryStatus.ONGOING)
                .Take(takeValuee)
                .ToList();
 
@@ -288,6 +289,7 @@ namespace Persistence.Services
             var items = _readRepository
                .GetAll()
                .Include(u => u.Equipment)
+               .OrderBy(u => u.Status != UsageHistoryStatus.ONGOING)
                .Skip(skipCount)
                .Take(takeValue)
                //.Where(uh => uh.IsDeleted == false && uh.IsActive == true)

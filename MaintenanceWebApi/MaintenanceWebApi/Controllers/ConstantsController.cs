@@ -12,11 +12,34 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult GetEquipmentStatuses()
+        public IActionResult GetEquipmentStatuses(string? name)
         {
-            var equipmentStatus = Enum.GetNames(typeof(EquipmentStatus)).ToList();
-            return Ok(equipmentStatus);
+
+            if (name == null)
+            {
+                var equipmentStatus = Enum.GetNames(typeof(EquipmentStatus)).ToList();
+                return Ok(equipmentStatus);
+            }
+
+            var equipmentStatuss = Enum.GetNames(typeof(EquipmentStatus))
+                .Where(status => status.ToString().Contains(name, StringComparison.OrdinalIgnoreCase))
+                .ToList();
+
+            return Ok(equipmentStatuss);
+
+
         }
+
+        [HttpGet("UsagehiistoryStatuses")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetUsageHistoryStatuses()
+        {
+            var usageHistoryStatuses = Enum.GetNames(typeof(UsageHistoryStatus)).ToList();
+            return Ok(usageHistoryStatuses);
+        }
+
 
         [HttpGet("MPStatus")]
         [ProducesResponseType(StatusCodes.Status200OK)]

@@ -7,6 +7,7 @@ using Domain.Concrets;
 using Domain.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Persistence.Services;
 
 namespace MaintenanceWebApi.Controllers
@@ -147,11 +148,16 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult ChangeStatus(int id, EquipmentStatus newStatus)
+        public IActionResult ChangeStatus([FromForm]int id, [FromForm] EquipmentStatus newStatus)
         {
-            _equipmentService.ChangeEquipmentStatusAsync(id, newStatus);
 
-            return StatusCode(200, "Status Updated");
+            var result = _equipmentService.ChangeEquipmentStatusAsync(id, newStatus).Result;
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
         }
 
 

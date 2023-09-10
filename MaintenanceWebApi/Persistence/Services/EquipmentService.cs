@@ -250,9 +250,9 @@ namespace Persistence.Services
                     var pagination = new Pagination<EquipmentListDto>(equipmentListDto, pageValue, pageCount, totalCount);
 
                 EquipmentsFromDb.ToList();
-                 var cachEntryOption = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromSeconds(5));
-                _memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
+                // var cachEntryOption = new MemoryCacheEntryOptions()
+                //    .SetSlidingExpiration(TimeSpan.FromSeconds(5));
+                //_memoryCach.Set("CachedEquipmentss", EquipmentsFromDb, cachEntryOption);
 
 
                 return new ServiceResult<Pagination<EquipmentListDto>> { IsSuccess = true, Data = pagination };
@@ -530,6 +530,9 @@ namespace Persistence.Services
             }
 
             existEquipment.Status = newStatus;
+            _equipmentWriteRepository.Update(existEquipment);
+            _equipmentWriteRepository.SaveAsync();
+
 
             var equipmentStatusDto = _mapper.Map<EquipmentStatusDto>(existEquipment);
 
