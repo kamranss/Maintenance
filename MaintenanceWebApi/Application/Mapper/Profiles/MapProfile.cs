@@ -59,6 +59,7 @@ namespace Application.Mapper.Profiles
 
             CreateMap<MaintenancePlan, MaintenancePlanDto>();
             CreateMap<MaintenancePlan, MpDto>();
+            CreateMap<MaintenancePlan, MpInputDto>();
             CreateMap<MaintenancePlan, MaintenencePlanStatusDto>();
             CreateMap<MaintenancePlanCreateDto, MaintenancePlan>();
             CreateMap<MaintenancePlanUpdateDto, MaintenancePlan>()
@@ -66,8 +67,9 @@ namespace Application.Mapper.Profiles
                 .ForMember(dest => dest.CreatedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.ModifiedBy, opt => opt.Ignore())
                 .ForMember(dest => dest.UpdatedDate, opt => opt.Ignore());
+            CreateMap<EquipmentMaintenancePlan, EquipmentAndMp>();
 
-   
+
             CreateMap<UsageHistory, UsageHistoryDto>().ReverseMap()
             .ForMember(dest => dest.EquipmentName, opt => opt.MapFrom(src => src.EquipmentName));
 

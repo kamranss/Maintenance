@@ -5,6 +5,7 @@ import { useTable, usePagination } from "react-table";
 import { fileBaseUrl } from "../Contants/Urls"; // Adjust the path accordingly
 import { CircularProgress } from "@mui/material";
 import EquipmentStatusChangeModal from "../Components/Modals/EquipmentStatusChangeModal";
+import EquipmentAddMpModal from "../Components/Modals/EquipmentAddMpModal";
 
 const EquipmentDetail = () => {
   const { id } = useParams();
@@ -22,6 +23,7 @@ const EquipmentDetail = () => {
 
   const [equipmentIdForStatusChange, setEquipmentIdForStatusChange] =
     useState(null);
+  const [equipmentIdForMp, setEquipmentIdForMp] = useState(null);
 
   const refreshEquipmentDetails = async () => {
     try {
@@ -30,7 +32,8 @@ const EquipmentDetail = () => {
         params: { id: rowId },
       });
       setEquipmentDetail(response.data);
-      setIsChangeStatusModalOpen(false); // Close the modal if open
+      setIsChangeStatusModalOpen(false);
+      setIsAddPartModalOpen(false);
 
       console.log("Equipment details refreshed.");
     } catch (error) {
@@ -63,9 +66,13 @@ const EquipmentDetail = () => {
   console.log(imageUrl);
 
   const handleStatusChange = (equipmentId) => {
-    // Open the modal and set the equipment ID
     setIsChangeStatusModalOpen(true);
     setEquipmentIdForStatusChange(equipmentId);
+  };
+
+  const handleAddMpChange = (equipmentId) => {
+    setIsAddMpModalOpen(true);
+    setEquipmentIdForMp(equipmentId);
   };
 
   const handleSetMpComplete = () => {
@@ -79,11 +86,6 @@ const EquipmentDetail = () => {
   };
 
   const handlePartChange = () => {
-    // Open the Add Part modal
-    setIsAddPartModalOpen(true);
-  };
-
-  const handleAddPartChange = () => {
     // Open the Add Part modal
     setIsAddPartModalOpen(true);
   };
@@ -177,8 +179,14 @@ const EquipmentDetail = () => {
                 <button onClick={handlePartChange}>Add Part</button>
               </div>
               <div className="equ_page_action-buttons_addMp">
-                <button onClick={handleStatusChange}>Add Mp</button>
+                <button onClick={handleAddMpChange}>Add Mp</button>
               </div>
+              <EquipmentAddMpModal
+                isOpen={isAddMpModalOpen}
+                onClose={() => setIsAddMpModalOpen(false)}
+                equipmentId={equipmentDetail.id}
+                onMpaddSuccess={refreshEquipmentDetails}
+              />
               <div className="equ_page_action-buttons_delete">
                 <button onClick={handleDeleteChange}>Delete</button>
               </div>

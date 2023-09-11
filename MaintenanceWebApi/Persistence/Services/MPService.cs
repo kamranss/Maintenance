@@ -274,6 +274,35 @@ namespace Persistence.Services
 
         } // done
 
+        public async Task<IServiceResult<List<MpInputDto>>> GetMpsForInput(string? name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                var equipments = _readRepository.GetAll()
+                    //.Include(e => e.EquipmentType)
+                    .Take(10);
+                if (equipments == null)
+                {
+                    return new ServiceResult<List<MpInputDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = equipments.ToList();
+
+                var equDto = _mapper.Map<List<MpInputDto>>(itemss);
+                return new ServiceResult<List<MpInputDto>> { IsSuccess = true, Data = equDto };
+            }
+            else
+            {
+                var equipmentss = _readRepository.GetAll().Where(m => m.Name.ToLower().Contains(name.ToLower()));
+                if (equipmentss == null)
+                {
+                    return new ServiceResult<List<MpInputDto>> { IsSuccess = true, Data = new List<MpInputDto>() };
+                }
+                var itemsss = equipmentss.ToList();
+                var equDtoss = _mapper.Map<List<MpInputDto>>(itemsss);
+                return new ServiceResult<List<MpInputDto>> { IsSuccess = true, Data = equDtoss };
+            }
+        }
+
         public async Task<IServiceResult<Pagination<MpDto>>> GetMPsToListAsync(int? page, int? pageSize)
         {
             if (page == null || pageSize == null)

@@ -10,6 +10,7 @@ using Application.DTOs.UsageHistory;
 using Application.Exceptions.EquipmentException;
 using Application.Helpers.FileExten;
 using Application.Repositories.DepartmentRepo;
+using Application.Repositories.EquipmentMpRepo;
 using Application.Repositories.EquipmentRepo;
 using Application.Repositories.ManufactureRepo;
 using Application.Repositories.ModelRepo;
@@ -52,8 +53,10 @@ namespace Persistence.Services
         private readonly IManufactureReadRepository _manufactureReadRepository;
         private readonly IDepartmentReadRepository _departmentReadRepository;
         private readonly IReadOperationSiteRepository _readOperationSiteRepository;
+        private readonly IEquipmentMpReadRepository _equipmentMpReadRepository;
+        private readonly IEquipmentMpWriteRepository _equipmentMpWriteRepository;
 
-        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment, IMpReadRepository readRepository, IModelReadRepository modelReadRepository, IManufactureReadRepository manufactureReadRepository, IDepartmentReadRepository departmentReadRepository, IReadOperationSiteRepository readOperationSiteRepository)
+        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment, IMpReadRepository readRepository, IModelReadRepository modelReadRepository, IManufactureReadRepository manufactureReadRepository, IDepartmentReadRepository departmentReadRepository, IReadOperationSiteRepository readOperationSiteRepository, IEquipmentMpReadRepository equipmentMpReadRepository, IEquipmentMpWriteRepository equipmentMpWriteRepository)
         {
             _equipmentReadRepository = equipmentReadRepository;
             _equipmentWriteRepository = equipmentWriteRepository;
@@ -65,6 +68,8 @@ namespace Persistence.Services
             _manufactureReadRepository = manufactureReadRepository;
             _departmentReadRepository = departmentReadRepository;
             _readOperationSiteRepository = readOperationSiteRepository;
+            _equipmentMpReadRepository = equipmentMpReadRepository;
+            _equipmentMpWriteRepository = equipmentMpWriteRepository;
         }
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
@@ -730,16 +735,33 @@ namespace Persistence.Services
                 }
             }
 
-            item.MaintenancePlan.Add(existMp);
+            //item.MaintenancePlan.Add(existMp);
 
             _equipmentWriteRepository.SaveAsync();
 
-            EquipmentAndMp equipmentAndMp = new EquipmentAndMp();
+            EquipmentMaintenancePlan equipmentAndMp = new EquipmentMaintenancePlan();
             equipmentAndMp.EquipmentId = equipmentId;
-            equipmentAndMp.MpId = Mpid;
-            equipmentAndMp.EquipmentName = item.Name;
+            equipmentAndMp.MaintenancePlanid = Mpid;
 
-            return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data=equipmentAndMp };
+            //equipmentAndMp.EquipmentName = item.Name;
+
+            var result = await _equipmentMpWriteRepository.AddAsync(equipmentAndMp);
+
+            if (result)
+            {
+               var endresult = await _equipmentMpWriteRepository.SaveAsync();
+
+                if (endresult<=0)
+                {
+                    var equDtoss = _mapper.Map<EquipmentAndMp>(equipmentAndMp);
+                    return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data = equDtoss };
+                }
+            }
+
+
+            var equDtosss = _mapper.Map<EquipmentAndMp>(equipmentAndMp);
+
+            return new ServiceResult<EquipmentAndMp> { IsSuccess = false, Data= equDtosss };
 
         }
 

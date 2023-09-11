@@ -27,6 +27,7 @@ namespace Application.Abstraction.Services
         Task<IServiceResult<MsSetDto>> SetMpSettings(MsSetDto msSetDto);
 
         Task<IServiceResult<MpCompleted>> IsMpCompleted(MpCompleted mpCompleted);
+        Task<IServiceResult<List<MpInputDto>>> GetMpsForInput(string? name);
 
         //Task<IServiceResult<MsUpdateDto>> UpdateMsAsync(MsUpdateDto? id);
 

@@ -166,7 +166,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddMpToEquipment(int equipmentId,  int mpid)
+        public async Task<IActionResult> AddMpToEquipment([FromForm]int equipmentId,[FromForm] int mpid)
         {
             var result = await _equipmentService.AddMptoEquipment(equipmentId, mpid);
 

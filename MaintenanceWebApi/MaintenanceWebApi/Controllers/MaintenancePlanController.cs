@@ -183,6 +183,23 @@ namespace MaintenanceWebApi.Controllers
 
         }
 
+        [HttpGet("DropDown")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetMpsforInput(string? name)
+        {
+            var result = _mpService.GetMpsForInput(name).Result;
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+           
+            return BadRequest(result.ErrorMessage) ;
+
+        }
+
 
     }
 }

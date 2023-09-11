@@ -2,6 +2,7 @@
 using Application.Abstraction.Services.Authentications;
 using Application.Mapper.Profiles;
 using Application.Repositories.DepartmentRepo;
+using Application.Repositories.EquipmentMpRepo;
 using Application.Repositories.EquipmentPartRepo;
 using Application.Repositories.EquipmentRepo;
 using Application.Repositories.EquipmentTypeRepo;
@@ -21,6 +22,7 @@ using Persistence.Configuration;
 using Persistence.Context;
 using Persistence.Helper;
 using Persistence.Repositories.DepartmentRepo;
+using Persistence.Repositories.EquipmentMpRepo;
 using Persistence.Repositories.EquipmentRepo;
 using Persistence.Repositories.EquipmentTypeRepo;
 using Persistence.Repositories.MaintSettingRepo;
@@ -75,6 +77,9 @@ namespace Persistence
 
             services.AddScoped<IEquipmentReadRepository, EquipmentReadRepository>();
             services.AddScoped<IEquipmentWriteRepository, EquipmentWriteRepository>();
+
+            services.AddScoped<IEquipmentMpReadRepository, EquipmentMpReadRepository>();
+            services.AddScoped<IEquipmentMpWriteRepository, EquipmentMpWriteRepository>();
 
             services.AddScoped<IDepartmentReadRepository, DepartmentReadRepository>();
             services.AddScoped<IDepartmentWriteRepository, DepartmentWriteRepository>();

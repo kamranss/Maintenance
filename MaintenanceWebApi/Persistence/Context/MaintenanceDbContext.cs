@@ -33,6 +33,7 @@ namespace Persistence.Context
         public DbSet<Model>? Models { get; set; }
         public DbSet<Manufacture>? Manufactures { get; set; }
         public DbSet<MaintenanceSetting> MaintenanceSettings { get; set; }
+        //public DbSet<EquipmentMaintenancePlan> EquipmentMaintenancePlans { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

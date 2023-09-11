@@ -11,6 +11,6 @@ namespace Application.DTOs.Equipment
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public EquipmentStatus EquipmentStatus { get; set; }
+        public EquipmentStatus Status { get; set; }
     }
 }
