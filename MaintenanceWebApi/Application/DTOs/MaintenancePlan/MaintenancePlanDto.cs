@@ -20,7 +20,7 @@ namespace Application.DTOs.MaintenancePlan
         public string? Description { get; set; }
         public MaintenencePlanStatus? Status { get; set; }
         public Metrictype? MetricType { get; set; } // inum
-        public List<EquipmentDto>? Equipments { get; set; }
+        //public List<EquipmentDto>? Equipments { get; set; }
         public List<ServiceDto>? Services { get; set; }
     }
 }

@@ -51,6 +51,8 @@ namespace Application.Abstraction.Services
 
         Task<IServiceResult<EquipmentAndMp>> AddMptoEquipment(int? equipmentId, int? Mpid);
 
+        Task<IServiceResult<EquipmentAndPart>> AddParttoEquipment(int? equipmentId, int? partId);
+
         Task<IServiceResult<List<EquipmentInputDto>>> GetEquipmentsForInput(string? name);
 
 

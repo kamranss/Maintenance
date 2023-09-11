@@ -5,6 +5,7 @@ import { useTable, usePagination } from "react-table";
 import { fileBaseUrl } from "../Contants/Urls"; // Adjust the path accordingly
 import { CircularProgress } from "@mui/material";
 import EquipmentStatusChangeModal from "../Components/Modals/EquipmentStatusChangeModal";
+import TableEquipmentMp from "../Components/Tables/TableEquipmentMp";
 import EquipmentAddMpModal from "../Components/Modals/EquipmentAddMpModal";
 
 const EquipmentDetail = () => {
@@ -208,13 +209,6 @@ const EquipmentDetail = () => {
                 </div>
               </div>
             )}
-
-            <div className="equ_page_action-buttons_resetValue">
-              <button onClick={handleSetResetValue}>Set Reset Value</button>
-            </div>
-            <div className="equ_page_action-buttons_setMp">
-              <button onClick={handleSetMpComplete}>Set Mp Complete</button>
-            </div>
           </div>
         )}
 
@@ -232,6 +226,24 @@ const EquipmentDetail = () => {
             </div>
             {/* )} */}
           </div>
+        </div>
+      </div>
+      <div className="mp_container">
+        <div className="mp_buttons">
+          <div className="equ_page_action-buttons_resetValue">
+            <button onClick={handleSetResetValue}>Set Reset Value</button>
+          </div>
+          <div className="equ_page_action-buttons_setMp">
+            <button onClick={handleSetMpComplete}>Set Mp Complete</button>
+          </div>
+        </div>
+        <div className="mp_list_container">
+          <h2>Maintenance Plans</h2>
+          <TableEquipmentMp maintenancePlans={equipmentDetail.mpList} />
+        </div>
+        <div className="mp_list_container">
+          <h2>Parts</h2>
+          <TableEquipmentMp maintenancePlans={equipmentDetail.partList} />
         </div>
       </div>
     </div>

@@ -384,14 +384,14 @@ namespace Persistence.Context
             {
                 entity.Property(d => d.Id).ValueGeneratedOnAdd();
                 entity.HasData(
-                    new EquipmentType { Id = 1, Name = "Oil Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 2, Name = "Air Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 3, Name = "Engine Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 4, Name = "TransMission Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 5, Name = "Gear_Box Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 6, Name = "Wheels", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 7, Name = "Antifiriz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
-                    new EquipmentType { Id = 8, Name = "Break pads", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
+                    new Part { Id = 1, Code = "OFL",  Name = "Oil Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 2, Code = "AFL", Name = "Air Filter", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 3, Code = "ENO", Name = "Engine Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 4, Code = "TRN", Name = "TransMission Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 5, Code = "GRB", Name = "Gear_Box Oil", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 6, Code = "WHL", Name = "Wheels", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 7, Code = "ANF", Name = "Antifiriz", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" },
+                    new Part { Id = 8, Code = "BRK", Name = "Break pads", IsDeleted = false, IsActive = true, CreatedDate = DateTime.UtcNow, CreatedBy = "System" }
                 );
             });
 

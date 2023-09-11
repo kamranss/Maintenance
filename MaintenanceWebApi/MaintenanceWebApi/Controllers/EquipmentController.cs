@@ -180,6 +180,24 @@ namespace MaintenanceWebApi.Controllers
             }
         }
 
+        [HttpPost("AddPartToEquipment")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AddPartToEquipment([FromForm] int equipmentId, [FromForm] int partId)
+        {
+            var result = await _equipmentService.AddParttoEquipment(equipmentId, partId);
+
+            if (result.IsSuccess)
+            {
+                return Ok("Part added");
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+        }
+
         [HttpGet("DropDown")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

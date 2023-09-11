@@ -11,6 +11,7 @@ using Application.Exceptions.EquipmentException;
 using Application.Helpers.FileExten;
 using Application.Repositories.DepartmentRepo;
 using Application.Repositories.EquipmentMpRepo;
+using Application.Repositories.EquipmentPartRepo;
 using Application.Repositories.EquipmentRepo;
 using Application.Repositories.ManufactureRepo;
 using Application.Repositories.ModelRepo;
@@ -45,6 +46,7 @@ namespace Persistence.Services
         private IMemoryCache _memoryCach;
         private readonly IWebHostEnvironment _webHostEnvironment;
         private readonly IMpReadRepository _readRepository;
+        private readonly IMpWriteRepository _writeRepository;
         //private readonly IModelService _modelService;
         //private readonly IManufactureService _manufactureService;
         //private readonly IDepartmentService _departmentService;
@@ -55,8 +57,10 @@ namespace Persistence.Services
         private readonly IReadOperationSiteRepository _readOperationSiteRepository;
         private readonly IEquipmentMpReadRepository _equipmentMpReadRepository;
         private readonly IEquipmentMpWriteRepository _equipmentMpWriteRepository;
+        private readonly IPartReadRepository _partReadRepository;
+        private readonly IPartWriteRepository _partWriteRepository;
 
-        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment, IMpReadRepository readRepository, IModelReadRepository modelReadRepository, IManufactureReadRepository manufactureReadRepository, IDepartmentReadRepository departmentReadRepository, IReadOperationSiteRepository readOperationSiteRepository, IEquipmentMpReadRepository equipmentMpReadRepository, IEquipmentMpWriteRepository equipmentMpWriteRepository)
+        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment, IMpReadRepository readRepository, IModelReadRepository modelReadRepository, IManufactureReadRepository manufactureReadRepository, IDepartmentReadRepository departmentReadRepository, IReadOperationSiteRepository readOperationSiteRepository, IEquipmentMpReadRepository equipmentMpReadRepository, IEquipmentMpWriteRepository equipmentMpWriteRepository, IMpWriteRepository writeRepository, IPartReadRepository partReadRepository, IPartWriteRepository partWriteRepository)
         {
             _equipmentReadRepository = equipmentReadRepository;
             _equipmentWriteRepository = equipmentWriteRepository;
@@ -70,6 +74,9 @@ namespace Persistence.Services
             _readOperationSiteRepository = readOperationSiteRepository;
             _equipmentMpReadRepository = equipmentMpReadRepository;
             _equipmentMpWriteRepository = equipmentMpWriteRepository;
+            _writeRepository = writeRepository;
+            _partReadRepository = partReadRepository;
+            _partWriteRepository = partWriteRepository;
         }
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
@@ -318,39 +325,7 @@ namespace Persistence.Services
             {
                 return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
             }
-            //var existEquipment = _equipmentReadRepository.GetAll().FirstOrDefault(d => d.Id == id);
-            //var equipment = _equipmentReadRepository
-            //  .GetAll()
-            //  .Where(e => e.Id == id)
-            //  .Include(e => e.MaintenancePlan)
-            //  .Include(e=>e.UsageHistories)
-            //  .Include(e => e.Part)
-            //  .Select(e => new EquipmentDetailDto
-            //  {
-            //      Id = e.Id,
-            //      Status = e.Status,
-            //      Name = e.Name,
-            //      Description = e.Description,
-            //      LastMaintenace = e.LastMaintenaceDate,
-            //      CurrentValue = e.CurrentValue,
-            //      Model = e.ModelId.HasValue ? e.Model.Name : null,
-            //      OperationSite = e.OperationSiteid.HasValue ? e.OperationSite.Name : null,
-            //      Department = e.DepartmentId.HasValue ? e.Department.Name : null,
-            //      Manufacture = e.ManufactureId.HasValue ? e.Manufacture.Name : null,
-            //      Type = e.EquipmentTypeId.HasValue ? e.EquipmentType.Name : null,
-            //      MpTime = e.MpCompleted,
-            //      UsageHistoryList = _mapper.Map<List<UsageHistoryDto>>(e.UsageHistories),
-            //      MpList = _mapper.Map<List<MaintenancePlanDto>>(e.MaintenancePlan),
-            //      PartList = _mapper.Map<List<PartDto>>(e.Part)
-
-
-            //  })
-            //  .ToList();
-            //if (equipment == null)
-            //{
-            //    return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
-            //}
-            //var equipmentListDto = _mapper.Map<EquipmentDetailDto>(equipment);
+          
 
             var equipment =  _equipmentReadRepository
                 .GetAll()
@@ -710,58 +685,55 @@ namespace Persistence.Services
         {
             if (equipmentId == null || equipmentId <= 0 || Mpid == null || Mpid <= 0)
             {
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "params is wrong" };
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "params are wrong" };
             }
 
-            var existEquipment = _equipmentReadRepository.GetWhere(e => e.Id == equipmentId).Include(e => e.MaintenancePlan);
-            if (existEquipment == null)
+            // Retrieve the Equipment and MaintenancePlan entities
+            var equipment = await _equipmentReadRepository.GetWhere(e => e.Id == equipmentId)
+                .Include(e => e.MaintenancePlan)
+                .FirstOrDefaultAsync();
+
+            if (equipment == null)
             {
                 return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
             }
-            var existMp = _readRepository.GetWhere(mp => mp.Id == Mpid).FirstOrDefault();
-            if (existMp == null)
+
+            var maintenancePlan = await _readRepository.GetWhere(mp => mp.Id == Mpid).FirstOrDefaultAsync();
+
+            if (maintenancePlan == null)
             {
-                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no Mp in DB" };
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "There is no MaintenancePlan in DB" };
             }
 
-
-            var item = existEquipment.FirstOrDefault();
-
-            foreach (var mp in item.MaintenancePlan)
+            // Check if the MaintenancePlan is already associated with the Equipment
+            if (equipment.MaintenancePlan.Contains(maintenancePlan))
             {
-                if (mp.Name == existMp.Name )
-                {
-                    return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "Equipment already have this Mp" };
-                }
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "Equipment already has this MaintenancePlan" };
             }
 
-            //item.MaintenancePlan.Add(existMp);
+            // Associate the MaintenancePlan with the Equipment (EF Core will handle the insertion into the junction table)
+            equipment.MaintenancePlan.Add(maintenancePlan);
 
-            _equipmentWriteRepository.SaveAsync();
-
-            EquipmentMaintenancePlan equipmentAndMp = new EquipmentMaintenancePlan();
-            equipmentAndMp.EquipmentId = equipmentId;
-            equipmentAndMp.MaintenancePlanid = Mpid;
-
-            //equipmentAndMp.EquipmentName = item.Name;
-
-            var result = await _equipmentMpWriteRepository.AddAsync(equipmentAndMp);
-
-            if (result)
+            try
             {
-               var endresult = await _equipmentMpWriteRepository.SaveAsync();
-
-                if (endresult<=0)
-                {
-                    var equDtoss = _mapper.Map<EquipmentAndMp>(equipmentAndMp);
-                    return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data = equDtoss };
-                }
+                await _equipmentWriteRepository.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions if necessary
+                Console.WriteLine(ex);
+                return new ServiceResult<EquipmentAndMp> { IsSuccess = false, ErrorMessage = "Failed to save changes" };
             }
 
+            // Create a result object or perform additional actions as needed
+            var equipmentAndMp = new EquipmentAndMp
+            {
+                EquipmentId = equipmentId,
+                MpId = Mpid,
+                EquipmentName = equipment.Name,
+            };
 
-            var equDtosss = _mapper.Map<EquipmentAndMp>(equipmentAndMp);
-
-            return new ServiceResult<EquipmentAndMp> { IsSuccess = false, Data= equDtosss };
+            return new ServiceResult<EquipmentAndMp> { IsSuccess = true, Data = equipmentAndMp };
 
         }
 
@@ -793,6 +765,62 @@ namespace Persistence.Services
                 var equDtoss = _mapper.Map<List<EquipmentInputDto>>(itemsss);
                 return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = equDtoss };
             }
+        }
+
+        public async Task<IServiceResult<EquipmentAndPart>> AddParttoEquipment(int? equipmentId, int? partId)
+        {
+            if (equipmentId == null || equipmentId <= 0 || partId == null || partId <= 0)
+            {
+                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "params are wrong" };
+            }
+
+            // Retrieve the Equipment and MaintenancePlan entities
+            var equipment = await _equipmentReadRepository.GetWhere(e => e.Id == equipmentId)
+                .Include(e => e.Part)
+                .FirstOrDefaultAsync();
+
+            if (equipment == null)
+            {
+                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "There is no Equipment in DB" };
+            }
+
+            var part = await _partReadRepository.GetWhere(p => p.Id == partId).FirstOrDefaultAsync();
+
+            if (part == null)
+            {
+                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "There is no part in DB" };
+            }
+
+            // Check if the MaintenancePlan is already associated with the Equipment
+            if (equipment.Part.Contains(part))
+            {
+                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "Equipment already has this part" };
+            }
+
+            // Associate the MaintenancePlan with the Equipment (EF Core will handle the insertion into the junction table)
+            equipment.Part.Add(part);
+
+            try
+            {
+                await _equipmentWriteRepository.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+                // Handle exceptions if necessary
+                Console.WriteLine(ex);
+                return new ServiceResult<EquipmentAndPart> { IsSuccess = false, ErrorMessage = "Failed to save changes" };
+            }
+
+            // Create a result object or perform additional actions as needed
+            var equipmentAndpart = new EquipmentAndPart
+            {
+                EquipmentId = equipmentId,
+                PartId = partId,
+                EquipmentName = equipment.Name,
+                PartName = part.Name,
+            };
+
+            return new ServiceResult<EquipmentAndPart> { IsSuccess = true, Data = equipmentAndpart };
         }
     }
 }
