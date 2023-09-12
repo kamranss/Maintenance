@@ -1,10 +1,14 @@
 ﻿using Application.DTOs.Common;
 using Application.DTOs.Equipment;
+using Application.DTOs.MS;
+using Application.DTOs.Parts;
 using Application.DTOs.Service;
+using Application.DTOs.UsageHistory;
 using Domain.Common;
 using Domain.Concrets;
 using Domain.Entities;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,5 +26,14 @@ namespace Application.DTOs.MaintenancePlan
         public Metrictype? MetricType { get; set; } // inum
         //public List<EquipmentDto>? Equipments { get; set; }
         public List<ServiceDto>? Services { get; set; }
+        public List<MsSetDto>? MaintenanceSettingsList { get; set; }
+
+        public MaintenancePlanDto()
+        {
+            Services = new List<ServiceDto>();
+            MaintenanceSettingsList = new List<MsSetDto>();
+        }
+
+
     }
 }

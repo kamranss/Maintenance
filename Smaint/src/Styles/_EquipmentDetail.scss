@@ -26,7 +26,7 @@
       background-color: white;
       border-radius: 10px;
       height: 100%;
-      margin-top: 2.8rem;
+      margin-top: 3.6rem;
       .info-field {
         margin-top: 1rem;
         margin-left: 1rem;
@@ -66,12 +66,12 @@
         padding: 30px;
         font-weight: 800;
         font-size: larger;
-        margin-left: 10px;
+        // margin-left: 10px;
       }
     }
     .button_container {
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       align-items: center;
       width: 100%;
       // height: 50%;
@@ -160,21 +160,45 @@
         }
       }
     }
-
-    .equipment-info-box_2 {
-      width: 100%;
-      background-color: white;
-      border-radius: 5px;
-      margin-top: 2rem;
+  }
+  .equipment-info-box_2 {
+    width: 99%;
+    background-color: white;
+    border-radius: 5px;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+    .info-field {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      justify-content: center;
+      // margin-top: 1rem;
+      width: 100%;
+      // display: flex;
+      // justify-content: space-between;
+      .info-label {
+        font-weight: 500;
+        margin-right: 10px;
+      }
+      .info-valueee {
+        // background-color: #008f8c;
+        // border-radius: 10px;
+        color: white;
+        width: 100%;
+        align-items: center;
+        text-align: center;
+        // padding: 30px;
+        font-weight: 800;
+        font-size: larger;
+        margin-left: 10px;
+      }
     }
   }
   .mp_container {
     margin-top: 2rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 100%;
     // margin-left: 40%;
 
@@ -182,12 +206,12 @@
       // display: flex;
       // justify-content: space-around;
       // justify-content: center;
-      width: 60%;
+      width: 35%;
     }
     .list-info {
       // display: flex;
       // justify-content: space-around;
-      width: 30%;
+      width: 20%;
 
       .image_Main {
         width: 100%;

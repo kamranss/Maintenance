@@ -167,6 +167,8 @@ const EquipmentDetail = () => {
                       ? "row-repair"
                       : equipmentDetail.status === "IN_USE"
                       ? "row-inuse"
+                      : equipmentDetail.status === "CONCERVATED"
+                      ? "row-concervated"
                       : ""
                   }`}
                 >
@@ -211,23 +213,22 @@ const EquipmentDetail = () => {
                   <button onClick={handleSetMpComplete}>Set Mp Complete</button>
                 </div>
               </div>
-
-              {equipmentDetail && (
-                <div className="equipment-info-box_2">
-                  <div className="info-field">
-                    <p className="info-label">Current Value:</p>
-                    <p className="info-value">{equipmentDetail.currentValue}</p>
-                  </div>
-                  <div className="info-field">
-                    <p className="info-label">Squence Value:</p>
-                    <p className="info-value">{equipmentDetail.squenceValue}</p>
-                  </div>
-                  <div className="info-field">
-                    <p className="info-label">Reset Value:</p>
-                    <p className="info-value">{equipmentDetail.resetValue}</p>
-                  </div>
-                </div>
-              )}
+            </div>
+          )}
+          {equipmentDetail && (
+            <div className="equipment-info-box_2">
+              <div className="info-field">
+                <p className="info-label">Current Value:</p>
+                <p className="info-value">{equipmentDetail.currentValue}</p>
+              </div>
+              <div className="info-field">
+                <p className="info-label">Squence Value:</p>
+                <p className="info-value">{equipmentDetail.squenceValue}</p>
+              </div>
+              <div className="info-field">
+                <p className="info-label">Reset Value:</p>
+                <p className="info-value">{equipmentDetail.resetValue}</p>
+              </div>
             </div>
           )}
           <div className="mp_container">

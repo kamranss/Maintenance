@@ -101,20 +101,6 @@ const EquipmentPage = () => {
                 rows={data?.items}
                 onRowClick={(rowId) => handleTableRowClick(rowId)}
               />
-              // <>
-              //   {isLoading ? (
-              //     <div className="loading-container">
-              //       <CircularProgress />{" "}
-              //     </div>
-              //   ) : (
-              //     <TableEquipment
-              //       className="table"
-              //       thead={Object.keys(data?.items?.[0])}
-              //       rows={data?.items}
-              //       onRowClick={(rowId) => handleTableRowClick(rowId)}
-              //     />
-              //   )}
-              // </>
             )}
             {activeTab === 1 && data && (
               <TableEquipment

@@ -335,17 +335,35 @@ namespace Persistence.Services
                 .Include(e => e.OperationSite)
                 .Include(e => e.Model)
                 .Include(e => e.EquipmentType)
-                .Include(e => e.MaintenancePlan)
                 .Include(e => e.UsageHistories)
                 .Include(e => e.Part)
+                .Include(e => e.MaintenancePlan)
+                //.ThenInclude(mp => mp.MaintenanceSettings)
+                //.Where(mp => mp.MaintenanceSettings != null && mp.MaintenanceSettings.Any(ms => ms.EquipmentId == id))
                 .FirstOrDefault();
 
-            Console.WriteLine(equipment);
+            if (equipment != null)
+            {
+                // Include all maintenance plans for the equipment
+                // Include an empty list of maintenance settings if there are none
+                equipment.MaintenancePlan.ForEach(mp =>
+                {
+                    if (mp.MaintenanceSettings == null)
+                    {
+                        mp.MaintenanceSettings = new List<MaintenanceSetting>();
+                    }
+                });
 
-            if (equipment == null)
+
+            }
+            else
             {
                 return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this Id in Db" };
             }
+
+            Console.WriteLine(equipment);
+
+          
 
             EquipmentDetailDto equipmentDetailDto = new EquipmentDetailDto();
 
@@ -510,13 +528,20 @@ namespace Persistence.Services
             }
 
             existEquipment.Status = newStatus;
-            _equipmentWriteRepository.Update(existEquipment);
-            _equipmentWriteRepository.SaveAsync();
+            var result = _equipmentWriteRepository.Update(existEquipment);
 
+            if (result)
+            {
+               var endResult =  await _equipmentWriteRepository.SaveAsync();
+                if (endResult>0)
+                {
+                    var equipmentStatusDto = _mapper.Map<EquipmentStatusDto>(existEquipment);
+                    return new ServiceResult<EquipmentStatusDto> { IsSuccess = true, Data = equipmentStatusDto };
+                }
+            }
 
-            var equipmentStatusDto = _mapper.Map<EquipmentStatusDto>(existEquipment);
+            return new ServiceResult<EquipmentStatusDto> { IsSuccess = false, ErrorMessage = "Something went Wrong" };
 
-            return new ServiceResult<EquipmentStatusDto> { IsSuccess = true, Data = equipmentStatusDto };
         } // done
 
         public async Task<IServiceResult<Pagination<EquipmentListDto>>> FindByDepartmentId(int? page, int? pageSize, int id)

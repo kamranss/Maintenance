@@ -34,6 +34,8 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                 ? "row-repair"
                 : row.status === "IN_USE"
                 ? "row-inuse"
+                : row.status === "CONCERVATED"
+                ? "row-concervated"
                 : "";
 
             return (
@@ -74,9 +76,28 @@ export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
                       ? "row-repair"
                       : row.status === "IN_USE"
                       ? "row-inuse"
+                      : row.status === "CONCERVATED"
+                      ? "row-concervated"
                       : ""
                   }`}
                   align="left"
+                  style={{
+                    color:
+                      row.status === "ACTIVE"
+                        ? "white"
+                        : row.status === "INACTIVE"
+                        ? "white"
+                        : row.status === "REPAIR"
+                        ? "white"
+                        : row.status === "IN_USE"
+                        ? "white"
+                        : row.status === "CONCERVATED"
+                        ? "white"
+                        : "white",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    fontSize: "14px",
+                  }}
                 >
                   {row?.status || "-"}
                 </TableCell>

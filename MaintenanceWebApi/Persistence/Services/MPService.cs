@@ -31,17 +31,19 @@ namespace Persistence.Services
 
         private readonly IMpReadRepository _readRepository;
         private readonly IMpWriteRepository _writeRepository;
+        private readonly IMSettingsReadRepository _mSettingsReadRepository;
         private readonly IMSettingsWriteRepository _settingsWriteRepository;
         private readonly IMapper _mapper;
         private IMemoryCache _memoryCach;
 
-        public MPService(IMpReadRepository readRepository, IMpWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach, IMSettingsWriteRepository settingsWriteRepository)
+        public MPService(IMpReadRepository readRepository, IMpWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach, IMSettingsWriteRepository settingsWriteRepository, IMSettingsReadRepository mSettingsReadRepository)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _mapper = mapper;
             _memoryCach = memoryCach;
             _settingsWriteRepository = settingsWriteRepository;
+            _mSettingsReadRepository = mSettingsReadRepository;
         }
 
         public async Task<IServiceResult<MaintenencePlanStatusDto>> ChangeMpStatusAsync(int id, MaintenencePlanStatus newStatus)
@@ -436,6 +438,8 @@ namespace Persistence.Services
 
         public async Task<IServiceResult<MsSetDto>> SetMpSettings(MsSetDto msSetDto)
         {
+
+
             if (msSetDto ==null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "data missing" };
           
             var existMp=  _readRepository.GetAll()
@@ -445,25 +449,45 @@ namespace Persistence.Services
 
             if (existMp == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no MP with this id" };
 
-           
-            if (existMp.Equipments != null)
+            var msSetting = _mSettingsReadRepository.GetAll().FirstOrDefault(ms => ms.EquipmentId == msSetDto.EquipmentId && ms.MaintenancePlanId == msSetDto.MaintenancePlanId);
+            if (msSetting == null)
             {
-                var existMpEquipment = existMp.Equipments?.FirstOrDefault(e => e.Id == msSetDto.EquipmentId);
-                if (existMpEquipment == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
-                var msDto = _mapper.Map<MaintenanceSetting>(msSetDto);
-                msDto.StartValue = existMpEquipment.CurrentValue;
-                msDto.IsMpCompleted = true;
-                existMp.MaintenanceSettings.Add(msDto);
-               var result =  _settingsWriteRepository.SaveAsync();
-     
-                return new ServiceResult<MsSetDto> { IsSuccess = true, Data = msSetDto };
-              
+                if (existMp.Equipments != null)
+                {
+                    var existMpEquipment = existMp.Equipments?.FirstOrDefault(e => e.Id == msSetDto.EquipmentId);
+                    if (existMpEquipment == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
+                    var msDto = _mapper.Map<MaintenanceSetting>(msSetDto);
+                    msDto.StartValue = existMpEquipment.CurrentValue;
+                    msDto.IsMpCompleted = true;
+                    existMp.MaintenanceSettings.Add(msDto);
+                    var result = await _settingsWriteRepository.SaveAsync();
+                    if (result > 0)
+                    {
+                        return new ServiceResult<MsSetDto> { IsSuccess = true, Data = msSetDto };
+                    }
+                    else
+                    {
+                       
+                    }
+
+                }
             }
 
-            //var msDtoo = _mapper.Map<MaintenanceSetting>(msSetDto);
-            //msDtoo.StartValue = existMpEquipment.CurrentValue;
-            //existMp.MaintenanceSettings.Add(msDtoo);
-            //return new ServiceResult<MsSetDto> { IsSuccess = false, Data = msSetDto };
+            msSetting.SequenceValue = msSetDto.SequenceValue;
+            var resultUpdate = _settingsWriteRepository.Update(msSetting);
+
+            if (resultUpdate)
+            {
+                var endResult =  await _settingsWriteRepository.SaveAsync();
+                if (endResult > 0)
+                {
+                    return new ServiceResult<MsSetDto> { IsSuccess = true, Data = msSetDto };
+                }
+
+                return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "Failed to save changes to the database" };
+
+            }
+
             return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
 
 
