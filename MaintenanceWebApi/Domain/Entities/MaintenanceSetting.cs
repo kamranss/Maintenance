@@ -9,7 +9,8 @@ namespace Domain.Entities
 {
     public class MaintenanceSetting:BaseEntity
     {
-       
+
+        public string MpName { get; set; }
         public decimal? StartValue { get; set; }// equ currect value
         public decimal? UpdatedValue { get; set; }
         public decimal? SequenceValue { get; set; } // for instance 5000

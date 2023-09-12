@@ -133,6 +133,7 @@ namespace MaintenanceWebApi.Controllers
             var metricType = Enum.GetNames(typeof(Metrictype)).ToList();
             return Ok(metricType);
         }
+
         [Route("StatusChange")]
         [HttpPatch]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -149,7 +150,7 @@ namespace MaintenanceWebApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> SetMpSettings(MsSetDto msSetDto)
+        public async Task<IActionResult> SetMpSettings([FromForm]MsSetDto msSetDto)
         {
             var result = await _mpService.SetMpSettings(msSetDto);
 
@@ -197,6 +198,23 @@ namespace MaintenanceWebApi.Controllers
             }
            
             return BadRequest(result.ErrorMessage) ;
+
+        }
+
+        [HttpGet("EquipmentMpsDropDown")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult GetEquipmentMpsforInput(int id)
+        {
+            var result = _mpService.GetEquipmentMps(id).Result;
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+
+            return BadRequest(result.ErrorMessage);
 
         }
 

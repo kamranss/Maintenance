@@ -22,6 +22,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Persistence.Services
 {
@@ -204,6 +205,31 @@ namespace Persistence.Services
             var pagination = new Pagination<ServiceDto>(MpListDto, pageValue, pageCount, totalCount);
 
             return new ServiceResult<Pagination<ServiceDto>> { IsSuccess = true, Data = pagination };
+        } // done
+
+        public async Task<IServiceResult<List<MpInputDto>>> GetEquipmentMps(int Id)
+        {
+            if (Id != null)
+            {
+                var mps = _readRepository.GetAll()
+                    .Include(e => e.Equipments)
+                    .Where(e => e.Equipments.Any(eq => eq.Id == Id))
+                    .Take(10)
+                    .ToList();
+                if (mps == null)
+                {
+                    return new ServiceResult<List<MpInputDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
+                }
+                var itemss = mps.ToList();
+
+                var mpsDto = _mapper.Map<List<MpInputDto>>(itemss);
+                return new ServiceResult<List<MpInputDto>> { IsSuccess = true, Data = mpsDto };
+            }
+            else
+            {
+                
+                return new ServiceResult<List<MpInputDto>> { IsSuccess = false, ErrorMessage = "id is warong" };
+            }
         } // done
 
         public async Task<IServiceResult<Pagination<MaintenancePlanDto>>> GetMPsAsync(int? page, int? pagesize)

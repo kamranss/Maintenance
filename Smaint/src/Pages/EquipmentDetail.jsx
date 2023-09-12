@@ -7,6 +7,7 @@ import { CircularProgress } from "@mui/material";
 import EquipmentStatusChangeModal from "../Components/Modals/EquipmentStatusChangeModal";
 import TableEquipmentMp from "../Components/Tables/TableEquipmentMp";
 import EquipmentAddMpModal from "../Components/Modals/EquipmentAddMpModal";
+import EquipmentAddMpSettingModal from "../Components/Modals/EquipmentAddMpSettingModal";
 
 const EquipmentDetail = () => {
   const { id } = useParams();
@@ -19,8 +20,11 @@ const EquipmentDetail = () => {
 
   const [isChangeStatusModalOpen, setIsChangeStatusModalOpen] = useState(false);
   const [isAddPartModalOpen, setIsAddPartModalOpen] = useState(false);
+
   const [isAddMpModalOpen, setIsAddMpModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isAddMpSettingsModalOpen, setisAddMpSettingsModalOpen] =
+    useState(false);
 
   const [equipmentIdForStatusChange, setEquipmentIdForStatusChange] =
     useState(null);
@@ -76,14 +80,14 @@ const EquipmentDetail = () => {
     setEquipmentIdForMp(equipmentId);
   };
 
+  const handleSetResetValue = (equipmentId) => {
+    setisAddMpSettingsModalOpen(true);
+    setEquipmentIdForMp(equipmentId);
+  };
+
   const handleSetMpComplete = () => {
     // Open the Set Mp Complete modal
     setIsAddMpModalOpen(true);
-  };
-
-  const handleSetResetValue = () => {
-    // Open the Set Reset Value modal
-    setIsAddPartModalOpen(true);
   };
 
   const handlePartChange = () => {
@@ -197,6 +201,12 @@ const EquipmentDetail = () => {
                 <div className="equ_page_action-buttons_resetValue">
                   <button onClick={handleSetResetValue}>Set Reset Value</button>
                 </div>
+                <EquipmentAddMpSettingModal
+                  isOpen={isAddMpSettingsModalOpen}
+                  onClose={() => setisAddMpSettingsModalOpen(false)}
+                  equipmentId={equipmentDetail.id}
+                  onMpaddSuccess={refreshEquipmentDetails}
+                />
                 <div className="equ_page_action-buttons_setMp">
                   <button onClick={handleSetMpComplete}>Set Mp Complete</button>
                 </div>

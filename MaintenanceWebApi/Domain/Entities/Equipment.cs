@@ -46,8 +46,10 @@ namespace Domain.Entities
         public Manufacture Manufacture { get; set; }
 
         public List<UsageHistory> UsageHistories { get; set; }
+        public List<MaintenanceSetting> MaintenanceSettings { get; set; }
 
-       
+
+
 
         //public bool? isDeleted { get; set; }
 

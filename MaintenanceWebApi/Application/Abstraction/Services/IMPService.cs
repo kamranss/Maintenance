@@ -28,6 +28,7 @@ namespace Application.Abstraction.Services
 
         Task<IServiceResult<MpCompleted>> IsMpCompleted(MpCompleted mpCompleted);
         Task<IServiceResult<List<MpInputDto>>> GetMpsForInput(string? name);
+        Task<IServiceResult<List<MpInputDto>>> GetEquipmentMps(int Id);
 
         //Task<IServiceResult<MsUpdateDto>> UpdateMsAsync(MsUpdateDto? id);
 
