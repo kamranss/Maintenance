@@ -183,7 +183,7 @@ const EquipmentAddMpModal = ({
             <Autocomplete
               id="status-options"
               options={mpOption}
-              // getOptionLabel={(option) => option.name} // Use the name property as the display value
+              getOptionLabel={(option) => option.name} // Use the name property as the display value
               // getOptionSelected={(option, value) => option.id === value.id} // Compare based on the id property
               value={selectedMp}
               onChange={(event, newValue) => {

@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Asn1.Ocsp;
+using Persistence.Migrations;
+using Persistence.Services.Account;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -62,6 +66,7 @@ namespace MaintenanceWebApi.Controllers
             string FullName = userRegisterDto.Name + " " + userRegisterDto.Surname;
             user.ConnectionId = null;
             user.OTP = otpnumber;
+            user.IsActive = true;
             var result = await _userManager.CreateAsync(user, userRegisterDto.Password);
 
             if (!result.Succeeded)
@@ -110,121 +115,102 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ConfirmEmail(ConfirmAccountVM confirmAccountVM)
-        //{
-        //    AppUser existUser = await _userManager.FindByEmailAsync(confirmAccountVM.Email);
-
-        //    if (existUser.OTP != confirmAccountVM.OTP || string.IsNullOrEmpty(confirmAccountVM.OTP))
-        //    {
-        //        TempData["Error"] = "Wrong OTP";
-        //        return RedirectToAction(nameof(VertifyEmail), new { Email = confirmAccountVM.Email });
-        //    }
-
-        //    string token = await _userManager.GenerateEmailConfirmationTokenAsync(existUser);
-        //    await _userManager.ConfirmEmailAsync(existUser, token);
-
-        //    await _signInManager.SignInAsync(existUser, false);
-
-        //    return RedirectToAction(nameof(Login));
-        //}
-
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> ResendOTP(string email) // this method serves for generating new OTP and sending this otp to user email
-        //{
-        //    string otp = OtpService.GenerateOTP();
-        //    AppUser existUser = await _userManager.FindByEmailAsync(email);
-        //    existUser.OTP = otp; // we are renewing previous Otp
-        //    await _userManager.UpdateAsync(existUser);
-        //    string body = string.Empty;
-        //    string path = "wwwroot/templates/verify.html";
-        //    string subject = "hey you verify your email!";
-
-        //    body = _fileService.ReadFile(path, body);
-        //    body = body.Replace("{{otp}}", otp);
-        //    body = body.Replace("{{fullname}}", existUser.FullName);
-
-        //    _emailService.Send(existUser.Email, subject, body);
-
-        //    //return RedirectToAction("index", "home", new {area="AdminArea"}); // if we want redirect to another area we should do like that 
-        //    //return RedirectToAction("index", "home");
-
-        //    return RedirectToAction(nameof(VertifyEmail), new { Email = existUser.Email }); // we are sending Email within the anonim object to the action 
-
-        //}
-
-        //public async Task<IActionResult> ChangePassowrd(ChangePasswordVM changePasswordVM)
-        //{
-        //    if (!ModelState.IsValid) return View();
-        //    AppUser existUser = await _userManager.FindByNameAsync(User.Identity.Name); // finding user referring to session
-        //    IdentityResult result = await _userManager.ChangePasswordAsync(existUser, changePasswordVM.CurrentPassword, changePasswordVM.NewPassword);
-
-        //    if (result.Succeeded)
-        //    {
-        //        ViewBag.IsSuccess = true;
-        //        return View(changePasswordVM);
-        //    }
-        //    else
-        //    {
-
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", error.Description);
-
-        //        }
-        //        return View(changePasswordVM);
-        //    }
-        //}
+       
 
         [Route("login")]
         [HttpPost]
-        public async Task<IActionResult> Login(UserLoginDto loginDto)
+        public async Task<IActionResult> Login([FromForm] UserLoginDto loginDto)
         {
-            AppUser user = await _userManager.FindByEmailAsync(loginDto.UserNameOrEmail);
+            AppUser user = await _userManager.FindByNameAsync(loginDto.UserNameOrEmail) ?? await _userManager.FindByEmailAsync(loginDto.UserNameOrEmail);
+
             if (user == null)
             {
-                user = await _userManager.FindByNameAsync(loginDto.UserNameOrEmail);
-                if (user == null)
-                {
-                    return NotFound();
-                }
+                var errors = ModelState.Values
+                       .SelectMany(v => v.Errors)
+                       .Select(e => e.ErrorMessage)
+                       .ToList();
+                return BadRequest(new { errors });
             }
-            var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
-            if (!result)
+
+            if (!user.IsActive)
             {
-                return NotFound();
+                var errors = ModelState.Values
+                     .SelectMany(v => v.Errors)
+                     .Select(e => e.ErrorMessage)
+                     .ToList();
+                return BadRequest(new { errors });
             }
+        
+            var passwordResult = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+            if (!passwordResult)
+            {
+                var errors = ModelState.Values
+                     .SelectMany(v => v.Errors)
+                     .Select(e => e.ErrorMessage)
+                     .ToList();
+                return BadRequest(new { errors });
+            }
+            var result = await _signInManager.PasswordSignInAsync(user, loginDto.Password, loginDto.RememberMe, true);
             // generate token 
+
+            if (result.IsLockedOut) 
+            {
+                var errors = ModelState.Values
+                      .SelectMany(v => v.Errors)
+                      .Select(e => e.ErrorMessage)
+                      .ToList();
+                return BadRequest(new { errors });
+            }
+            if (!result.Succeeded)
+            {
+                var errors = ModelState.Values
+                      .SelectMany(v => v.Errors)
+                      .Select(e => e.ErrorMessage)
+                      .ToList();
+                return BadRequest(new { errors });
+            }
+     
             var userRoles = await _userManager.GetRolesAsync(user);
             var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenKey = Encoding.UTF8.GetBytes(_config["JWT:Key"]);  // convering string key to bytes
+             // convering string key to bytes
             var claimList = new List<Claim>(); // claim data will be stored within the claim
             claimList.Add(new Claim(ClaimTypes.NameIdentifier, user.Id));  // instead of ClaimTypes.NameIdentifier we could just write id
             claimList.Add(new Claim("username", user.UserName));
             claimList.Add(new Claim("email", user.Email));
-            claimList.Add(new Claim("role", userRoles[0]));
+            if (userRoles.Count!=0)
+            {
+                claimList.Add(new Claim("role", userRoles[0] ?? Roles.MEMBER.ToString()));
+            }
+
+            claimList.Add(new Claim("role", "MEMBER"));
 
             foreach (var role in userRoles)
             {
                 claimList.Add(new Claim("role", role));
             }
+            var tokenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Key"]));
+            var key = _config["JWT:Key"];
+            Console.WriteLine(key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                // all of the description also should be implemented within program class 
+
                 Subject = new ClaimsIdentity(claimList),
-                Expires = DateTime.UtcNow.AddMinutes(10),
+                Expires =  loginDto.RememberMe ? DateTime.UtcNow.AddDays(30) : DateTime.UtcNow.AddMinutes(20),
                 Issuer = _config["JWT: Issuer"],
                 Audience = _config["JWT: Audience"],
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(tokenKey, SecurityAlgorithms.HmacSha256.ToString())
             };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
+            try
+            {
+                var token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return Ok(new { token = tokenHandler.WriteToken(token), message = "succesfull" });
-            //return Ok(result);
-
+                return Ok(new { token = tokenHandler.WriteToken(token), message = "succesfull" });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Token creation error: " + ex.Message);
+                return BadRequest(ex.Message);
+            }
         }
 
 
@@ -238,6 +224,60 @@ namespace MaintenanceWebApi.Controllers
                 await _roleManager.CreateAsync(new IdentityRole { Name = item.ToString() });
             }
             return StatusCode(201);
+        }
+
+        [Route("ConfirmEmail")]
+        [HttpPost]
+        public async Task<IActionResult> ConfirmEmail(ConfirmOtpDto confirmAccountDto)
+        {
+            AppUser existUser = await _userManager.FindByEmailAsync(confirmAccountDto.Email);
+
+            if (existUser.OTP != confirmAccountDto.OTP || string.IsNullOrEmpty(confirmAccountDto.OTP))
+            {
+                //TempData["Error"] = "Wrong OTP";
+                return BadRequest("Invalid OTP");
+            }
+
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(existUser);
+            await _userManager.ConfirmEmailAsync(existUser, token);
+
+            //await _signInManager.SignInAsync(existUser, false);
+
+            return Ok("Email verify succesfully");
+        }
+
+        [Route("ResentOtp")]
+        [HttpPost]
+        public async Task<IActionResult> ResendOTP(string email) 
+        {
+            //string otp = OtpService.GenerateOTP();
+
+            Random random = new Random();
+            string otpnumber = random.Next(100000, 999999).ToString();
+            AppUser existUser = await _userManager.FindByEmailAsync(email);
+            existUser.OTP = otpnumber; // we are renewing previous Otp
+            var result = await _userManager.UpdateAsync(existUser);
+            if (!result.Succeeded)
+            {
+                var errors = ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+                return BadRequest(new { errors });
+            }
+
+            string body = string.Empty;
+            string path = "wwwroot/templates/verify.html";
+            string subject = "hey you verify your email!";
+
+            body = _fileService.ReadFile(path, body);
+            body = body.Replace("{{otp}}", otpnumber);
+            body = body.Replace("{{fullname}}", existUser.Name+ " " +existUser.Surname);
+
+            _emailService.Send(existUser.Email, subject, body);
+            return StatusCode(201);
+            
+
         }
     }
 

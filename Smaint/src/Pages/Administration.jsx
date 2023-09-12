@@ -58,6 +58,9 @@ const Administration = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    console.log("Token:", token); // Log the token
+    axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     fetchData(activeTab); // Fetch data when the component mounts or activeTab changes
   }, [activeTab, page, size]);
 

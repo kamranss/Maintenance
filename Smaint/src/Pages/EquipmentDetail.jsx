@@ -106,144 +106,145 @@ const EquipmentDetail = () => {
   return (
     <div>
       <div className="line"></div>;
-      <div className="equipment-detail-container">
-        <div className="equipment-info">
-          <div className="heading">
-            <h2>Equipment Information</h2>
-          </div>
-
-          {equipmentDetail && (
-            <div className="equipment-info-box">
-              <div className="info-field">
-                <p className="info-label">Name:</p>
-                <p className="info-value">{equipmentDetail.name}</p>
-              </div>
-              <div className="info-field">
-                <p className="info-label">Description:</p>
-                <p className="info-value">{equipmentDetail.description}</p>
-              </div>
-              <div className="info-field">
-                <p className="info-label">Type:</p>
-                <p className="info-value">{equipmentDetail.type}</p>
-              </div>
-              <div className="info-field">
-                <p className="info-label">Department:</p>
-                <p className="info-value">{equipmentDetail.department}</p>
-              </div>
-              <div className="info-field">
-                <p className="info-label">Manufacture:</p>
-                <p className="info-value">{equipmentDetail.manufacture}</p>
-              </div>
-              <div className="info-field">
-                <p className="info-label">Model:</p>
-                <p className="info-value">{equipmentDetail.model}</p>
-              </div>
-              <div className="info-field">
-                <p className="info-label">OperationSite:</p>
-                <p className="info-value">{equipmentDetail.operationSite}</p>
-              </div>
-              {/* Add more fields as needed */}
-            </div>
-          )}
-        </div>
-        {equipmentDetail && (
-          <div className="equipment-info-box_Status">
-            <div className="info-field">
-              {/* <p className="info-label">Status:</p> */}
-              <p
-                className={`info-valueee ${
-                  equipmentDetail.status === "ACTIVE"
-                    ? "row-active"
-                    : equipmentDetail.status === "INACTIVE"
-                    ? "row-inactive"
-                    : equipmentDetail.status === "REPAIR"
-                    ? "row-repair"
-                    : equipmentDetail.status === "IN_USE"
-                    ? "row-inuse"
-                    : ""
-                }`}
-              >
-                {equipmentDetail.status}
-              </p>
-            </div>
-            <div className="button_container">
-              <div className="equ_page_action-buttons_changestatus">
-                <button onClick={handleStatusChange}>Change Status</button>
-              </div>
-              <EquipmentStatusChangeModal
-                isOpen={isChangeStatusModalOpen}
-                onClose={() => setIsChangeStatusModalOpen(false)}
-                equipmentId={equipmentDetail.id}
-                onStatusChangeSuccess={refreshEquipmentDetails}
-              />
-              <div className="equ_page_action-buttons_addPart">
-                <button onClick={handlePartChange}>Add Part</button>
-              </div>
-              <div className="equ_page_action-buttons_addMp">
-                <button onClick={handleAddMpChange}>Add Mp</button>
-              </div>
-              <EquipmentAddMpModal
-                isOpen={isAddMpModalOpen}
-                onClose={() => setIsAddMpModalOpen(false)}
-                equipmentId={equipmentDetail.id}
-                onMpaddSuccess={refreshEquipmentDetails}
-              />
-              <div className="equ_page_action-buttons_delete">
-                <button onClick={handleDeleteChange}>Delete</button>
-              </div>
+      <div className="main_container">
+        <div className="equipment-detail-container">
+          <div className="equipment-info">
+            <div className="heading">
+              <h2>Equipment Information</h2>
             </div>
 
             {equipmentDetail && (
-              <div className="equipment-info-box_2">
+              <div className="equipment-info-box">
                 <div className="info-field">
-                  <p className="info-label">Current Value:</p>
-                  <p className="info-value">{equipmentDetail.currentValue}</p>
+                  <p className="info-label">Name:</p>
+                  <p className="info-value">{equipmentDetail.name}</p>
                 </div>
                 <div className="info-field">
-                  <p className="info-label">Squence Value:</p>
-                  <p className="info-value">{equipmentDetail.squenceValue}</p>
+                  <p className="info-label">Description:</p>
+                  <p className="info-value">{equipmentDetail.description}</p>
                 </div>
                 <div className="info-field">
-                  <p className="info-label">Reset Value:</p>
-                  <p className="info-value">{equipmentDetail.resetValue}</p>
+                  <p className="info-label">Type:</p>
+                  <p className="info-value">{equipmentDetail.type}</p>
                 </div>
+                <div className="info-field">
+                  <p className="info-label">Department:</p>
+                  <p className="info-value">{equipmentDetail.department}</p>
+                </div>
+                <div className="info-field">
+                  <p className="info-label">Manufacture:</p>
+                  <p className="info-value">{equipmentDetail.manufacture}</p>
+                </div>
+                <div className="info-field">
+                  <p className="info-label">Model:</p>
+                  <p className="info-value">{equipmentDetail.model}</p>
+                </div>
+                <div className="info-field">
+                  <p className="info-label">OperationSite:</p>
+                  <p className="info-value">{equipmentDetail.operationSite}</p>
+                </div>
+                {/* Add more fields as needed */}
               </div>
             )}
           </div>
-        )}
-
-        <div className="list-info">
-          <div className="image_Main">
-            {/* {equipmentDetail && ( */}
-            <div className="image_Container">
-              {imageUrl ? (
-                <div className="image_box">
-                  <img src={imageUrl} alt="" />
+        </div>
+        <div className="right_Side">
+          {equipmentDetail && (
+            <div className="equipment-info-box_Status">
+              <div className="info-field">
+                {/* <p className="info-label">Status:</p> */}
+                <p
+                  className={`info-valueee ${
+                    equipmentDetail.status === "ACTIVE"
+                      ? "row-active"
+                      : equipmentDetail.status === "INACTIVE"
+                      ? "row-inactive"
+                      : equipmentDetail.status === "REPAIR"
+                      ? "row-repair"
+                      : equipmentDetail.status === "IN_USE"
+                      ? "row-inuse"
+                      : ""
+                  }`}
+                >
+                  {equipmentDetail.status}
+                </p>
+              </div>
+              <div className="button_container">
+                <div className="equ_page_action-buttons_changestatus">
+                  <button onClick={handleStatusChange}>Change Status</button>
                 </div>
-              ) : (
-                <p>No image available</p>
+                <EquipmentStatusChangeModal
+                  isOpen={isChangeStatusModalOpen}
+                  onClose={() => setIsChangeStatusModalOpen(false)}
+                  equipmentId={equipmentDetail.id}
+                  onStatusChangeSuccess={refreshEquipmentDetails}
+                />
+                <div className="equ_page_action-buttons_addPart">
+                  <button onClick={handlePartChange}>Add Part</button>
+                </div>
+                <div className="equ_page_action-buttons_addMp">
+                  <button onClick={handleAddMpChange}>Add Mp</button>
+                </div>
+                <EquipmentAddMpModal
+                  isOpen={isAddMpModalOpen}
+                  onClose={() => setIsAddMpModalOpen(false)}
+                  equipmentId={equipmentDetail.id}
+                  onMpaddSuccess={refreshEquipmentDetails}
+                />
+                <div className="equ_page_action-buttons_delete">
+                  <button onClick={handleDeleteChange}>Delete</button>
+                </div>
+                <div className="equ_page_action-buttons_resetValue">
+                  <button onClick={handleSetResetValue}>Set Reset Value</button>
+                </div>
+                <div className="equ_page_action-buttons_setMp">
+                  <button onClick={handleSetMpComplete}>Set Mp Complete</button>
+                </div>
+              </div>
+
+              {equipmentDetail && (
+                <div className="equipment-info-box_2">
+                  <div className="info-field">
+                    <p className="info-label">Current Value:</p>
+                    <p className="info-value">{equipmentDetail.currentValue}</p>
+                  </div>
+                  <div className="info-field">
+                    <p className="info-label">Squence Value:</p>
+                    <p className="info-value">{equipmentDetail.squenceValue}</p>
+                  </div>
+                  <div className="info-field">
+                    <p className="info-label">Reset Value:</p>
+                    <p className="info-value">{equipmentDetail.resetValue}</p>
+                  </div>
+                </div>
               )}
             </div>
-            {/* )} */}
+          )}
+          <div className="mp_container">
+            <div className="mp_list_container">
+              <h2>Maintenance Plans</h2>
+              <TableEquipmentMp maintenancePlans={equipmentDetail.mpList} />
+            </div>
+            <div className="mp_list_container">
+              <h2>Parts</h2>
+              <TableEquipmentMp maintenancePlans={equipmentDetail.partList} />
+            </div>
+            <div className="list-info">
+              <div className="image_Main">
+                {/* {equipmentDetail && ( */}
+                <div className="image_Container">
+                  {imageUrl ? (
+                    <div className="image_box">
+                      <img src={imageUrl} alt="" />
+                    </div>
+                  ) : (
+                    <p>No image available</p>
+                  )}
+                </div>
+                {/* )} */}
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="mp_container">
-        <div className="mp_buttons">
-          <div className="equ_page_action-buttons_resetValue">
-            <button onClick={handleSetResetValue}>Set Reset Value</button>
-          </div>
-          <div className="equ_page_action-buttons_setMp">
-            <button onClick={handleSetMpComplete}>Set Mp Complete</button>
-          </div>
-        </div>
-        <div className="mp_list_container">
-          <h2>Maintenance Plans</h2>
-          <TableEquipmentMp maintenancePlans={equipmentDetail.mpList} />
-        </div>
-        <div className="mp_list_container">
-          <h2>Parts</h2>
-          <TableEquipmentMp maintenancePlans={equipmentDetail.partList} />
         </div>
       </div>
     </div>

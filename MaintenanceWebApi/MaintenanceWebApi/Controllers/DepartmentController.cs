@@ -2,6 +2,7 @@
 using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.Exceptions.EquipmentException;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Persistence.Services;
@@ -31,14 +32,14 @@ namespace MaintenanceWebApi.Controllers
             return Ok(department);
         }
 
+ 
+        [Authorize]
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetDepartments(int? page, int? pageSize)
         {
-            //var departments = _departmentService.GetDepartmentsAsync(page, pageSize);
-
 
             var serviceResult = _departmentService.GetDepartmentsAsync(page, pageSize).Result;
 

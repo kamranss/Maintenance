@@ -13,7 +13,7 @@ namespace Domain.Entities
         public string? Name { get; set; }
         public string? Surname { get; set; }
         public string? OTP { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public bool? IsOperator { get; set; }
         public bool? IsDivisionHead { get; set; }
         public string? ConnectionId { get; set; }

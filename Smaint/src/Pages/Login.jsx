@@ -9,9 +9,11 @@ import Box from "@mui/material/Box"; // Added Box for margin and padding
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    UserName: "",
+    UserNameOrEmail: "",
     Password: "",
+    RememberMe: false,
   });
+  const [validationErrors, setValidationErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,12 +22,33 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formData);
     try {
-      const response = await axios.post("/api/auth/login", formData);
+      const response = await axios.post(
+        "https://localhost:7066/api/Account/login",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
       console.log("Login successful", response);
-      // Redirect to a different page upon successful login
-      // Example: window.location.href = "/dashboard";
+
+      if (response.status === 200) {
+        // Login successful
+        if (response.data && response.data.token) {
+          localStorage.setItem("token", response.data.token);
+          window.location.href = "/home";
+        }
+      } else if (response.status === 400) {
+        // Validation errors
+        setValidationErrors(response.data);
+      } else {
+        // Handle other error cases
+        console.error("Login error", response);
+      }
     } catch (error) {
       console.error("Login error", error);
     }
@@ -42,15 +65,20 @@ const Login = () => {
               <TextField
                 fullWidth
                 variant="outlined"
-                label="Username"
-                name="UserName"
-                value={formData.UserName}
+                label="Username or Email"
+                name="UserNameOrEmail"
+                value={formData.UserNameOrEmail}
                 onChange={handleChange}
                 InputLabelProps={{
                   shrink: true,
                   style: { color: "#0f6466" }, // Customize placeholder color
                 }}
               />
+              {validationErrors.UserNameOrEmail && (
+                <span className="validation-error">
+                  {validationErrors.UserNameOrEmail}
+                </span>
+              )}
             </Box>
           </Grid>
           <Grid item xs={12}>
@@ -70,6 +98,11 @@ const Login = () => {
                   style: { color: "#0f6466" }, // Customize placeholder color
                 }}
               />
+              {validationErrors.Password && (
+                <span className="validation-error">
+                  {validationErrors.Password}
+                </span>
+              )}
             </Box>
           </Grid>
         </Grid>

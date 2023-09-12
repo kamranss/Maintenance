@@ -34,7 +34,7 @@ const TableEquipmentPart = ({ parts }) => {
               <TableCell>ID</TableCell>
               <TableCell>Code</TableCell>
               <TableCell>Name</TableCell>
-              <TableCell></TableCell>
+              {/* <TableCell></TableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -45,7 +45,7 @@ const TableEquipmentPart = ({ parts }) => {
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.code}</TableCell>
                   <TableCell>{row.name}</TableCell>
-                  <TableCell>{row.isActive}</TableCell>
+                  {/* <TableCell>{row.isActive}</TableCell> */}
                 </TableRow>
               ))}
           </TableBody>
