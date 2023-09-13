@@ -31,10 +31,12 @@ const TableEquipmentMp = ({ maintenancePlans }) => {
         <Table>
           <TableHead>
             <TableRow>
+              <TableCell>Mp Time</TableCell>
               <TableCell>ID</TableCell>
               <TableCell>Code</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Description</TableCell>
+              <TableCell>sequenceValue</TableCell>
               {/* Add other table headers */}
             </TableRow>
           </TableHead>
@@ -43,10 +45,30 @@ const TableEquipmentMp = ({ maintenancePlans }) => {
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <TableRow key={row.id}>
+                  <TableCell align="left">
+                    {row.maintenanceSettingsList &&
+                    row.maintenanceSettingsList[0] ? (
+                      row.maintenanceSettingsList[0].mpCompleted !== true &&
+                      row.maintenanceSettingsList[0].mpCompleted !== null ? (
+                        <i className="far fa-clock"></i> // Clock icon for incomplete
+                      ) : (
+                        <i className="fa-solid fa-check"></i>
+                      )
+                    ) : (
+                      // Handle the case where maintenanceSettingsList is null
+                      <i className="fa-solid fa-check"></i>
+                    )}
+                  </TableCell>
                   <TableCell>{row.id}</TableCell>
                   <TableCell>{row.code}</TableCell>
                   <TableCell>{row.name}</TableCell>
                   <TableCell>{row.description}</TableCell>
+                  <TableCell>
+                    {row.maintenanceSettingsList &&
+                    row.maintenanceSettingsList.length > 0
+                      ? row.maintenanceSettingsList[0]?.sequenceValue ?? ""
+                      : ""}
+                  </TableCell>
                 </TableRow>
               ))}
           </TableBody>

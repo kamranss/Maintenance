@@ -38,7 +38,7 @@ const TableEquipmentPart = ({ parts }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {maintenancePlans
+            {parts
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => (
                 <TableRow key={row.id}>
@@ -54,7 +54,7 @@ const TableEquipmentPart = ({ parts }) => {
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
-        count={maintenancePlans.length}
+        count={parts.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

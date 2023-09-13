@@ -57,7 +57,9 @@ namespace Application.Mapper.Profiles
             CreateMap<MaintenancePlan, MaintenancePlanDto>();
 
 
-            CreateMap<MaintenancePlan, MaintenancePlanDto>();
+            CreateMap<MaintenancePlan, MaintenancePlanDto>()
+            .ForMember(dest => dest.MaintenanceSettingsList, opt => opt.MapFrom(src => src.MaintenanceSettings))
+            .ReverseMap();
             CreateMap<MaintenancePlan, MpDto>();
             CreateMap<MaintenancePlan, MpInputDto>();
             CreateMap<MaintenancePlan, MaintenencePlanStatusDto>();

@@ -6,6 +6,7 @@ import { fileBaseUrl } from "../Contants/Urls"; // Adjust the path accordingly
 import { CircularProgress } from "@mui/material";
 import EquipmentStatusChangeModal from "../Components/Modals/EquipmentStatusChangeModal";
 import TableEquipmentMp from "../Components/Tables/TableEquipmentMp";
+import TableEquipmentPart from "../Components/Tables/TableEquipmentPart";
 import EquipmentAddMpModal from "../Components/Modals/EquipmentAddMpModal";
 import EquipmentAddMpSettingModal from "../Components/Modals/EquipmentAddMpSettingModal";
 import EquipmentAddPartModal from "../Components/Modals/EquipmentAddPartModal";
@@ -244,7 +245,7 @@ const EquipmentDetail = () => {
             </div>
             <div className="mp_list_container">
               <h2>Parts</h2>
-              <TableEquipmentMp maintenancePlans={equipmentDetail.partList} />
+              <TableEquipmentPart parts={equipmentDetail.partList} />
             </div>
             <div className="list-info">
               <div className="image_Main">

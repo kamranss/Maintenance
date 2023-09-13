@@ -150,7 +150,7 @@ namespace Persistence.Services
                     existSetting.IsMpCompleted = false;
                     existEqu.MpCompleted = false;
                     existSetting.StartValue = existEqu.CurrentValue;
-                    existSetting.MaintenancePlan.MPChecked = false;
+                    //existSetting.MaintenancePlan.MPChecked = false;
                     check++;
                 }
 

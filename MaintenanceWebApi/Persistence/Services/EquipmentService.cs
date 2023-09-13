@@ -355,8 +355,7 @@ namespace Persistence.Services
                 .Include(e => e.UsageHistories)
                 .Include(e => e.Part)
                 .Include(e => e.MaintenancePlan)
-            
-                .ThenInclude(mp => mp.MaintenanceSettings);
+                 .ThenInclude(mp => mp.MaintenanceSettings);
 
             var sql = await query.ToListAsync(); // Log the generated SQL query
 
@@ -372,6 +371,9 @@ namespace Persistence.Services
                     {
                         mp.MaintenanceSettings = new List<MaintenanceSetting>();
                     }
+                    mp.MaintenanceSettings = mp.MaintenanceSettings
+                       .Where(ms => ms.EquipmentId == equipment.Id)
+                       .ToList();
                 });
 
 
@@ -405,6 +407,7 @@ namespace Persistence.Services
             equipmentDetailDto.MpTime = equipment.MpCompleted;
             equipmentDetailDto.UsageHistoryList = equipment.UsageHistories != null ? _mapper.Map<List<UsageHistoryDto>>(equipment.UsageHistories) : null;
             equipmentDetailDto.MpList = equipment.MaintenancePlan != null ? _mapper.Map<List<MaintenancePlanDto>>(equipment.MaintenancePlan) : null;
+            
             equipmentDetailDto.PartList = equipment.Part != null ? _mapper.Map<List<PartDto>>(equipment.Part) : null;
             equipmentDetailDto.SettingList = equipment.MaintenanceSettings != null ? _mapper.Map<List<MsDto>>(equipment.MaintenanceSettings) : null;
             equipmentDetailDto.ImagUrl =  "/images/" + equipment.ImagUrl;
@@ -600,6 +603,7 @@ namespace Persistence.Services
                        MpTime = e.MpCompleted
 
                    })
+                    .OrderBy(e => e.MpTime.HasValue && e.MpTime.Value ? 1 : 0)
                    .ToList();
 
                     if (equipments == null)
@@ -650,6 +654,7 @@ namespace Persistence.Services
                        //UsageLocation = e.usageLocation,
                        MpTime = e.MpCompleted
                    })
+                   .OrderBy(e => e.MpTime.HasValue && e.MpTime.Value ? 1 : 0)
                  .ToList();
 
 

@@ -10,6 +10,16 @@ import moment from "moment";
 import { NavLink } from "react-router-dom";
 
 export default function TableEquipment({ thead = [], rows = [], onRowClick }) {
+  rows.sort((a, b) => {
+    // Convert mpTime to boolean (null and true will be treated as true, false will be treated as false)
+    const aMpTime = !!a.mpTime;
+    const bMpTime = !!b.mpTime;
+
+    // Sort based on mpTime (false first)
+    if (aMpTime < bMpTime) return -1;
+    if (aMpTime > bMpTime) return 1;
+    return 0;
+  });
   return (
     <TableContainer
       component={Paper}
