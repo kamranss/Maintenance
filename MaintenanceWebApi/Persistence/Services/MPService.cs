@@ -458,6 +458,7 @@ namespace Persistence.Services
                     if (existMpEquipment == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no Equipment with this id in this Mp" };
                     var msDto = _mapper.Map<MaintenanceSetting>(msSetDto);
                     msDto.StartValue = existMpEquipment.CurrentValue;
+                    msDto.MpName = existMp.Name;
                     msDto.IsMpCompleted = true;
                     existMp.MaintenanceSettings.Add(msDto);
                     var result = await _settingsWriteRepository.SaveAsync();

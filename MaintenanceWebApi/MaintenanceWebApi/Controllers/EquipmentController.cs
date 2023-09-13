@@ -5,6 +5,7 @@ using Application.Exceptions.EquipmentException;
 using Application.Repositories.EquipmentRepo;
 using Domain.Concrets;
 using Domain.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -54,6 +55,7 @@ namespace MaintenanceWebApi.Controllers
             //}
         }
 
+        //[Authorize]
         [HttpGet]
         public IActionResult GetEquipment(int? id)
         {
@@ -161,7 +163,7 @@ namespace MaintenanceWebApi.Controllers
         }
 
 
-
+  
         [HttpPost("AddMpToEquipment")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

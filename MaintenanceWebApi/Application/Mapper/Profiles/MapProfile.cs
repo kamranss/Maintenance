@@ -82,6 +82,7 @@ namespace Application.Mapper.Profiles
             CreateMap<Part, PartDto>().ReverseMap();
             CreateMap<EquipmentType, EquipmentTypeDto>();
             CreateMap<MsSetDto, MaintenanceSetting>().ReverseMap();
+            CreateMap<MaintenanceSetting, MsDto>();
 
             //CreateMap<Department, Depar>()
             //        .ForMember(ds => ds.ProductCount, map => map.MapFrom(c => c.Products.Count)); // we are doing it because of types are different within mapped objects

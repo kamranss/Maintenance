@@ -8,6 +8,7 @@ import EquipmentStatusChangeModal from "../Components/Modals/EquipmentStatusChan
 import TableEquipmentMp from "../Components/Tables/TableEquipmentMp";
 import EquipmentAddMpModal from "../Components/Modals/EquipmentAddMpModal";
 import EquipmentAddMpSettingModal from "../Components/Modals/EquipmentAddMpSettingModal";
+import EquipmentAddPartModal from "../Components/Modals/EquipmentAddPartModal";
 
 const EquipmentDetail = () => {
   const { id } = useParams();
@@ -29,6 +30,7 @@ const EquipmentDetail = () => {
   const [equipmentIdForStatusChange, setEquipmentIdForStatusChange] =
     useState(null);
   const [equipmentIdForMp, setEquipmentIdForMp] = useState(null);
+  const [equipmentIdForPart, setEquipmentIdForPart] = useState(null);
 
   const refreshEquipmentDetails = async () => {
     try {
@@ -74,25 +76,22 @@ const EquipmentDetail = () => {
     setIsChangeStatusModalOpen(true);
     setEquipmentIdForStatusChange(equipmentId);
   };
-
   const handleAddMpChange = (equipmentId) => {
     setIsAddMpModalOpen(true);
     setEquipmentIdForMp(equipmentId);
   };
-
   const handleSetResetValue = (equipmentId) => {
     setisAddMpSettingsModalOpen(true);
+    setEquipmentIdForMp(equipmentId);
+  };
+  const handlePartChange = (equipmentId) => {
+    setIsAddPartModalOpen(true);
     setEquipmentIdForMp(equipmentId);
   };
 
   const handleSetMpComplete = () => {
     // Open the Set Mp Complete modal
     setIsAddMpModalOpen(true);
-  };
-
-  const handlePartChange = () => {
-    // Open the Add Part modal
-    setIsAddPartModalOpen(true);
   };
 
   const handleDeleteChange = () => {
@@ -188,6 +187,13 @@ const EquipmentDetail = () => {
                 <div className="equ_page_action-buttons_addPart">
                   <button onClick={handlePartChange}>Add Part</button>
                 </div>
+                <EquipmentAddPartModal
+                  isOpen={isAddPartModalOpen}
+                  onClose={() => setIsAddPartModalOpen(false)}
+                  equipmentId={equipmentDetail.id}
+                  onMpaddSuccess={refreshEquipmentDetails}
+                />
+
                 <div className="equ_page_action-buttons_addMp">
                   <button onClick={handleAddMpChange}>Add Mp</button>
                 </div>

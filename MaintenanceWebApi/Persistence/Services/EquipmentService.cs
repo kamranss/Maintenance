@@ -4,6 +4,7 @@ using Application.DTOs.Department;
 using Application.DTOs.Equipment;
 using Application.DTOs.MaintenancePlan;
 using Application.DTOs.Manufacture;
+using Application.DTOs.MS;
 using Application.DTOs.Parts;
 using Application.DTOs.Service;
 using Application.DTOs.UsageHistory;
@@ -325,9 +326,24 @@ namespace Persistence.Services
             {
                 return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
             }
-          
 
-            var equipment =  _equipmentReadRepository
+
+            //var equipment =  _equipmentReadRepository
+            //    .GetAll()
+            //    .Where(e => e.Id == id)
+            //    .Include(e => e.Department)
+            //    .Include(e => e.Manufacture)
+            //    .Include(e => e.OperationSite)
+            //    .Include(e => e.Model)
+            //    .Include(e => e.EquipmentType)
+            //    .Include(e => e.UsageHistories)
+            //    .Include(e => e.Part)
+            //    .Include(e => e.MaintenancePlan)
+            //    .ThenInclude(mp => mp.MaintenanceSettings)
+            //    .Where(mp => mp.MaintenanceSettings != null && mp.MaintenanceSettings.Any(ms => ms.EquipmentId == id))
+            //    .FirstOrDefault();
+
+            var query = _equipmentReadRepository
                 .GetAll()
                 .Where(e => e.Id == id)
                 .Include(e => e.Department)
@@ -335,12 +351,16 @@ namespace Persistence.Services
                 .Include(e => e.OperationSite)
                 .Include(e => e.Model)
                 .Include(e => e.EquipmentType)
+                .Include(e => e.MaintenanceSettings)
                 .Include(e => e.UsageHistories)
                 .Include(e => e.Part)
                 .Include(e => e.MaintenancePlan)
-                //.ThenInclude(mp => mp.MaintenanceSettings)
-                //.Where(mp => mp.MaintenanceSettings != null && mp.MaintenanceSettings.Any(ms => ms.EquipmentId == id))
-                .FirstOrDefault();
+            
+                .ThenInclude(mp => mp.MaintenanceSettings);
+
+            var sql = await query.ToListAsync(); // Log the generated SQL query
+
+            var equipment = query.FirstOrDefault();
 
             if (equipment != null)
             {
@@ -386,9 +406,10 @@ namespace Persistence.Services
             equipmentDetailDto.UsageHistoryList = equipment.UsageHistories != null ? _mapper.Map<List<UsageHistoryDto>>(equipment.UsageHistories) : null;
             equipmentDetailDto.MpList = equipment.MaintenancePlan != null ? _mapper.Map<List<MaintenancePlanDto>>(equipment.MaintenancePlan) : null;
             equipmentDetailDto.PartList = equipment.Part != null ? _mapper.Map<List<PartDto>>(equipment.Part) : null;
+            equipmentDetailDto.SettingList = equipment.MaintenanceSettings != null ? _mapper.Map<List<MsDto>>(equipment.MaintenanceSettings) : null;
             equipmentDetailDto.ImagUrl =  "/images/" + equipment.ImagUrl;
-            
 
+            //var json = JsonSerializer.Serialize(equipmentDetailDto);
             return new ServiceResult<EquipmentDetailDto> { IsSuccess = true, Data = equipmentDetailDto };
         } // done
 
@@ -781,7 +802,7 @@ namespace Persistence.Services
             }
             else
             {
-                var equipmentss = _equipmentReadRepository.GetAll().Where(m => m.Name.ToLower().Contains(name.ToLower()) && m.IsIdle == false);
+                var equipmentss = _equipmentReadRepository.GetAll().Where(m => m.Name.ToLower().Contains(name.ToLower()) && m.IsIdle == true);
                 if (equipmentss == null)
                 {
                     return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = new List<EquipmentInputDto>() };

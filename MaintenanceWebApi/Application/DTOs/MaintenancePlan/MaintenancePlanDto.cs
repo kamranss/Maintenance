@@ -26,12 +26,12 @@ namespace Application.DTOs.MaintenancePlan
         public Metrictype? MetricType { get; set; } // inum
         //public List<EquipmentDto>? Equipments { get; set; }
         public List<ServiceDto>? Services { get; set; }
-        public List<MsSetDto>? MaintenanceSettingsList { get; set; }
+        public List<MsDto>? MaintenanceSettingsList { get; set; }
 
         public MaintenancePlanDto()
         {
             Services = new List<ServiceDto>();
-            MaintenanceSettingsList = new List<MsSetDto>();
+            MaintenanceSettingsList = new List<MsDto>();
         }
 
 

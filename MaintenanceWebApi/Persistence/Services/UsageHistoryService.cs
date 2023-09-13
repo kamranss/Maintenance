@@ -131,25 +131,58 @@ namespace Persistence.Services
             {
                 return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "SomethingWnetWrong" };
             }
-            updateEquipmentValue.CurrentValue = usageHistoryEnd.EndUsageHourValue;
+            //updateEquipmentValue.CurrentValue = usageHistoryEnd.EndUsageHourValue;
 
-            var existSetting = _settingsReadRepository.GetAll().FirstOrDefault(es => es.EquipmentId == existUsageStory.EquipmentId);
-            if (existSetting==null) 
+            var existSettings = _settingsReadRepository.GetAll()
+                .Include(s => s.MaintenancePlan)
+                .Where(es => es.EquipmentId == existUsageStory.EquipmentId).ToList();
+            if (existSettings.Count == 0) 
             {
                 return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
             }
 
-            existSetting.UpdatedValue = usageHistoryEnd.EndUsageHourValue;
-            if ((existSetting.UpdatedValue - existSetting.StartValue) >= existSetting.SequenceValue)
+            foreach (var existSetting in existSettings)
             {
-                existSetting.IsMpCompleted = false;
-                existEqu.MpCompleted = false;
+                existSetting.UpdatedValue = usageHistoryEnd.EndUsageHourValue;
+                int check = 0;
+                if ((existSetting.UpdatedValue - existSetting.StartValue) >= existSetting.SequenceValue)
+                {
+                    existSetting.IsMpCompleted = false;
+                    existEqu.MpCompleted = false;
+                    existSetting.StartValue = existEqu.CurrentValue;
+                    existSetting.MaintenancePlan.MPChecked = false;
+                    check++;
+                }
 
+               var resultSet =  _settingsWriteRepository.Update(existSetting);
+                if (!resultSet)
+                {
+                    return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "History not updated" };
+                }
+                if (check>0)
+                {
+                    var resultEqu = _equipmentWritwepository.Update(existEqu);
+                    if (!resultEqu)
+                    {
+                        return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "Equipment not updated" };
+                    }
+                }
+                
+               
             }
-            _settingsWriteRepository.Update(existSetting);
-            _settingsWriteRepository.SaveAsync();
 
-            return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
+            var endResultSet = await _settingsWriteRepository.SaveAsync();
+            if (endResultSet >=1)
+            {
+               var endResultEqu = await _equipmentWritwepository.SaveAsync();
+ 
+                return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
+                //return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "Equipment not Saves" };
+            }
+
+            //_settingsWriteRepository.Update(existSettings);
+
+            return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, ErrorMessage = "Equipment not Saves" };
             //return new ServiceResult<UsageHistoryCreateDto> { IsSuccess = false, ErrorMessage = "Something Went Wrong" };
         }
 

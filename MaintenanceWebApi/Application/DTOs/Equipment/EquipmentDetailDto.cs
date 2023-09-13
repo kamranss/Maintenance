@@ -3,6 +3,7 @@ using Application.DTOs.MS;
 using Application.DTOs.Parts;
 using Application.DTOs.UsageHistory;
 using Domain.Concrets;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,7 @@ namespace Application.DTOs.Equipment
         public decimal? ResetValue { get; set; }
         public decimal? SquenceValue { get; set; }
         public List<MaintenancePlanDto>? MpList { get; set; }
+        public List<MsDto>? SettingList { get; set; }
         public List<UsageHistoryDto>? UsageHistoryList { get; set; }
         public List<PartDto>? PartList { get; set; }
         public string? ImagUrl { get; set; }
