@@ -202,16 +202,22 @@
     width: 100%;
     // margin-left: 40%;
 
-    .mp_list_container {
+    .mp_list_container_mp {
       // display: flex;
       // justify-content: space-around;
       // justify-content: center;
-      width: 35%;
+      width: 48%;
+    }
+    .mp_list_container_part {
+      // display: flex;
+      // justify-content: space-around;
+      // justify-content: center;
+      width: 30%;
     }
     .list-info {
       // display: flex;
       // justify-content: space-around;
-      width: 20%;
+      width: 18%;
 
       .image_Main {
         width: 100%;

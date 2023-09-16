@@ -854,7 +854,7 @@
           "lib/net6.0/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
         }
       },
-      "Serilog/3.0.1": {
+      "Serilog/3.0.0": {
         "type": "package",
         "compile": {
           "lib/net6.0/Serilog.dll": {
@@ -2508,10 +2508,10 @@
         "postgresql.png"
       ]
     },
-    "Serilog/3.0.1": {
-      "sha512": "E4UmOQ++eNJax1laE+lws7E3zbhKgHsGJbO7ra0yE5smUh+5FfUPIKKBxM3MO1tK4sgpQke6/pLReDxIc/ggNw==",
+    "Serilog/3.0.0": {
+      "sha512": "aKLycLo/ELJu9bargBjgEJOdR2y0HP1nzVqy1KZjuuuL7f6O+fkq7LCKVvmhzBNq7Ewb9gLvBXXZxWg1x1czrw==",
       "type": "package",
-      "path": "serilog/3.0.1",
+      "path": "serilog/3.0.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -2531,7 +2531,7 @@
         "lib/netstandard2.0/Serilog.xml",
         "lib/netstandard2.1/Serilog.dll",
         "lib/netstandard2.1/Serilog.xml",
-        "serilog.3.0.1.nupkg.sha512",
+        "serilog.3.0.0.nupkg.sha512",
         "serilog.nuspec"
       ]
     },
@@ -3219,7 +3219,7 @@
       "Microsoft.EntityFrameworkCore.Design >= 6.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.0",
       "Persistence >= 1.0.0",
-      "Serilog >= 3.0.1",
+      "Serilog >= 3.0.0",
       "Serilog.AspNetCore >= 6.0.0",
       "Serilog.Sinks.PostgreSQL >= 2.3.0",
       "Serilog.Sinks.Seq >= 5.2.2",
@@ -3303,7 +3303,7 @@
           },
           "Serilog": {
             "target": "Package",
-            "version": "[3.0.1, )"
+            "version": "[3.0.0, )"
           },
           "Serilog.AspNetCore": {
             "target": "Package",

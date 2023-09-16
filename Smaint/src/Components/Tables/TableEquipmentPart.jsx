@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import {
+  Button,
   Table,
   TableBody,
   TableCell,
@@ -25,6 +26,12 @@ const TableEquipmentPart = ({ parts }) => {
     setPage(0);
   };
 
+  const handleButtonClick = (row) => {
+    // Implement your logic to send a request to another table
+    console.log("Button clicked for row:", row);
+    // You can send a request or perform any action here
+  };
+
   return (
     <>
       <TableContainer component={Paper}>
@@ -34,7 +41,7 @@ const TableEquipmentPart = ({ parts }) => {
               <TableCell>ID</TableCell>
               <TableCell>Code</TableCell>
               <TableCell>Name</TableCell>
-              {/* <TableCell></TableCell> */}
+              <TableCell>remove</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -46,6 +53,18 @@ const TableEquipmentPart = ({ parts }) => {
                   <TableCell>{row.code}</TableCell>
                   <TableCell>{row.name}</TableCell>
                   {/* <TableCell>{row.isActive}</TableCell> */}
+                  <Button
+                    variant="contained"
+                    style={{
+                      fontSize: "12px",
+                      padding: "4px 5px",
+                      marginTop: "10px",
+                    }}
+                    color="primary"
+                    onClick={() => handleButtonClick(row)}
+                  >
+                    Remove Part
+                  </Button>
                 </TableRow>
               ))}
           </TableBody>

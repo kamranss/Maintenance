@@ -239,11 +239,11 @@ const EquipmentDetail = () => {
             </div>
           )}
           <div className="mp_container">
-            <div className="mp_list_container">
+            <div className="mp_list_container_mp">
               <h2>Maintenance Plans</h2>
               <TableEquipmentMp maintenancePlans={equipmentDetail.mpList} />
             </div>
-            <div className="mp_list_container">
+            <div className="mp_list_container_part">
               <h2>Parts</h2>
               <TableEquipmentPart parts={equipmentDetail.partList} />
             </div>

@@ -22,10 +22,12 @@ using Application.RequestParameters;
 using AutoMapper;
 using Domain.Concrets;
 using Domain.Entities;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Persistence.Services.Common;
 using System;
 using System.Collections.Generic;
@@ -40,7 +42,6 @@ namespace Persistence.Services
 {
     public class EquipmentService:IEquipmentService
     {
-
         private readonly IEquipmentReadRepository? _equipmentReadRepository;
         private readonly IEquipmentWriteRepository? _equipmentWriteRepository;
         private readonly IMapper _mapper;
@@ -60,9 +61,12 @@ namespace Persistence.Services
         private readonly IEquipmentMpWriteRepository _equipmentMpWriteRepository;
         private readonly IPartReadRepository _partReadRepository;
         private readonly IPartWriteRepository _partWriteRepository;
+        private readonly ILogger<EquipmentService> _logger;
 
-        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment, IMpReadRepository readRepository, IModelReadRepository modelReadRepository, IManufactureReadRepository manufactureReadRepository, IDepartmentReadRepository departmentReadRepository, IReadOperationSiteRepository readOperationSiteRepository, IEquipmentMpReadRepository equipmentMpReadRepository, IEquipmentMpWriteRepository equipmentMpWriteRepository, IMpWriteRepository writeRepository, IPartReadRepository partReadRepository, IPartWriteRepository partWriteRepository)
+
+        public EquipmentService(IEquipmentReadRepository? equipmentReadRepository, IEquipmentWriteRepository? equipmentWriteRepository, IMapper mapper, IMemoryCache memoryCach, IWebHostEnvironment webHostEnvironment, IMpReadRepository readRepository, IModelReadRepository modelReadRepository, IManufactureReadRepository manufactureReadRepository, IDepartmentReadRepository departmentReadRepository, IReadOperationSiteRepository readOperationSiteRepository, IEquipmentMpReadRepository equipmentMpReadRepository, IEquipmentMpWriteRepository equipmentMpWriteRepository, IMpWriteRepository writeRepository, IPartReadRepository partReadRepository, IPartWriteRepository partWriteRepository, ILogger<EquipmentService> logger)
         {
+
             _equipmentReadRepository = equipmentReadRepository;
             _equipmentWriteRepository = equipmentWriteRepository;
             _mapper = mapper;
@@ -78,80 +82,89 @@ namespace Persistence.Services
             _writeRepository = writeRepository;
             _partReadRepository = partReadRepository;
             _partWriteRepository = partWriteRepository;
+            _logger = logger;
         }
 
         public async Task<IServiceResult<EquipmentCreateDto>> CreateEquipment(EquipmentCreateDto equipment)
         {
-            string imageUrl = "";
-            if (equipment.Image != null)
+            try
             {
-                //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Image ismissing" };
-
-                if (!equipment.Image.CheckFileType())
+                string imageUrl = "";
+                if (equipment.Image != null)
                 {
-                    return new ServiceResult<EquipmentCreateDto>
+                    //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Image ismissing" };
+
+                    if (!equipment.Image.CheckFileType())
                     {
-                        IsSuccess = false,
-                        ErrorMessage = "File Type is not correct"
-                    };
-                }
-                if (!equipment.Image.CheckFileLenght(9000000))
-                {
-                    return new ServiceResult<EquipmentCreateDto>
+                        return new ServiceResult<EquipmentCreateDto>
+                        {
+                            IsSuccess = false,
+                            ErrorMessage = "File Type is not correct"
+                        };
+                    }
+                    if (!equipment.Image.CheckFileLenght(9000000))
                     {
-                        IsSuccess = false,
-                        ErrorMessage = "File Size is bigger"
-                    };
+                        return new ServiceResult<EquipmentCreateDto>
+                        {
+                            IsSuccess = false,
+                            ErrorMessage = "File Size is bigger"
+                        };
+                    }
+                    imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
                 }
-                imageUrl = equipment.Image.SaveFile(_webHostEnvironment, "images");
-            }
-           
 
-            if (equipment.UsageLocation != null)
-            {
-                if (!Enum.IsDefined(typeof(Location), equipment.UsageLocation))
+
+                if (equipment.UsageLocation != null)
                 {
-                    return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Invalid UsageLocation value" };
+                    if (!Enum.IsDefined(typeof(Location), equipment.UsageLocation))
+                    {
+                        //return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Invalid UsageLocation value" };
+                        throw new Exception("Invalid UsageLocation value");
+                    }
                 }
-            }
 
-          
-
-
-            var newEquipment = _mapper.Map<Equipment>(equipment);
-            if (equipment.CurrentValue == null)
-            {
-                newEquipment.CurrentValue = 0;
-            }
-            newEquipment.IsActive = true;
-            newEquipment.IsDeleted = true;
-            var imageurl = imageUrl;
-            newEquipment.ImagUrl = imageurl;
-            newEquipment.Status = EquipmentStatus.ACTIVE;
-            newEquipment.usageLocation = equipment.UsageLocation;
-            newEquipment.MpCompleted = true;
-            newEquipment.IsIdle = true;
-
-
-
-
-            var result = await _equipmentWriteRepository.AddAsync(newEquipment);
-            if (result)
-            {
-                var endresult = await _equipmentWriteRepository.SaveAsync();
-
-                if (endresult > 0)
+                var newEquipment = _mapper.Map<Equipment>(equipment);
+                if (equipment.CurrentValue == null)
                 {
-                    return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = equipment };
-                   
-                  
+                    newEquipment.CurrentValue = 0;
                 }
-                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be saved." };
+                newEquipment.IsActive = true;
+                newEquipment.IsDeleted = true;
+                var imageurl = imageUrl;
+                newEquipment.ImagUrl = imageurl;
+                newEquipment.Status = EquipmentStatus.ACTIVE;
+                newEquipment.usageLocation = equipment.UsageLocation;
+                newEquipment.MpCompleted = true;
+                newEquipment.IsIdle = true;
+
+
+
+
+                var result = await _equipmentWriteRepository.AddAsync(newEquipment);
+                if (result)
+                {
+                    var endresult = await _equipmentWriteRepository.SaveAsync();
+
+                    if (endresult > 0)
+                    {
+                        _logger.LogInformation("Equipment created successfully: {EquipmentId}", newEquipment.Id);
+                        return new ServiceResult<EquipmentCreateDto> { IsSuccess = true, Data = equipment };
+
+
+                    }
+                    throw new Exception("Equipment could not be saved.");
+                }
+
+
+                throw new Exception("Equipment could not be added.");
+
+
             }
-
-            return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = "Equipment could not be added." };
-
-
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating equipment: {ErrorMessage}", ex.Message);
+                return new ServiceResult<EquipmentCreateDto> { IsSuccess = false, ErrorMessage = $"Equipment could not be added: {ex.Message}" };
+            }
 
         } // should be modified
 

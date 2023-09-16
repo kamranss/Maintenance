@@ -12,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using NpgsqlTypes;
 using Persistence;
 using Serilog;
+using Serilog.Events;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Sinks.PostgreSQL;
@@ -47,7 +48,7 @@ Logger log = new LoggerConfiguration()
     .MinimumLevel.Information()
     .CreateLogger();
 
-
+builder.Host.UseSerilog(log);
 builder.Services.AddHttpLogging(logging =>
 {
     logging.LoggingFields = HttpLoggingFields.All;
@@ -57,7 +58,7 @@ builder.Services.AddHttpLogging(logging =>
     logging.ResponseBodyLogLimit = 4096;
 });
 
-builder.Host.UseSerilog();
+
 
 //builder.Services.AddControllers();
 
@@ -138,7 +139,6 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(builder =>
     {
-        //builder.AllowAnyOrigin()
         builder.WithOrigins(allowedOrigins)
                .AllowAnyMethod()
                .AllowAnyHeader();
@@ -155,7 +155,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseStaticFiles();
 
-app.UseSerilogRequestLogging();
+//app.UseSerilogRequestLogging();
 app.UseHttpLogging();
 
 // disable cors
