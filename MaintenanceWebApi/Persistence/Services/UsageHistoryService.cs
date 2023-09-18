@@ -138,7 +138,7 @@ namespace Persistence.Services
                 .Where(es => es.EquipmentId == existUsageStory.EquipmentId).ToList();
             if (existSettings.Count == 0) 
             {
-                return new ServiceResult<UsageHistoryEndDto> { IsSuccess = true, Data = usageHistoryEnd };
+                return new ServiceResult<UsageHistoryEndDto> { IsSuccess = false, Data = usageHistoryEnd };
             }
 
             foreach (var existSetting in existSettings)

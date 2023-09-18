@@ -94,9 +94,6 @@ namespace Persistence.Services
                     throw new Exception("No Found");
                 }
 
-                existSettings.ResetDate = DateTime.UtcNow;
-                existSettings.StartValue = existSettings.Equipment.CurrentValue;
-                existSettings.IsMpCompleted = true;
 
                 var checkAllSettngsMp = 0;
                 foreach (var setting in existSettings.Equipment.MaintenanceSettings)
@@ -106,6 +103,11 @@ namespace Persistence.Services
                         checkAllSettngsMp++;
                     }
                 }
+
+
+                existSettings.ResetDate = DateTime.UtcNow;
+                existSettings.StartValue = existSettings.Equipment.CurrentValue;
+                existSettings.IsMpCompleted = true;
 
                 if (checkAllSettngsMp == existSettings.Equipment.MaintenanceSettings.Count)
                 {
