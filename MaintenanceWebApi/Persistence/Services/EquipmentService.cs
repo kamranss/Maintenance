@@ -339,23 +339,6 @@ namespace Persistence.Services
             {
                 return new ServiceResult<EquipmentDetailDto> { IsSuccess = false, ErrorMessage = "Id is wrong" };
             }
-
-
-            //var equipment =  _equipmentReadRepository
-            //    .GetAll()
-            //    .Where(e => e.Id == id)
-            //    .Include(e => e.Department)
-            //    .Include(e => e.Manufacture)
-            //    .Include(e => e.OperationSite)
-            //    .Include(e => e.Model)
-            //    .Include(e => e.EquipmentType)
-            //    .Include(e => e.UsageHistories)
-            //    .Include(e => e.Part)
-            //    .Include(e => e.MaintenancePlan)
-            //    .ThenInclude(mp => mp.MaintenanceSettings)
-            //    .Where(mp => mp.MaintenanceSettings != null && mp.MaintenanceSettings.Any(ms => ms.EquipmentId == id))
-            //    .FirstOrDefault();
-
             var query = _equipmentReadRepository
                 .GetAll()
                 .Where(e => e.Id == id)
@@ -368,16 +351,15 @@ namespace Persistence.Services
                 .Include(e => e.UsageHistories)
                 .Include(e => e.Part)
                 .Include(e => e.MaintenancePlan)
-                 .ThenInclude(mp => mp.MaintenanceSettings);
+                .ThenInclude(mp => mp.MaintenanceSettings);
 
-            var sql = await query.ToListAsync(); // Log the generated SQL query
+            var sql = await query.ToListAsync(); 
 
             var equipment = query.FirstOrDefault();
 
             if (equipment != null)
             {
-                // Include all maintenance plans for the equipment
-                // Include an empty list of maintenance settings if there are none
+    
                 equipment.MaintenancePlan.ForEach(mp =>
                 {
                     if (mp.MaintenanceSettings == null)
@@ -402,10 +384,7 @@ namespace Persistence.Services
 
             EquipmentDetailDto equipmentDetailDto = new EquipmentDetailDto();
 
-            //EquipmentDetailDto equipmentDetailDto = new EquipmentDetailDto
-            //{
-
-            //};
+         
             equipmentDetailDto.Id = equipment.Id;
             equipmentDetailDto.Status = equipment.Status;
             equipmentDetailDto.Name = equipment.Name;
@@ -425,7 +404,6 @@ namespace Persistence.Services
             equipmentDetailDto.SettingList = equipment.MaintenanceSettings != null ? _mapper.Map<List<MsDto>>(equipment.MaintenanceSettings) : null;
             equipmentDetailDto.ImagUrl =  "/images/" + equipment.ImagUrl;
 
-            //var json = JsonSerializer.Serialize(equipmentDetailDto);
             return new ServiceResult<EquipmentDetailDto> { IsSuccess = true, Data = equipmentDetailDto };
         } // done
 
@@ -807,8 +785,8 @@ namespace Persistence.Services
             {
                 var equipments = _equipmentReadRepository.GetAll()
                     .Include(e => e.EquipmentType)
-                    .Where(e => e.IsIdle == true)
-                    .Take(5);
+                    .Where(e => e.IsIdle == true && e.IsActive == true && e.Status == EquipmentStatus.ACTIVE)
+                    .Take(10);
                 if (equipments == null)
                 {
                     return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = false, ErrorMessage = "There is no data in DB" };
@@ -820,7 +798,7 @@ namespace Persistence.Services
             }
             else
             {
-                var equipmentss = _equipmentReadRepository.GetAll().Where(m => m.Name.ToLower().Contains(name.ToLower()) && m.IsIdle == true);
+                var equipmentss = _equipmentReadRepository.GetAll().Where(e => e.Name.ToLower().Contains(name.ToLower()) && e.IsIdle == true && e.IsActive==true && e.Status== EquipmentStatus.ACTIVE);
                 if (equipmentss == null)
                 {
                     return new ServiceResult<List<EquipmentInputDto>> { IsSuccess = true, Data = new List<EquipmentInputDto>() };

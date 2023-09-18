@@ -45,6 +45,7 @@ const App = () => {
         <HeaderNav />;{/* <Department/> */}
         {/* // code within rooute page should be change */}
         <Routes>
+          <Route path="/" element={<Login />} />
           <Route path="/department" element={<Departmment />} />
           <Route path="/equipmentPage" element={<EquipmentPage />} />
           <Route path="/MpPage" element={<MpPage />} />

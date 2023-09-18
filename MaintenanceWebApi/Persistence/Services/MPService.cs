@@ -7,14 +7,17 @@ using Application.DTOs.Model;
 using Application.DTOs.MS;
 using Application.DTOs.Service;
 using Application.Repositories.DepartmentRepo;
+using Application.Repositories.EquipmentMpRepo;
 using Application.Repositories.MaintenanceSettingsRepo;
 using Application.Repositories.MpRepo;
 using Application.RequestParameters;
 using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using Domain.Concrets;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Logging;
 using Persistence.Repositories.MpRepo;
 using Persistence.Services.Common;
 using System;
@@ -31,19 +34,25 @@ namespace Persistence.Services
 
         private readonly IMpReadRepository _readRepository;
         private readonly IMpWriteRepository _writeRepository;
-        private readonly IMSettingsReadRepository _mSettingsReadRepository;
+        private readonly IMSettingsReadRepository _SettingsReadRepository;
         private readonly IMSettingsWriteRepository _settingsWriteRepository;
+        private readonly IEquipmentMpReadRepository _equipmentMpReadRepository;
+        private readonly IEquipmentMpWriteRepository _equipmentMpWriteRepository;
         private readonly IMapper _mapper;
         private IMemoryCache _memoryCach;
+        private readonly ILogger<MPService> _logger;
 
-        public MPService(IMpReadRepository readRepository, IMpWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach, IMSettingsWriteRepository settingsWriteRepository, IMSettingsReadRepository mSettingsReadRepository)
+        public MPService(IMpReadRepository readRepository, IMpWriteRepository writeRepository, IMapper mapper, IMemoryCache memoryCach, IMSettingsWriteRepository settingsWriteRepository, IMSettingsReadRepository SettingsReadRepository, ILogger<MPService> logger, IEquipmentMpReadRepository equipmentMpReadRepository, IEquipmentMpWriteRepository equipmentMpWriteRepository)
         {
             _readRepository = readRepository;
             _writeRepository = writeRepository;
             _mapper = mapper;
             _memoryCach = memoryCach;
             _settingsWriteRepository = settingsWriteRepository;
-            _mSettingsReadRepository = mSettingsReadRepository;
+            _SettingsReadRepository = SettingsReadRepository;
+            _logger = logger;
+            _equipmentMpReadRepository = equipmentMpReadRepository;
+            _equipmentMpWriteRepository = equipmentMpWriteRepository;
         }
 
         public async Task<IServiceResult<MaintenencePlanStatusDto>> ChangeMpStatusAsync(int id, MaintenencePlanStatus newStatus)
@@ -68,6 +77,63 @@ namespace Persistence.Services
             var mpStatusDto = _mapper.Map<MaintenencePlanStatusDto>(existMp);
 
             return new ServiceResult<MaintenencePlanStatusDto> { IsSuccess = true, Data = mpStatusDto };
+        }
+
+        public async Task<IServiceResult<MpCompleted>> CompleteMp(MpCompleted mpCompleted)
+        {
+            try
+            {
+                var existSettings = _SettingsReadRepository
+                    .GetAll()
+                    .Include(s =>s.Equipment)
+                    .ThenInclude(e => e.MaintenanceSettings)
+                    .FirstOrDefault(s => s.Id == mpCompleted.EquSettingid);
+
+                if (existSettings == null)
+                {
+                    throw new Exception("No Found");
+                }
+
+                existSettings.ResetDate = DateTime.UtcNow;
+                existSettings.StartValue = existSettings.Equipment.CurrentValue;
+                existSettings.IsMpCompleted = true;
+
+                var checkAllSettngsMp = 0;
+                foreach (var setting in existSettings.Equipment.MaintenanceSettings)
+                {
+                    if (setting.IsMpCompleted != true)
+                    {
+                        checkAllSettngsMp++;
+                    }
+                }
+
+                if (checkAllSettngsMp == existSettings.Equipment.MaintenanceSettings.Count)
+                {
+                    existSettings.Equipment.MpCompleted = true;
+                }
+
+               var settingUpdateResult =  _settingsWriteRepository.Update(existSettings);
+
+                if (!settingUpdateResult)
+                {
+                    throw new Exception("Settings not updated");
+                }
+                var settinngsSaveResult = await _settingsWriteRepository.SaveAsync();
+
+                if (settinngsSaveResult< 0)
+                {
+                    throw new Exception("Settings not saved");
+                }        
+
+                return new ServiceResult<MpCompleted> { IsSuccess = true, Data = mpCompleted };
+            }
+            catch (Exception ex)
+            {
+
+                _logger.LogError(ex, "An error occurred: {ErrorMessage}", ex.Message);
+                return new ServiceResult<MpCompleted> { IsSuccess = false, ErrorMessage = $"Error Occured: {ex.Message}" };
+            }
+
         }
 
         public async Task<IServiceResult<MaintenancePlanCreateDto>> CreateMPAsync(MaintenancePlanCreateDto maintenancePlan)
@@ -449,7 +515,7 @@ namespace Persistence.Services
 
             if (existMp == null) return new ServiceResult<MsSetDto> { IsSuccess = false, ErrorMessage = "There is no MP with this id" };
 
-            var msSetting = _mSettingsReadRepository.GetAll().FirstOrDefault(ms => ms.EquipmentId == msSetDto.EquipmentId && ms.MaintenancePlanId == msSetDto.MaintenancePlanId);
+            var msSetting = _SettingsReadRepository.GetAll().FirstOrDefault(ms => ms.EquipmentId == msSetDto.EquipmentId && ms.MaintenancePlanId == msSetDto.MaintenancePlanId);
             if (msSetting == null)
             {
                 if (existMp.Equipments != null)
@@ -468,7 +534,7 @@ namespace Persistence.Services
                     }
                     else
                     {
-                       
+                        return new ServiceResult<MsSetDto> { IsSuccess = true, ErrorMessage = "Problem Occured" };
                     }
 
                 }

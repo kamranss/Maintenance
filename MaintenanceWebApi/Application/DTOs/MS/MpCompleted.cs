@@ -10,5 +10,6 @@ namespace Application.DTOs.MS
     {
         public int? MaintenancePlanId { get; set; }
         public int? EquipmentId { get; set; }
+        public int? EquSettingid { get; set; }
     }
 }

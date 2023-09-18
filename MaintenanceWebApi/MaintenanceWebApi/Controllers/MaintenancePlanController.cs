@@ -165,13 +165,32 @@ namespace MaintenanceWebApi.Controllers
 
         }
 
-        [HttpPost("MpCompleted")]
+        [HttpPost("MpCom")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> IsMpCompleted(MpCompleted mpCompleted)
         {
             var result = await _mpService.IsMpCompleted(mpCompleted);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result.Data);
+            }
+            else
+            {
+                return BadRequest(result.ErrorMessage);
+            }
+
+        }
+
+        [HttpPost("CompletMp")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> CompletMp([FromForm]MpCompleted mpCompleted)
+        {
+            var result = await _mpService.CompleteMp(mpCompleted);
 
             if (result.IsSuccess)
             {

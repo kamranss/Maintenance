@@ -1,6 +1,7 @@
 // MaintenancePlanTable.js
-
+import axios from "axios";
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import {
   Button,
   Table,
@@ -26,10 +27,70 @@ const TableEquipmentMp = ({ maintenancePlans }) => {
     setPage(0);
   };
 
-  const handleButtonClick = (row) => {
-    // Implement your logic to send a request to another table
+  const handleButtonClick = async (row) => {
     console.log("Button clicked for row:", row);
-    // You can send a request or perform any action here
+
+    if (
+      row.maintenanceSettingsList &&
+      row.maintenanceSettingsList[0] &&
+      row.maintenanceSettingsList[0].id
+    ) {
+      const maintenanceSettingId = row.maintenanceSettingsList[0].id;
+
+      const requestData = {
+        MaintenancePlanId: null, // Set to null
+        EquipmentId: null, // Set to null
+        EquSettingid: maintenanceSettingId, // Set EquSettingid to maintenanceSettingsList[0].id
+      };
+
+      try {
+        // Use SweetAlert2 to confirm the action
+        const { value } = await Swal.fire({
+          title: "Are you sure?",
+          text: "Do you want to complete this maintenance plan?",
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonText: "Yes, complete it!",
+          cancelButtonText: "No, cancel!",
+        });
+
+        if (value) {
+          // User confirmed, make the API request
+          const response = await axios.post(
+            "https://localhost:7066/api/MaintenancePlan/CompletMp",
+            requestData,
+            {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+            }
+          );
+
+          // Handle the response data as needed
+          console.log("API response:", response.data);
+
+          // You can perform additional actions based on the API response here
+
+          // Refresh the page
+          window.location.reload();
+        } else {
+          // User canceled, show an error message
+          Swal.fire("Cancelled", "The operation was cancelled.", "error");
+        }
+      } catch (error) {
+        console.error("Error making API request:", error);
+        // Handle errors as needed
+        // Show an error message
+        Swal.fire(
+          "Error",
+          "An error occurred while completing the maintenance plan.",
+          "error"
+        );
+      }
+    } else {
+      // Handle the case where maintenanceSettingsList[0] or id is missing
+      console.error("Maintenance setting data is missing");
+    }
   };
 
   return (
@@ -56,8 +117,8 @@ const TableEquipmentMp = ({ maintenancePlans }) => {
                   <TableCell align="left">
                     {row.maintenanceSettingsList &&
                     row.maintenanceSettingsList[0] ? (
-                      row.maintenanceSettingsList[0].mpCompleted !== true &&
-                      row.maintenanceSettingsList[0].mpCompleted !== null ? (
+                      row.maintenanceSettingsList[0].isMpCompleted !== true &&
+                      row.maintenanceSettingsList[0].isMpCompleted !== null ? (
                         <i className="far fa-clock"></i> // Clock icon for incomplete
                       ) : (
                         <i className="fa-solid fa-check"></i>
