@@ -124,6 +124,7 @@ namespace Persistence.Services
             existEqu.CurrentValue = existUsageStory.EndUsageHourValue;
             existEqu.Status = EquipmentStatus.ACTIVE;
             existEqu.IsIdle = true;
+            //existEqu.MpCompleted = true;
             _writeRepository.Update(existUsageStory);
             var endresult = await _writeRepository.SaveAsync();
             var updateEquipmentValue =  _equipmentReadRepository.GetAll().FirstOrDefault(e => e.Id == existUsageStory.EquipmentId);

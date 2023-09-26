@@ -109,12 +109,16 @@ namespace Persistence.Services
                 existSettings.StartValue = existSettings.Equipment.CurrentValue;
                 existSettings.IsMpCompleted = true;
 
-                if (checkAllSettngsMp == existSettings.Equipment.MaintenanceSettings.Count)
+                if (checkAllSettngsMp<2)
                 {
                     existSettings.Equipment.MpCompleted = true;
                 }
+                //if (checkAllSettngsMp == existSettings.Equipment.MaintenanceSettings.Count)
+                //{
+                //    existSettings.Equipment.MpCompleted = true;
+                //}
 
-               var settingUpdateResult =  _settingsWriteRepository.Update(existSettings);
+                var settingUpdateResult =  _settingsWriteRepository.Update(existSettings);
 
                 if (!settingUpdateResult)
                 {
