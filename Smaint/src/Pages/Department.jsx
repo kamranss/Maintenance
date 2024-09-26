@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-// import TableComponent from "../Components/Table";
-// import TableMui from "../Components/TableMui";
 import TableHeader from "../Components/TableHeader";
 import PaginationComponent from "../Components/PaginationComponent";
 import axios from "axios";
 import { TableHead } from "@mui/material";
 import SideBarEquipment from "../Components/SideBarEquipment";
-
+import HeaderNav from "../Components/Common/HeaderNav";
 import TableDepartment from "../Components/Tables/TableDepartment";
 
 const Department = () => {
@@ -41,6 +39,7 @@ const Department = () => {
   console.log(departmentData);
   return (
     <div className="department-main">
+      <HeaderNav />;
       <div className="dep-mid">
         <SideBarEquipment />
         <div className="page-content">

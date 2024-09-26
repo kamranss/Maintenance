@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 // import { AiFillAppstore } from "react-icons/ai";
-import ExportExcel from "./ExportExcel";
+import ExportExcel from "../ExportExcel";
 // import {IoAppsSharp} from "react-icons/io"
 
 const HeaderNav = () => {

@@ -9,6 +9,7 @@ import axios from "axios";
 import { TableHead } from "@mui/material";
 import SideBarEquipment from "../Components/SideBarEquipment";
 import TableDepartment from "../Components/Tables/TableDepartment";
+import HeaderNav from "../Components/Common/HeaderNav";
 import TableHeaderUsageHistory from "../Components/TableHeaderUsageHistory";
 import TableUsageHistory from "../Components/Tables/TableUsageHistory";
 import SideBarUsageHistory from "../Components/SideBars/SideBarUsageHistory";
@@ -46,6 +47,7 @@ const UsageHistory = () => {
   console.log(departmentData);
   return (
     <div className="department-main">
+      <HeaderNav />;
       <div className="dep-mid">
         <SideBarUsageHistory />
         {/* <SideBarEquipment /> */}

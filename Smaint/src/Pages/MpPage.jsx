@@ -3,6 +3,7 @@ import TableHeader from "../Components/TableHeader";
 import PaginationComponent from "../Components/PaginationComponent";
 import SideBarMp from "../Components/SideBars/SideBarMp";
 import axios from "axios";
+import HeaderNav from "../Components/Common/HeaderNav";
 
 import SideBarEquipment from "../Components/SideBarEquipment";
 import TableMp from "../Components/Tables/TableMp";
@@ -30,6 +31,7 @@ const MpPage = () => {
   console.log(mpData);
   return (
     <div className="department-main">
+      <HeaderNav />;
       <div className="dep-mid">
         {/* <SideBarEquipment /> */}
         <SideBarMp />

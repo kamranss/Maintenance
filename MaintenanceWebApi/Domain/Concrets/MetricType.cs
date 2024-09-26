@@ -16,6 +16,8 @@ namespace Domain.Concrets
         [Description("WEIGHT")]
         WEIGHT =3,
         [Description("DISTANCE")]
-        DISTANCE =4
+        DISTANCE =4,
+        [Description("UNPLANNED")]
+        UNPLANNED = 5
     }
 }

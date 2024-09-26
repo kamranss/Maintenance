@@ -13,6 +13,7 @@ import { TableHead } from "@mui/material";
 // import SideBarEquipment from "../Components/SideBarEquipment";
 import SideBarAdministration from "../Components/SideBarAdministration";
 import TableOperation_Sites from "../Components/Tables/TableOperation_Sites";
+import HeaderNav from "../Components/Common/HeaderNav";
 // import HeaderNav from "../Components/HeaderNav";
 
 import {
@@ -66,6 +67,7 @@ const Administration = () => {
 
   return (
     <div className="department-main">
+      <HeaderNav />;
       <div className="dep-mid">
         <SideBarAdministration
           activeTab={activeTab}

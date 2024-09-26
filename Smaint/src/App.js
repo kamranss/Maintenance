@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 // import Home from "./Pages/Home.jsx";
 // import About from "./Pages/Department.jsx";
-import HeaderNav from "./Components/HeaderNav.jsx";
+import HeaderNav from "./Components/Common/HeaderNav.jsx";
 import EquipmentPage from "./Pages/EquipmentPage.jsx";
 import Departmment from "./Pages/Department.jsx";
 import MpPage from "./Pages/MpPage.jsx";
@@ -42,7 +42,8 @@ const App = () => {
         {/* <div className="headernav_container">
          
         </div> */}
-        <HeaderNav />;{/* <Department/> */}
+        {/* <HeaderNav />; */}
+        {/* <Department/> */}
         {/* // code within rooute page should be change */}
         <Routes>
           <Route path="/" element={<Login />} />

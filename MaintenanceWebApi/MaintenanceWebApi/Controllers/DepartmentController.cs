@@ -33,7 +33,7 @@ namespace MaintenanceWebApi.Controllers
         }
 
  
-        [Authorize]
+        //[Authorize]
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

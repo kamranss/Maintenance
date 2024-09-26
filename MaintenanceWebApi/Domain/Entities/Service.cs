@@ -16,8 +16,10 @@ namespace Domain.Entities
         public int? PartId { get; set; }
         public string? PartName { get; set; }
         public Part? Part { get; set; }
+        public bool IsPartChanged { get; set; }
+        public MaintenancePlan? MaintenancePlan { get; set; }
+
         //public int? ChangedPartId { get; set; }
         //public EquipmentPart EquipmentPart { get; set; }
-        public MaintenancePlan? MaintenancePlan { get; set; }
     }
 }
